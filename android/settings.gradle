@@ -1,0 +1,3 @@
+rootProject.name = 'appufpa'
+
+include ':app'
