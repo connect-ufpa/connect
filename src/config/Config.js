@@ -7,9 +7,15 @@ const config = {
     projectId: 'app-ufpa',
     storageBucket: 'app-ufpa.appspot.com',
     messagingSenderId: '483065002053'
-  };
+};
 
   firebase.initializeApp(config);
 
-  export const database = firebase.database;
-  export const firebaseAuth = firebase.auth;
+export const database = firebase.database;
+export const firebaseAuth = firebase.auth;
+
+const onlyNumbers = /^[0-9.]*$/;
+const onlyLetters = /^([a-zA-Zà-úÀ-Ú]|\s+)+$/;
+
+export { onlyLetters, onlyNumbers };
+
