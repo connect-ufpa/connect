@@ -2,6 +2,7 @@ import React from 'react';
 import { Scene, Router } from 'react-native-router-flux';
 import Splash from './components/Splash';
 import Login from './components/Login';
+import CreateUser from './components/CreateUser';
 
 const RouterComponent = () => {
     return (
@@ -16,6 +17,10 @@ const RouterComponent = () => {
                     <Scene
                         key="login"
                         component={Login}
+                    />
+                    <Scene 
+                        key="createUser"
+                        component={CreateUser}
                     />
                 </Scene>
             </Scene>

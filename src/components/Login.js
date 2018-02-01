@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, Image, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { Actions } from 'react-native-router-flux';
 import { Input, Card, CardSection, Button, Texts } from './commons/';
 import Styles from '../Styles';
 
@@ -40,7 +41,7 @@ class Login extends Component {
                             />
                         </CardSection>
                         <CardSection>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => { Actions.createUser(); }}>
                                 <Texts text="Criar conta" sizeText="medium" />
                             </TouchableOpacity>
                         </CardSection>
