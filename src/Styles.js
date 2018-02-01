@@ -3,8 +3,29 @@ import { StyleSheet } from 'react-native';
 const grey = '#777';
 
 export default StyleSheet.create({
-    imageStyle: {
-        alignItems: 'center'
+    xLargeTextStyle: {
+        fontFamily: 'Ubuntu',
+        fontSize: 48,
+        fontWeight: 'bold',
+        color: '#ffff'
+    },
+    largeTextStyle: {
+        fontFamily: 'Ubuntu',
+        fontSize: 28,
+        fontWeight: 'bold',
+        color: '#ffff'
+    },
+    mediumTextStyle: {
+        fontFamily: 'Ubuntu',
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#ffff'
+    },
+    smallTextStyle: {
+        fontFamily: 'Ubuntu',
+        fontSize: 12,
+        fontWeight: 'bold',
+        color: '#ffff'
     },
     inputStyle: {
         backgroundColor: '#ffff',
@@ -14,7 +35,7 @@ export default StyleSheet.create({
         flex: 1,
         borderColor: grey,
         borderWidth: 2,
-        borderRadius: 5   
+        borderRadius: 5
     },
     containerStyle: {
         padding: 10,
@@ -56,5 +77,13 @@ export default StyleSheet.create({
         color: '#ffff',
         paddingTop: 10,
         paddingBottom: 10
+    },
+    spinnerStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    scrollViewStyle: {
+        height: '100%'
     }
 });
