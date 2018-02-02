@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { ScrollView, Image } from 'react-native';
+import { ScrollView, Image, View } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import Swiper from 'react-native-swiper';
 import { Card, CardSection, Texts, Input, Button } from './commons';
-import { onNameChanged } from '../actions';
+import {
+    onNameChanged,
+    onRegistrationChanged,
+    onBirthChanged
+} from '../actions';
 import Styles from '../Styles';
 
 const logo = require('../../assets/img/logo.png');
@@ -30,16 +34,29 @@ class CreateUser extends Component {
                                     value={this.props.name}
                                 />
                             </CardSection>
+                            <View>
+                                <Texts text={this.props.errorMessageName} />
+                            </View>
                             <CardSection>
                                 <Input
                                     placeholder="Matrícula:"
+                                    onChangeText={registration => this.props.onRegistrationChanged(registration)}
+                                    value={this.props.registration}
                                 />
                             </CardSection>
+                            <View>
+                                <Texts text={this.props.errorMessageRegistration} />
+                            </View>
                             <CardSection>
                                 <Input
                                     placeholder="Nascimento: 00/00/0000"
+                                    onChangeText={birth => this.props.onBirthChanged(birth)}
+                                    value={this.props.date}
                                 />
                             </CardSection>
+                            <View>
+                                <Texts text={this.props.errorMessageDate} />
+                            </View>
                         </Card>
                     </ScrollView>
                 </LinearGradient>
@@ -83,9 +100,18 @@ class CreateUser extends Component {
     }
 }
 
-const mapStateToPropos = (state) => {
+const mapStateToProps = (state) => {
     return {
-        name: state.createUser.name
+        name: state.createUser.name,
+        registration: state.createUser.registration,
+        date: state.createUser.date,
+        errorMessageName: state.createUser.errorMessageName,
+        errorMessageRegistration: state.createUser.errorMessageRegistration,
+        errorMessageDate: state.createUser.errorMessageDate
     };
 };
-export default connect(mapStateToPropos, { onNameChanged })(CreateUser);
+export default connect(mapStateToProps, {
+    onNameChanged,
+    onRegistrationChanged,
+    onBirthChanged
+})(CreateUser);
