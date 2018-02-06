@@ -1,7 +1,8 @@
 import {
     validateLetters,
     validateNumbers,
-    validateDates
+    validateDates,
+    validateEmail
 } from '../helpers/HandleData';
 import {
     VALID_NAME,
@@ -9,7 +10,9 @@ import {
     VALID_REGISTRATION,
     INVALID_REGISTRATION,
     VALID_DATE,
-    INVALID_DATE
+    INVALID_DATE,
+    VALID_EMAIL,
+    INVALID_EMAIL
 } from './types';
 
 export const onNameChanged = (name) => {
@@ -35,4 +38,12 @@ export const onBirthChanged = (birth) => {
     }
     return { type: INVALID_DATE, payload: birth };
 };
+
+export const onEmailChanged = (email) => {
+    const validateEmail = validateEmail(email);
+    if(validateEmail) {
+        return { type: VALID_EMAIL, payload: email };
+    }
+    return { type: INVALID_EMAIL, payload: email };
+}
 

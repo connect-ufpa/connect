@@ -4,16 +4,20 @@ import {
     VALID_REGISTRATION,
     INVALID_REGISTRATION,
     VALID_DATE,
-    INVALID_DATE
+    INVALID_DATE,
+    VALID_EMAIL,
+    INVALID_EMAIL
 } from '../actions/types';
 
 const INITIAL_STATE = {
     name: '',
     registration: '',
     date: '',
+    email: '',
     errorMessageName: '',
     errorMessageRegistration: '',
-    errorMessageDate: ''
+    errorMessageDate: '',
+    errorMessageEmail: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -33,7 +37,11 @@ export default (state = INITIAL_STATE, action) => {
         case VALID_DATE:
             return { ...state, date: action.payload, errorMessageDate: '' };
         case INVALID_DATE:
-            return { ...state, date: action.payload, errorMessageDate: 'Formato inválido' };
+            return { ...state, date: action.payload, errorMessageDate: 'Digite um formato de data válido' };
+        case VALID_EMAIL:
+            return { ...state, email: action.payload, errorMessageEmail: '' };
+        case INVALID_EMAIL:
+            return { ...state, email: action.payload, errorMessageEmail: 'Digite um e-mail válido' }
         default:
             return state;
     }

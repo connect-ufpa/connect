@@ -13,3 +13,13 @@ export const validateDates = (date) => {
     const validateDate = dateFormat.exec(date);
     if (validateDate) return date;
 };
+
+export const validateEmail = (email) => {
+    if (email !== '') {
+        if ((email.indexOf('.com') !== -1)
+            || (email.indexOf('@') !== -1)
+            || (email.indexOf(' ') !== -1)) {
+            return email;
+        }
+    }
+}
