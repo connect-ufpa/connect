@@ -21,7 +21,7 @@ class Login extends Component {
                         </CardSection>
                         <CardSection>
                             <Input
-                                placeholder="Digite seu e-mail:"
+                                placeholder="Digite seu e-mail lalalala:"
                             />
                         </CardSection>
                         <CardSection>
