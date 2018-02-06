@@ -72,17 +72,17 @@ class CreateUser extends Component {
                             </CardSection>
                             <CardSection>
                                 <Input
-                                    placeholder="Nome:"
+                                    placeholder="E-mail:"
                                 />
                             </CardSection>
                             <CardSection>
                                 <Input
-                                    placeholder="Matrícula:"
+                                    placeholder="Senha:"
                                 />
                             </CardSection>
                             <CardSection>
                                 <Input
-                                    placeholder="Nascimento: 00/00/0000"
+                                    placeholder="Confirmação de senha:"
                                 />
                             </CardSection>
                             <CardSection>
