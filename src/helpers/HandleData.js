@@ -14,12 +14,11 @@ export const validateDates = (date) => {
     if (validateDate) return date;
 };
 
-export const validateEmail = (email) => {
+export const validateEmails = (email) => {
     if (email !== '') {
         if ((email.indexOf('.com') !== -1)
-            || (email.indexOf('@') !== -1)
-            || (email.indexOf(' ') !== -1)) {
+            & (email.indexOf('@') !== -1)) {
             return email;
         }
     }
-}
+};

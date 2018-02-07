@@ -2,7 +2,7 @@ import {
     validateLetters,
     validateNumbers,
     validateDates,
-    validateEmail
+    validateEmails
 } from '../helpers/HandleData';
 import {
     VALID_NAME,
@@ -40,10 +40,10 @@ export const onBirthChanged = (birth) => {
 };
 
 export const onEmailChanged = (email) => {
-    const validateEmail = validateEmail(email);
-    if(validateEmail) {
+    const validateEmail = validateEmails(email);
+    if (validateEmail) {
         return { type: VALID_EMAIL, payload: email };
     }
     return { type: INVALID_EMAIL, payload: email };
-}
+};
 
