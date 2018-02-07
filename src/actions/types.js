@@ -6,3 +6,5 @@ export const VALID_DATE = 'valid_date';
 export const INVALID_DATE = 'invalid_date';
 export const VALID_EMAIL = 'valid_email';
 export const INVALID_EMAIL = 'invalid_email';
+export const VALID_PASSWORD = 'valid_password';
+export const INVALID_PASSWORD = 'invalid_password';

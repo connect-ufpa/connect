@@ -22,3 +22,7 @@ export const validateEmails = (email) => {
         }
     }
 };
+
+export const validatePasswords = (password) => {
+    if (password.length >= 6) return password;
+};

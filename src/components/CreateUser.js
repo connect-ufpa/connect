@@ -9,7 +9,8 @@ import {
     onNameChanged,
     onRegistrationChanged,
     onBirthChanged,
-    onEmailChanged
+    onEmailChanged,
+    onPasswordChanged
 } from '../actions';
 import Styles from '../Styles';
 
@@ -41,7 +42,10 @@ class CreateUser extends Component {
                             <CardSection>
                                 <Input
                                     placeholder="Matrícula:"
-                                    onChangeText={registration => this.props.onRegistrationChanged(registration)}
+                                    onChangeText={
+                                        registration => 
+                                        this.props.onRegistrationChanged(registration)
+                                    }
                                     value={this.props.registration}
                                 />
                             </CardSection>
@@ -74,8 +78,8 @@ class CreateUser extends Component {
                             <CardSection>
                                 <Input
                                     placeholder="E-mail:"
-                                    onChangeText={ email => this.props.onEmailChanged(email) }
-                                    value={ this.props.email }
+                                    onChangeText={email => this.props.onEmailChanged(email)}
+                                    value={this.props.email}
                                 />
                             </CardSection>
                             <View>
@@ -84,8 +88,17 @@ class CreateUser extends Component {
                             <CardSection>
                                 <Input
                                     placeholder="Senha:"
+                                    secureTextEntry
+                                    onChangeText={
+                                        password => 
+                                        this.props.onPasswordChanged(password)
+                                    }
+                                    value={this.props.password}
                                 />
                             </CardSection>
+                            <View>
+                                <Texts text={this.props.errorMessagePassword} />
+                            </View>
                             <CardSection>
                                 <Input
                                     placeholder="Confirmação de senha:"
@@ -112,15 +125,18 @@ const mapStateToProps = (state) => {
         registration: state.createUser.registration,
         date: state.createUser.date,
         email: state.createUser.email,
+        password: state.createUser.password,
         errorMessageName: state.createUser.errorMessageName,
         errorMessageRegistration: state.createUser.errorMessageRegistration,
         errorMessageDate: state.createUser.errorMessageDate,
-        errorMessageEmail: state.createUser.errorMessageEmail
+        errorMessageEmail: state.createUser.errorMessageEmail,
+        errorMessagePassword: state.createUser.errorMessagePassword
     };
 };
 export default connect(mapStateToProps, {
     onNameChanged,
     onRegistrationChanged,
     onBirthChanged,
-    onEmailChanged
+    onEmailChanged,
+    onPasswordChanged
 })(CreateUser);

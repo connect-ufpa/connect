@@ -2,7 +2,8 @@ import {
     validateLetters,
     validateNumbers,
     validateDates,
-    validateEmails
+    validateEmails,
+    validatePasswords
 } from '../helpers/HandleData';
 import {
     VALID_NAME,
@@ -12,7 +13,9 @@ import {
     VALID_DATE,
     INVALID_DATE,
     VALID_EMAIL,
-    INVALID_EMAIL
+    INVALID_EMAIL,
+    VALID_PASSWORD,
+    INVALID_PASSWORD
 } from './types';
 
 export const onNameChanged = (name) => {
@@ -47,3 +50,10 @@ export const onEmailChanged = (email) => {
     return { type: INVALID_EMAIL, payload: email };
 };
 
+export const onPasswordChanged = (password) => {
+    const validatePassword = validatePasswords(password);
+    if (validatePassword) {
+        return { type: VALID_PASSWORD, payload: password };
+    }
+    return { type: INVALID_PASSWORD, payload: password };
+};
