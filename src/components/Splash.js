@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import LinearGradient from 'react-native-linear-gradient';
+import Orientation from 'react-native-orientation';
 import { firebaseAuth } from '../config/Config';
 import { Spinner, Card, CardSection } from './commons';
 
@@ -13,6 +14,7 @@ class Splash extends Component {
         de login, se existe, vai pra tela principal
     */
     componentWillMount() {
+        Orientation.lockToPortrait();
         firebaseAuth().onAuthStateChanged((user) => {
             if (!user) {
                 Actions.login();

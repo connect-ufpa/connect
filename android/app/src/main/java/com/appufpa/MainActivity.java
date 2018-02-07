@@ -1,6 +1,8 @@
 package com.appufpa;
 
 import com.facebook.react.ReactActivity;
+import android.content.Intent;
+import android.content.res.Configuration;
 
 public class MainActivity extends ReactActivity {
 
@@ -12,4 +14,13 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "appufpa";
     }
+    
+     @Override
+      public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Intent intent = new Intent("onConfigurationChanged");
+        intent.putExtra("newConfig", newConfig);
+        this.sendBroadcast(intent);
+    }
+
 }
