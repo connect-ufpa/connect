@@ -1,9 +1,11 @@
+import { firebaseAuth } from '../config/Config'
 import {
     validateLetters,
     validateNumbers,
     validateDates,
     validateEmails,
     validatePasswords,
+    validateUser,
     matchPasswords
 } from '../helpers/HandleData';
 import {
@@ -11,14 +13,15 @@ import {
     INVALID_NAME,
     VALID_REGISTRATION,
     INVALID_REGISTRATION,
-    VALID_DATE,
-    INVALID_DATE,
+    VALID_BIRTHDAY,
+    INVALID_BIRTHDAY,
     VALID_EMAIL,
     INVALID_EMAIL,
     VALID_PASSWORD,
     INVALID_PASSWORD,
     MATCH_PASSWORD,
-    MISMATCH_PASSWORD
+    MISMATCH_PASSWORD,
+    CREATING_ACCOUNT
 } from './types';
 
 export const onNameChanged = (name) => {
@@ -40,9 +43,9 @@ export const onRegistrationChanged = (registration) => {
 export const onBirthChanged = (birth) => {
     const validateBirth = validateDates(birth);
     if (validateBirth) {
-        return { type: VALID_DATE, payload: birth };
+        return { type: VALID_BIRTHDAY, payload: birth };
     }
-    return { type: INVALID_DATE, payload: birth };
+    return { type: INVALID_BIRTHDAY, payload: birth };
 };
 
 export const onEmailChanged = (email) => {
@@ -67,4 +70,14 @@ export const onConfirmPasswordChanged = (confirmPassword, password) => {
         return { type: MATCH_PASSWORD, payload: confirmPassword };
     }
     return { type: MISMATCH_PASSWORD, payload: confirmPassword };
+};
+
+export const saveUser = (user) => {
+    const result = validateUser(user);
+    if(result) {
+        return (dispatch) => {
+            dispatch({ type: CREATING_ACCOUNT });
+            firebaseAuth().createUserWithEmailAndPassword(user.email, user.password)
+        } 
+    }
 };

@@ -4,20 +4,53 @@ import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import { Actions } from 'react-native-router-flux';
 import Swiper from 'react-native-swiper';
-import { Card, CardSection, Texts, Input, Button } from './commons';
+import { Card, CardSection, Texts, Input, Button, Spinner } from './commons';
 import {
     onNameChanged,
     onRegistrationChanged,
     onBirthChanged,
     onEmailChanged,
     onPasswordChanged,
-    onConfirmPasswordChanged
+    onConfirmPasswordChanged,
+    saveUser
 } from '../actions';
 import Styles from '../Styles';
 
 const logo = require('../../assets/img/logo.png');
 
 class CreateUser extends Component {
+
+    renderButton() {
+        if (this.props.loading) {
+            return (<Spinner size="large" color="#ffff" />);
+        }
+        return (
+            <Button
+                text="Cadastrar"
+                styles={Styles.btnConfirm}
+                onPress={() => {
+                    // const user = {
+                    //     name: this.props.name,
+                    //     registration: this.props.registration,
+                    //     birthday: this.props.birthday,
+                    //     email: this.props.email,
+                    //     password: this.props.password,
+                    //     error: this.props.error
+                    // }
+                    const user = {
+                        name: "Otavio Augusto",
+                        registration: "201206840012",
+                        birthday: "02/07/1992",
+                        email: "tavioalves@gmail.com",
+                        password: "123456",
+                        error: false
+                    }
+                    this.props.saveUser(user);
+                }}
+            />
+        );
+    }
+
     render() {
         return (
             <Swiper>
@@ -56,8 +89,8 @@ class CreateUser extends Component {
                             <CardSection>
                                 <Input
                                     placeholder="Nascimento: 00/00/0000"
-                                    onChangeText={birth => this.props.onBirthChanged(birth)}
-                                    value={this.props.date}
+                                    onChangeText={birthday => this.props.onBirthChanged(birthday)}
+                                    value={this.props.birthday}
                                 />
                             </CardSection>
                             <View>
@@ -117,10 +150,7 @@ class CreateUser extends Component {
                                 <Texts text={this.props.errorMessageConfirmPassword} />
                             </View>
                             <CardSection>
-                                <Button
-                                    text="Cadastrar"
-                                    styles={Styles.btnConfirm}
-                                />
+                                {this.renderButton()}
                             </CardSection>
                         </Card>
                     </ScrollView>
@@ -135,13 +165,15 @@ const mapStateToProps = (state) => {
     return {
         name: state.createUser.name,
         registration: state.createUser.registration,
-        date: state.createUser.date,
+        birthday: state.createUser.birthday,
         email: state.createUser.email,
         password: state.createUser.password,
         confirmPassword: state.createUser.confirmPassword,
+        loading: state.createUser.loading,
+        error: state.createUser.error,
         errorMessageName: state.createUser.errorMessageName,
         errorMessageRegistration: state.createUser.errorMessageRegistration,
-        errorMessageDate: state.createUser.errorMessageDate,
+        errorMessageBirthday: state.createUser.errorMessageBirthday,
         errorMessageEmail: state.createUser.errorMessageEmail,
         errorMessagePassword: state.createUser.errorMessagePassword,
         errorMessageConfirmPassword: state.createUser.errorMessageConfirmPassword
@@ -153,5 +185,6 @@ export default connect(mapStateToProps, {
     onBirthChanged,
     onEmailChanged,
     onPasswordChanged,
-    onConfirmPasswordChanged
+    onConfirmPasswordChanged,
+    saveUser
 })(CreateUser);

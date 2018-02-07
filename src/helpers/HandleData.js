@@ -28,5 +28,15 @@ export const validatePasswords = (password) => {
 };
 
 export const matchPasswords = (confirmPassword, password) => {
-    if (confirmPassword === password) return true;
+    if (confirmPassword === password) return true; 
 };
+
+export const validateUser = (user) => {
+    console.log("Usuário: ", user);
+    if(!user.error) {
+        if ((user.name === '') || (user.registration === '') || (user.birth === '') || (user.email === '') || (user.password === ''))
+            return false;
+        else
+            return true;
+    }  return false;
+}
