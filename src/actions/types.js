@@ -11,5 +11,6 @@ export const INVALID_PASSWORD = 'invalid_password';
 export const MATCH_PASSWORD = 'match_password';
 export const MISMATCH_PASSWORD = 'mismatch_password';
 export const CREATING_ACCOUNT = "creating_account";
-
+export const CREATE_ACCOUNT_ERROR = "create_account_error";
+export const CREATE_ACCOUNT_SUCCESS = "create_account_success";
 

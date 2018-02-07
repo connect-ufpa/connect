@@ -11,7 +11,9 @@ import {
     INVALID_PASSWORD,
     MATCH_PASSWORD,
     MISMATCH_PASSWORD,
-    CREATING_ACCOUNT
+    CREATING_ACCOUNT,
+    CREATE_ACCOUNT_SUCCESS,
+    CREATE_ACCOUNT_ERROR
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -28,6 +30,7 @@ const INITIAL_STATE = {
     errorMessageEmail: '',
     errorMessagePassword: '',
     errorMessageConfirmPassword: '',
+    errorMessageCreateAccountFail: '',
     error: true
 };
 
@@ -59,6 +62,10 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, confirmPassword: action.payload, errorMessageConfirmPassword: 'As senhas devem ser iguais', error: true };
         case CREATING_ACCOUNT:
             return { ...state, loading: true };
+        case CREATE_ACCOUNT_ERROR:
+            return { ...state, loading: false, errorMessageCreateAccountFail: 'Falha no cadastro da conta!' };
+        case CREATE_ACCOUNT_SUCCESS:
+            return { ...state, loading: false };
         default:
             return state;
     }

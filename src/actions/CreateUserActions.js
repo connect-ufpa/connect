@@ -1,4 +1,4 @@
-import { firebaseAuth } from '../config/Config'
+import { firebaseAuth, database } from '../config/Config'
 import {
     validateLetters,
     validateNumbers,
@@ -21,7 +21,9 @@ import {
     INVALID_PASSWORD,
     MATCH_PASSWORD,
     MISMATCH_PASSWORD,
-    CREATING_ACCOUNT
+    CREATING_ACCOUNT,
+    CREATE_ACCOUNT_SUCCESS,
+    CREATE_ACCOUNT_ERROR
 } from './types';
 
 export const onNameChanged = (name) => {
@@ -78,6 +80,23 @@ export const saveUser = (user) => {
         return (dispatch) => {
             dispatch({ type: CREATING_ACCOUNT });
             firebaseAuth().createUserWithEmailAndPassword(user.email, user.password)
+                .then(() => {
+                    persistUser(dispatch, user);
+                }).catch(() => { dispatch({ type: CREATE_ACCOUNT_ERROR }) });
         } 
     }
+};
+
+const persistUser = (dispatch, user) => {
+    const { currentUser } = firebaseAuth();
+    
+    console.log("Usuário para ser salvo no banco: ", user);
+    const name = user.name;
+
+    database().ref(`/users/${currentUser.uid}`).push({name}).then(() => {
+            dispatch({ type: CREATE_ACCOUNT_SUCCESS });
+        }).catch(() => {
+            dispatch({ type: CREATE_ACCOUNT_ERROR });
+            currentUser.delete();
+        });
 };

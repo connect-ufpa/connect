@@ -152,6 +152,9 @@ class CreateUser extends Component {
                             <CardSection>
                                 {this.renderButton()}
                             </CardSection>
+                            <View>
+                                <Texts text={this.props.errorMessageCreateAccountFail} />
+                            </View>
                         </Card>
                     </ScrollView>
                 </LinearGradient>
@@ -176,7 +179,8 @@ const mapStateToProps = (state) => {
         errorMessageBirthday: state.createUser.errorMessageBirthday,
         errorMessageEmail: state.createUser.errorMessageEmail,
         errorMessagePassword: state.createUser.errorMessagePassword,
-        errorMessageConfirmPassword: state.createUser.errorMessageConfirmPassword
+        errorMessageConfirmPassword: state.createUser.errorMessageConfirmPassword,
+        errorMessageCreateAccountFail: state.createUser.errorMessageCreateAccountFail
     };
 };
 export default connect(mapStateToProps, {
