@@ -93,7 +93,7 @@ const persistUser = (dispatch, user) => {
     console.log("Usuário para ser salvo no banco: ", user);
     const name = user.name;
 
-    database().ref(`/users/${currentUser.uid}`).push({name}).then(() => {
+    database().ref(`/users/`).push({name}).then(() => {
             dispatch({ type: CREATE_ACCOUNT_SUCCESS });
         }).catch(() => {
             dispatch({ type: CREATE_ACCOUNT_ERROR });
