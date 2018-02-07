@@ -3,7 +3,8 @@ import {
     validateNumbers,
     validateDates,
     validateEmails,
-    validatePasswords
+    validatePasswords,
+    matchPasswords
 } from '../helpers/HandleData';
 import {
     VALID_NAME,
@@ -15,7 +16,9 @@ import {
     VALID_EMAIL,
     INVALID_EMAIL,
     VALID_PASSWORD,
-    INVALID_PASSWORD
+    INVALID_PASSWORD,
+    MATCH_PASSWORD,
+    MISMATCH_PASSWORD
 } from './types';
 
 export const onNameChanged = (name) => {
@@ -56,4 +59,12 @@ export const onPasswordChanged = (password) => {
         return { type: VALID_PASSWORD, payload: password };
     }
     return { type: INVALID_PASSWORD, payload: password };
+};
+
+export const onConfirmPasswordChanged = (confirmPassword, password) => {
+    const validateMatchPasswords = matchPasswords(confirmPassword, password);
+    if (validateMatchPasswords) {
+        return { type: MATCH_PASSWORD, payload: confirmPassword };
+    }
+    return { type: MISMATCH_PASSWORD, payload: confirmPassword };
 };

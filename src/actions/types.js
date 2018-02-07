@@ -8,3 +8,6 @@ export const VALID_EMAIL = 'valid_email';
 export const INVALID_EMAIL = 'invalid_email';
 export const VALID_PASSWORD = 'valid_password';
 export const INVALID_PASSWORD = 'invalid_password';
+export const MATCH_PASSWORD = 'match_password';
+export const MISMATCH_PASSWORD = 'mismatch_password';
+

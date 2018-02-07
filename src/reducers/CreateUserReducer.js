@@ -8,7 +8,9 @@ import {
     VALID_EMAIL,
     INVALID_EMAIL,
     VALID_PASSWORD,
-    INVALID_PASSWORD
+    INVALID_PASSWORD,
+    MATCH_PASSWORD,
+    MISMATCH_PASSWORD
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -17,11 +19,13 @@ const INITIAL_STATE = {
     date: '',
     email: '',
     password: '',
+    confirmPassword: '',
     errorMessageName: '',
     errorMessageRegistration: '',
     errorMessageDate: '',
     errorMessageEmail: '',
-    errorMessagePassword: ''
+    errorMessagePassword: '',
+    errorMessageConfirmPassword: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -49,7 +53,11 @@ export default (state = INITIAL_STATE, action) => {
         case VALID_EMAIL:
             return { ...state, email: action.payload, errorMessageEmail: '' };
         case INVALID_EMAIL:
-            return { ...state, email: action.payload, errorMessageEmail: 'Digite um e-mail válido' }
+            return {
+                ...state,
+                email: action.payload,
+                errorMessageEmail: 'Digite um e-mail válido'
+            };
         case VALID_PASSWORD:
             return { ...state, password: action.payload, errorMessagePassword: '' };
         case INVALID_PASSWORD:
@@ -57,6 +65,14 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 password: action.payload,
                 errorMessagePassword: 'Senha deve ter no mínimo seis caracteres'
+            };
+        case MATCH_PASSWORD:
+            return { ...state, confirmPassword: action.payload, errorMessageConfirmPassword: '' };
+        case MISMATCH_PASSWORD:
+            return {
+                ...state,
+                confirmPassword: action.payload,
+                errorMessageConfirmPassword: 'As senhas devem ser iguais'
             };
         default:
             return state;
