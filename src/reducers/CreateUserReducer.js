@@ -39,27 +39,27 @@ export default (state = INITIAL_STATE, action) => {
         case VALID_NAME:
             return { ...state, name: action.payload, errorMessageName: '', error: false };
         case INVALID_NAME:
-            return { ...state, name: '', errorMessageName: 'Digite um nome válido', error: true };
+            return { ...state, name: '', errorMessageName: 'Digite um nome válido!', error: true };
         case VALID_REGISTRATION:
             return { ...state, registration: action.payload, errorMessageRegistration: '', error: false };
         case INVALID_REGISTRATION:
-            return { ...state, registration: '', errorMessageRegistration: 'Matrícula deve conter apenas números', error: true };
+            return { ...state, registration: '', errorMessageRegistration: 'Matrícula deve conter apenas números!', error: true };
         case VALID_BIRTHDAY:
             return { ...state, birthday: action.payload, errorMessageBirthday: '', error: false };
         case INVALID_BIRTHDAY:
-            return { ...state, birthday: action.payload, errorMessageBirthday: 'Digite um formato de data válido', error: true };
+            return { ...state, birthday: action.payload, errorMessageBirthday: 'Digite um formato de data válido!', error: true };
         case VALID_EMAIL:
             return { ...state, email: action.payload, errorMessageEmail: '', error: false };
         case INVALID_EMAIL:
-            return { ...state, email: action.payload, errorMessageEmail: 'Digite um e-mail válido', error: true };
+            return { ...state, email: action.payload, errorMessageEmail: 'Digite um e-mail válido!', error: true };
         case VALID_PASSWORD:
             return { ...state, password: action.payload, errorMessagePassword: '', error: false };
         case INVALID_PASSWORD:
-            return { ...state, password: action.payload, errorMessagePassword: 'Senha deve ter no mínimo seis caracteres', error: true };
+            return { ...state, password: action.payload, errorMessagePassword: 'Senha deve ter no mínimo seis caracteres!', error: true };
         case MATCH_PASSWORD:
             return { ...state, confirmPassword: action.payload, errorMessageConfirmPassword: '', error: false };
         case MISMATCH_PASSWORD:
-            return { ...state, confirmPassword: action.payload, errorMessageConfirmPassword: 'As senhas devem ser iguais', error: true };
+            return { ...state, confirmPassword: action.payload, errorMessageConfirmPassword: 'As senhas devem ser iguais!', error: true };
         case CREATING_ACCOUNT:
             return { ...state, loading: true };
         case CREATE_ACCOUNT_ERROR:

@@ -13,12 +13,13 @@ const RouterComponent = () => {
                     component={Splash}
                     initial
                 />
-                <Scene key="auth" hideNavBar>
-                    <Scene
+                <Scene key="auth">
+                    <Scene hideNavBar
                         key="login"
                         component={Login}
                     />
                     <Scene 
+                        title="Cadastro"
                         key="createUser"
                         component={CreateUser}
                     />

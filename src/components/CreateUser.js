@@ -36,119 +36,96 @@ class CreateUser extends Component {
       <Button
         text="Cadastrar"
         styles={Styles.btnConfirm}
-        onPress={() => { this.props.saveUser(user);}}
+        onPress={() => { this.props.saveUser(user); }}
       />
     );
   }
 
   render() {
     return (
-      <Swiper showsButtons={true}>
-        <LinearGradient colors={['#62B5DB', '#D6534D']}>
-          <ScrollView style={Styles.scrollViewStyle}>
-            <Card addStyle={{ paddingBottom: 40 }}>
-              <CardSection>
-                <View style={{ flex: 1, flexDirection: 'row' }} >
-                  <ButtonBack />
-                  <Image
-                    source={logo}
-                    style={{ width: 95, height: 120, marginBottom: 10, alignSelf: 'center' }}
-                  /> 
-                </View>
-              </CardSection>
-              <CardSection>
-                <Input
-                  placeholder="Nome:"
-                  onChangeText={name => this.props.onNameChanged(name)}
-                  value={this.props.name}
-                />
-              </CardSection>
-              <View>
-                <Texts text={this.props.errorMessageName} />
-              </View>
-              <CardSection>
-                <Input
-                  placeholder="Matrícula:"
-                  onChangeText={ registration => this.props.onRegistrationChanged(registration)}
-                  value={this.props.registration}
-                />
-              </CardSection>
-              <View>
-                <Texts text={this.props.errorMessageRegistration} />
-              </View>
-              <CardSection>
-                <Input
-                  placeholder="Nascimento: 00/00/0000"
-                  onChangeText={birthday => this.props.onBirthChanged(birthday)}
-                  value={this.props.birthday}
-                />
-              </CardSection>
-              <View>
-                <Texts text={this.props.errorMessageBirthday} />
-              </View>
-            </Card>
-          </ScrollView>
-        </LinearGradient>
+      <LinearGradient colors={['#62B5DB', '#D6534D']}>
+        <ScrollView style={Styles.scrollViewStyle}>
+          <Card addStyle={{ paddingBottom: 40 }}>
+            <CardSection>
+              <Input
+                placeholder="Nome:"
+                onChangeText={name => this.props.onNameChanged(name)}
+                value={this.props.name}
+              />
+            </CardSection>
+            <View>
+              <Texts text={this.props.errorMessageName} />
+            </View>
+            <CardSection>
+              <Input
+                placeholder="Matrícula:"
+                onChangeText={registration => this.props.onRegistrationChanged(registration)}
+                value={this.props.registration}
+              />
+            </CardSection>
+            <View>
+              <Texts text={this.props.errorMessageRegistration} />
+            </View>
+            <CardSection>
+              <Input
+                placeholder="Nascimento: 00/00/0000"
+                onChangeText={birthday => this.props.onBirthChanged(birthday)}
+                value={this.props.birthday}
+              />
+            </CardSection>
+            <View>
+              <Texts text={this.props.errorMessageBirthday} />
+            </View>
 
-        <LinearGradient colors={['#62B5DB', '#D6534D']}>
-          <ScrollView style={Styles.scrollViewStyle}>
-            <Card addStyle={{ paddingBottom: 50 }}>
-              <CardSection>
-                <Image
-                  source={logo}
-                  style={{ width: 95, height: 120, marginBottom: 10 }}
-                />
-              </CardSection>
-              <CardSection>
-                <Input
-                  placeholder="E-mail:"
-                  onChangeText={email => this.props.onEmailChanged(email)}
-                  value={this.props.email}
-                />
-              </CardSection>
-              <View>
-                <Texts text={this.props.errorMessageEmail} />
-              </View>
-              <CardSection>
-                <Input
-                  placeholder="Senha:"
-                  secureTextEntry
-                  onChangeText={
-                    password =>
-                      this.props.onPasswordChanged(password)
-                  }
-                  value={this.props.password}
-                />
-              </CardSection>
-              <View>
-                <Texts text={this.props.errorMessagePassword} />
-              </View>
-              <CardSection>
-                <Input
-                  placeholder="Confirmação de senha:"
-                  secureTextEntry
-                  onChangeText={
-                    confirmPassword =>
-                      this.props.onConfirmPasswordChanged(
-                        confirmPassword, this.props.password
-                      )
-                  }
-                  value={this.props.confirmPassword}
-                />
-              </CardSection>
-              <View>
-                <Texts text={this.props.errorMessageConfirmPassword} />
-              </View>
-              <CardSection>
-                {this.renderCreateUserButton()}
-              </CardSection>
-              <View>
-                <Texts text={this.props.errorMessageCreateAccountFail} />
-              </View>
-            </Card>
-          </ScrollView>
-        </LinearGradient>
-      </Swiper>
+            <CardSection>
+              <Input
+                placeholder="E-mail:"
+                onChangeText={email => this.props.onEmailChanged(email)}
+                value={this.props.email}
+              />
+            </CardSection>
+            <View>
+              <Texts text={this.props.errorMessageEmail} />
+            </View>
+            <CardSection>
+              <Input
+                placeholder="Senha:"
+                secureTextEntry
+                onChangeText={
+                  password =>
+                    this.props.onPasswordChanged(password)
+                }
+                value={this.props.password}
+              />
+            </CardSection>
+            <View>
+              <Texts text={this.props.errorMessagePassword} />
+            </View>
+            <CardSection>
+              <Input
+                placeholder="Confirmação de senha:"
+                secureTextEntry
+                onChangeText={
+                  confirmPassword =>
+                    this.props.onConfirmPasswordChanged(
+                      confirmPassword, this.props.password
+                    )
+                }
+                value={this.props.confirmPassword}
+              />
+            </CardSection>
+            <View>
+              <Texts text={this.props.errorMessageConfirmPassword} />
+            </View>
+            <CardSection>
+              {this.renderCreateUserButton()}
+            </CardSection>
+            <View>
+              <Texts text={this.props.errorMessageCreateAccountFail} />
+            </View>
+          </Card>
+        </ScrollView>
+      </LinearGradient>
 
     );
   }
@@ -173,6 +150,7 @@ const mapStateToProps = (state) => {
     errorMessageCreateAccountFail: state.createUser.errorMessageCreateAccountFail
   };
 };
+
 export default connect(mapStateToProps, {
   onNameChanged,
   onRegistrationChanged,

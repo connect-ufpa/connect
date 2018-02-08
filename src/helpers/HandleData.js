@@ -32,11 +32,20 @@ export const matchPasswords = (confirmPassword, password) => {
 };
 
 export const validateUser = (user) => {
-    console.log("Usuário: ", user);
     if(!user.error) {
         if ((user.name === '') || (user.registration === '') || (user.birth === '') || (user.email === '') || (user.password === ''))
             return false;
         else
             return true;
     }  return false;
+}
+
+export const validateLogin = (credentials) => {
+    if (!credentials.error) {
+        if ((credentials.email === '') || (credentials.password === '')) 
+            return false;
+        else 
+          return true;
+    }
+    return false;
 }
