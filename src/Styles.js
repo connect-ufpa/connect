@@ -69,12 +69,27 @@ export default StyleSheet.create({
         borderColor: '#CC2820',
         elevation: 4
     },
+    btnBack: {
+        width: 50,
+        height: 50,
+        backgroundColor: "#CC2820",
+        borderRadius: 5,
+        elevation: 4,
+        alignSelf: 'flex-start'
+    },
+    btnBackTextStyle: {
+        fontFamily: 'Ubuntu',
+        fontSize: 40,
+        fontWeight: '800',
+        alignSelf: 'center',
+        color: '#fff'
+    },
     btnTextStyle: {
         fontFamily: 'Ubuntu',
         fontSize: 24,
         fontWeight: '600',
         alignSelf: 'center',
-        color: '#ffff',
+        color: '#fff',
         paddingTop: 10,
         paddingBottom: 10
     },

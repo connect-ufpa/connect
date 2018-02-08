@@ -4,7 +4,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { ScrollView, Image, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { Card, CardSection, Texts, Input, Button, Spinner } from './commons';
+import { Card, CardSection, Texts, Input, Button, ButtonBack, Spinner } from './commons';
 import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, onPasswordChanged, onConfirmPasswordChanged, saveUser } from '../actions';
 import Styles from '../Styles';
 
@@ -12,8 +12,15 @@ const logo = require('../../assets/img/logo.png');
 
 class CreateUser extends Component {
 
-  
-  renderButton() {
+  renderCreateUserButton() {
+    // const user = {
+    //     name: this.props.name,
+    //     registration: this.props.registration,
+    //     birthday: this.props.birthday,
+    //     email: this.props.email,
+    //     password: this.props.password,
+    //     error: this.props.error
+    // }
     const user = {
       nome: "Otavio Augusto",
       matricula: "201206840012",
@@ -29,18 +36,7 @@ class CreateUser extends Component {
       <Button
         text="Cadastrar"
         styles={Styles.btnConfirm}
-        onPress={() => {
-          // const user = {
-          //     name: this.props.name,
-          //     registration: this.props.registration,
-          //     birthday: this.props.birthday,
-          //     email: this.props.email,
-          //     password: this.props.password,
-          //     error: this.props.error
-          // }
-          
-          this.props.saveUser(user);
-        }}
+        onPress={() => { this.props.saveUser(user);}}
       />
     );
   }
@@ -50,14 +46,15 @@ class CreateUser extends Component {
       <Swiper showsButtons={true}>
         <LinearGradient colors={['#62B5DB', '#D6534D']}>
           <ScrollView style={Styles.scrollViewStyle}>
-            <Card 
-              addStyle={{ paddingBottom: 40 }}
-            >
+            <Card addStyle={{ paddingBottom: 40 }}>
               <CardSection>
-                <Image
-                  source={logo}
-                  style={{ width: 95, height: 120, marginBottom: 10 }}
-                />
+                <View style={{ flex: 1, flexDirection: 'row' }} >
+                  <ButtonBack />
+                  <Image
+                    source={logo}
+                    style={{ width: 95, height: 120, marginBottom: 10, alignSelf: 'center' }}
+                  /> 
+                </View>
               </CardSection>
               <CardSection>
                 <Input
@@ -95,7 +92,7 @@ class CreateUser extends Component {
 
         <LinearGradient colors={['#62B5DB', '#D6534D']}>
           <ScrollView style={Styles.scrollViewStyle}>
-            <Card>
+            <Card addStyle={{ paddingBottom: 50 }}>
               <CardSection>
                 <Image
                   source={logo}
@@ -143,7 +140,7 @@ class CreateUser extends Component {
                 <Texts text={this.props.errorMessageConfirmPassword} />
               </View>
               <CardSection>
-                {this.renderButton()}
+                {this.renderCreateUserButton()}
               </CardSection>
               <View>
                 <Texts text={this.props.errorMessageCreateAccountFail} />
