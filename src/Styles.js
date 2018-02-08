@@ -39,8 +39,8 @@ export default StyleSheet.create({
     },
     containerStyle: {
         padding: 10,
-        paddingRight: 25,
-        paddingLeft: 25,
+        paddingRight: 40,
+        paddingLeft: 40,
         justifyContent: 'center',
         flexDirection: 'row',
         position: 'relative'

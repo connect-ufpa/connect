@@ -76,27 +76,24 @@ export const onConfirmPasswordChanged = (confirmPassword, password) => {
 
 export const saveUser = (user) => {
     const result = validateUser(user);
-    if(result) {
+    if (result) {
         return (dispatch) => {
             dispatch({ type: CREATING_ACCOUNT });
             firebaseAuth().createUserWithEmailAndPassword(user.email, user.password)
                 .then(() => {
                     persistUser(dispatch, user);
                 }).catch(() => { dispatch({ type: CREATE_ACCOUNT_ERROR }) });
-        } 
+        }
     }
 };
 
 const persistUser = (dispatch, user) => {
-    const { currentUser } = firebaseAuth();
-    
-    console.log("Usuário para ser salvo no banco: ", user);
-    const name = user.name;
+    const { nome, matricula, nascimento, email } = user;
 
-    database().ref(`/users/`).push({name}).then(() => {
-            dispatch({ type: CREATE_ACCOUNT_SUCCESS });
-        }).catch(() => {
-            dispatch({ type: CREATE_ACCOUNT_ERROR });
-            currentUser.delete();
-        });
+    database().ref(`/users/`).push({ nome, matricula, nascimento, email }).then(() => {
+        dispatch({ type: CREATE_ACCOUNT_SUCCESS });
+    }).catch(() => {
+        dispatch({ type: CREATE_ACCOUNT_ERROR });
+        currentUser.delete();
+    });
 };
