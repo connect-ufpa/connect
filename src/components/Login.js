@@ -17,11 +17,6 @@ class Login extends Component {
             password: this.props.password,
             error: this.props.error
         }
-        // const user = {
-        //     email: 'tavioalves@gmail.com',
-        //     password: '123456',
-        //     error: this.props.error
-        // }
 
         if (this.props.loading) {
             return (<Spinner size="large" color="#ffff" />);
