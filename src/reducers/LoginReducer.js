@@ -3,7 +3,8 @@ import {
     INVALID_EMAIL_LOGIN,
     VALID_PASSWORD_LOGIN,
     INVALID_PASSWORD_LOGIN,
-    LOGIN
+    CREDENTIAL_INVALID,
+    CREDENTIAL_VALID
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -12,6 +13,7 @@ const INITIAL_STATE = {
     loading: false,
     errorMessageEmail: '',
     errorMessagePassword: '',
+    errorMessageLogin: '',
     error: true
 };
 
@@ -25,8 +27,10 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, password: action.payload, errorMessagePassword: '', error: false };
         case INVALID_PASSWORD_LOGIN:
             return { ...state, password: action.payload, errorMessagePassword: 'Senha deve ter no mínimo seis caracteres!', error: true };
-        case LOGIN:
+        case CREDENTIAL_VALID:
             return { ...state, loading: true };
+        case CREDENTIAL_INVALID:
+            return { ...state, errorMessageLogin: 'E-mail ou senha inválido!', error: true }
         default:
             return state;
     }

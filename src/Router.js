@@ -3,6 +3,7 @@ import { Scene, Router } from 'react-native-router-flux';
 import Splash from './components/Splash';
 import Login from './components/Login';
 import CreateUser from './components/CreateUser';
+import Main from './components/Main';
 
 const RouterComponent = () => {
     return (
@@ -24,6 +25,11 @@ const RouterComponent = () => {
                         component={CreateUser}
                     />
                 </Scene>
+                <Scene 
+                    title="Menu"
+                    key="main"
+                    component={Main}
+                />
             </Scene>
         </Router>
     );

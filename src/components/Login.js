@@ -72,6 +72,9 @@ class Login extends Component {
                         <CardSection>
                             {this.renderLoginButton()}
                         </CardSection>
+                        <View>
+                            <Texts text={this.props.errorMessageLogin} />
+                        </View>
                         <CardSection>
                             <TouchableOpacity onPress={() => { Actions.createUser(); }}>
                                 <Texts text="Criar conta" sizeText="medium" />
@@ -90,7 +93,8 @@ const mapStateToProps = (state) => {
         errorMessageEmail: state.login.errorMessageEmail,
         password: state.login.password,
         loading: state.login.loading,
-        errorMessagePassword: state.login.errorMessagePassword
+        errorMessagePassword: state.login.errorMessagePassword,
+        errorMessageLogin: state.login.errorMessageLogin
     };
 };
 

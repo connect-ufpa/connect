@@ -19,5 +19,5 @@ export const INVALID_EMAIL_LOGIN = 'invalid_email_login';
 export const VALID_PASSWORD_LOGIN = 'valid_password_login';
 export const INVALID_PASSWORD_LOGIN = 'invalid_password_login';
 export const CREDENTIAL_INVALID = 'credential_invalid';
-export const LOGIN = 'login';
+export const CREDENTIAL_VALID = 'credential_valid';
 
