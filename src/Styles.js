@@ -49,7 +49,7 @@ export default StyleSheet.create({
         height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 50
+        paddingTop: 25
     },
     btnConfirm: {
         flex: 1,

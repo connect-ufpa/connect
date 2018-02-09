@@ -28,7 +28,7 @@ export default (state = INITIAL_STATE, action) => {
         case INVALID_PASSWORD_LOGIN:
             return { ...state, password: action.payload, errorMessagePassword: 'Senha deve ter no mínimo seis caracteres!', error: true };
         case CREDENTIAL_VALID:
-            return { ...state, loading: true };
+            return { ...state, loading: false, email: '', password:'', errorMessageEmail: '', errorMessagePassword: '', errorMessageLogin: '', error: false};
         case CREDENTIAL_INVALID:
             return { ...state, errorMessageLogin: 'E-mail ou senha inválido!', error: true }
         default:

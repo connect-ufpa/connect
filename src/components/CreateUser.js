@@ -43,7 +43,7 @@ class CreateUser extends Component {
 
   render() {
     return (
-      <LinearGradient colors={['#62B5DB', '#D6534D']}>
+      <LinearGradient colors={['#2A4065', '#2BA3DA']}>
         <ScrollView style={Styles.scrollViewStyle}>
           <Card addStyle={{ paddingBottom: 40 }}>
             <CardSection>

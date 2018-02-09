@@ -25,12 +25,12 @@ class Splash extends Component {
     }
     render() {
         return (
-            <LinearGradient colors={['#62B5DB', '#D6534D']}>
+            <LinearGradient colors={['#2A4065', '#2BA3DA']}>
                 <Card>
                     <CardSection>
                         <Image
                             source={logo}
-                            style={{ width: 95, height: 120, marginBottom: 60 }}
+                            style={{ width: 150, height: 135, marginBottom: 60 }}
                         />
                     </CardSection>
                     <CardSection>

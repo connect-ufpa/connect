@@ -25,11 +25,14 @@ const RouterComponent = () => {
                         component={CreateUser}
                     />
                 </Scene>
-                <Scene 
-                    title="Menu"
-                    key="main"
-                    component={Main}
-                />
+                <Scene key="dashboard">
+                    <Scene 
+                       renderLeftButton={null}
+                        title="Menu"
+                        key="main"
+                        component={Main}
+                    />
+                </Scene>
             </Scene>
         </Router>
     );

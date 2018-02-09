@@ -23,7 +23,7 @@ class Login extends Component {
         }
         return (
             <Button
-                text="Cadastrar"
+                text="Entrar"
                 styles={Styles.btnConfirm}
                 onPress={() => { this.props.login(user); }}
             />
@@ -31,13 +31,13 @@ class Login extends Component {
     }
     render() {
         return (
-            <LinearGradient colors={['#62B5DB', '#D6534D']}>
+            <LinearGradient colors={['#2A4065', '#2BA3DA']}>
                 <ScrollView style={Styles.scrollViewStyle} >
                     <Card>
                         <CardSection>
                             <Image
                                 source={logo}
-                                style={{ width: 95, height: 120, marginBottom: 10 }}
+                                style={{ width: 150, height: 135, marginBottom: 10 }}
                             />
                         </CardSection>
                         <CardSection>
