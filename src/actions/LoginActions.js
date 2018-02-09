@@ -33,6 +33,5 @@ export const login = (credentials) => {
           dispatch({ type: CREDENTIAL_INVALID });
         });
     }
-  }
-  return { type: CREDENTIAL_INVALID }
+  } else return { type: CREDENTIAL_INVALID }
 }

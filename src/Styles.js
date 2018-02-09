@@ -6,25 +6,21 @@ export default StyleSheet.create({
     xLargeTextStyle: {
         fontFamily: 'Ubuntu',
         fontSize: 48,
-        fontWeight: 'bold',
         color: '#ffff'
     },
     largeTextStyle: {
-        fontFamily: 'Ubuntu',
         fontSize: 28,
-        fontWeight: 'bold',
+        fontFamily: 'Righteous',
         color: '#ffff'
     },
     mediumTextStyle: {
-        fontFamily: 'Ubuntu',
         fontSize: 20,
-        fontWeight: 'bold',
+        fontFamily: 'Ubuntu',
         color: '#ffff'
     },
     smallTextStyle: {
         fontFamily: 'Ubuntu',
         fontSize: 12,
-        fontWeight: 'bold',
         color: '#ffff'
     },
     inputStyle: {
@@ -80,14 +76,12 @@ export default StyleSheet.create({
     btnBackTextStyle: {
         fontFamily: 'Ubuntu',
         fontSize: 40,
-        fontWeight: '800',
         alignSelf: 'center',
         color: '#fff'
     },
     btnTextStyle: {
         fontFamily: 'Ubuntu',
         fontSize: 24,
-        fontWeight: '600',
         alignSelf: 'center',
         color: '#fff',
         paddingTop: 10,

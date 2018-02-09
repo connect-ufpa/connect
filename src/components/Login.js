@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Image, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Image, TouchableOpacity, View, Text} from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { Input, Card, CardSection, Button, Texts, Spinner } from './commons/';
@@ -17,6 +17,11 @@ class Login extends Component {
             password: this.props.password,
             error: this.props.error
         }
+        // const user = {
+        //     email: 'tavioalves@gmail.com',
+        //     password: '123456',
+        //     error: this.props.error
+        // }
 
         if (this.props.loading) {
             return (<Spinner size="large" color="#ffff" />);
