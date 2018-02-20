@@ -13,22 +13,13 @@ const logo = require('../../assets/img/logo.png');
 class CreateUser extends Component {
 
   renderCreateUserButton() {
-    // const user = {
-    //     name: this.props.name,
-    //     registration: this.props.registration,
-    //     birthday: this.props.birthday,
-    //     email: this.props.email,
-    //     password: this.props.password,
-    //     error: this.props.error
-    // }
-
     const user = {
-      name: 'Ailson Freire',
-      registration: '201206840012',
-      birthday: '02/07/1992',
-      email: 'ailson@gmail.com',
-      password: '123456',
-      error: false
+        name: this.props.name,
+        registration: this.props.registration,
+        birthday: this.props.birthday,
+        email: this.props.email,
+        password: this.props.password,
+        error: this.props.error
     }
     
     if (this.props.loading) {

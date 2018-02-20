@@ -4,7 +4,8 @@ import {
     VALID_PASSWORD_LOGIN,
     INVALID_PASSWORD_LOGIN,
     CREDENTIAL_INVALID,
-    CREDENTIAL_VALID
+    CREDENTIAL_VALID,
+    CHECKING_CREDENTIAL
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -29,8 +30,10 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, password: action.payload, errorMessagePassword: 'Senha deve ter no mínimo seis caracteres!', error: true };
         case CREDENTIAL_VALID:
             return INITIAL_STATE;
+        case CHECKING_CREDENTIAL:
+            return {... state, loading: true };
         case CREDENTIAL_INVALID:
-            return { ...state, errorMessageLogin: 'E-mail ou senha inválido!', error: true }
+            return { ...state, loading: false, errorMessageLogin: 'E-mail ou senha inválido!', error: true }
         default:
             return state;
     }

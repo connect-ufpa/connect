@@ -1,6 +1,6 @@
 import { firebaseAuth } from '../config/Config';
 import { validateEmails, validatePasswords, validateLogin } from '../helpers/HandleData';
-import { VALID_EMAIL_LOGIN, INVALID_EMAIL_LOGIN, VALID_PASSWORD_LOGIN, INVALID_PASSWORD_LOGIN, CREDENTIAL_VALID, CREDENTIAL_INVALID } from '../actions/types';
+import { VALID_EMAIL_LOGIN, INVALID_EMAIL_LOGIN, VALID_PASSWORD_LOGIN, INVALID_PASSWORD_LOGIN, CREDENTIAL_VALID, CREDENTIAL_INVALID, CHECKING_CREDENTIAL } from '../actions/types';
 
 export const loginEmailChange = (email) => {
   const validateEmail = validateEmails(email);
@@ -19,11 +19,13 @@ export const loginPasswordChange = (password) => {
   return { type: INVALID_PASSWORD_LOGIN, payload: password };
 }
 
-export const login = (credentials) => {
+export const loginUser = (credentials) => {
   const validate = validateLogin(credentials);
+
+
   if (validate) {
     return (dispatch) => {
-      dispatch({ type: CREDENTIAL_VALID })
+      dispatch({ type: CHECKING_CREDENTIAL })
 
       firebaseAuth().signInWithEmailAndPassword(credentials.email, credentials.password)
         .then(() => {

@@ -20,9 +20,8 @@ import {
 
 export const onNameChanged = (name) => {
     const validateName = validateLetters(name);
-    if (validateName) {
-        return { type: VALID_NAME, payload: name };
-    }
+    if (validateName) return { type: VALID_NAME, payload: name };
+
     return { type: INVALID_NAME };
 };
 
@@ -67,7 +66,7 @@ export const authUser = (user) => {
         return (dispatch) => {
             dispatch({ type: CREATING_ACCOUNT });
             firebaseAuth().createUserWithEmailAndPassword(user.email, user.password)
-                .then(() => { saveUser(dispatch, user);})
+                .then(() => { saveUser(dispatch, user); })
                     .catch(() => { dispatch({ type: CREATE_ACCOUNT_ERROR }) });
         }
     }
