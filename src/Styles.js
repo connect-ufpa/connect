@@ -35,8 +35,8 @@ export default StyleSheet.create({
     },
     containerStyle: {
         padding: 10,
-        paddingRight: 40,
-        paddingLeft: 40,
+        paddingRight: 20,
+        paddingLeft: 20,
         justifyContent: 'center',
         flexDirection: 'row',
         position: 'relative'
@@ -50,10 +50,10 @@ export default StyleSheet.create({
     btnConfirm: {
         flex: 1,
         alignSelf: 'stretch',
-        backgroundColor: '#2BA3DA',
+        backgroundColor: '#2A4065',
         borderRadius: 5,
         borderWidth: 2,
-        borderColor: '#2BA3DA',
+        borderColor: '#2A4065',
         elevation: 4
     },
     btnCancel: {

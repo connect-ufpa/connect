@@ -37,7 +37,7 @@ class Login extends Component {
                         <CardSection>
                             <Image
                                 source={logo}
-                                style={{ width: 150, height: 135, marginBottom: 10 }}
+                                style={{ width: 100, height: 90, marginBottom: 10 }}
                             />
                         </CardSection>
                         <CardSection>
@@ -64,11 +64,13 @@ class Login extends Component {
                         <View>
                             <Texts text={this.props.errorMessagePassword} />
                         </View>
-                        <View>
-                            <TouchableOpacity style={{ paddingLeft: 160 }}>
-                                <Texts text="Esqueci a senha" sizeText="medium" />
-                            </TouchableOpacity>
-                        </View>
+                        <CardSection styleSection={{ alignSelf: 'flex-end', marginTop: 0 }}>
+                            <View>
+                                <TouchableOpacity  >
+                                    <Texts text="Esqueci a senha" sizeText="small" />
+                                </TouchableOpacity>
+                            </View>
+                        </CardSection>
                         <CardSection>
                             {this.renderLoginButton()}
                         </CardSection>

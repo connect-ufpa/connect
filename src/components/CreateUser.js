@@ -5,7 +5,7 @@ import { ScrollView, Image, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { Card, CardSection, Texts, Input, Button, ButtonBack, Spinner } from './commons';
-import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, onPasswordChanged, onConfirmPasswordChanged, saveUser } from '../actions';
+import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, onPasswordChanged, onConfirmPasswordChanged, authUser } from '../actions';
 import Styles from '../Styles';
 
 const logo = require('../../assets/img/logo.png');
@@ -13,13 +13,22 @@ const logo = require('../../assets/img/logo.png');
 class CreateUser extends Component {
 
   renderCreateUserButton() {
+    // const user = {
+    //     name: this.props.name,
+    //     registration: this.props.registration,
+    //     birthday: this.props.birthday,
+    //     email: this.props.email,
+    //     password: this.props.password,
+    //     error: this.props.error
+    // }
+
     const user = {
-        name: this.props.name,
-        registration: this.props.registration,
-        birthday: this.props.birthday,
-        email: this.props.email,
-        password: this.props.password,
-        error: this.props.error
+      name: 'Ailson Freire',
+      registration: '201206840012',
+      birthday: '02/07/1992',
+      email: 'ailson@gmail.com',
+      password: '123456',
+      error: false
     }
     
     if (this.props.loading) {
@@ -29,7 +38,7 @@ class CreateUser extends Component {
       <Button
         text="Cadastrar"
         styles={Styles.btnConfirm}
-        onPress={() => { this.props.saveUser(user); }}
+        onPress={() => { this.props.authUser(user); }}
       />
     );
   }
@@ -151,5 +160,5 @@ export default connect(mapStateToProps, {
   onEmailChanged,
   onPasswordChanged,
   onConfirmPasswordChanged,
-  saveUser
+  authUser
 })(CreateUser);
