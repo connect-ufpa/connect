@@ -14,7 +14,7 @@ class CreateUser extends Component {
     headerTintColor: '#2A4065',
     headerTitleStyle: {
       fontFamily: 'Ubuntu',
-      fontSize: 22,
+      fontSize: 20,
       fontWeight: '200',
       alignSelf: 'center',
       paddingRight: 60

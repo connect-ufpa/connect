@@ -4,4 +4,3 @@ export * from './CardSection';
 export * from './Button';
 export * from './Spinner';
 export * from './Texts';
-export * from './ButtonBack';

@@ -12,7 +12,7 @@ class ForgotPassword extends Component {
     headerTintColor: '#2A4065',
     headerTitleStyle: {
       fontFamily: 'Ubuntu',
-      fontSize: 18,
+      fontSize: 20,
       fontWeight: '200',
       alignSelf: 'center',
       paddingRight: 60
@@ -27,6 +27,9 @@ class ForgotPassword extends Component {
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
         <ScrollView style={Styles.scrollViewStyle}>
           <Card>
+            <CardSection>
+              <Texts sizeText='medium' text={'Digite seu e-mail para redefinição de senha'}/>
+            </CardSection>
             <CardSection>
               <Input
                 placeholder="E-mail: aluno@email.com"

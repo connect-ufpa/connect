@@ -3,6 +3,11 @@ import { StyleSheet } from 'react-native';
 const grey = '#777';
 
 export default StyleSheet.create({
+    logoTextStyle: {
+        fontSize: 28,
+        fontFamily: 'Righteous',
+        color: '#ffff'
+    },
     xLargeTextStyle: {
         fontFamily: 'Ubuntu',
         fontSize: 48,
@@ -10,7 +15,7 @@ export default StyleSheet.create({
     },
     largeTextStyle: {
         fontSize: 28,
-        fontFamily: 'Righteous',
+        fontFamily: 'Ubuntu',
         color: '#ffff'
     },
     mediumTextStyle: {
@@ -64,20 +69,6 @@ export default StyleSheet.create({
         borderWidth: 2,
         borderColor: '#CC2820',
         elevation: 4
-    },
-    btnBack: {
-        width: 50,
-        height: 50,
-        backgroundColor: "#CC2820",
-        borderRadius: 5,
-        elevation: 4,
-        alignSelf: 'flex-start'
-    },
-    btnBackTextStyle: {
-        fontFamily: 'Ubuntu',
-        fontSize: 40,
-        alignSelf: 'center',
-        color: '#fff'
     },
     btnTextStyle: {
         fontFamily: 'Ubuntu',

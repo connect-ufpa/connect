@@ -46,7 +46,9 @@ class Login extends Component {
               />
             </CardSection>
             <CardSection>
-              <Texts sizeText="large" text="Connect UFPa" />
+              <Text style={Styles.logoTextStyle}>
+                Connect UFPa
+              </Text>
             </CardSection>
             <CardSection>
               <Input
