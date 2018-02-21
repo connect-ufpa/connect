@@ -13,7 +13,6 @@ export const MainScreen = StackNavigator({
 
 export const SideMenu = DrawerNavigator({
   Main: { screen: Main },
-
     initialRouteName: 'Main',
     drawerBackgroundColor: 'transparent',
     
@@ -24,9 +23,9 @@ export const UnauthorizedScreens = StackNavigator({
   Login: { screen: Login },
   CreateUser: { screen: CreateUser },
   ForgotPasword: { screen: ForgotPassword }
-}, {
+  },{
     initialRouteName: 'Login'
-  });
+});
 
 export const AuthorizedScreens = StackNavigator({
   SideMenu: {

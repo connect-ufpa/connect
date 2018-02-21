@@ -31,7 +31,7 @@ export default StyleSheet.create({
     inputStyle: {
         backgroundColor: '#ffff',
         paddingLeft: 20,
-        fontSize: 18,
+        fontSize: 16,
         fontFamily: 'Ubuntu',
         flex: 1,
         borderColor: grey,
