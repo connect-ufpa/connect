@@ -30,7 +30,7 @@ export const loginUser = (credentials) => {
       firebaseAuth().signInWithEmailAndPassword(credentials.email, credentials.password)
         .then(() => {
           dispatch({ type: CREDENTIAL_VALID });
-          Actions.main();
+
         }).catch(() => {
           dispatch({ type: CREDENTIAL_INVALID });
         });

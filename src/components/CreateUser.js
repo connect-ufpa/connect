@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import Swiper from 'react-native-swiper';
-import LinearGradient from 'react-native-linear-gradient';
+import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, onPasswordChanged, onConfirmPasswordChanged, authUser } from '../actions';
+import { Card, CardSection, Texts, Input, Button, ButtonBack, Spinner } from './commons';
 import { ScrollView, Image, View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
-import { Card, CardSection, Texts, Input, Button, ButtonBack, Spinner } from './commons';
-import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, onPasswordChanged, onConfirmPasswordChanged, authUser } from '../actions';
+import Swiper from 'react-native-swiper';
+import LinearGradient from 'react-native-linear-gradient';
 import Styles from '../Styles';
 
 const logo = require('../../assets/img/logo.png');

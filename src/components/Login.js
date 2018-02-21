@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, Image, TouchableOpacity, View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
 import { Input, Card, CardSection, Button, Texts, Spinner } from './commons/';
 import { loginEmailChange, loginPasswordChange, loginUser } from '../actions/';
 import LinearGradient from 'react-native-linear-gradient';
@@ -12,19 +11,19 @@ const logo = require('../../assets/img/logo.png');
 class Login extends Component {
 
   renderLoginButton() {
-    // const user = {
-    //     email: this.props.email,
-    //     password: this.props.password,
-    //     error: this.props.error,
-    //     loading: false
-    // }
-
     const user = {
-      email: 'lalala@gmail.com',
-      password: '123456',
-      error: false,
-      loading: false
+        email: this.props.email,
+        password: this.props.password,
+        error: this.props.error,
+        loading: false
     }
+
+    // const user = {
+    //   email: 'lalala@gmail.com',
+    //   password: '123456',
+    //   error: false,
+    //   loading: false
+    // }
 
     if (this.props.loading)
       return <Spinner size="large" color="#ffff" />;
@@ -87,7 +86,7 @@ class Login extends Component {
               <Texts text={this.props.errorMessageLogin} />
             </View>
             <CardSection>
-              <TouchableOpacity onPress={() => { Actions.createUser(); }}>
+              <TouchableOpacity onPress={() => { }}>
                 <Texts text="Criar conta" sizeText="medium" />
               </TouchableOpacity>
             </CardSection>
