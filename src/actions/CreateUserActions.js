@@ -1,5 +1,4 @@
 import { firebaseAuth, database } from '../config/Config'
-import { StackNavigator } from 'react-navigation';
 import { validateLetters, validateNumbers, validateDates, validateEmails, validatePasswords, validateUser, matchPasswords } from '../helpers/HandleData';
 import {
     VALID_NAME,

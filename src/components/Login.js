@@ -71,7 +71,7 @@ class Login extends Component {
             </View>
             <CardSection styleSection={{ alignSelf: 'flex-end', marginTop: 0 }}>
               <View>
-                <TouchableOpacity  >
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('ForgotPasword')}>
                   <Texts text="Esqueci a senha" sizeText="small" />
                 </TouchableOpacity>
               </View>

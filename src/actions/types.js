@@ -21,3 +21,6 @@ export const INVALID_PASSWORD_LOGIN = 'invalid_password_login';
 export const CREDENTIAL_INVALID = 'credential_invalid';
 export const CREDENTIAL_VALID = 'credential_valid';
 export const CHECKING_CREDENTIAL = 'checking_credential';
+
+export const VALID_EMAIL_FORGOT = 'valid_email_forgot';
+export const INVALID_EMAIL_FORGOT = 'invalid_email_forgot';

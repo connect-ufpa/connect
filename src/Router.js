@@ -1,21 +1,38 @@
 import React from 'react';
-import { StackNavigator } from "react-navigation";
+import { StackNavigator, DrawerNavigator } from "react-navigation";
 import Splash from './components/Splash';
 import Login from './components/Login';
 import CreateUser from './components/CreateUser';
+import ForgotPassword from './components/ForgotPassword';
 import Main from './components/Main';
 
-export const UnauthorizedScreens = StackNavigator({
-    Login: { screen: Login },
-    CreateUser: { screen: CreateUser }
-  },{
-    initialRouteName: 'Login',  
-    headerMode: 'screen'
+export const MainScreen = StackNavigator({
+  Main: { screen: Main },
 });
 
-export const AuthorizedScreens = StackNavigator({
-    Main: { screen: Main }
-  },{
+
+export const SideMenu = DrawerNavigator({
+  Main: { screen: Main },
+
     initialRouteName: 'Main',
-    headerMode: 'screen'
+    drawerBackgroundColor: 'transparent',
+    
+});
+
+
+export const UnauthorizedScreens = StackNavigator({
+  Login: { screen: Login },
+  CreateUser: { screen: CreateUser },
+  ForgotPasword: { screen: ForgotPassword }
+}, {
+    initialRouteName: 'Login'
+  });
+
+export const AuthorizedScreens = StackNavigator({
+  SideMenu: {
+    screen: SideMenu,
+    navigationOptions: ({ navigation }) => ({
+      header: null
+    })
+  }
 });
