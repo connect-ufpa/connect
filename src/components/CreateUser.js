@@ -3,13 +3,26 @@ import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, o
 import { Card, CardSection, Texts, Input, Button, ButtonBack, Spinner } from './commons';
 import { ScrollView, Image, View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import Swiper from 'react-native-swiper';
 import LinearGradient from 'react-native-linear-gradient';
 import Styles from '../Styles';
 
 const logo = require('../../assets/img/logo.png');
 
 class CreateUser extends Component {
+  static navigationOptions = {
+    title: 'Cadastro',
+    headerTintColor: '#2A4065',
+    headerTitleStyle: {
+      fontFamily: 'Ubuntu',
+      fontSize: 22,
+      fontWeight: '200',
+      alignSelf: 'center',
+      paddingRight: 60
+    },
+    headerStyle: { 
+      elevation: 5
+    }
+  };
 
   renderCreateUserButton() {
     const user = {
@@ -71,7 +84,7 @@ class CreateUser extends Component {
 
             <CardSection>
               <Input
-                placeholder="E-mail:"
+                placeholder="E-mail: aluno@email.com"
                 onChangeText={email => this.props.onEmailChanged(email)}
                 value={this.props.email}
               />

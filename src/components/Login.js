@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import { ScrollView, Image, TouchableOpacity, View, Text } from 'react-native';
-import { connect } from 'react-redux';
 import { Input, Card, CardSection, Button, Texts, Spinner } from './commons/';
 import { loginEmailChange, loginPasswordChange, loginUser } from '../actions/';
+import { connect } from 'react-redux';
+import { StackNavigator } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
 import Styles from '../Styles';
 
 const logo = require('../../assets/img/logo.png');
 
 class Login extends Component {
+  static navigationOptions = {
+    header: null
+  }
 
   renderLoginButton() {
     const user = {
@@ -17,13 +21,6 @@ class Login extends Component {
         error: this.props.error,
         loading: false
     }
-
-    // const user = {
-    //   email: 'lalala@gmail.com',
-    //   password: '123456',
-    //   error: false,
-    //   loading: false
-    // }
 
     if (this.props.loading)
       return <Spinner size="large" color="#ffff" />;
@@ -86,7 +83,7 @@ class Login extends Component {
               <Texts text={this.props.errorMessageLogin} />
             </View>
             <CardSection>
-              <TouchableOpacity onPress={() => { }}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateUser')}>
                 <Texts text="Criar conta" sizeText="medium" />
               </TouchableOpacity>
             </CardSection>
@@ -103,6 +100,7 @@ const mapStateToProps = (state) => {
     errorMessageEmail: state.login.errorMessageEmail,
     password: state.login.password,
     loading: state.login.loading,
+    error: state.login.error,
     errorMessagePassword: state.login.errorMessagePassword,
     errorMessageLogin: state.login.errorMessageLogin
   };

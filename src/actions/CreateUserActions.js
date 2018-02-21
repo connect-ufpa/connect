@@ -1,4 +1,5 @@
 import { firebaseAuth, database } from '../config/Config'
+import { StackNavigator } from 'react-navigation';
 import { validateLetters, validateNumbers, validateDates, validateEmails, validatePasswords, validateUser, matchPasswords } from '../helpers/HandleData';
 import {
     VALID_NAME,
@@ -66,8 +67,10 @@ export const authUser = (user) => {
         return (dispatch) => {
             dispatch({ type: CREATING_ACCOUNT });
             firebaseAuth().createUserWithEmailAndPassword(user.email, user.password)
-                .then(() => { saveUser(dispatch, user); })
-                    .catch(() => { dispatch({ type: CREATE_ACCOUNT_ERROR }) });
+                .then(() => { 
+                    saveUser(dispatch, user);  
+                    this.props.navigation.navigate('Main');
+                }).catch(() => { dispatch({ type: CREATE_ACCOUNT_ERROR }) });
         }
     }
 };
