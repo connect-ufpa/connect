@@ -16,8 +16,7 @@ class CreateUser extends Component {
       fontFamily: 'Ubuntu',
       fontSize: 20,
       fontWeight: '200',
-      alignSelf: 'center',
-      paddingRight: 60
+      textAlign: 'center'
     },
     headerStyle: { 
       elevation: 5

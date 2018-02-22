@@ -12,7 +12,7 @@ import MeuPerfil from './components/MeuPerfil';
 
 const Logout = () => {
   return (
-    firebaseAuth().signOut()
+    firebaseAuth().signOut(), null
   );
 }
 
@@ -66,10 +66,5 @@ export const UnauthorizedScreens = StackNavigator({
 });
 
 export const AuthorizedScreens = StackNavigator({
-  SideMenu: {
-    screen: SideMenu,
-    navigationOptions: ({ navigation }) => ({
-      header: null
-    })
-  }
+  SideMenu: { screen: SideMenu }
 });

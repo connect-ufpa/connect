@@ -1,30 +1,52 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { Spinner, Card, CardSection, Button, Texts, HeaderImage } from './commons';
+import { View, Text, UIManager, Dimensions } from 'react-native';
 import { firebaseAuth } from '../config/Config';
-import { Spinner, Card, CardSection, Button, Texts } from './commons';
+import { Icon } from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient';
 import Styles from '../Styles';
 
+const {height, width} = Dimensions.get('window');
+
 class Main extends Component {
-  static navigationOptions = ({ navigation }) => {
-    const { state, navigate } = navigation;
+  static navigationOptions = ({navigation}) => {
+    const { navigate } = navigation;
     return {
+      title: <HeaderImage />,
       headerStyle: {
-        backgroundColor: "#F4394A",
-        height: 60
+        paddingLeft: 15,
+        paddingRight: 15,
+        height: 55
       },
       headerTitleStyle: {
         alignSelf: 'center',
       },
       drawerLabel: 'Início',
-
-      headerLeft: <Button
-        styles={Styles.btnCancel}
-        text="Logout"
-        onPress={() => { firebaseAuth().signOut(); }}
-      />
+      drawerIcon: ({ tintColor }) => (
+        <Icon
+          type='font-awesome'
+          name='home'
+          color='#2a4065'
+          size={25}
+         />
+      ),
+      headerLeft: <Icon
+                    name='bars'
+                    type='font-awesome'
+                    color='#2a4065'
+                    size={25}
+                    onPress={() => navigate('DrawerOpen')}
+                  />,
+      headerRight: <Icon
+                    name='search'
+                    type='font-awesome'
+                    color='#2a4065'
+                    size={25}
+                    onPress={() => navigate('DrawerOpen')}
+                  />,
     }
-  };
+  }
+
   render() {
     return (
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>

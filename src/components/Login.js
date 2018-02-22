@@ -42,7 +42,7 @@ class Login extends Component {
             <CardSection>
               <Image
                 source={logo}
-                style={{ width: 100, height: 90, marginBottom: 10 }}
+                style={{ width: 100, height: 100, marginBottom: 10 }}
               />
             </CardSection>
             <CardSection>
