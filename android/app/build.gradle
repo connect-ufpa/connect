@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 
+
 import com.android.build.OutputFile
 
 /**
@@ -137,6 +138,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-vector-icons')
     compile project(':react-native-linear-gradient')
     compile project(':react-native-orientation')
     compile fileTree(dir: "libs", include: ["*.jar"])

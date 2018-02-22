@@ -11,8 +11,6 @@ class Main extends Component {
     return {
       headerStyle: {
         backgroundColor: "#F4394A",
-        paddingLeft: 10,
-        paddingRight: 10,
         height: 60
       },
       headerTitleStyle: {
@@ -32,10 +30,7 @@ class Main extends Component {
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
         <Card>
           <CardSection>
-            <Text>Dashboard</Text>
-          </CardSection>
-          <CardSection>
-            <Texts sizeText="large" text="HERE" />
+            <Texts sizeText="large" text="Dashboard"/>
           </CardSection>
         </Card>
       </LinearGradient>

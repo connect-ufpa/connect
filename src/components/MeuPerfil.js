@@ -11,11 +11,9 @@ class MeuPerfil extends Component {
       headerTintColor: 'white',
       headerStyle: {
         backgroundColor: "#F4394A",
-        height: 60,
-        paddingRight: 30
+        height: 60
       },
       headerTitleStyle: {
-        color: '#fff',
         alignSelf: 'center',
       },
       drawerLabel: 'Meu Perfil',
@@ -27,7 +25,7 @@ class MeuPerfil extends Component {
     return (
       <Card>
         <CardSection>
-          <Texts sizeText="large" text="Testando"/>
+          <Texts sizeText="large" text="Meu perfil"/>
         </CardSection>
       </Card>
     )
