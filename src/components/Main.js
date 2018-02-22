@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Spinner, Card, CardSection, Button, Texts, HeaderImage } from './commons';
-import { View, Text, UIManager, Dimensions } from 'react-native';
+import { View, Text, UIManager, Dimensions, StyleSheet } from 'react-native';
 import { firebaseAuth } from '../config/Config';
 import { Icon } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
+import MapView from 'react-native-maps';
 import Styles from '../Styles';
 
 const {height, width} = Dimensions.get('window');
@@ -49,15 +50,23 @@ class Main extends Component {
 
   render() {
     return (
-      <LinearGradient colors={['#2A4065', '#2BA3DA']}>
-        <Card>
-          <CardSection>
-            <Texts sizeText="large" text="Dashboard"/>
-          </CardSection>
-        </Card>
-      </LinearGradient>
+      <MapView
+      style={styles.container}
+      initialRegial={{
+        latitude: 39.7392,
+        longitude:  -104.9903,
+        latitudeDelta: 0.00121,
+        longitudeDelta: 0.0099
+      }} 
+      />
     );
   }
 };
+
+const styles = StyleSheet.create({
+  container: {
+    height: '100%',
+    width: '100%', 
+  }})
 
 export default Main;
