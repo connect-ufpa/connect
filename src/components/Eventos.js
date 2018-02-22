@@ -4,7 +4,7 @@ import { Card, CardSection, Texts, HeaderImage } from '../components/commons';
 import { Icon } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 
-class MeuPerfil extends Component {
+class Eventos extends Component {
   static navigationOptions = ({navigation}) => {
     const { navigate } = navigation;
     return {
@@ -17,11 +17,11 @@ class MeuPerfil extends Component {
       headerTitleStyle: {
         alignSelf: 'center',
       },
-      drawerLabel: 'Meu perfil',
+      drawerLabel: 'Eventos',
       drawerIcon: ({ tintColor }) => (
         <Icon
           type='font-awesome'
-          name='user'
+          name='calendar'
           color='#2a4065'
           size={25}
          />
@@ -48,11 +48,11 @@ class MeuPerfil extends Component {
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
         <Card>
           <CardSection>
-            <Texts sizeText='large' text='Meu perfil'/>
+            <Texts sizeText='large' text='Eventos'/>
           </CardSection>
         </Card>
       </LinearGradient>
     );
   }
 }
-export default MeuPerfil; 
+export default Eventos; 

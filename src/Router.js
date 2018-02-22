@@ -6,9 +6,12 @@ import Splash from './components/Splash';
 import Login from './components/Login';
 import CreateUser from './components/CreateUser';
 import ForgotPassword from './components/ForgotPassword';
-import Main from './components/Main';
+import Localizacao from './components/Localizacao';
 import MenuLateral from './components/SideMenu';
 import MeuPerfil from './components/MeuPerfil';
+import Eventos from './components/Eventos';
+import Ajuda from './components/Ajuda';
+import Sobre from './components/Sobre';
 
 const Logout = () => {
   return (
@@ -16,18 +19,33 @@ const Logout = () => {
   );
 }
 
-export const MainScreen = StackNavigator({
-  Main: { screen: Main },
+export const LocalizacaoScreen = StackNavigator({
+  Localizacao: { screen: Localizacao },
 });
 
 export const PerfilScreen = StackNavigator({
   MeuPerfil: { screen: MeuPerfil },
 });
 
+export const EventosScreen = StackNavigator({
+  Eventos: { screen: Eventos },
+});
+
+export const AjudaScreen = StackNavigator({
+  Ajuda: { screen: Ajuda },
+});
+
+export const SobreScreen = StackNavigator({
+  Sobre: { screen: Sobre },
+});
+
 
 export const SideMenu = DrawerNavigator({
-  Main: { screen: Main },
+  Localizacao: { screen: LocalizacaoScreen },
   Perfil: { screen: PerfilScreen },
+  Eventos: { screen: EventosScreen },
+  Ajuda: { screen: AjudaScreen },
+  Sobre: { screen: SobreScreen },
   Sair: {
 		screen: Logout,
 		navigationOptions: {
@@ -48,7 +66,7 @@ export const SideMenu = DrawerNavigator({
   	}
 	},
   },{
-    initialRouteName: 'Main',
+    initialRouteName: 'Localizacao',
     contentComponent: props => <MenuLateral {...props} />,
     drawerBackgroundColor: 'transparent',
     contentOptions: {
@@ -66,5 +84,14 @@ export const UnauthorizedScreens = StackNavigator({
 });
 
 export const AuthorizedScreens = StackNavigator({
-  SideMenu: { screen: SideMenu }
+	SideMenu: {
+		screen: SideMenu,
+		navigationOptions: ({navigation}) => ({
+			header: null
+    }),
+	},
+  MeuPerfil: { screen: MeuPerfil },
+  Eventos: { screen: Eventos },
+  Ajuda: { screen: Ajuda },
+  Sobre: { screen: Sobre },
 });

@@ -9,7 +9,7 @@ import Styles from '../Styles';
 
 const {height, width} = Dimensions.get('window');
 
-class Main extends Component {
+class Localizacao extends Component {
   static navigationOptions = ({navigation}) => {
     const { navigate } = navigation;
     return {
@@ -22,11 +22,11 @@ class Main extends Component {
       headerTitleStyle: {
         alignSelf: 'center',
       },
-      drawerLabel: 'Início',
+      drawerLabel: 'Localização',
       drawerIcon: ({ tintColor }) => (
         <Icon
           type='font-awesome'
-          name='home'
+          name='map-marker'
           color='#2a4065'
           size={25}
          />
@@ -50,15 +50,13 @@ class Main extends Component {
 
   render() {
     return (
-      <MapView
-      style={styles.container}
-      initialRegial={{
-        latitude: 39.7392,
-        longitude:  -104.9903,
-        latitudeDelta: 0.00121,
-        longitudeDelta: 0.0099
-      }} 
-      />
+      <LinearGradient colors={['#2A4065', '#2BA3DA']}>
+        <Card>
+          <CardSection>
+            <Texts sizeText='large' text='Localização'/>
+          </CardSection>
+        </Card>
+      </LinearGradient>
     );
   }
 };
@@ -69,4 +67,4 @@ const styles = StyleSheet.create({
     width: '100%', 
   }})
 
-export default Main;
+export default Localizacao;
