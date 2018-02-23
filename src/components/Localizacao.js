@@ -7,10 +7,10 @@ import LinearGradient from 'react-native-linear-gradient';
 import MapView from 'react-native-maps';
 import Styles from '../Styles';
 
-const {height, width} = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 class Localizacao extends Component {
-  static navigationOptions = ({navigation}) => {
+  static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
     return {
       title: <HeaderImage />,
@@ -29,42 +29,46 @@ class Localizacao extends Component {
           name='map-marker'
           color='#2a4065'
           size={25}
-         />
+        />
       ),
       headerLeft: <Icon
-                    name='bars'
-                    type='font-awesome'
-                    color='#2a4065'
-                    size={25}
-                    onPress={() => navigate('DrawerOpen')}
-                  />,
+        name='bars'
+        type='font-awesome'
+        color='#2a4065'
+        size={25}
+        onPress={() => navigate('DrawerOpen')}
+      />,
       headerRight: <Icon
-                    name='search'
-                    type='font-awesome'
-                    color='#2a4065'
-                    size={25}
-                    onPress={() => navigate('DrawerOpen')}
-                  />,
+        name='search'
+        type='font-awesome'
+        color='#2a4065'
+        size={25}
+        onPress={() => navigate('DrawerOpen')}
+      />,
     }
   }
 
   render() {
     return (
-      <LinearGradient colors={['#2A4065', '#2BA3DA']}>
-        <Card>
-          <CardSection>
-            <Texts sizeText='large' text='Localização'/>
-          </CardSection>
-        </Card>
-      </LinearGradient>
+      <MapView
+        style={styles.container}
+        initialRegion={{
+          latitude: 39.7392,
+          longitude: -104.9903,
+          latitudeDelta: 0.00121,
+          longitudeDelta: 0.0099
+        }}
+      />
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    width: '100%', 
-  }})
+    width: '100%',
+  }
+}
+);
 
 export default Localizacao;
