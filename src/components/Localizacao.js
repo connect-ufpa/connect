@@ -6,11 +6,14 @@ import { Icon } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import MapView from 'react-native-maps';
 import Styles from '../Styles';
+import local from '../data/locais.json';
 
 const { height, width } = Dimensions.get('window');
 
 class Localizacao extends Component {
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = ({ navigation }) => {  
+    console.log(local);
+  
     const { navigate } = navigation;
     return {
       title: <HeaderImage />,
@@ -65,7 +68,7 @@ class Localizacao extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
+    height: '50%',
     width: '100%',
   }
 }
