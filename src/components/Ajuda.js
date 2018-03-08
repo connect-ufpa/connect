@@ -48,7 +48,7 @@ class Ajuda extends Component {
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
         <Card>
           <CardSection>
-            <Texts sizeText='large' text='Ajuda'/>
+            <Texts style='large' text='Ajuda'/>
           </CardSection>
         </Card>
       </LinearGradient>

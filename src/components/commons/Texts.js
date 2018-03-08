@@ -2,26 +2,29 @@ import React from 'react';
 import { Text } from 'react-native';
 import Styles from '../../Styles';
 
-const Texts = ({ text, sizeText }) => {
-  let typeStyle;
+const Texts = ({ text, style }) => {
+  let textStyle;
 
-  switch (sizeText) {
+  switch (style) {
     case 'xlarge':
-      typeStyle = Styles.xLargeTextStyle;
+      textStyle = Styles.xLargeTextStyle;
       break;
     case 'large':
-      typeStyle = Styles.largeTextStyle;
+      textStyle = Styles.largeTextStyle;
       break;
     case 'medium':
-      typeStyle = Styles.mediumTextStyle;
+      textStyle = Styles.mediumTextStyle;
+      break;
+    case 'smallBlue':
+      textStyle = Styles.smallBlueTextStyle;
       break;
     default:
-      typeStyle = Styles.smallTextStyle;
+      textStyle = Styles.smallTextStyle;
       break;
   }
 
   return (
-    <Text style={typeStyle}>
+    <Text style={textStyle}>
       {text}
     </Text>
   );

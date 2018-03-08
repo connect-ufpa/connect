@@ -48,7 +48,7 @@ class Sobre extends Component {
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
         <Card>
           <CardSection>
-            <Texts sizeText='large' text='Sobre'/>
+            <Texts style='large' text='Sobre'/>
           </CardSection>
         </Card>
       </LinearGradient>

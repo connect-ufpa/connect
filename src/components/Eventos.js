@@ -48,7 +48,7 @@ class Eventos extends Component {
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
         <Card>
           <CardSection>
-            <Texts sizeText='large' text='Eventos'/>
+            <Texts style='large' text='Eventos'/>
           </CardSection>
         </Card>
       </LinearGradient>

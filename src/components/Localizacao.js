@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Spinner, Card, CardSection, Button, Texts, HeaderImage } from './commons';
 import { View, Text, UIManager, Dimensions, StyleSheet } from 'react-native';
+import { saveLocal, verifyLocal } from '../actions';
 import { firebaseAuth } from '../config/Config';
 import { Icon } from 'react-native-elements';
-import { saveLocal } from '../actions';
+import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import MapView from 'react-native-maps';
 import Styles from '../Styles';
-import local from '../data/locais.json';
+import locais from '../data/locais.json';
 
 const { height, width } = Dimensions.get('window');
 
@@ -51,7 +52,15 @@ class Localizacao extends Component {
   }
 
   salvarLocais() {
-    saveLocal(local);
+    saveLocal(locais);
+  }
+
+  renderLocais() {
+    return(
+      <View>
+
+      </View>
+    );
   }
 
   render() {
@@ -68,10 +77,20 @@ class Localizacao extends Component {
         />
         <CardSection>
           <Button
-            text="Verificar locais"
+            text="Salvar locais"
             styles={Styles.btnConfirm}
             onPress={() => {this.salvarLocais()}}
           />
+        </CardSection>
+        <CardSection>
+          <Button
+            text="Verificar locais"
+            styles={Styles.btnConfirm}
+            onPress={locais => {this.props.verifyLocal(locais)}}
+          />
+        </CardSection>
+        <CardSection>
+          <Texts style='smallBlue' text={this.props.statusMessage} />
         </CardSection>
       </View>
     );
@@ -86,4 +105,14 @@ const styles = StyleSheet.create({
 }
 );
 
-export default Localizacao;
+const mapStateToProps = (state) => {
+  return {
+    locais: state.localizacao.locais,
+    statusMessage: state.localizacao.statusMessage
+  };
+};
+
+export default connect(mapStateToProps, {
+  verifyLocal
+})(Localizacao);
+

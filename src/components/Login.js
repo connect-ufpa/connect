@@ -74,7 +74,7 @@ class Login extends Component {
             <CardSection styleSection={{ alignSelf: 'flex-end', marginTop: 0 }}>
               <View>
               <TouchableOpacity onPress={() => this.props.navigation.navigate('ForgotPasword')}>
-                  <Texts text="Esqueci a senha" sizeText="small" />
+                  <Texts text="Esqueci a senha" style="small" />
                 </TouchableOpacity>
               </View>
             </CardSection>
@@ -86,7 +86,7 @@ class Login extends Component {
             </View>
             <CardSection>
               <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateUser')}>
-                <Texts text="Criar conta" sizeText="medium" />
+                <Texts text="Criar conta" style="medium" />
               </TouchableOpacity>
             </CardSection>
           </Card>

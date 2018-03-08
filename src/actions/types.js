@@ -24,3 +24,5 @@ export const CHECKING_CREDENTIAL = 'checking_credential';
 
 export const VALID_EMAIL_FORGOT = 'valid_email_forgot';
 export const INVALID_EMAIL_FORGOT = 'invalid_email_forgot';
+
+export const RETRIEVE_LOCAIS = 'retrieve_locais';

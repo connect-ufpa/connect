@@ -109,12 +109,7 @@ class CreateUser extends Component {
               <Input
                 placeholder="Confirmação de senha:"
                 secureTextEntry
-                onChangeText={
-                  confirmPassword =>
-                    this.props.onConfirmPasswordChanged(
-                      confirmPassword, this.props.password
-                    )
-                }
+                onChangeText={confirmPassword => this.props.onConfirmPasswordChanged(confirmPassword, this.props.password)}
                 value={this.props.confirmPassword}
               />
             </CardSection>

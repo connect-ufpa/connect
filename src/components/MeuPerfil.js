@@ -48,7 +48,7 @@ class MeuPerfil extends Component {
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
         <Card>
           <CardSection>
-            <Texts sizeText='large' text='Meu perfil'/>
+            <Texts style='large' text='Meu perfil'/>
           </CardSection>
         </Card>
       </LinearGradient>

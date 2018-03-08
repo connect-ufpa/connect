@@ -6,27 +6,33 @@ export default StyleSheet.create({
     logoTextStyle: {
         fontSize: 28,
         fontFamily: 'Righteous',
-        color: '#ffff'
+        color: '#ffffff'
+    },
+    smallBlueTextStyle: {
+        fontSize: 12,
+        fontFamily: 'Righteous',
+        color: '#2A4065'
     },
     xLargeTextStyle: {
         fontFamily: 'Ubuntu',
         fontSize: 48,
-        color: '#ffff'
+        color: '#ffffff'
     },
     largeTextStyle: {
         fontSize: 28,
         fontFamily: 'Ubuntu',
-        color: '#ffff'
+        color: '#ffffff'
     },
     mediumTextStyle: {
         fontSize: 20,
         fontFamily: 'Ubuntu',
-        color: '#ffff'
+        color: '#ffffff'
+        
     },
     smallTextStyle: {
         fontFamily: 'Ubuntu',
         fontSize: 12,
-        color: '#ffff'
+        color: '#ffffff'
     },
     inputStyle: {
         backgroundColor: '#ffff',

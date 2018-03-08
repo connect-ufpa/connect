@@ -28,7 +28,7 @@ class ForgotPassword extends Component {
         <ScrollView style={Styles.scrollViewStyle}>
           <Card>
             <CardSection>
-              <Texts sizeText='medium' text={'Digite seu e-mail para redefinição de senha'}/>
+              <Texts style='medium' text={'Digite seu e-mail para redefinição de senha'}/>
             </CardSection>
             <CardSection>
               <Input
