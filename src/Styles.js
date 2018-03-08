@@ -72,7 +72,7 @@ export default StyleSheet.create({
     },
     btnTextStyle: {
         fontFamily: 'Ubuntu',
-        fontSize: 24,
+        fontSize: 16,
         alignSelf: 'center',
         color: '#fff',
         paddingTop: 10,

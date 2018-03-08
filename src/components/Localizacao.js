@@ -3,6 +3,7 @@ import { Spinner, Card, CardSection, Button, Texts, HeaderImage } from './common
 import { View, Text, UIManager, Dimensions, StyleSheet } from 'react-native';
 import { firebaseAuth } from '../config/Config';
 import { Icon } from 'react-native-elements';
+import { saveLocal } from '../actions';
 import LinearGradient from 'react-native-linear-gradient';
 import MapView from 'react-native-maps';
 import Styles from '../Styles';
@@ -11,9 +12,7 @@ import local from '../data/locais.json';
 const { height, width } = Dimensions.get('window');
 
 class Localizacao extends Component {
-  static navigationOptions = ({ navigation }) => {  
-    console.log(local);
-  
+  static navigationOptions = ({ navigation }) => {    
     const { navigate } = navigation;
     return {
       title: <HeaderImage />,
@@ -51,24 +50,37 @@ class Localizacao extends Component {
     }
   }
 
+  salvarLocais() {
+    saveLocal(local);
+  }
+
   render() {
     return (
-      <MapView
-        style={styles.container}
-        initialRegion={{
-          latitude: 39.7392,
-          longitude: -104.9903,
-          latitudeDelta: 0.00121,
-          longitudeDelta: 0.0099
-        }}
-      />
+      <View>
+        <MapView
+          style={styles.container}
+          initialRegion={{
+            latitude: -1.473987,
+            longitude: -48.452267,
+            latitudeDelta: 0.00121,
+            longitudeDelta: 0.0099
+          }}
+        />
+        <CardSection>
+          <Button
+            text="Verificar locais"
+            styles={Styles.btnConfirm}
+            onPress={() => {this.salvarLocais()}}
+          />
+        </CardSection>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: '50%',
+    height: '65%',
     width: '100%',
   }
 }

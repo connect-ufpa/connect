@@ -1,4 +1,4 @@
-import { firebaseAuth, database } from '../config/Config'
+import { firebaseAuth, database } from '../config/Config';
 import { validateLetters, validateNumbers, validateDates, validateEmails, validatePasswords, validateUser, matchPasswords } from '../helpers/HandleData';
 import {
     VALID_NAME,
