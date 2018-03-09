@@ -1,5 +1,5 @@
 import { database } from '../config/Config';
-import { RETRIEVE_LOCAIS } from './types';
+import { RETRIEVE_LOCAIS, RETRIVING_LOCAIS } from './types';
 
 export const saveLocal = (locais) => {
   for(var i = 0; i < locais.local.length; i++){
@@ -10,20 +10,25 @@ export const saveLocal = (locais) => {
         lng: locais.local[i].coords.lng
       }
     });
-    console.log(locais.local[i]);
   }
 };
 
-export const verifyLocal = (locais) => {
-  console.log('Verificando locais previamente salvos...');
+export const verifyLocais = () => {
+  const locais = [];
 
-  var data = database().ref("local/");
-
-  data.on("value", function(snapshot) {
-    console.log(snapshot.val());
-  }, function (errorObject) {
-    console.log("The read failed: " + errorObject.code);
-  });
-
+  database().ref("local/").on("value", function(snapshot) {
+    locais.push(Object.values(snapshot.val())); 
+   }, function (errorObject) {
+     console.log("Erro ao ler: " + errorObject.code);
+   });
   return { type: RETRIEVE_LOCAIS, payload: locais }
 };
+
+
+// async const getLocais = () => {
+//   await database().ref("local/").on("value", function(snapshot) {
+//    return Object.values(snapshot.val());
+//   }, function (errorObject) {
+//     console.log("Erro ao ler: " + errorObject.code);
+//   });
+// };

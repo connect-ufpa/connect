@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Spinner, Card, CardSection, Button, Texts, HeaderImage } from './commons';
-import { View, Text, UIManager, Dimensions, StyleSheet } from 'react-native';
-import { saveLocal, verifyLocal } from '../actions';
+import { View, Text, UIManager, Dimensions, StyleSheet, ScrollView } from 'react-native';
+import { saveLocal, verifyLocais } from '../actions';
 import { firebaseAuth } from '../config/Config';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -56,18 +56,36 @@ class Localizacao extends Component {
   }
 
   renderLocais() {
-    return(
-      <View>
+    if(this.props.locais.length !== 0) {
+        this.props.locais[0].forEach( local => {
+          console.log(local.nome);
+        }); 
+    } else {
+      console.log("Verificando locais...")
+    }
+  }
 
-      </View>
-    );
+  renderMessageStatus(){
+    if(this.props.isLocais) {
+      return(
+        <CardSection>
+          <Texts style='smallBlue' text={'Existem locais para debugar'} />
+        </CardSection>
+      );
+    } else {
+      return(
+        <CardSection>
+          <Texts style='smallBlue' text={'Verifique locais para debugar'} />
+        </CardSection>
+      );
+    }
   }
 
   render() {
     return (
-      <View>
+      <ScrollView style={Styles.scrollViewStyle}>
         <MapView
-          style={styles.container}
+          style={Styles.mapStyle}
           initialRegion={{
             latitude: -1.473987,
             longitude: -48.452267,
@@ -86,33 +104,29 @@ class Localizacao extends Component {
           <Button
             text="Verificar locais"
             styles={Styles.btnConfirm}
-            onPress={locais => {this.props.verifyLocal(locais)}}
+            onPress={() => {this.props.verifyLocais()}}
           />
         </CardSection>
         <CardSection>
           <Texts style='smallBlue' text={this.props.statusMessage} />
         </CardSection>
-      </View>
+        <CardSection>
+          {this.renderLocais()}
+        </CardSection>
+      </ScrollView>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    height: '65%',
-    width: '100%',
-  }
-}
-);
-
 const mapStateToProps = (state) => {
   return {
     locais: state.localizacao.locais,
+    isLocais: state.localizacao.isLocais,
     statusMessage: state.localizacao.statusMessage
   };
 };
 
 export default connect(mapStateToProps, {
-  verifyLocal
+  verifyLocais
 })(Localizacao);
 

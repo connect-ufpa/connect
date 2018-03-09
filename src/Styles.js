@@ -10,7 +10,7 @@ export default StyleSheet.create({
     },
     smallBlueTextStyle: {
         fontSize: 12,
-        fontFamily: 'Righteous',
+        fontFamily: 'Ubuntu',
         color: '#2A4065'
     },
     xLargeTextStyle: {
@@ -91,5 +91,9 @@ export default StyleSheet.create({
     },
     scrollViewStyle: {
         height: '100%'
+    },
+    mapStyle: {
+        height: 200,
+        width: '100%'
     }
 });
