@@ -12,12 +12,13 @@ import MeuPerfil from './components/MeuPerfil';
 import Eventos from './components/Eventos';
 import Ajuda from './components/Ajuda';
 import Sobre from './components/Sobre';
+import SalvarEventos from './components/SalvarEventos';
 
 const Logout = () => {
   return (
     firebaseAuth().signOut(), null
   );
-}
+};
 
 export const LocalizacaoScreen = StackNavigator({
   Localizacao: { screen: Localizacao },
@@ -94,4 +95,5 @@ export const AuthorizedScreens = StackNavigator({
   Eventos: { screen: Eventos },
   Ajuda: { screen: Ajuda },
   Sobre: { screen: Sobre },
+  SalvarEventos: { screen: SalvarEventos }
 });
