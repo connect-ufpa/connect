@@ -10,9 +10,9 @@ export const VALID_PASSWORD = 'valid_password';
 export const INVALID_PASSWORD = 'invalid_password';
 export const MATCH_PASSWORD = 'match_password';
 export const MISMATCH_PASSWORD = 'mismatch_password';
-export const CREATING_ACCOUNT = "creating_account";
-export const CREATE_ACCOUNT_ERROR = "create_account_error";
-export const CREATE_ACCOUNT_SUCCESS = "create_account_success";
+export const CREATING_ACCOUNT = 'creating_account';
+export const CREATE_ACCOUNT_ERROR = 'create_account_error';
+export const CREATE_ACCOUNT_SUCCESS = 'create_account_success';
 
 export const VALID_EMAIL_LOGIN = 'valid_email_login';
 export const INVALID_EMAIL_LOGIN = 'invalid_email_login';
@@ -27,3 +27,5 @@ export const INVALID_EMAIL_FORGOT = 'invalid_email_forgot';
 
 export const RETRIEVE_LOCAIS = 'retrieve_locais';
 export const RETRIVING_LOCAIS = 'retrieving_locais';
+
+export const MARKER = 'marker';
