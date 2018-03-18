@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, Modal, TouchableHighlight, Dimensions } from 'react-native';
-import MapView, { Marker, Callout } from 'react-native-maps';
+import { View, Modal, TouchableHighlight, Dimensions } from 'react-native';
+import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
-import { showMarkerAndModal } from '../actions';
-import { Button } from './commons/';
+import { Icon } from 'react-native-elements';
+import { showMarkerAndModal, closeModal } from '../actions';
+import { Button, Input } from './commons/';
 import Styles from '../Styles';
 
 const Height = Dimensions.get('window').height;
@@ -43,14 +44,21 @@ class SalvarEventos extends Component {
                 >
                     <View style={styles.modalStyle}>
                         <View>
-                            <Text>Hello World!</Text>
                             <TouchableHighlight
                                 onPress={() => {
-                                    this.setModalVisible(!this.state.modalVisible);
+                                    this.props.closeModal();
                                 }}
                             >
-                                <Text>Hide Modal</Text>
+                                <View style={{ alignItems: 'flex-end', paddingTop: 5, paddingRight: 10 }}>
+                                    <Icon
+                                        type='font-awesome'
+                                        name='times-circle'
+                                        color='#2a4065'
+                                        size={30}
+                                    />
+                                </View>
                             </TouchableHighlight>
+
                         </View>
                     </View>
                 </Modal>
@@ -80,5 +88,5 @@ const mapStatesToProps = (state) => {
     };
 };
 
-export default connect(mapStatesToProps, { showMarkerAndModal })(SalvarEventos);
+export default connect(mapStatesToProps, { showMarkerAndModal, closeModal })(SalvarEventos);
 

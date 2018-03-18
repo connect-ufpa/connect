@@ -29,4 +29,4 @@ export const RETRIEVE_LOCAIS = 'retrieve_locais';
 export const RETRIVING_LOCAIS = 'retrieving_locais';
 
 export const MARKER = 'marker';
-
+export const CLOSE_MODAL = 'unmark';
