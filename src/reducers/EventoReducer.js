@@ -1,13 +1,14 @@
 import { MARKER } from '../actions/types';
 
 const INITIAL_STATE = {
-    marker: []
+    marker: [],
+    modal: false
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case MARKER:
-            return { ...state, marker: [action.payload] };
+            return { ...state, marker: [action.payload], modal: true };
         default:
            return state;
     }

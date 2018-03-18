@@ -1,5 +1,5 @@
 import { MARKER } from './types';
 
-export const showMarker = (e) => {
-    return { type: MARKER, payload: { coordinate: e.nativeEvent.coordinate } };
+export const showMarkerAndModal = (e) => {
+    return { type: MARKER, payload: { coordinate: e.nativeEvent.coordinate } }
 };
