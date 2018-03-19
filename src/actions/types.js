@@ -29,4 +29,8 @@ export const RETRIEVE_LOCAIS = 'retrieve_locais';
 export const RETRIVING_LOCAIS = 'retrieving_locais';
 
 export const MARKER = 'marker';
-export const CLOSE_MODAL = 'unmark';
+export const CLOSE_MODAL = 'close_modal';
+export const EVENT_NAME = 'event_name';
+export const DESCRIPTION = 'description';
+export const LOCAL = 'local';
+

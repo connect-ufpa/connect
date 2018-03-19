@@ -95,5 +95,11 @@ export default StyleSheet.create({
     mapStyle: {
         height: 200,
         width: '100%'
+    },
+    eventCardStyle: {
+        backgroundColor: '#ffff',
+        borderRadius: 20,
+        marginLeft: 10,
+        marginRight: 10,
     }
 });
