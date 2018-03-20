@@ -33,4 +33,10 @@ export const CLOSE_MODAL = 'close_modal';
 export const EVENT_NAME = 'event_name';
 export const DESCRIPTION = 'description';
 export const LOCAL = 'local';
+export const VALID_START_EVENT_DATE = 'valid_start_event_date';
+export const INVALID_START_EVENT_DATE = 'invalid_start_event_date';
+export const VALID_START_HOUR_EVENT = 'valid_start_hour_event';
+export const INVALID_START_HOUR_EVENT = 'invalid_start_hour_event';
+export const LOADING_EVENT = 'loading_event';
+export const CREATE_EVENT_SUCCESS = 'create_event_successs';
 

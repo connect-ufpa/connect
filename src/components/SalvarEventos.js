@@ -3,8 +3,8 @@ import { View, Modal, TouchableHighlight, Dimensions, ScrollView, TextInput } fr
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
-import { showMarkerAndModal, closeModal, eventNameChange, eventDescriptionChange, eventLocalChange } from '../actions';
-import { Button, Input, CardSection } from './commons/';
+import { showMarkerAndModal, closeModal, eventNameChange, eventDescriptionChange, eventLocalChange, eventDateChange, eventHourChange, saveEvent } from '../actions';
+import { Button, Input, CardSection, Texts, Spinner } from './commons/';
 import Styles from '../Styles';
 
 const Height = Dimensions.get('window').height;
@@ -15,6 +15,27 @@ class SalvarEventos extends Component {
     static navigationOptions = {
         header: null
     }
+
+    renderSaveEventButton() {
+        const evento = {
+            nome: this.props.nomeEvento,
+            descricao: this.props.descricaoEvento,
+            local: this.props.localEvento,
+            data: this.props.dataInicioEvento,
+            hora: this.props.horaInicioEvento,
+            error: this.props.error
+        };
+        if (this.props.loading) {
+          return (<Spinner size="large" color="#ffff" />);
+        }
+        return (
+          <Button
+            text="Cadastrar"
+            styles={Styles.btnConfirm}
+            onPress={() => { this.props.saveEvent(evento); }}
+          />
+        );
+      }
     render() {
         return (
             <View>
@@ -80,28 +101,27 @@ class SalvarEventos extends Component {
                                 <Input
                                     placeholder="Local:"
                                     onChangeText={texto => this.props.eventLocalChange(texto)}
-                                    value={this.props.nomeEvento}
+                                    value={this.props.localEvento}
                                 />
                             </CardSection>
                             <CardSection>
                                 <Input
                                     placeholder="00/00/000"
-                                    onChangeText={texto => this.props.eventLocalChange(texto)}
-                                    value={this.props.nomeEvento}
+                                    onChangeText={texto => this.props.eventDateChange(texto)}
+                                    value={this.props.dataInicioEvento}
                                 />
                                 <Input
                                     placeholder="00:00"
-                                    onChangeText={texto => this.props.eventLocalChange(texto)}
-                                    value={this.props.nomeEvento}
+                                    onChangeText={texto => this.props.eventHourChange(texto)}
+                                    value={this.props.horaInicioEvento}
                                 />
                             </CardSection>
+                            <View style={{ alignItems: 'center' }}>
+                                <Texts text={this.props.msgErrorDataInicioEvento} color='grey' />
+                                <Texts text={this.props.msgErrorHoraInicioEvento} color='grey' />
+                            </View>
                             <CardSection>
-                                <Button
-                                    text="Salvar"
-                                    styles={Styles.btnConfirm}
-                                    onPress={() => { this.props.loginUser(user); }}
-                                />
-
+                               {this.renderSaveEventButton()}
                             </CardSection>
                         </View>
                     </ScrollView>
@@ -121,9 +141,15 @@ const mapStatesToProps = (state) => {
     return { 
         marker: state.evento.marker,
         modal: state.evento.modal,
-        nomeEvento: state.nomeEvento,
-        descricaoEvento: state.descricaoEvento,
-        localEvento: state.localEvento 
+        nomeEvento: state.evento.nomeEvento,
+        descricaoEvento: state.evento.descricaoEvento,
+        localEvento: state.evento.localEvento,
+        dataInicioEvento: state.evento.dataInicioEvento,
+        msgErrorDataInicioEvento: state.evento.msgErrorDataInicioEvento,
+        horaInicioEvento: state.evento.horaInicioEvento,
+        msgErrorHoraInicioEvento: state.evento.msgErrorHoraInicioEvento,
+        loading: state.evento.loading,
+        error: state.evento.error
     };
 };
 
@@ -132,5 +158,8 @@ export default connect(mapStatesToProps, {
                         closeModal, 
                         eventNameChange, 
                         eventDescriptionChange,
-                        eventLocalChange })(SalvarEventos);
+                        eventLocalChange,
+                        eventDateChange,
+                        eventHourChange,
+                        saveEvent })(SalvarEventos);
 
