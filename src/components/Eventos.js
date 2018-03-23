@@ -50,7 +50,7 @@ class Eventos extends Component {
         <Card>
           <CardSection>
           <Button
-            text="Salvar locais"
+            text="Salvar Eventos"
             styles={Styles.btnConfirm}
             onPress={() => { this.props.navigation.navigate('SalvarEventos'); }}
           />

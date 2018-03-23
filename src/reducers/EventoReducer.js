@@ -2,6 +2,11 @@ import { MARKER, CLOSE_MODAL, EVENT_NAME, DESCRIPTION, LOCAL, VALID_START_EVENT_
          INVALID_START_EVENT_DATE, VALID_START_HOUR_EVENT, INVALID_START_HOUR_EVENT, LOADING_EVENT, CREATE_EVENT_SUCCESS } from '../actions/types';
 
 const INITIAL_STATE = {
+    region: {
+        latitude: -1.4753622,
+        longitude: -48.4557933,
+        latitudeDelta: 0.00121,
+        longitudeDelta: 0.0025 }, 
     marker: [],
     modal: false,
     nomeEvento: '',
@@ -18,7 +23,15 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case MARKER:
-            return { ...state, marker: [action.payload], modal: true };
+            return { ...state, 
+                    marker: [action.payload], 
+                    region: {
+                        latitude: action.payload.coordinate.latitude,
+                        longitude: action.payload.coordinate.longitude,
+                        latitudeDelta: 0.00021,
+                        longitudeDelta: 0.0025
+                    }, 
+                    modal: true };
         case CLOSE_MODAL:
             return { ...state, modal: false, marker:[] };
         case EVENT_NAME:

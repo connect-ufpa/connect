@@ -48,6 +48,7 @@ export const saveEvent = (evento) => {
                 nome: evento.nome,
                 descricao: evento.descricao,
                 local: evento.local,
+                coords: evento.coords,
                 usuario_id: usuario.uid,
                 data: evento.data,
                 hora: evento.hora

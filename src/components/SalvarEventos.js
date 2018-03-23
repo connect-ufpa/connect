@@ -3,17 +3,46 @@ import { View, Modal, TouchableHighlight, Dimensions, ScrollView, TextInput } fr
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
+import { StackNavigator } from 'react-navigation';
 import { showMarkerAndModal, closeModal, eventNameChange, eventDescriptionChange, eventLocalChange, eventDateChange, eventHourChange, saveEvent } from '../actions';
-import { Button, Input, CardSection, Texts, Spinner } from './commons/';
+import { Button, Input, CardSection, Texts, Spinner, HeaderImage } from './commons/';
 import Styles from '../Styles';
 
 const Height = Dimensions.get('window').height;
-const HalfHeight = Height * 0.3;
+const HalfHeight = Height * 0.55;
 
 
 class SalvarEventos extends Component {
-    static navigationOptions = {
-        header: null
+    static navigationOptions = ({ navigation }) => {
+        const { navigate } = navigation;
+        return {
+            title: <HeaderImage />,
+            headerStyle: {
+                paddingLeft: 15,
+                paddingRight: 35,
+                height: 55
+            },
+            headerTitleStyle: {
+                alignSelf: 'center',
+            },
+            drawerLabel: 'Salvar Evento',
+            drawerIcon: ({ tintColor }) => (
+                <Icon
+                    type='font-awesome'
+                    name='calendar'
+                    color='#2a4065'
+                    size={25}
+                />
+            ),
+            headerLeft:
+                <Icon
+                    name='arrow-left'
+                    type='font-awesome'
+                    color='#2a4065'
+                    size={25}
+                    onPress={() => navigate('Eventos')}
+                />
+        };
     }
 
     renderSaveEventButton() {
@@ -21,6 +50,10 @@ class SalvarEventos extends Component {
             nome: this.props.nomeEvento,
             descricao: this.props.descricaoEvento,
             local: this.props.localEvento,
+            coords: {
+                lat: this.props.region.latitude, 
+                long: this.props.region.longitude
+                }, 
             data: this.props.dataInicioEvento,
             hora: this.props.horaInicioEvento,
             error: this.props.error
@@ -41,12 +74,7 @@ class SalvarEventos extends Component {
             <View>
                 <MapView
                     style={styles.mapStyle}
-                    initialRegion={{
-                        latitude: -1.473987,
-                        longitude: -48.452267,
-                        latitudeDelta: 0.00121,
-                        longitudeDelta: 0.0030
-                    }}
+                    region={this.props.region}
                     onPress={(e) => { this.props.showMarkerAndModal(e); }}
                 >
                     {this.props.marker.map((marker) => {
@@ -139,6 +167,7 @@ const styles = {
 };
 const mapStatesToProps = (state) => {
     return { 
+        region: state.evento.region,
         marker: state.evento.marker,
         modal: state.evento.modal,
         nomeEvento: state.evento.nomeEvento,

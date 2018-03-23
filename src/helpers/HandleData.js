@@ -47,11 +47,10 @@ export const validateUser = (user) => {
 
 export const validateEvent = (evento) => {
     if (!evento.error) {
-        if ((evento.nome === '') || (evento.descricao === '') || (evento.local === '') || (evento.data === '') || ( evento.hora === '')){
+        if ((evento.nome === '') || (evento.descricao === '') || (evento.local === '') || (evento.data === '') || ( evento.hora === '') || (evento.coords === '')) {
             return false;
        } 
         return true;
-
     } return false;
 };
 

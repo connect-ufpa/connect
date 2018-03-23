@@ -13,6 +13,7 @@ import Eventos from './components/Eventos';
 import Ajuda from './components/Ajuda';
 import Sobre from './components/Sobre';
 import SalvarEventos from './components/SalvarEventos';
+import EditarEventos from './components/EditarEventos';
 
 const Logout = () => {
   return (
