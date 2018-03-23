@@ -40,3 +40,5 @@ export const INVALID_START_HOUR_EVENT = 'invalid_start_hour_event';
 export const LOADING_EVENT = 'loading_event';
 export const CREATE_EVENT_SUCCESS = 'create_event_successs';
 
+export const EVENTS_TO_EDIT_SUCCESS = 'events_to_edit_success';
+

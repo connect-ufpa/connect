@@ -49,11 +49,18 @@ class Eventos extends Component {
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
         <Card>
           <CardSection>
-          <Button
-            text="Salvar Eventos"
-            styles={Styles.btnConfirm}
-            onPress={() => { this.props.navigation.navigate('SalvarEventos'); }}
-          />
+            <Button
+              text="Salvar Eventos"
+              styles={Styles.btnConfirm}
+              onPress={() => { this.props.navigation.navigate('SalvarEventos'); }}
+            />
+          </CardSection>
+          <CardSection>
+            <Button
+              text="Editar Eventos"
+              styles={Styles.btnConfirm}
+              onPress={() => { this.props.navigation.navigate('EditarEventos'); }}
+            />
           </CardSection>
         </Card>
       </LinearGradient>

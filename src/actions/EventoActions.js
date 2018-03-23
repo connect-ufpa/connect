@@ -1,7 +1,8 @@
 import { firebaseAuth, database } from '../config/Config';
 import { validateDates, validateHours, validateEvent } from '../helpers/HandleData';
 import { MARKER, CLOSE_MODAL, EVENT_NAME, DESCRIPTION, LOCAL, VALID_START_EVENT_DATE, 
-         INVALID_START_EVENT_DATE, VALID_START_HOUR_EVENT, INVALID_START_HOUR_EVENT, LOADING_EVENT, CREATE_EVENT_SUCCESS } from './types';
+         INVALID_START_EVENT_DATE, VALID_START_HOUR_EVENT, INVALID_START_HOUR_EVENT,
+         LOADING_EVENT, CREATE_EVENT_SUCCESS, EVENTS_TO_EDIT_SUCCESS } from './types';
 
 export const showMarkerAndModal = (e) => {
     return { type: MARKER, payload: { coordinate: e.nativeEvent.coordinate } };
@@ -43,7 +44,6 @@ export const saveEvent = (evento) => {
         return (dispatch) => {
             dispatch({ type: LOADING_EVENT });
             const usuario = firebaseAuth().currentUser;
-            console.log(usuario);
             database().ref(`evento/`).push({
                 nome: evento.nome,
                 descricao: evento.descricao,
@@ -55,4 +55,13 @@ export const saveEvent = (evento) => {
             }).then(() => { dispatch({ type: CREATE_EVENT_SUCCESS }); });
         };
     }
+};
+
+export const searchEventsToEdit = () => {
+    return (dispatch) => {
+        const usuario = firebaseAuth().currentUser;
+        database().ref(`evento/{usuario_id}`).on('value', snapshot => {
+            dispatch({ type: EVENTS_TO_EDIT_SUCCESS, payload: snapshot.val() });
+        });
+    } 
 };

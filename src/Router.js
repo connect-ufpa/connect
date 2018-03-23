@@ -96,5 +96,6 @@ export const AuthorizedScreens = StackNavigator({
   Eventos: { screen: Eventos },
   Ajuda: { screen: Ajuda },
   Sobre: { screen: Sobre },
-  SalvarEventos: { screen: SalvarEventos }
+  SalvarEventos: { screen: SalvarEventos },
+  EditarEventos: { screen: EditarEventos }
 });
