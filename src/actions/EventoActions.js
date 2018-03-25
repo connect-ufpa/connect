@@ -52,7 +52,20 @@ export const saveEvent = (evento) => {
                 usuario_id: usuario.uid,
                 data: evento.data,
                 hora: evento.hora
-            }).then(() => { dispatch({ type: CREATE_EVENT_SUCCESS }); });
+            }).then((response) => {
+                database().ref(`usuario/${usuario.uid}/`).once('value').then(snap => {
+                    const user = snap.val();
+                    if (user.hasOwnProperty("eventos_criados")) {
+                        database().ref().child(`usuario/${usuario.uid}/`).update({
+                            eventos_criados: [...user.eventos_criados, response.path.pieces_[1]]
+                        }).then(() => { dispatch({ type: CREATE_EVENT_SUCCESS }); });
+                    } else {
+                        database().ref().child(`usuario/${usuario.uid}/`).update({
+                            eventos_criados: [response.path.pieces_[1]]
+                        }).then(() => { dispatch({ type: CREATE_EVENT_SUCCESS }); });
+                    }
+                });
+            });  
         };
     }
 };
