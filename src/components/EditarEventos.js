@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { searchEventsToEdit } from '../actions';
-import { Card, CardSection, HeaderImage, Button, Spinner } from '../components/commons';
+import { CardSection, HeaderImage, Button, Spinner, Input } from '../components/commons';
 
 class EditarEventos extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -43,12 +44,20 @@ class EditarEventos extends Component {
         if (this.props.loading) return (<Spinner size="large" color="#ffff" />);
 
         return (
+            <ScrollView>
+                {this.renderEvents()}
+            </ScrollView>
+        );
+    }
+    renderEvents() {
+        return this.props.eventos.map(evento => 
             <CardSection>
-                {this.props.eventos}
+                <Input 
+                    value={evento.nome}
+                />
             </CardSection>
         );
     }
-    
     render() { 
         return (
         this.searchingEvents()
