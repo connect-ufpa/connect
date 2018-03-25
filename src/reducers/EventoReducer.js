@@ -19,7 +19,7 @@ const INITIAL_STATE = {
     msgErrorHoraInicioEvento: '',
     loading: false,
     error: false,
-    eventosToEdit: '',
+    eventosToEdit: [],
     fetchingEvents: true
 };
 
@@ -56,7 +56,7 @@ export default (state = INITIAL_STATE, action) => {
         case CREATE_EVENT_SUCCESS:
             return INITIAL_STATE;
         case EVENTS_TO_EDIT_SUCCESS:
-            return { ...state, eventosToEdit: action.payload, fetchingEvents: false };
+            return { ...state, eventosToEdit: [...state.eventosToEdit, action.payload], fetchingEvents: false };
         default:
             
            return state;

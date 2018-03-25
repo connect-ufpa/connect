@@ -56,13 +56,11 @@ export const saveEvent = (evento) => {
                 database().ref(`usuario/${usuario.uid}/`).once('value').then(snap => {
                     const user = snap.val();
                     if (user.hasOwnProperty("eventos_criados")) {
-                        database().ref().child(`usuario/${usuario.uid}/`).update({
-                            eventos_criados: [...user.eventos_criados, response.path.pieces_[1]]
-                        }).then(() => { dispatch({ type: CREATE_EVENT_SUCCESS }); });
+                        database().ref().child(`usuario/${usuario.uid}/`).update({ eventos_criados: [...user.eventos_criados, response.path.pieces_[1]] })
+                          .then(() => { dispatch({ type: CREATE_EVENT_SUCCESS }); });
                     } else {
-                        database().ref().child(`usuario/${usuario.uid}/`).update({
-                            eventos_criados: [response.path.pieces_[1]]
-                        }).then(() => { dispatch({ type: CREATE_EVENT_SUCCESS }); });
+                        database().ref().child(`usuario/${usuario.uid}/`).update({ eventos_criados: [response.path.pieces_[1]] })
+                         .then(() => { dispatch({ type: CREATE_EVENT_SUCCESS }); });
                     }
                 });
             });  
@@ -73,8 +71,15 @@ export const saveEvent = (evento) => {
 export const searchEventsToEdit = () => {
     return (dispatch) => {
         const usuario = firebaseAuth().currentUser;
-        database().ref(`evento/{usuario_id}`).on('value', snapshot => {
-            dispatch({ type: EVENTS_TO_EDIT_SUCCESS, payload: snapshot.val() });
+        database().ref(`usuario/${usuario.uid}`).once('value').then(snap => {
+             const user = snap.val();
+             if (user.hasOwnProperty("eventos_criados")) {
+                 for (var eventoID in user.eventos_criados) {
+                    database().ref(`evento/${eventoID}`).once('value').then(snap => {
+                        dispatch({ type: EVENTS_TO_EDIT_SUCCESS, payload: snap.val() });
+                    });
+                 }
+             }
         });
-    } 
+    }; 
 };

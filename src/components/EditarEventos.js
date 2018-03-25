@@ -41,8 +41,12 @@ class EditarEventos extends Component {
     }
     searchingEvents() {
         if (this.props.loading) return (<Spinner size="large" color="#ffff" />);
-        
-        console.log("O QUE TA VINDO", this.props.eventos);
+
+        return (
+            <CardSection>
+                {this.props.eventos}
+            </CardSection>
+        );
     }
     
     render() { 
