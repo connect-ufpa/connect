@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View, TouchableHighlight, TextInput, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { searchEventsToEdit } from '../actions';
 import { CardSection, HeaderImage, Button, Spinner, Input } from '../components/commons';
+import Styles from '../Styles';
 
 class EditarEventos extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -37,6 +38,11 @@ class EditarEventos extends Component {
                 />
         };
     }
+
+    state = {
+        showdetail: false,
+      };
+    
     componentWillMount() {
          this.props.searchEventsToEdit();
     }
@@ -44,20 +50,77 @@ class EditarEventos extends Component {
         if (this.props.loading) return (<Spinner size="large" color="#ffff" />);
 
         return (
-            <ScrollView>
+            <ScrollView style={Styles.scrollViewStyle}>
                 {this.renderEvents()}
             </ScrollView>
         );
     }
+
+    changeValue(value) {
+        this.setState({ showdetail: value });
+        console.log("State", this.state.showdetail)
+    }
+    
+    showEvento(evento) {
+      if (this.state.showdetail) {
+         return (
+              <View>
+                  <CardSection>
+                      <TextInput
+                          style={Styles.inputStyle}
+                          value={evento.descricao}
+                          underlineColorAndroid='transparent'
+                          multiline
+                          numberOfLines={4}
+                          maxLength={250}
+                      />
+                  </CardSection>
+                  <CardSection>
+                      <Input
+                          value={evento.local}
+                      />
+                  </CardSection>
+                  <CardSection>
+                      <Input
+                          value={evento.data}
+                      />
+                      <Input
+                          value={evento.hora}
+                      />
+                  </CardSection>
+              </View>
+          );
+      }
+    }
     renderEvents() {
-        return this.props.eventos.map(evento => 
-            <CardSection>
-                <Input 
-                    value={evento.nome}
-                />
-            </CardSection>
+        return this.props.eventos.map(evento =>
+            <View key={evento.id} style={[Styles.eventCardStyle, { marginTop: 5, marginBottom: 5, elevation: 5 }]}>
+                <CardSection>
+                    <Input
+                        value={evento.nome}
+                    />
+                </CardSection>
+                <View style={{ alignItems: 'flex-end', paddingRight: 20 }}>
+                    <TouchableHighlight
+                        onPress={() => { this.changeValue(true); }}
+                    >
+                        <View>
+                            <Icon
+                                type='font-awesome'
+                                name='angle-down'
+                                color='#2a4065'
+                                size={30}
+                            />
+                        </View>
+                    </TouchableHighlight>
+                </View>
+                <View>
+                    {this.showEvento(evento)}
+                </View>
+            </View>
         );
     }
+
     render() { 
         return (
         this.searchingEvents()

@@ -75,8 +75,12 @@ export const searchEventsToEdit = () => {
              const user = snap.val();
              if (user.hasOwnProperty("eventos_criados")) {
                  for (var eventoID in user.eventos_criados) {
+                     const id = user.eventos_criados[eventoID];
                     database().ref(`evento/${user.eventos_criados[eventoID]}`).once('value')
-                    .then(snap => { dispatch({ type: EVENTS_TO_EDIT_SUCCESS, payload: snap.val() }); });
+                    .then(snap => { 
+                        const evento = snap.val(); 
+                        dispatch({ type: EVENTS_TO_EDIT_SUCCESS, payload: { ...evento, id } });
+                     });
                  }
              }
         });

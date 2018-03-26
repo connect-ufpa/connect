@@ -87,7 +87,7 @@ class SalvarEventos extends Component {
               
                 <Modal
                     animationType="slide"
-                    transparent={true}
+                    transparent
                     visible={this.props.modal}
                 >
                     <ScrollView style={Styles.scrollViewStyle} >
