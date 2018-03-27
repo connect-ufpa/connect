@@ -13,22 +13,21 @@ export const saveLocal = (locais) => {
   }
 };
 
-export const verifyLocais = () => {
-  const locais = [];
+export const verifyLocais = () => { 
+  return (dispatch) => {    
+    dispatch({ type: RETRIVING_LOCAIS });
 
-  database().ref("local/").on("value", function(snapshot) {
-    locais.push(Object.values(snapshot.val())); 
-   }, function (errorObject) {
-     console.log("Erro ao ler: " + errorObject.code);
-   });
-  return { type: RETRIEVE_LOCAIS, payload: locais }
+    const locais = [];
+    database().ref("local/")
+      .on('value', snap => {
+        retriveLocaisSuccess(dispatch, snap.val());
+    });
+  };
 };
 
-
-// async const getLocais = () => {
-//   await database().ref("local/").on("value", function(snapshot) {
-//    return Object.values(snapshot.val());
-//   }, function (errorObject) {
-//     console.log("Erro ao ler: " + errorObject.code);
-//   });
-// };
+const retriveLocaisSuccess = (dispatch, locais) => {
+  dispatch({
+    type: RETRIEVE_LOCAIS,
+    payload: locais
+  })
+};

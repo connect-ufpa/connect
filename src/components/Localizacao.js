@@ -16,14 +16,11 @@ class Localizacao extends Component {
   static navigationOptions = ({ navigation }) => {    
     const { navigate } = navigation;
     return {
-      title: <HeaderImage />,
+      headerTitle: <View style={{ flex: 1, alignContent: 'center' }}><HeaderImage /></View>,
       headerStyle: {
         paddingLeft: 15,
         paddingRight: 15,
         height: 55
-      },
-      headerTitleStyle: {
-        alignSelf: 'center',
       },
       drawerLabel: 'Localização',
       drawerIcon: ({ tintColor }) => (
@@ -34,21 +31,32 @@ class Localizacao extends Component {
           size={25}
         />
       ),
-      headerLeft: <Icon
-        name='bars'
-        type='font-awesome'
-        color='#2a4065'
-        size={25}
-        onPress={() => navigate('DrawerOpen')}
-      />,
-      headerRight: <Icon
-        name='search'
-        type='font-awesome'
-        color='#2a4065'
-        size={25}
-        onPress={() => navigate('DrawerOpen')}
-      />,
+      headerLeft: 
+        <View>
+          <Icon
+            name='bars'
+            type='font-awesome'
+            color='#2a4065'
+            size={25}
+            onPress={() => navigate('DrawerOpen')}
+          />
+        </View>
+        ,
+      headerRight: 
+        <View>
+          <Icon
+            name='search'
+            type='font-awesome'
+            color='#2a4065'
+            size={25}
+            onPress={() => navigate('DrawerOpen')}
+          />
+      </View>
     }
+  }
+
+  componentDidMount() {
+    this.props.verifyLocais();
   }
 
   salvarLocais() {
@@ -56,28 +64,12 @@ class Localizacao extends Component {
   }
 
   renderLocais() {
-    if(this.props.locais.length !== 0) {
-        this.props.locais[0].forEach( local => {
-          console.log(local.nome);
-        }); 
+    console.log("Locais: ", this.props.locais);
+   
+    if (this.props.loading) {
+      return <Spinner size="large" color="#2A4065" />;
     } else {
-      console.log("Verificando locais...")
-    }
-  }
 
-  renderMessageStatus(){
-    if(this.props.isLocais) {
-      return(
-        <CardSection>
-          <Texts style='smallBlue' text={'Existem locais para debugar'} />
-        </CardSection>
-      );
-    } else {
-      return(
-        <CardSection>
-          <Texts style='smallBlue' text={'Verifique locais para debugar'} />
-        </CardSection>
-      );
     }
   }
 
@@ -93,7 +85,7 @@ class Localizacao extends Component {
             longitudeDelta: 0.0099
           }}
         />
-        <CardSection>
+        {/* <CardSection>
           <Button
             text="Salvar locais"
             styles={Styles.btnConfirm}
@@ -106,7 +98,7 @@ class Localizacao extends Component {
             styles={Styles.btnConfirm}
             onPress={() => {this.props.verifyLocais()}}
           />
-        </CardSection>
+        </CardSection> */}
         <CardSection>
           <Texts style='smallBlue' text={this.props.statusMessage} />
         </CardSection>
@@ -121,8 +113,8 @@ class Localizacao extends Component {
 const mapStateToProps = (state) => {
   return {
     locais: state.localizacao.locais,
-    isLocais: state.localizacao.isLocais,
-    statusMessage: state.localizacao.statusMessage
+    statusMessage: state.localizacao.statusMessage,
+    loading: state.localizacao.loading
   };
 };
 

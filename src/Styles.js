@@ -93,7 +93,7 @@ export default StyleSheet.create({
         height: '100%'
     },
     mapStyle: {
-        height: 200,
+        height: 300,
         width: '100%'
     }
 });
