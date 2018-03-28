@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Spinner, Card, CardSection, Button, Texts, HeaderImage } from './commons';
 import { View, Text, UIManager, Dimensions, StyleSheet, ScrollView } from 'react-native';
-import { saveLocal, verifyLocais } from '../actions';
+import { saveLocais, verifyLocais } from '../actions';
 import { firebaseAuth } from '../config/Config';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -60,16 +60,15 @@ class Localizacao extends Component {
   }
 
   salvarLocais() {
-    saveLocal(locais);
+    saveLocais(locais);
   }
 
   renderLocais() {
-    console.log("Locais: ", this.props.locais);
-   
     if (this.props.loading) {
+      console.log("Verificando locais...");
       return <Spinner size="large" color="#2A4065" />;
     } else {
-
+      console.log("Locais: ", this.props.locais);
     }
   }
 
