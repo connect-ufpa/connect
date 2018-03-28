@@ -3,9 +3,7 @@ import { TextInput } from 'react-native';
 import Styles from '../../Styles';
 
 const Input = ({ value, onChangeText, placeholder, secureTextEntry, addStyle }) => {
-  
   return (
-    
       <TextInput 
         style={[Styles.inputStyle, addStyle]}
         secureTextEntry={secureTextEntry}
@@ -15,7 +13,6 @@ const Input = ({ value, onChangeText, placeholder, secureTextEntry, addStyle }) 
         onChangeText={onChangeText}
         underlineColorAndroid='transparent'
       />
-   
   );
 };
 

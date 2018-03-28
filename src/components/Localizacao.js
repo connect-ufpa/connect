@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Spinner, Card, CardSection, Button, Texts, HeaderImage } from './commons';
+import { Spinner, Card, CardSection, Button, Texts, HeaderImage, Input } from './commons';
 import { View, Text, UIManager, Dimensions, StyleSheet, ScrollView } from 'react-native';
 import { saveLocais, verifyLocais } from '../actions';
 import { firebaseAuth } from '../config/Config';
@@ -66,9 +66,39 @@ class Localizacao extends Component {
   renderLocais() {
     if (this.props.loading) {
       console.log("Verificando locais...");
-      return <Spinner size="large" color="#2A4065" />;
+      return (
+        <View style={{
+          flex: 1, 
+          flexDirection: 'row', 
+          position: 'absolute', 
+          zIndex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0
+        }}>
+          <Spinner size={60} color="#2A4065" />
+        </View>
+      );
     } else {
       console.log("Locais: ", this.props.locais);
+      return (
+        <View style={{
+          flex: 1,
+          position: 'absolute', 
+          zIndex: 1,
+          width: '100%',
+          padding: 20
+        }}>
+          <Input
+            placeholder="Pesquise local desejado:"
+            value={this.props.local}
+            addStyle={{ elevation: 3, borderColor: "#2A4065", color: "#2A4065", fontSize: 14 }}
+          />
+        </View>
+      );
     }
   }
 
@@ -76,7 +106,7 @@ class Localizacao extends Component {
     return (
       <ScrollView style={Styles.scrollViewStyle}>
         <MapView
-          style={Styles.mapStyle}
+          style={Styles.mapLocalizacaoStyle}
           initialRegion={{
             latitude: -1.473987,
             longitude: -48.452267,
@@ -97,13 +127,11 @@ class Localizacao extends Component {
             styles={Styles.btnConfirm}
             onPress={() => {this.props.verifyLocais()}}
           />
-        </CardSection> */}
+        </CardSection>
         <CardSection>
           <Texts style='smallBlue' text={this.props.statusMessage} />
-        </CardSection>
-        <CardSection>
-          {this.renderLocais()}
-        </CardSection>
+        </CardSection> */}
+        {this.renderLocais()}
       </ScrollView>
     );
   }
@@ -111,6 +139,7 @@ class Localizacao extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    local: state.localizacao.local,
     locais: state.localizacao.locais,
     statusMessage: state.localizacao.statusMessage,
     loading: state.localizacao.loading

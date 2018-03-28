@@ -1,6 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const grey = '#777';
+const { height, width } = Dimensions.get('window');
 
 export default StyleSheet.create({
     logoTextStyle: {
@@ -40,7 +41,7 @@ export default StyleSheet.create({
         fontSize: 16,
         fontFamily: 'Ubuntu',
         flex: 1,
-        borderColor: grey,
+        borderColor: '#777',
         borderWidth: 2,
         borderRadius: 5
     },
@@ -95,5 +96,9 @@ export default StyleSheet.create({
     mapStyle: {
         height: 300,
         width: '100%'
-    }
+    },
+    mapLocalizacaoStyle: {
+        height: height - 80,
+        width: '100%'
+    },
 });
