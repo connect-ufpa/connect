@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, TouchableHighlight, TextInput, FlatList } from 'react-native';
+import { ScrollView, View, TouchableHighlight, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { searchEventsToEdit } from '../actions';
@@ -58,7 +58,6 @@ class EditarEventos extends Component {
 
     changeValue(value) {
         this.setState({ showdetail: value });
-        console.log("State", this.state.showdetail)
     }
     
     showEvento(evento) {
@@ -67,40 +66,71 @@ class EditarEventos extends Component {
               <View>
                   <CardSection>
                       <TextInput
-                          style={Styles.inputStyle}
+                          style={[Styles.inputStyle, { color: 'black' }]}
                           value={evento.descricao}
                           underlineColorAndroid='transparent'
                           multiline
                           numberOfLines={4}
                           maxLength={250}
+                          editable={false}
                       />
                   </CardSection>
                   <CardSection>
                       <Input
+                          addStyle={{ color: 'black' }}
                           value={evento.local}
+                          editable={false}
                       />
                   </CardSection>
                   <CardSection>
                       <Input
+                          addStyle={{ color: 'black' }}  
                           value={evento.data}
+                          editable={false}
                       />
                       <Input
+                          addStyle={{ color: 'black' }}
                           value={evento.hora}
+                          editable={false}
                       />
+                  </CardSection>
+                  <CardSection>
+                     <Button
+                         text="Editar"
+                         styles={Styles.btnConfirm}
+                         onPress={() => { this.showModal(evento); }}
+                     />
                   </CardSection>
               </View>
           );
       }
     }
+
     renderEvents() {
         return this.props.eventos.map(evento =>
             <View key={evento.id} style={[Styles.eventCardStyle, { marginTop: 5, marginBottom: 5, elevation: 5 }]}>
                 <CardSection>
                     <Input
+                        addStyle={{ color: 'black' }}
                         value={evento.nome}
+                        editable={false}
                     />
                 </CardSection>
-                <View style={{ alignItems: 'flex-end', paddingRight: 20 }}>
+                <View style={{ justifyContent: 'flex-end', paddingRight: 20, flexDirection: 'row' }}>
+                    <View style={{ paddingRight: 10 }}>
+                        <TouchableHighlight
+                            onPress={() => { this.changeValue(false); }}
+                        >
+                            <View>
+                                <Icon
+                                    type='font-awesome'
+                                    name='angle-up'
+                                    color='#2a4065'
+                                    size={30}
+                                />
+                            </View>
+                        </TouchableHighlight>
+                    </View>
                     <TouchableHighlight
                         onPress={() => { this.changeValue(true); }}
                     >

@@ -79,7 +79,7 @@ class SalvarEventos extends Component {
                 >
                     {this.props.marker.map((marker) => {
                         return (
-                            <Marker {...marker} image={require('../../assets/img/marker.png')} />
+                            <Marker key={marker} {...marker} image={require('../../assets/img/marker.png')} />
                         );
                     }
                     )}
@@ -89,6 +89,7 @@ class SalvarEventos extends Component {
                     animationType="slide"
                     transparent
                     visible={this.props.modal}
+                    onRequestClose={() =>{}}
                 >
                     <ScrollView style={Styles.scrollViewStyle} >
                         <View style={[Styles.eventCardStyle, { marginTop: HalfHeight }]}>
