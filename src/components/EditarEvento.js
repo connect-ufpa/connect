@@ -1,0 +1,50 @@
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+import { StackNavigator } from 'react-navigation';
+import { HeaderImage } from '../components/commons';
+import { Icon } from 'react-native-elements';
+
+class EditarEvento extends Component {
+    static navigationOptions = ({ navigation }) => {
+        const { navigate } = navigation;
+        return {
+            title: <HeaderImage />,
+            headerStyle: {
+                paddingLeft: 15,
+                paddingRight: 35,
+                height: 55
+            },
+            headerTitleStyle: {
+                alignSelf: 'center',
+            },
+            drawerLabel: 'Salvar Evento',
+            drawerIcon: ({ tintColor }) => (
+                <Icon
+                    type='font-awesome'
+                    name='calendar'
+                    color='#2a4065'
+                    size={25}
+                />
+            ),
+            headerLeft:
+                <Icon
+                    name='arrow-left'
+                    type='font-awesome'
+                    color='#2a4065'
+                    size={25}
+                    onPress={() => navigate('Eventos')}
+                />
+        };
+    }
+    render() {
+        const { params } = this.props.navigation.state;
+        console.log("PARAMS", params.nome)
+        return (
+            <View>
+                <Text>{params.nome}</Text> 
+            </View>
+        );
+    }
+}
+
+export default EditarEvento;

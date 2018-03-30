@@ -61,6 +61,7 @@ class EditarEventos extends Component {
     }
     
     showEvento(evento) {
+        const { nome } = evento;
       if (this.state.showdetail) {
          return (
               <View>
@@ -98,7 +99,7 @@ class EditarEventos extends Component {
                      <Button
                          text="Editar"
                          styles={Styles.btnConfirm}
-                         onPress={() => { this.showModal(evento); }}
+                         onPress={() => { this.props.navigation.navigate('EditarEvento', { nome }); }}
                      />
                   </CardSection>
               </View>

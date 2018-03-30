@@ -121,7 +121,7 @@ class SalvarEventos extends Component {
                                     onChangeText={texto => this.props.eventDescriptionChange(texto)}
                                     value={this.props.descricaoEvento}
                                     underlineColorAndroid='transparent'
-                                    multiline={true}
+                                    multiline
                                     numberOfLines={4}
                                     maxLength={250}
                                 />
