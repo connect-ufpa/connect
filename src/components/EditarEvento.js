@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
+import { editEvent } from '../actions';
 import { HeaderImage } from '../components/commons';
 import { Icon } from 'react-native-elements';
 
@@ -32,19 +34,30 @@ class EditarEvento extends Component {
                     type='font-awesome'
                     color='#2a4065'
                     size={25}
-                    onPress={() => navigate('Eventos')}
+                    onPress={() => navigate('EditarEventos')}
                 />
         };
     }
-    render() {
+   
+    componentWillMount() {
         const { params } = this.props.navigation.state;
-        console.log("PARAMS", params.nome)
+        const key = Object.keys(params);
+        key.forEach(prop => {
+            const value = params[prop];
+            this.props.editEvent({ prop, value });
+        });
+    }
+
+    render() {
         return (
             <View>
-                <Text>{params.nome}</Text> 
+                <Text>NOME</Text> 
             </View>
         );
     }
 }
+const mapStateToProps = (state) => {
+    return {}
+};
 
-export default EditarEvento;
+export default connect(mapStateToProps, { editEvent })(EditarEvento);

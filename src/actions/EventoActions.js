@@ -86,3 +86,7 @@ export const searchEventsToEdit = () => {
         });
     }; 
 };
+
+export const editEvent = ({ prop, value }) => {
+    console.log(`PROP ${prop} VALUE ${value}`);
+};

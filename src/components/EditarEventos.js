@@ -61,7 +61,7 @@ class EditarEventos extends Component {
     }
     
     showEvento(evento) {
-        const { nome } = evento;
+        const { nome, descricao, local, data, hora } = evento;
       if (this.state.showdetail) {
          return (
               <View>
@@ -99,7 +99,7 @@ class EditarEventos extends Component {
                      <Button
                          text="Editar"
                          styles={Styles.btnConfirm}
-                         onPress={() => { this.props.navigation.navigate('EditarEvento', { nome }); }}
+                         onPress={() => { this.props.navigation.navigate('EditarEvento', { nome, descricao, local, data, hora }); }}
                      />
                   </CardSection>
               </View>
