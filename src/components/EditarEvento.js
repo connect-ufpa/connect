@@ -3,7 +3,7 @@ import { View, TextInput, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import { editEvent } from '../actions';
-import { HeaderImage, CardSection, Input, Texts } from '../components/commons';
+import { HeaderImage, CardSection, Input, Texts, Button } from '../components/commons';
 import { Icon } from 'react-native-elements';
 import Styles from '../Styles';
 
@@ -90,15 +90,22 @@ class EditarEvento extends Component {
                         <Texts text={this.props.errorData} color='grey' />
                         <Texts text={this.props.errorHora} color='grey' />
                     </View>
+                    <CardSection>
+                        <Button
+                            text="Editar Local no Mapa"
+                            styles={Styles.btnConfirm}
+                            onPress={() => { this.props.navigation.navigate('EditarEventoMapa', this.props.coords); }}
+                        />
+                    </CardSection>
                 </View>
             </ScrollView>
         );
     }
 }
 const mapStateToProps = (state) => {
-   const { nome, descricao, local, data, hora, errorData, errorHora, error } = state.eventoEdicao;
+   const { nome, descricao, local, data, hora, coords, errorData, errorHora, error } = state.eventoEdicao;
    
-   return { nome, descricao, local, data, hora, errorData, errorHora, error };
+   return { nome, descricao, local, data, hora, coords, errorData, errorHora, error };
 };
 
 export default connect(mapStateToProps, { editEvent })(EditarEvento);

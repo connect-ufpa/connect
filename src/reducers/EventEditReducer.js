@@ -6,6 +6,7 @@ const INITIAL_STATTE = {
     local: '',
     data: '',
     hora: '',
+    coords: '',
     errorData: '',
     errorHora: '',
     error: true

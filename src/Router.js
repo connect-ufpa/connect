@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StackNavigator, DrawerNavigator } from "react-navigation";
 import { Icon } from 'react-native-elements';
 import { firebaseAuth } from './config/Config';
@@ -15,6 +15,7 @@ import Sobre from './components/Sobre';
 import SalvarEventos from './components/SalvarEventos';
 import EditarEventos from './components/EditarEventos';
 import EditarEvento from './components/EditarEvento';
+import EditarEventoMapa from './components/EditarEventoMapa';
 
 const Logout = () => {
   return (
@@ -99,5 +100,6 @@ export const AuthorizedScreens = StackNavigator({
   Sobre: { screen: Sobre },
   SalvarEventos: { screen: SalvarEventos },
   EditarEventos: { screen: EditarEventos },
-  EditarEvento: { screen: EditarEvento } 
+  EditarEvento: { screen: EditarEvento },
+  EditarEventoMapa: { screen: EditarEventoMapa } 
 });
