@@ -51,7 +51,7 @@ class EditarEvento extends Component {
 
     render() {
         return (
-            <ScrollView>
+            <ScrollView contentContainerStyle={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                 <View style={[Styles.eventCardStyle, { marginTop: 5, marginBottom: 5, elevation: 5, flex: 1 }]} >
                     <CardSection>
                         <Input
@@ -88,6 +88,7 @@ class EditarEvento extends Component {
                     </CardSection>
                     <View style={{ alignItems: 'center' }}>
                         <Texts text={this.props.errorData} color='grey' />
+                        <Texts text={this.props.errorHora} color='grey' />
                     </View>
                 </View>
             </ScrollView>
@@ -95,9 +96,9 @@ class EditarEvento extends Component {
     }
 }
 const mapStateToProps = (state) => {
-   const { nome, descricao, local, data, hora, errorData, error } = state.eventoEdicao;
+   const { nome, descricao, local, data, hora, errorData, errorHora, error } = state.eventoEdicao;
    
-   return { nome, descricao, local, data, hora, errorData, error };
+   return { nome, descricao, local, data, hora, errorData, errorHora, error };
 };
 
 export default connect(mapStateToProps, { editEvent })(EditarEvento);
