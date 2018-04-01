@@ -42,4 +42,5 @@ export const CREATE_EVENT_SUCCESS = 'create_event_successs';
 
 export const EVENTS_TO_EDIT_SUCCESS = 'events_to_edit_success';
 export const EDIT_EVENT = 'edit_event';
+export const EVENT_EDIT_DATA = 'event_edit_data';
 

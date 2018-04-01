@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput } from 'react-native';
+import { View, TextInput, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import { editEvent } from '../actions';
@@ -51,7 +51,7 @@ class EditarEvento extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+            <ScrollView>
                 <View style={[Styles.eventCardStyle, { marginTop: 5, marginBottom: 5, elevation: 5, flex: 1 }]} >
                     <CardSection>
                         <Input
@@ -87,18 +87,17 @@ class EditarEvento extends Component {
                         />
                     </CardSection>
                     <View style={{ alignItems: 'center' }}>
-                        <Texts text={this.props.msgErrorDataInicioEvento} color='grey' />
-                        <Texts text={this.props.msgErrorHoraInicioEvento} color='grey' />
+                        <Texts text={this.props.errorData} color='grey' />
                     </View>
                 </View>
-            </View>
+            </ScrollView>
         );
     }
 }
 const mapStateToProps = (state) => {
-   const { nome, descricao, local, data, hora } = state.eventoEdicao;
+   const { nome, descricao, local, data, hora, errorData, error } = state.eventoEdicao;
    
-   return { nome, descricao, local, data, hora };
+   return { nome, descricao, local, data, hora, errorData, error };
 };
 
 export default connect(mapStateToProps, { editEvent })(EditarEvento);
