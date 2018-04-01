@@ -3,7 +3,7 @@ import { View, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import { editEvent } from '../actions';
-import { HeaderImage, CardSection, Input } from '../components/commons';
+import { HeaderImage, CardSection, Input, Texts } from '../components/commons';
 import { Icon } from 'react-native-elements';
 import Styles from '../Styles';
 
@@ -51,40 +51,46 @@ class EditarEvento extends Component {
 
     render() {
         return (
-            <View style={[Styles.eventCardStyle, { marginTop: 5, marginBottom: 5, elevation: 5 }]} >
-                <CardSection>
-                    <Input
-                        onChangeText={text => this.props.editEvent({ prop: 'nome', value: text })}
-                        value={this.props.nome}
-                    />
-                </CardSection>
-                <CardSection>
-                      <TextInput
-                          style={Styles.inputStyle}
-                          onChangeText={text => this.props.editEvent({ prop: 'descricao', value: text })}
-                          value={this.props.descricao}
-                          underlineColorAndroid='transparent'
-                          multiline
-                          numberOfLines={4}
-                          maxLength={250}
-                      />
-                  </CardSection>
-                  <CardSection>
-                      <Input
-                          onChangeText={text => this.props.editEvent({ prop: 'local', value: text })}
-                          value={this.props.local}
-                      />
-                  </CardSection>
-                  <CardSection>
-                      <Input
-                          onChangeText={text => this.props.editEvent({ prop: 'data', value: text })}
-                          value={this.props.data}
-                      />
-                      <Input
-                          onChangeText={text => this.props.editEvent({ prop: 'hora', value: text })}
-                          value={this.props.hora}
-                      />
-                  </CardSection>
+            <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                <View style={[Styles.eventCardStyle, { marginTop: 5, marginBottom: 5, elevation: 5, flex: 1 }]} >
+                    <CardSection>
+                        <Input
+                            onChangeText={text => this.props.editEvent({ prop: 'nome', value: text })}
+                            value={this.props.nome}
+                        />
+                    </CardSection>
+                    <CardSection>
+                        <TextInput
+                            style={Styles.inputStyle}
+                            onChangeText={text => this.props.editEvent({ prop: 'descricao', value: text })}
+                            value={this.props.descricao}
+                            underlineColorAndroid='transparent'
+                            multiline
+                            numberOfLines={4}
+                            maxLength={250}
+                        />
+                    </CardSection>
+                    <CardSection>
+                        <Input
+                            onChangeText={text => this.props.editEvent({ prop: 'local', value: text })}
+                            value={this.props.local}
+                        />
+                    </CardSection>
+                    <CardSection>
+                        <Input
+                            onChangeText={text => this.props.editEvent({ prop: 'data', value: text })}
+                            value={this.props.data}
+                        />
+                        <Input
+                            onChangeText={text => this.props.editEvent({ prop: 'hora', value: text })}
+                            value={this.props.hora}
+                        />
+                    </CardSection>
+                    <View style={{ alignItems: 'center' }}>
+                        <Texts text={this.props.msgErrorDataInicioEvento} color='grey' />
+                        <Texts text={this.props.msgErrorHoraInicioEvento} color='grey' />
+                    </View>
+                </View>
             </View>
         );
     }
