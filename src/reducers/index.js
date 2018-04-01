@@ -4,11 +4,13 @@ import LoginReducer from './LoginReducer';
 import ForgotPasswordReducer from './ForgotPasswordReducer';
 import LocalizacaoReducer from './LocalizacaoReducer';
 import EventoReducer from './EventoReducer';
+import EventEditReducer from './EventEditReducer';
 
 export default combineReducers({
    createUser: CreateUserReducer,
    login: LoginReducer,
    forgotPassword: ForgotPasswordReducer,
    localizacao: LocalizacaoReducer,
-   evento: EventoReducer
+   evento: EventoReducer,
+   eventoEdicao: EventEditReducer
 });

@@ -44,7 +44,7 @@ class EditarEventos extends Component {
       };
     
     componentWillMount() {
-         this.props.searchEventsToEdit();
+        if (this.props.eventos.length === 0) this.props.searchEventsToEdit();
     }
     searchingEvents() {
         if (this.props.loading) return (<Spinner size="large" color="#ffff" />);

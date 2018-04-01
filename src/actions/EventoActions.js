@@ -2,7 +2,7 @@ import { firebaseAuth, database } from '../config/Config';
 import { validateDates, validateHours, validateEvent } from '../helpers/HandleData';
 import { MARKER, CLOSE_MODAL, EVENT_NAME, DESCRIPTION, LOCAL, VALID_START_EVENT_DATE, 
          INVALID_START_EVENT_DATE, VALID_START_HOUR_EVENT, INVALID_START_HOUR_EVENT,
-         LOADING_EVENT, CREATE_EVENT_SUCCESS, EVENTS_TO_EDIT_SUCCESS } from './types';
+         LOADING_EVENT, CREATE_EVENT_SUCCESS, EVENTS_TO_EDIT_SUCCESS, EDIT_EVENT } from './types';
 
 export const showMarkerAndModal = (e) => {
     return { type: MARKER, payload: { coordinate: e.nativeEvent.coordinate } };
@@ -69,6 +69,7 @@ export const saveEvent = (evento) => {
 };
 
 export const searchEventsToEdit = () => {
+    console.log("ENTROU")
     return (dispatch) => {
         const usuario = firebaseAuth().currentUser;
         database().ref(`usuario/${usuario.uid}`).once('value').then(snap => {
@@ -88,5 +89,5 @@ export const searchEventsToEdit = () => {
 };
 
 export const editEvent = ({ prop, value }) => {
-    console.log(`PROP ${prop} VALUE ${value}`);
+    return { type: EDIT_EVENT, payload: { prop, value } };
 };
