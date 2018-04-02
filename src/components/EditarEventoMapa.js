@@ -42,7 +42,7 @@ class EditarEventoMapa extends Component {
                     type='font-awesome'
                     color='#2a4065'
                     size={25}
-                    onPress={() => navigate('EditarEventos')}
+                    onPress={() => navigate('EditarEvento', LatLng)}
                 />
         };
     }
