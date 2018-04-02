@@ -54,7 +54,7 @@ class EditarEventoMapa extends Component {
     }
     render() {
         if (this.props.coords) {
-             lat = this.props.coords.lat;
+            lat = this.props.coords.lat;
             long = this.props.coords.long;
             LatLng = {
                 latitude: this.props.coords.lat,
@@ -72,17 +72,14 @@ class EditarEventoMapa extends Component {
                 }}
                 onPress={(e) => { 
                     const prop = 'coords';
-                    const coords = e.nativeEvent.coordinate;
-                    console.log("COORDENADAS", coords)
-                    this.props.editEvent({ prop, coords }); 
+                    const value = {
+                        lat: e.nativeEvent.coordinate.latitude,
+                        long: e.nativeEvent.coordinate.longitude
+                    };
+                    this.props.editEvent({ prop, value }); 
                     }}
             >
-                {/* {this.props.coords.map((coord) => { */}
-                    {/* return ( */}
-                        <Marker coordinate={LatLng} image={require('../../assets/img/marker.png')} />
-                    {/* ); */}
-                {/* } */}
-                {/* )} */}
+                    <Marker coordinate={LatLng} image={require('../../assets/img/marker.png')} />
             </MapView>
         );
     }

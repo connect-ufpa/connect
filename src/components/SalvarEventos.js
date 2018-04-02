@@ -78,10 +78,8 @@ class SalvarEventos extends Component {
                     onPress={(e) => { this.props.showMarkerAndModal(e); }}
                 >
                     {this.props.marker.map((marker) => {
-                        return (
-                            <Marker key={marker} {...marker} image={require('../../assets/img/marker.png')} />
-                        );
-                    }
+                        return (<Marker key={marker} {...marker} image={require('../../assets/img/marker.png')} />); 
+                        }
                     )}
                 </MapView>
               
