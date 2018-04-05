@@ -41,7 +41,9 @@ export const LOADING_EVENT = 'loading_event';
 export const CREATE_EVENT_SUCCESS = 'create_event_successs';
 
 export const EVENTS_TO_EDIT_SUCCESS = 'events_to_edit_success';
+export const CLEAR = 'clear';
 export const EDIT_EVENT = 'edit_event';
 export const EVENT_EDIT_DATA = 'event_edit_data';
 export const EVENT_EDIT_HORA = 'event_edit_hora';
+export const SAVED_EDITED_EVENT = 'saved_edited_event';
 

@@ -62,7 +62,7 @@ class SalvarEventos extends Component {
         }
         return (
           <Button
-            text="Cadastrar"
+            text="Salvar Evento"
             styles={Styles.btnConfirm}
             onPress={() => { this.props.saveEvent(evento); }}
           />

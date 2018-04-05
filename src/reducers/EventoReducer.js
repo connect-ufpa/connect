@@ -1,6 +1,6 @@
 import { MARKER, CLOSE_MODAL, EVENT_NAME, DESCRIPTION, LOCAL, VALID_START_EVENT_DATE, 
          INVALID_START_EVENT_DATE, VALID_START_HOUR_EVENT, INVALID_START_HOUR_EVENT, LOADING_EVENT, 
-         CREATE_EVENT_SUCCESS, EVENTS_TO_EDIT_SUCCESS } from '../actions/types';
+         CREATE_EVENT_SUCCESS, EVENTS_TO_EDIT_SUCCESS, CLEAR } from '../actions/types';
 
 const INITIAL_STATE = {
     region: {
@@ -55,6 +55,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, loading: true };
         case CREATE_EVENT_SUCCESS:
             return INITIAL_STATE;
+        case CLEAR: 
+            return { ...state, eventosToEdit: [] };
         case EVENTS_TO_EDIT_SUCCESS:
             return { ...state, eventosToEdit: [...state.eventosToEdit, action.payload], fetchingEvents: false };
         default:

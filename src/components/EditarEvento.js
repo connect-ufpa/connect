@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, TextInput, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
-import { editEvent } from '../actions';
-import { HeaderImage, CardSection, Input, Texts, Button } from '../components/commons';
+import { editEvent, saveEditedEvent } from '../actions';
+import { HeaderImage, CardSection, Input, Texts, Button, Spinner } from '../components/commons';
 import { Icon } from 'react-native-elements';
 import Styles from '../Styles';
 
@@ -39,7 +39,7 @@ class EditarEvento extends Component {
                 />
         };
     }
-    
+
     componentWillMount() {
         const { params } = this.props.navigation.state;
         const key = Object.keys(params);
@@ -48,14 +48,35 @@ class EditarEvento extends Component {
             this.props.editEvent({ prop, value });
         });
     }
-
+    renderSaveEventButton() {
+        const evento = {
+            id: this.props.id,
+            nome: this.props.nome,
+            descricao: this.props.descricao,
+            local: this.props.local,
+            coords: this.props.coords,
+            data: this.props.data,
+            hora: this.props.hora,
+            error: this.props.error
+        };
+        if (this.props.loading) {
+            return (<Spinner size="large" color="#ffff" />);
+        }
+        return (
+            <Button
+                text="Salvar Edição"
+                styles={Styles.btnConfirm}
+                onPress={() => { this.props.saveEditedEvent(evento); }}
+            />
+        );
+    }
     render() {
-        const param = { 
+        const param = {
             id: this.props.id,
             coords: this.props.coords
         };
         return (
-            <ScrollView contentContainerStyle={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+            <ScrollView >
                 <View style={[Styles.eventCardStyle, { marginTop: 5, marginBottom: 5, elevation: 5, flex: 1 }]} >
                     <CardSection>
                         <Input
@@ -101,15 +122,18 @@ class EditarEvento extends Component {
                             onPress={() => { this.props.navigation.navigate('EditarEventoMapa', { param }); }}
                         />
                     </CardSection>
+                    <CardSection>
+                        {this.renderSaveEventButton()}
+                    </CardSection>
                 </View>
             </ScrollView>
         );
     }
 }
 const mapStateToProps = (state) => {
-   const { id, nome, descricao, local, data, hora, coords, errorData, errorHora, error } = state.eventoEdicao;
-   
-   return { id, nome, descricao, local, data, hora, coords, errorData, errorHora, error };
+    const { id, nome, descricao, local, data, hora, coords, loading, errorData, errorHora, error } = state.eventoEdicao;
+
+    return { id, nome, descricao, local, data, hora, coords, errorData, errorHora, error, loading };
 };
 
-export default connect(mapStateToProps, { editEvent })(EditarEvento);
+export default connect(mapStateToProps, { editEvent, saveEditedEvent })(EditarEvento);

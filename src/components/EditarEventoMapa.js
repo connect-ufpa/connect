@@ -13,9 +13,13 @@ const HalfHeight = Height * 0.75;
 
 let lat = -1.473987;
 let long = -48.452267;
+let coords = {
+    lat: -1.473987,
+    long: -48.452267
+ };
 let LatLng = {
-    latitude: - 1.473987,
-    longitude: - 48.452267,
+    latitude: -1.473987,
+    longitude: -48.452267,
   };
 
 class EditarEventoMapa extends Component {
@@ -46,7 +50,7 @@ class EditarEventoMapa extends Component {
                     type='font-awesome'
                     color='#2a4065'
                     size={25}
-                    onPress={() => navigate('EditarEvento', LatLng)}
+                    onPress={() => navigate('EditarEvento', coords)}
                 />
         };
     }
@@ -60,6 +64,10 @@ class EditarEventoMapa extends Component {
         if (this.props.coords) {
             lat = this.props.coords.lat;
             long = this.props.coords.long;
+            coords = {
+                lat: this.props.coords.lat,
+                long: this.props.coords.long,
+            };
             LatLng = {
                 latitude: this.props.coords.lat,
                 longitude: this.props.coords.long
@@ -93,12 +101,9 @@ class EditarEventoMapa extends Component {
                         onPress={() => {
                             this.props.saveNewEventCoords({
                             id: this.props.id,
-                            coords: {
-                                lat: this.props.coords.lat,
-                                long: this.props.coords.long
-                            }
-                        }
-                   ); }}
+                            coords
+                        }); 
+                    }}
                     />
                 </CardSection>
             </View>

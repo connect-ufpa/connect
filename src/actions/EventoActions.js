@@ -3,7 +3,7 @@ import { validateDates, validateHours, validateEvent } from '../helpers/HandleDa
 import { MARKER, CLOSE_MODAL, EVENT_NAME, DESCRIPTION, LOCAL, VALID_START_EVENT_DATE, 
          INVALID_START_EVENT_DATE, VALID_START_HOUR_EVENT, INVALID_START_HOUR_EVENT,
          LOADING_EVENT, CREATE_EVENT_SUCCESS, EVENTS_TO_EDIT_SUCCESS, EDIT_EVENT, 
-         EVENT_EDIT_DATA, EVENT_EDIT_HORA } from './types';
+         EVENT_EDIT_DATA, EVENT_EDIT_HORA, SAVED_EDITED_EVENT, CLEAR } from './types';
 
 export const showMarkerAndModal = (e) => {
     return { type: MARKER, payload: { coordinate: e.nativeEvent.coordinate } };
@@ -72,6 +72,7 @@ export const saveEvent = (evento) => {
 export const searchEventsToEdit = () => {
     return (dispatch) => {
         const usuario = firebaseAuth().currentUser;
+        dispatch({type: CLEAR });
         database().ref(`usuario/${usuario.uid}`).once('value').then(snap => {
              const user = snap.val();
              if (user.hasOwnProperty("eventos_criados")) {
@@ -113,5 +114,37 @@ export const saveNewEventCoords = ({ id, coords }) => {
          dispatch({ type: EDIT_EVENT, payload: { prop, coords } }); 
         });
   };
+};
+
+export const saveEditedEvent = (evento) => {
+    const validate = validateEvent(evento);
+    const id = evento.id;
+    if (validate) {
+        return (dispatch) => {
+            const prop = 'loading';
+            const value = true;
+            dispatch({ type: EDIT_EVENT, payload: { prop, value } });
+            const usuario = firebaseAuth().currentUser;
+            database().ref(`evento/${id}/`).update({
+                nome: evento.nome,
+                descricao: evento.descricao,
+                local: evento.local,
+                coords: evento.coords,
+                usuario_id: usuario.uid,
+                data: evento.data,
+                hora: evento.hora
+            }).then(() => {
+                dispatch({ type: SAVED_EDITED_EVENT });
+                database().ref(`evento/${id}`).on('value', snap => {
+                    const evento = snap.val();
+                    const key = Object.keys(evento);
+                    key.forEach(prop => {
+                        const value = evento[prop];
+                        dispatch({ type: EDIT_EVENT, payload: { prop, value } });
+                    });
+                });
+            });
+        };
+    }
 };
 
