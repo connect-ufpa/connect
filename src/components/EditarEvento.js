@@ -39,7 +39,7 @@ class EditarEvento extends Component {
                 />
         };
     }
-   
+    
     componentWillMount() {
         const { params } = this.props.navigation.state;
         const key = Object.keys(params);
@@ -50,6 +50,10 @@ class EditarEvento extends Component {
     }
 
     render() {
+        const param = { 
+            id: this.props.id,
+            coords: this.props.coords
+        };
         return (
             <ScrollView contentContainerStyle={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                 <View style={[Styles.eventCardStyle, { marginTop: 5, marginBottom: 5, elevation: 5, flex: 1 }]} >
@@ -94,7 +98,7 @@ class EditarEvento extends Component {
                         <Button
                             text="Editar Local no Mapa"
                             styles={Styles.btnConfirm}
-                            onPress={() => { this.props.navigation.navigate('EditarEventoMapa', this.props.coords); }}
+                            onPress={() => { this.props.navigation.navigate('EditarEventoMapa', { param }); }}
                         />
                     </CardSection>
                 </View>
@@ -103,9 +107,9 @@ class EditarEvento extends Component {
     }
 }
 const mapStateToProps = (state) => {
-   const { nome, descricao, local, data, hora, coords, errorData, errorHora, error } = state.eventoEdicao;
+   const { id, nome, descricao, local, data, hora, coords, errorData, errorHora, error } = state.eventoEdicao;
    
-   return { nome, descricao, local, data, hora, coords, errorData, errorHora, error };
+   return { id, nome, descricao, local, data, hora, coords, errorData, errorHora, error };
 };
 
 export default connect(mapStateToProps, { editEvent })(EditarEvento);

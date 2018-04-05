@@ -1,6 +1,7 @@
 import { EDIT_EVENT, EVENT_EDIT_DATA, EVENT_EDIT_HORA } from '../actions/types';
 
 const INITIAL_STATTE = {
+    id: '',
     nome: '',
     descricao: '',
     local: '',

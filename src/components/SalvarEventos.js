@@ -11,7 +11,6 @@ import Styles from '../Styles';
 const Height = Dimensions.get('window').height;
 const HalfHeight = Height * 0.55;
 
-
 class SalvarEventos extends Component {
     static navigationOptions = ({ navigation }) => {
         const { navigate } = navigation;

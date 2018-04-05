@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { View, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
-import { Icon } from 'react-native-elements';
-import { editEvent } from '../actions';
-import { StackNavigator } from 'react-navigation';
 import MapView, { Marker } from 'react-native-maps';
-import { HeaderImage } from '../components/commons';
+import { Icon } from 'react-native-elements';
+import { editEvent, saveNewEventCoords } from '../actions';
+import { StackNavigator } from 'react-navigation';
+import { HeaderImage, Button, CardSection } from '../components/commons';
 import Styles from '../Styles';
+
+const Height = Dimensions.get('window').height;
+const HalfHeight = Height * 0.75;
 
 let lat = -1.473987;
 let long = -48.452267;
@@ -62,39 +66,56 @@ class EditarEventoMapa extends Component {
             };
         }
         return (
-            <MapView
-                style={styles.mapStyle}
-                region={{
-                    latitude: lat,
-                    longitude: long,
-                    latitudeDelta: 0.00021,
-                    longitudeDelta: 0.0025
-                }}
-                onPress={(e) => { 
-                    const prop = 'coords';
-                    const value = {
-                        lat: e.nativeEvent.coordinate.latitude,
-                        long: e.nativeEvent.coordinate.longitude
-                    };
-                    this.props.editEvent({ prop, value }); 
+            <View>
+                <MapView
+                    style={styles.mapStyle}
+                    region={{
+                        latitude: lat,
+                        longitude: long,
+                        latitudeDelta: 0.00021,
+                        longitudeDelta: 0.0025
                     }}
-            >
+                    onPress={(e) => {
+                        const prop = 'coords';
+                        const value = {
+                            lat: e.nativeEvent.coordinate.latitude,
+                            long: e.nativeEvent.coordinate.longitude
+                        };
+                        this.props.editEvent({ prop, value });
+                    }}
+                >
                     <Marker coordinate={LatLng} image={require('../../assets/img/marker.png')} />
-            </MapView>
+                </MapView>
+                <CardSection styleSection={{ position: 'absolute', marginTop: HalfHeight }}>
+                    <Button
+                        text="Salvar Localização"
+                        styles={Styles.btnConfirm}
+                        onPress={() => { this.props.saveNewEventCoords({
+                            id: this.props.id,
+                            coords: {
+                                lat: this.props.coords.lat,
+                                long: this.props.coords.long
+                            }
+                        }
+                   ); }}
+                    />
+                </CardSection>
+            </View>
         );
     }
 }
+
 const styles = {
     mapStyle: {
         height: '100%',
-        width: '100%'
+        width: '100%'    
     }
 };
 
 const mapStateToProps = (state) => {
-    const { coords } = state.eventoEdicao;
+    const { id, coords } = state.eventoEdicao;
     
-    return { coords };
+    return { id, coords };
  };
  
- export default connect(mapStateToProps, { editEvent })(EditarEventoMapa);
+ export default connect(mapStateToProps, { editEvent, saveNewEventCoords })(EditarEventoMapa);

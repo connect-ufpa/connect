@@ -3,7 +3,7 @@ import { validateDates, validateHours, validateEvent } from '../helpers/HandleDa
 import { MARKER, CLOSE_MODAL, EVENT_NAME, DESCRIPTION, LOCAL, VALID_START_EVENT_DATE, 
          INVALID_START_EVENT_DATE, VALID_START_HOUR_EVENT, INVALID_START_HOUR_EVENT,
          LOADING_EVENT, CREATE_EVENT_SUCCESS, EVENTS_TO_EDIT_SUCCESS, EDIT_EVENT, 
-         EVENT_EDIT_DATA, EVENT_EDIT_HORA } from './types';
+         EVENT_EDIT_DATA, EVENT_EDIT_HORA, COORDS_EVENT_EDITED } from './types';
 
 export const showMarkerAndModal = (e) => {
     return { type: MARKER, payload: { coordinate: e.nativeEvent.coordinate } };
@@ -102,3 +102,13 @@ export const editEvent = ({ prop, value }) => {
     }
     return { type: EDIT_EVENT, payload: { prop, value } };
 };
+
+export const saveNewEventCoords = ({ id, coords }) => {
+  return (dispatch) => {
+    database().ref(`evento/${id}/coords`).update({ 
+        lat: coords.lat,
+        long: coords.long
+     }).then(() => dispatch({ type: COORDS_EVENT_EDITED }));
+  };
+};
+
