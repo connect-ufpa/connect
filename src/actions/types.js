@@ -44,5 +44,4 @@ export const EVENTS_TO_EDIT_SUCCESS = 'events_to_edit_success';
 export const EDIT_EVENT = 'edit_event';
 export const EVENT_EDIT_DATA = 'event_edit_data';
 export const EVENT_EDIT_HORA = 'event_edit_hora';
-export const COORDS_EVENT_EDITED = 'coords_event_edited';
 
