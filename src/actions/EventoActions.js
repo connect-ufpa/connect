@@ -108,7 +108,10 @@ export const saveNewEventCoords = ({ id, coords }) => {
     database().ref(`evento/${id}/coords`).update({ 
         lat: coords.lat,
         long: coords.long
-     }).then(() => dispatch({ type: COORDS_EVENT_EDITED }));
+     }).then(() => {
+         const prop = 'coords';
+         dispatch({ type: EDIT_EVENT, payload: { prop, coords } }); 
+        });
   };
 };
 

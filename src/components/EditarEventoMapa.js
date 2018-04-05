@@ -90,7 +90,8 @@ class EditarEventoMapa extends Component {
                     <Button
                         text="Salvar Localização"
                         styles={Styles.btnConfirm}
-                        onPress={() => { this.props.saveNewEventCoords({
+                        onPress={() => {
+                            this.props.saveNewEventCoords({
                             id: this.props.id,
                             coords: {
                                 lat: this.props.coords.lat,
