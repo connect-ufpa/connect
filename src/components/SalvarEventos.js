@@ -86,7 +86,7 @@ class SalvarEventos extends Component {
                     animationType="slide"
                     transparent
                     visible={this.props.modal}
-                    onRequestClose={() =>{}}
+                    onRequestClose={() => {}}
                 >
                     <ScrollView style={Styles.scrollViewStyle} >
                         <View style={[Styles.eventCardStyle, { marginTop: HalfHeight }]}>

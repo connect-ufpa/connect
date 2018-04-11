@@ -47,3 +47,5 @@ export const EVENT_EDIT_DATA = 'event_edit_data';
 export const EVENT_EDIT_HORA = 'event_edit_hora';
 export const SAVED_EDITED_EVENT = 'saved_edited_event';
 
+export const EVENTS_TO_SHOW_SUCCESS = 'events_to_show_success';
+

@@ -3,7 +3,8 @@ import { validateDates, validateHours, validateEvent } from '../helpers/HandleDa
 import { MARKER, CLOSE_MODAL, EVENT_NAME, DESCRIPTION, LOCAL, VALID_START_EVENT_DATE, 
          INVALID_START_EVENT_DATE, VALID_START_HOUR_EVENT, INVALID_START_HOUR_EVENT,
          LOADING_EVENT, CREATE_EVENT_SUCCESS, EVENTS_TO_EDIT_SUCCESS, EDIT_EVENT, 
-         EVENT_EDIT_DATA, EVENT_EDIT_HORA, SAVED_EDITED_EVENT, CLEAR } from './types';
+         EVENT_EDIT_DATA, EVENT_EDIT_HORA, SAVED_EDITED_EVENT, EVENTS_TO_SHOW_SUCCESS,
+         CLEAR } from './types';
 
 export const showMarkerAndModal = (e) => {
     return { type: MARKER, payload: { coordinate: e.nativeEvent.coordinate } };
@@ -72,7 +73,7 @@ export const saveEvent = (evento) => {
 export const searchEventsToEdit = () => {
     return (dispatch) => {
         const usuario = firebaseAuth().currentUser;
-        dispatch({type: CLEAR });
+        dispatch({ type: CLEAR });
         database().ref(`usuario/${usuario.uid}`).once('value').then(snap => {
              const user = snap.val();
              if (user.hasOwnProperty("eventos_criados")) {
@@ -146,5 +147,19 @@ export const saveEditedEvent = (evento) => {
             });
         };
     }
+};
+
+export const serachEventsToShow = () => {
+    return (dispatch) => {
+        dispatch({ type: CLEAR });
+        database().ref('evento/').once('value', snap => {
+            const eventos = snap.val();
+            const key = Object.keys(eventos);
+            key.forEach(id => {
+                const { nome, descricao, local, data, hora, coords } = eventos[id];
+                dispatch({ type: EVENTS_TO_SHOW_SUCCESS, payload: { id, nome, descricao, local, data, hora, coords } });
+            });
+        });
+    };
 };
 

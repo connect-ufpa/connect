@@ -16,6 +16,7 @@ import SalvarEventos from './components/SalvarEventos';
 import EditarEventos from './components/EditarEventos';
 import EditarEvento from './components/EditarEvento';
 import EditarEventoMapa from './components/EditarEventoMapa';
+import VisualizarEventos from './components/VisualizarEventos';
 
 const Logout = () => {
   return (
@@ -101,5 +102,6 @@ export const AuthorizedScreens = StackNavigator({
   SalvarEventos: { screen: SalvarEventos },
   EditarEventos: { screen: EditarEventos },
   EditarEvento: { screen: EditarEvento },
-  EditarEventoMapa: { screen: EditarEventoMapa } 
+  EditarEventoMapa: { screen: EditarEventoMapa },
+  VisualizarEventos: { screen: VisualizarEventos } 
 });
