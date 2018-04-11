@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Spinner, Card, CardSection, Button, Texts, HeaderImage, Input } from './commons';
 import { View, Text, UIManager, Dimensions, StyleSheet, ScrollView } from 'react-native';
-import { saveLocais, verifyLocais } from '../actions';
+import { saveLocais, verifyLocais, searchLocal } from '../actions';
 import { firebaseAuth } from '../config/Config';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -65,15 +65,14 @@ class Localizacao extends Component {
 
   renderLocais() {
     if (this.props.loading) {
-      console.log("Verificando locais...");
       return (
         <View style={{
-          flex: 1, 
-          flexDirection: 'row', 
-          position: 'absolute', 
+          flex: 1,
           zIndex: 1,
+          flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
+          position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
@@ -83,7 +82,6 @@ class Localizacao extends Component {
         </View>
       );
     } else {
-      console.log("Locais: ", this.props.locais);
       return (
         <View style={{
           flex: 1,
@@ -95,6 +93,7 @@ class Localizacao extends Component {
           <Input
             placeholder="Pesquise local desejado:"
             value={this.props.local}
+            onChangeText={local => this.props.searchLocal(local, this.props.locais)}
             addStyle={{ elevation: 3, borderColor: "#2A4065", color: "#2A4065", fontSize: 14 }}
           />
         </View>
@@ -114,24 +113,8 @@ class Localizacao extends Component {
             longitudeDelta: 0.0099
           }}
         />
-        {/* <CardSection>
-          <Button
-            text="Salvar locais"
-            styles={Styles.btnConfirm}
-            onPress={() => {this.salvarLocais()}}
-          />
-        </CardSection>
-        <CardSection>
-          <Button
-            text="Verificar locais"
-            styles={Styles.btnConfirm}
-            onPress={() => {this.props.verifyLocais()}}
-          />
-        </CardSection>
-        <CardSection>
-          <Texts style='smallBlue' text={this.props.statusMessage} />
-        </CardSection> */}
         {this.renderLocais()}
+
       </ScrollView>
     );
   }
@@ -147,6 +130,24 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  verifyLocais
+  verifyLocais,
+  searchLocal
 })(Localizacao);
 
+/* <CardSection>
+  <Button
+    text="Salvar locais"
+    styles={Styles.btnConfirm}
+    onPress={() => {this.salvarLocais()}}
+  />
+</CardSection>
+<CardSection>
+  <Button
+    text="Verificar locais"
+    styles={Styles.btnConfirm}
+    onPress={() => {this.props.verifyLocais()}}
+  />
+</CardSection>
+<CardSection>
+  <Texts style='smallBlue' text={this.props.statusMessage} />
+</CardSection> */

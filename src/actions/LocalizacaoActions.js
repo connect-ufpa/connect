@@ -1,5 +1,5 @@
 import { database } from '../config/Config';
-import { RETRIEVE_LOCAIS, RETRIVING_LOCAIS } from './types';
+import { RETRIEVE_LOCAIS, RETRIVING_LOCAIS, SEARCHING_LOCAL } from './types';
 
 export const saveLocais = (locais) => {
   for(var i = 0; i < locais.local.length; i++){
@@ -23,6 +23,25 @@ export const verifyLocais = () => {
     });
   };
 };
+
+export const searchLocal = (localPesquisado, locais) => {
+  return (dispatch) => {
+    dispatch({ type: SEARCHING_LOCAL, payload: localPesquisado });
+
+    let locaisAchados = [];
+
+    if(localPesquisado !== "") {
+      locais.map((localVerificado) => {
+        if (localVerificado['nome'].includes(localPesquisado)) {
+          locaisAchados.push(localVerificado);
+        }
+      });
+      console.log('Locais achados: ', locaisAchados);
+    } else {
+      console.log('Nenhum local encontrado!');
+    }
+  }
+}
 
 const retriveLocaisSuccess = (dispatch, locais) => {
   dispatch({
