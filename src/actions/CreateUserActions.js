@@ -35,14 +35,14 @@ export const onRegistrationChanged = (registration) => {
 export const onBirthChanged = (birth) => {
     const validateBirth = validateDates(birth);
     if (validateBirth) return { type: VALID_BIRTHDAY, payload: birth };
-    
+
     return { type: INVALID_BIRTHDAY, payload: birth };
 };
 
 export const onEmailChanged = (email) => {
     const validateEmail = validateEmails(email);
     if (validateEmail) return { type: VALID_EMAIL, payload: email };
-    
+
     return { type: INVALID_EMAIL, payload: email };
 };
 
@@ -56,7 +56,7 @@ export const onPasswordChanged = (password) => {
 export const onConfirmPasswordChanged = (confirmPassword, password) => {
     const validateMatchPasswords = matchPasswords(confirmPassword, password);
     if (validateMatchPasswords) return { type: MATCH_PASSWORD, payload: confirmPassword };
-    
+
     return { type: MISMATCH_PASSWORD, payload: confirmPassword };
 };
 
@@ -66,24 +66,25 @@ export const authUser = (user) => {
         return (dispatch) => {
             dispatch({ type: CREATING_ACCOUNT });
             firebaseAuth().createUserWithEmailAndPassword(user.email, user.password)
-                .then(() => { 
-                    saveUser(dispatch, user);  
-                    this.props.navigation.navigate('Main');
-                }).catch(() => { dispatch({ type: CREATE_ACCOUNT_ERROR }) });
+            .then((usuario) =>{
+                saveUser(dispatch, user, usuario);
+                this.props.navigation.navigate('Main');
+            }).catch(() => { dispatch({type: CREATE_ACCOUNT_ERROR})});
+                }
         }
-    }
-};
+    };
 
-const saveUser = (dispatch, user) => {
-    database().ref(`usuario/`).push({
-         nome: user.name,
-         matricula: user.registration,
-         nascimento: user.birthday,
-         email: user.email
-     }).then(() => {
-        dispatch({ type: CREATE_ACCOUNT_SUCCESS }); })
-            .catch(() => { dispatch({ type: CREATE_ACCOUNT_ERROR });
-
-        currentUser.delete();
-    });
+const saveUser = (dispatch, user, usuario) => {
+    database().ref(`usuario/${usuario.uid}`).set({
+        nome: user.name,
+        matricula: user.registration,
+        nascimento: user.birthday,
+        email: user.email
+    }).then(() => {
+        dispatch({ type: CREATE_ACCOUNT_SUCCESS });
+    })
+        .catch(() => {
+            dispatch({ type: CREATE_ACCOUNT_ERROR });
+            
+        });
 };
