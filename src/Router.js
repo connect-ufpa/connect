@@ -17,6 +17,7 @@ import EditarEventos from './components/EditarEventos';
 import EditarEvento from './components/EditarEvento';
 import EditarEventoMapa from './components/EditarEventoMapa';
 import VisualizarEventos from './components/VisualizarEventos';
+import VisualizarEventoMapa from './components/VisualizarEventoMapa';
 
 const Logout = () => {
   return (
@@ -103,5 +104,6 @@ export const AuthorizedScreens = StackNavigator({
   EditarEventos: { screen: EditarEventos },
   EditarEvento: { screen: EditarEvento },
   EditarEventoMapa: { screen: EditarEventoMapa },
-  VisualizarEventos: { screen: VisualizarEventos } 
+  VisualizarEventos: { screen: VisualizarEventos },
+  VisualizarEventoMapa: { screen: VisualizarEventoMapa } 
 });

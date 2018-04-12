@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { ScrollView, View, TouchableHighlight } from 'react-native';
+import { ScrollView, View, TextInput, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
-import { CardSection, Input, Spinner, HeaderImage } from '../components/commons';
+import { CardSection, Input, Spinner, Button, HeaderImage } from '../components/commons';
 import { serachEventsToShow } from '../actions';
 import Styles from '../Styles';
 
@@ -39,6 +39,10 @@ class VisualizarEventos extends Component {
         };
     }
 
+    state = {
+        showdetail: false,
+      };
+      
     componentWillMount() {
         this.props.serachEventsToShow();
     }
@@ -53,6 +57,56 @@ class VisualizarEventos extends Component {
         );
     }
 
+    changeValue(value) {
+        this.setState({ showdetail: value });
+    }
+    
+    showEvento(evento) {
+        const { coords } = evento;
+      if (this.state.showdetail) {
+         return (
+              <View>
+                  <CardSection>
+                      <TextInput
+                          style={[Styles.inputStyle, { color: 'black' }]}
+                          value={evento.descricao}
+                          underlineColorAndroid='transparent'
+                          multiline
+                          numberOfLines={4}
+                          maxLength={250}
+                          editable={false}
+                      />
+                  </CardSection>
+                  <CardSection>
+                      <Input
+                          addStyle={{ color: 'black' }}
+                          value={evento.local}
+                          editable={false}
+                      />
+                  </CardSection>
+                  <CardSection>
+                      <Input
+                          addStyle={{ color: 'black' }}  
+                          value={evento.data}
+                          editable={false}
+                      />
+                      <Input
+                          addStyle={{ color: 'black' }}
+                          value={evento.hora}
+                          editable={false}
+                      />
+                  </CardSection>
+                  <CardSection>
+                     <Button
+                         text="Visualizar Evento no Mapa"
+                         styles={Styles.btnConfirm}
+                         onPress={() => { this.props.navigation.navigate('VisualizarEventoMapa', { coords }); }}
+                     />
+                  </CardSection>
+              </View>
+          );s
+      }
+    }
     renderEvents() {
         return this.props.eventos.map(evento =>
             <View key={evento.id} style={[Styles.eventCardStyle, { marginTop: 5, marginBottom: 5, elevation: 5 }]}>
@@ -90,6 +144,9 @@ class VisualizarEventos extends Component {
                             />
                         </View>
                     </TouchableHighlight>
+                </View>
+                <View>
+                    {this.showEvento(evento)}
                 </View>
             </View>
         );
