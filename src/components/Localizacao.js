@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Spinner, Card, CardSection, Button, Texts, HeaderImage, Input } from './commons';
-import { View, Text, UIManager, Dimensions, StyleSheet, ScrollView } from 'react-native';
-import { saveLocais, verifyLocais, searchLocal } from '../actions';
+import { View, Text, UIManager, Dimensions, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { saveLocais, verifyLocais, searchLocal, markLocal } from '../actions';
 import { firebaseAuth } from '../config/Config';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -63,7 +63,7 @@ class Localizacao extends Component {
     saveLocais(locais);
   }
 
-  renderLocais() {
+  renderInputPesquisarLocais() {
     if (this.props.loading) {
       return (
         <View style={{
@@ -85,10 +85,10 @@ class Localizacao extends Component {
       return (
         <View style={{
           flex: 1,
-          position: 'absolute', 
           zIndex: 1,
+          padding: 20,
           width: '100%',
-          padding: 20
+          position: 'absolute', 
         }}>
           <Input
             placeholder="Pesquise local desejado:"
@@ -101,6 +101,38 @@ class Localizacao extends Component {
     }
   }
 
+  renderLocaisAchados() {
+    if(this.props.locaisAchados.length !== 0) {
+      return(
+        <View style={{
+          flex: 1,
+          zIndex: 1,
+          position: 'absolute',
+          marginTop: 70,
+          paddingLeft: 20,
+          paddingRight: 20,
+          elevation: 3,
+          width: '100%'
+        }}>
+          
+          <FlatList
+            data={this.props.locaisAchados}
+            style={{ borderWidth: 2,  borderColor: "#2A4065"}}
+            renderItem={({item}) =>
+            <TouchableOpacity  onPress={() => {console.log('Local foi clicado: ', item)}}> 
+              <Text style={{ backgroundColor: 'white', color: "#777", fontSize: 14 , padding: 10 }}>
+                {item.nome}
+              </Text>
+            </TouchableOpacity >}
+            
+          />
+        </View>
+      );
+    } else {
+      console.log('Nenhum local foi achado...');
+    }
+  }
+
   render() {
     return (
       <ScrollView style={Styles.scrollViewStyle}>
@@ -109,12 +141,12 @@ class Localizacao extends Component {
           initialRegion={{
             latitude: -1.473987,
             longitude: -48.452267,
-            latitudeDelta: 0.00121,
-            longitudeDelta: 0.0099
+            latitudeDelta: 0.004,
+            longitudeDelta: 0.004
           }}
         />
-        {this.renderLocais()}
-
+        {this.renderInputPesquisarLocais()}
+        {this.renderLocaisAchados()}
       </ScrollView>
     );
   }
@@ -122,32 +154,36 @@ class Localizacao extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    local: state.localizacao.local,
     locais: state.localizacao.locais,
-    statusMessage: state.localizacao.statusMessage,
-    loading: state.localizacao.loading
+    locaisAchados: state.localizacao.locaisAchados,
+    localPesquisado: state.localizacao.local,
+    localMarcado: state.localizacao.localMarcado,
+    loading: state.localizacao.loading,
   };
 };
 
 export default connect(mapStateToProps, {
   verifyLocais,
-  searchLocal
+  searchLocal,
+  markLocal
 })(Localizacao);
 
-/* <CardSection>
-  <Button
-    text="Salvar locais"
-    styles={Styles.btnConfirm}
-    onPress={() => {this.salvarLocais()}}
-  />
-</CardSection>
-<CardSection>
-  <Button
-    text="Verificar locais"
-    styles={Styles.btnConfirm}
-    onPress={() => {this.props.verifyLocais()}}
-  />
-</CardSection>
-<CardSection>
-  <Texts style='smallBlue' text={this.props.statusMessage} />
-</CardSection> */
+/* 
+  <CardSection>
+    <Button
+      text="Salvar locais"
+      styles={Styles.btnConfirm}
+      onPress={() => {this.salvarLocais()}}
+    />
+  </CardSection>
+  <CardSection>
+    <Button
+      text="Verificar locais"
+      styles={Styles.btnConfirm}
+      onPress={() => {this.props.verifyLocais()}}
+    />
+  </CardSection>
+  <CardSection>
+    <Texts style='smallBlue' text={this.props.statusMessage} />
+  </CardSection> 
+*/

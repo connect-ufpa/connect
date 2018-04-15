@@ -27,20 +27,20 @@ export default StyleSheet.create({
     mediumTextStyle: {
         fontSize: 20,
         fontFamily: 'Ubuntu',
-        color: '#ffffff'
+        color: '#FFF'
         
     },
     smallTextStyle: {
         fontFamily: 'Ubuntu',
         fontSize: 12,
-        color: '#ffffff'
+        color: '#FFF'
     },
     inputStyle: {
-        backgroundColor: '#ffff',
+        flex: 1,
         paddingLeft: 20,
         fontSize: 16,
+        backgroundColor: '#FFF',
         fontFamily: 'Ubuntu',
-        flex: 1,
         borderColor: '#777',
         borderWidth: 2,
         borderRadius: 5

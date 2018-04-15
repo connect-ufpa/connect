@@ -1,24 +1,31 @@
 import {
   RETRIEVE_LOCAIS,
   RETRIVING_LOCAIS,
-  SEARCHING_LOCAL
+  SEARCHING_LOCAL,
+  SEARCHED_LOCAL,
+  MARK_LOCAL
 } from '../actions/types';
 
-const INITIAL_STATE = {
-  local: '',
+const INITIAL_STATE = {  
   locais: [],
-  statusMessage: '',
+  locaisAchados: [],
+  localPesquisado: '',
+  localMarcado: {},
   loading: true
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case RETRIEVE_LOCAIS:
-      return { ...state, loading: false, locais: Object.values(action.payload), statusMessage: 'Verificação completa!' };
     case RETRIVING_LOCAIS:
-      return { ...state, loading: true, statusMessage: 'Verificando locais...'};
+      return { ...state, loading: true };
+    case RETRIEVE_LOCAIS:
+      return { ...state, loading: false, locais: Object.values(action.payload) };
     case SEARCHING_LOCAL:
-      return { ...state, local: action.payload };
+      return { ...state, localPesquisado: action.payload, locaisAchados: [] };
+    case SEARCHED_LOCAL:
+      return { ...state, locaisAchados: action.payload }
+    case MARK_LOCAL:
+      return { ...state, locaisAchados: [], localPesquisado: '', localMarcado: action.payload }
     default:
       return state;
   }
