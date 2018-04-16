@@ -1,4 +1,4 @@
-import { onlyLetters, onlyNumbers, dateFormat } from '../config/Config';
+import { onlyLetters, onlyNumbers, dateFormat, hourFormat } from '../config/Config';
 
 export const validateLetters = (text) => {
     const validateText = onlyLetters.exec(text);
@@ -12,6 +12,11 @@ export const validateNumbers = (number) => {
 export const validateDates = (date) => {
     const validateDate = dateFormat.exec(date);
     if (validateDate) return date;
+};
+
+export const validateHours = (hour) => {
+    const validateHour = hourFormat.exec(hour);
+    if (validateHour) return hour;
 };
 
 export const validateEmails = (email) => {
@@ -38,7 +43,16 @@ export const validateUser = (user) => {
         else
             return true;
     }  return false;
-}
+};
+
+export const validateEvent = (evento) => {
+    if (!evento.error) {
+        if ((evento.nome === '') || (evento.descricao === '') || (evento.local === '') || (evento.data === '') || ( evento.hora === '') || (evento.coords === '')) {
+            return false;
+       } 
+        return true;
+    } return false;
+};
 
 export const validateLogin = (credentials) => {
     if (!credentials.error) {

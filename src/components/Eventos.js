@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Dimensions, Text, ScrollView, View, Alert } from 'react-native';
-import { Card, CardSection, Texts, HeaderImage } from '../components/commons';
-import { Icon } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
+import { Card, CardSection, HeaderImage, Button } from '../components/commons';
+import { StackNavigator } from 'react-navigation';
+import { Icon } from 'react-native-elements';
+import Styles from '../Styles';
 
 class Eventos extends Component {
-  static navigationOptions = ({navigation}) => {
+  static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
     return {
       headerTitle: <View style={{ flex: 1, alignContent: 'center' }}><HeaderImage /></View>,
@@ -24,7 +25,7 @@ class Eventos extends Component {
           name='calendar'
           color='#2a4065'
           size={25}
-         />
+        />
       ),
       headerLeft: <Icon
                     name='bars'
@@ -40,7 +41,7 @@ class Eventos extends Component {
                     size={25}
                     onPress={() => navigate('DrawerOpen')}
                   />,
-    }
+    };
   }
 
   render() {
@@ -48,7 +49,25 @@ class Eventos extends Component {
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
         <Card>
           <CardSection>
-            <Texts style='large' text='Eventos'/>
+            <Button
+              text="Salvar Evento"
+              styles={Styles.btnConfirm}
+              onPress={() => { this.props.navigation.navigate('SalvarEventos'); }}
+            />
+          </CardSection>
+          <CardSection>
+            <Button
+              text="Editar Eventos"
+              styles={Styles.btnConfirm}
+              onPress={() => { this.props.navigation.navigate('EditarEventos'); }}
+            />
+          </CardSection>
+        <CardSection>
+            <Button
+              text="Visualizar Eventos"
+              styles={Styles.btnConfirm}
+              onPress={() => { this.props.navigation.navigate('VisualizarEventos'); }}
+            />
           </CardSection>
         </Card>
       </LinearGradient>

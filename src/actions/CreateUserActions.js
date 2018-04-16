@@ -66,16 +66,16 @@ export const authUser = (user) => {
         return (dispatch) => {
             dispatch({ type: CREATING_ACCOUNT });
             firebaseAuth().createUserWithEmailAndPassword(user.email, user.password)
-                .then(() => { 
-                    saveUser(dispatch, user);  
+                .then((usuario) => { 
+                    saveUser(dispatch, user, usuario);  
                     this.props.navigation.navigate('Main');
                 }).catch(() => { dispatch({ type: CREATE_ACCOUNT_ERROR }) });
         }
     }
 };
 
-const saveUser = (dispatch, user) => {
-    database().ref(`usuario/`).push({
+const saveUser = (dispatch, user, usuario) => {
+    database().ref(`usuario/${usuario.uid}`).set({
          nome: user.name,
          matricula: user.registration,
          nascimento: user.birthday,
@@ -84,6 +84,5 @@ const saveUser = (dispatch, user) => {
         dispatch({ type: CREATE_ACCOUNT_SUCCESS }); })
             .catch(() => { dispatch({ type: CREATE_ACCOUNT_ERROR });
 
-        currentUser.delete();
     });
 };

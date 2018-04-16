@@ -17,5 +17,6 @@ export const firebaseAuth = firebase.auth;
 const onlyNumbers = /^[0-9.]*$/;
 const onlyLetters = /^([a-zA-Zà-úÀ-Ú]|\s+)+$/;
 const dateFormat = /^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20|21|22|23|24|25|26|27|28|29|30)\d\d$/;
+const hourFormat = /^([01]\d|2[0-3]):?([0-5]\d)$/;
 
-export { onlyLetters, onlyNumbers, dateFormat };
+export { onlyLetters, onlyNumbers, dateFormat, hourFormat };

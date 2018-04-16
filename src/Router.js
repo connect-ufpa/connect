@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { StackNavigator, DrawerNavigator } from "react-navigation";
 import { Icon } from 'react-native-elements';
 import { firebaseAuth } from './config/Config';
@@ -12,12 +12,18 @@ import MeuPerfil from './components/MeuPerfil';
 import Eventos from './components/Eventos';
 import Ajuda from './components/Ajuda';
 import Sobre from './components/Sobre';
+import SalvarEventos from './components/SalvarEventos';
+import EditarEventos from './components/EditarEventos';
+import EditarEvento from './components/EditarEvento';
+import EditarEventoMapa from './components/EditarEventoMapa';
+import VisualizarEventos from './components/VisualizarEventos';
+import VisualizarEventoMapa from './components/VisualizarEventoMapa';
 
 const Logout = () => {
   return (
     firebaseAuth().signOut(), null
   );
-}
+};
 
 export const LocalizacaoScreen = StackNavigator({
   Localizacao: { screen: Localizacao },
@@ -94,4 +100,10 @@ export const AuthorizedScreens = StackNavigator({
   Eventos: { screen: Eventos },
   Ajuda: { screen: Ajuda },
   Sobre: { screen: Sobre },
+  SalvarEventos: { screen: SalvarEventos },
+  EditarEventos: { screen: EditarEventos },
+  EditarEvento: { screen: EditarEvento },
+  EditarEventoMapa: { screen: EditarEventoMapa },
+  VisualizarEventos: { screen: VisualizarEventos },
+  VisualizarEventoMapa: { screen: VisualizarEventoMapa } 
 });
