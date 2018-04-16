@@ -64,7 +64,7 @@ class MeuPerfil extends Component {
           <Button
             text="Salvar"
             styles={Styles.btnConfirm}
-            onPress={() => { this.props.updateUser(user); }}
+            onPress={() => { false }}
           />
         );
     }
@@ -105,16 +105,6 @@ class MeuPerfil extends Component {
               <Texts text={this.props.errorMessageBirthday} />
             </View>
 
-            {/* <CardSection>
-              <Input
-                placeholder="E-mail: aluno@email.com"
-                onChangeText={email => this.props.onEmailChanged(email)}
-                value={this.props.email}
-              />
-            </CardSection>
-            <View>
-              <Texts text={this.props.errorMessageEmail} />
-            </View> */}
             <CardSection>
               {this.renderUpdateUserButton()}
             </CardSection>
@@ -129,17 +119,16 @@ class MeuPerfil extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    name: state.updateUser.name,
-    registration: state.updateUser.registration,
-    birthday: state.updateUser.birthday,
-    // email: state.createUser.email,
-    loading: state.updateUser.loading,
-    error: state.updateUser.error,
-    errorMessageName: state.updateUser.errorMessageName,
-    errorMessageRegistration: state.updateUser.errorMessageRegistration,
-    errorMessageBirthday: state.updateUser.errorMessageBirthday,
-    errorMessageEmail: state.updateUser.errorMessageEmail,
-    errorMessageCreateAccountFail: state.updateUser.errorMessageCreateAccountFail
+    // name: state.updateUser.name,
+    // registration: state.updateUser.registration,
+    // birthday: state.updateUser.birthday,
+    // loading: state.updateUser.loading,
+    // error: state.updateUser.error,
+    // errorMessageName: state.updateUser.errorMessageName,
+    // errorMessageRegistration: state.updateUser.errorMessageRegistration,
+    // errorMessageBirthday: state.updateUser.errorMessageBirthday,
+    // errorMessageEmail: state.updateUser.errorMessageEmail,
+    // errorMessageCreateAccountFail: state.updateUser.errorMessageCreateAccountFail
   };
 };
 
@@ -147,6 +136,6 @@ export default connect(mapStateToProps, {
   onNameChanged,
   onRegistrationChanged,
   onBirthChanged,
-  onEmailChanged,
-  updateUser
+  onEmailChanged
+  // updateUser
 })(MeuPerfil);
