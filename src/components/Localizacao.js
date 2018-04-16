@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Spinner, Card, CardSection, Button, Texts, HeaderImage } from './commons';
-import { View, Text, UIManager, Dimensions, StyleSheet, ScrollView } from 'react-native';
-import { saveLocal, verifyLocais } from '../actions';
+import { Spinner, Card, CardSection, Button, Texts, HeaderImage, Input } from './commons';
+import { View, Text, UIManager, Dimensions, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import { saveLocais, verifyLocais, searchLocal, markLocal } from '../actions';
 import { firebaseAuth } from '../config/Config';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -16,14 +16,11 @@ class Localizacao extends Component {
   static navigationOptions = ({ navigation }) => {    
     const { navigate } = navigation;
     return {
-      title: <HeaderImage />,
+      headerTitle: <View style={{ flex: 1, alignContent: 'center' }}><HeaderImage /></View>,
       headerStyle: {
         paddingLeft: 15,
         paddingRight: 15,
         height: 55
-      },
-      headerTitleStyle: {
-        alignSelf: 'center',
       },
       drawerLabel: 'Localização',
       drawerIcon: ({ tintColor }) => (
@@ -34,50 +31,105 @@ class Localizacao extends Component {
           size={25}
         />
       ),
-      headerLeft: <Icon
-        name='bars'
-        type='font-awesome'
-        color='#2a4065'
-        size={25}
-        onPress={() => navigate('DrawerOpen')}
-      />,
-      headerRight: <Icon
-        name='search'
-        type='font-awesome'
-        color='#2a4065'
-        size={25}
-        onPress={() => navigate('DrawerOpen')}
-      />,
+      headerLeft: 
+        <View>
+          <Icon
+            name='bars'
+            type='font-awesome'
+            color='#2a4065'
+            size={25}
+            onPress={() => navigate('DrawerOpen')}
+          />
+        </View>
+        ,
+      headerRight: 
+        <View>
+          <Icon
+            name='search'
+            type='font-awesome'
+            color='#2a4065'
+            size={25}
+            onPress={() => navigate('DrawerOpen')}
+          />
+      </View>
     }
+  }
+
+  componentDidMount() {
+    this.props.verifyLocais();
   }
 
   salvarLocais() {
-    saveLocal(locais);
+    saveLocais(locais);
   }
 
-  renderLocais() {
-    if(this.props.locais.length !== 0) {
-        this.props.locais[0].forEach( local => {
-          console.log(local.nome);
-        }); 
+  renderInputPesquisarLocais() {
+    if (this.props.loading) {
+      return (
+        <View style={{
+          flex: 1,
+          zIndex: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0
+        }}>
+          <Spinner size={60} color="#2A4065" />
+        </View>
+      );
     } else {
-      console.log("Verificando locais...")
+      return (
+        <View style={{
+          flex: 1,
+          zIndex: 1,
+          padding: 20,
+          width: '100%',
+          position: 'absolute', 
+        }}>
+          <Input
+            placeholder="Pesquise local desejado:"
+            value={this.props.local}
+            onChangeText={local => this.props.searchLocal(local, this.props.locais)}
+            addStyle={{ elevation: 3, borderColor: "#2A4065", color: "#2A4065", fontSize: 14 }}
+          />
+        </View>
+      );
     }
   }
 
-  renderMessageStatus(){
-    if(this.props.isLocais) {
+  renderLocaisAchados() {
+    if(this.props.locaisAchados.length !== 0) {
       return(
-        <CardSection>
-          <Texts style='smallBlue' text={'Existem locais para debugar'} />
-        </CardSection>
+        <View style={{
+          flex: 1,
+          zIndex: 1,
+          position: 'absolute',
+          marginTop: 70,
+          paddingLeft: 20,
+          paddingRight: 20,
+          elevation: 3,
+          width: '100%'
+        }}>
+          
+          <FlatList
+            data={this.props.locaisAchados}
+            style={{ borderWidth: 2,  borderColor: "#2A4065"}}
+            renderItem={({item}) =>
+            <TouchableOpacity  onPress={() => {console.log('Local foi clicado: ', item)}}> 
+              <Text style={{ backgroundColor: 'white', color: "#777", fontSize: 14 , padding: 10 }}>
+                {item.nome}
+              </Text>
+            </TouchableOpacity >}
+            
+          />
+        </View>
       );
     } else {
-      return(
-        <CardSection>
-          <Texts style='smallBlue' text={'Verifique locais para debugar'} />
-        </CardSection>
-      );
+      console.log('Nenhum local foi achado...');
     }
   }
 
@@ -85,34 +137,16 @@ class Localizacao extends Component {
     return (
       <ScrollView style={Styles.scrollViewStyle}>
         <MapView
-          style={Styles.mapStyle}
+          style={Styles.mapLocalizacaoStyle}
           initialRegion={{
             latitude: -1.473987,
             longitude: -48.452267,
-            latitudeDelta: 0.00121,
-            longitudeDelta: 0.0099
+            latitudeDelta: 0.004,
+            longitudeDelta: 0.004
           }}
         />
-        <CardSection>
-          <Button
-            text="Salvar locais"
-            styles={Styles.btnConfirm}
-            onPress={() => {this.salvarLocais()}}
-          />
-        </CardSection>
-        <CardSection>
-          <Button
-            text="Verificar locais"
-            styles={Styles.btnConfirm}
-            onPress={() => {this.props.verifyLocais()}}
-          />
-        </CardSection>
-        <CardSection>
-          <Texts style='smallBlue' text={this.props.statusMessage} />
-        </CardSection>
-        <CardSection>
-          {this.renderLocais()}
-        </CardSection>
+        {this.renderInputPesquisarLocais()}
+        {this.renderLocaisAchados()}
       </ScrollView>
     );
   }
@@ -121,12 +155,35 @@ class Localizacao extends Component {
 const mapStateToProps = (state) => {
   return {
     locais: state.localizacao.locais,
-    isLocais: state.localizacao.isLocais,
-    statusMessage: state.localizacao.statusMessage
+    locaisAchados: state.localizacao.locaisAchados,
+    localPesquisado: state.localizacao.local,
+    localMarcado: state.localizacao.localMarcado,
+    loading: state.localizacao.loading,
   };
 };
 
 export default connect(mapStateToProps, {
-  verifyLocais
+  verifyLocais,
+  searchLocal,
+  markLocal
 })(Localizacao);
 
+/* 
+  <CardSection>
+    <Button
+      text="Salvar locais"
+      styles={Styles.btnConfirm}
+      onPress={() => {this.salvarLocais()}}
+    />
+  </CardSection>
+  <CardSection>
+    <Button
+      text="Verificar locais"
+      styles={Styles.btnConfirm}
+      onPress={() => {this.props.verifyLocais()}}
+    />
+  </CardSection>
+  <CardSection>
+    <Texts style='smallBlue' text={this.props.statusMessage} />
+  </CardSection> 
+*/

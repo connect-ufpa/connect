@@ -1,7 +1,7 @@
 import { database } from '../config/Config';
-import { RETRIEVE_LOCAIS, RETRIVING_LOCAIS } from './types';
+import { RETRIEVE_LOCAIS, RETRIVING_LOCAIS, SEARCHING_LOCAL, SEARCHED_LOCAL, MARK_LOCAL } from './types';
 
-export const saveLocal = (locais) => {
+export const saveLocais = (locais) => {
   for(var i = 0; i < locais.local.length; i++){
     database().ref(`local/`).push({
       nome: locais.local[i].nome,
@@ -13,22 +13,52 @@ export const saveLocal = (locais) => {
   }
 };
 
-export const verifyLocais = () => {
-  const locais = [];
-
-  database().ref("local/").on("value", function(snapshot) {
-    locais.push(Object.values(snapshot.val())); 
-   }, function (errorObject) {
-     console.log("Erro ao ler: " + errorObject.code);
-   });
-  return { type: RETRIEVE_LOCAIS, payload: locais }
+export const verifyLocais = () => { 
+  return (dispatch) => {    
+    dispatch({ type: RETRIVING_LOCAIS });
+    
+    database().ref("local/")
+      .on('value', snap => {
+        retriveLocaisSuccess(dispatch, snap.val());
+    });
+  };
 };
 
+export const searchLocal = (localPesquisado, locais) => {
+  return (dispatch) => {
+    dispatch({ type: SEARCHING_LOCAL, payload: localPesquisado });
 
-// async const getLocais = () => {
-//   await database().ref("local/").on("value", function(snapshot) {
-//    return Object.values(snapshot.val());
-//   }, function (errorObject) {
-//     console.log("Erro ao ler: " + errorObject.code);
-//   });
-// };
+    let locaisAchados = [];
+
+    if(localPesquisado !== "") {
+      locais.map((localVerificado) => {
+        if (localVerificado['nome'].includes(localPesquisado)) {
+          locaisAchados.push(localVerificado);
+        }
+      });
+      searchedLocaisSuccess(dispatch, locaisAchados);
+    }
+  }
+}
+
+export const markLocal = (local) => {
+  return (dispatch) => {
+    console.log('Local foi clicado: ', local);
+
+    dispatch({ type: MARK_LOCAL, payload: local });
+  }
+}
+
+const retriveLocaisSuccess = (dispatch, locais) => {
+  dispatch({
+    type: RETRIEVE_LOCAIS,
+    payload: locais
+  })
+};
+
+const searchedLocaisSuccess = (dispatch, locais) => {
+  dispatch({
+    type: SEARCHED_LOCAL,
+    payload: locais
+  })
+}

@@ -27,3 +27,7 @@ export const INVALID_EMAIL_FORGOT = 'invalid_email_forgot';
 
 export const RETRIEVE_LOCAIS = 'retrieve_locais';
 export const RETRIVING_LOCAIS = 'retrieving_locais';
+
+export const SEARCHING_LOCAL = 'searching_local';
+export const SEARCHED_LOCAL = 'searched_local';
+export const MARK_LOCAL = 'mark_local';

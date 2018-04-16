@@ -8,7 +8,7 @@ class Sobre extends Component {
   static navigationOptions = ({navigation}) => {
     const { navigate } = navigation;
     return {
-      title: <HeaderImage />,
+      headerTitle: <View style={{ flex: 1, alignContent: 'center' }}><HeaderImage /></View>,
       headerStyle: {
         paddingLeft: 15,
         paddingRight: 15,

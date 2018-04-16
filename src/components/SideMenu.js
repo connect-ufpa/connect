@@ -42,12 +42,12 @@ const styles = StyleSheet.create({
   },
   inactiveTintColor: {
     fontFamily: 'Ubuntu',
-    fontSize: 15,
+    fontSize: 12,
     color: '#94999E'
   },
   activeTintColor: {
     fontFamily: 'Ubuntu',
-    fontSize: 18,
+    fontSize: 14,
     color: '#2a4065'
   }
 });
