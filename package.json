@@ -12,6 +12,7 @@
     ]
   },
   "dependencies": {
+    "base-64": "^0.1.0",
     "firebase": "^4.9.0",
     "react": "16.2.0",
     "react-native": "0.51.0",
