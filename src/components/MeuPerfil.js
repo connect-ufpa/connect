@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, authUser } from '../actions';
+import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, authUser, adicionaContato, saveEditedPerfil } from '../actions';
 import { Dimensions, Text, ScrollView, View, Alert } from 'react-native';
 import { Card, CardSection, Texts, HeaderImage, Input, Button } from './commons';
 import { Icon } from 'react-native-elements';
@@ -65,7 +65,7 @@ class MeuPerfil extends Component {
           <Button
             text="Salvar"
             styles={Styles.btnConfirm}
-            onPress={() => { this.props.updateUser(user); }}
+            onPress={() => { this.props.saveEditedPerfil(); }}
           />
         );
     }
@@ -126,4 +126,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(MeuPerfil);
+export default connect(mapStateToProps, {saveEditedPerfil})(MeuPerfil);
