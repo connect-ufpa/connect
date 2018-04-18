@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, authUser, updateUser } from '../actions';
+import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, authUser } from '../actions';
 import { Dimensions, Text, ScrollView, View, Alert } from 'react-native';
 import { Card, CardSection, Texts, HeaderImage, Input, Button } from './commons';
 import { Icon } from 'react-native-elements';
@@ -46,6 +46,7 @@ class MeuPerfil extends Component {
                   />,
     }
   }
+  
 
   renderUpdateUserButton() {
     const user = {
@@ -69,6 +70,7 @@ class MeuPerfil extends Component {
         );
     }
 
+
   render() {
     return (
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
@@ -77,8 +79,8 @@ class MeuPerfil extends Component {
             <CardSection>
               <Input
                 placeholder="Nome:"
-                onChangeText={name => this.props.onNameChanged(name)}
-                value={this.props.name}
+                onChangeText={false}
+                value={this.props.namePerfil}
               />
             </CardSection>
             <View>
@@ -87,8 +89,8 @@ class MeuPerfil extends Component {
             <CardSection>
               <Input
                 placeholder="Matrícula:"
-                onChangeText={registration => this.props.onRegistrationChanged(registration)}
-                value={this.props.registration}
+                onChangeText={false}
+                value={this.props.registrationPerfil}
               />
             </CardSection>
             <View>
@@ -97,24 +99,13 @@ class MeuPerfil extends Component {
             <CardSection>
               <Input
                 placeholder="Nascimento: 00/00/0000"
-                onChangeText={birthday => this.props.onBirthChanged(birthday)}
-                value={this.props.birthday}
+                onChangeText={false}
+                value={this.props.birthdayPerfil}
               />
             </CardSection>
             <View>
               <Texts text={this.props.errorMessageBirthday} />
             </View>
-
-            {/* <CardSection>
-              <Input
-                placeholder="E-mail: aluno@email.com"
-                onChangeText={email => this.props.onEmailChanged(email)}
-                value={this.props.email}
-              />
-            </CardSection>
-            <View>
-              <Texts text={this.props.errorMessageEmail} />
-            </View> */}
             <CardSection>
               {this.renderUpdateUserButton()}
             </CardSection>
@@ -129,24 +120,10 @@ class MeuPerfil extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    name: state.updateUser.name,
-    registration: state.updateUser.registration,
-    birthday: state.updateUser.birthday,
-    // email: state.createUser.email,
-    loading: state.updateUser.loading,
-    error: state.updateUser.error,
-    errorMessageName: state.updateUser.errorMessageName,
-    errorMessageRegistration: state.updateUser.errorMessageRegistration,
-    errorMessageBirthday: state.updateUser.errorMessageBirthday,
-    errorMessageEmail: state.updateUser.errorMessageEmail,
-    errorMessageCreateAccountFail: state.updateUser.errorMessageCreateAccountFail
+      namePerfil: state.perfil.namePerfil,
+      registrationPerfil: state.perfil.registrationPerfil,
+      birthdayPerfil: state.perfil.birthdayPerfil
   };
 };
 
-export default connect(mapStateToProps, {
-  onNameChanged,
-  onRegistrationChanged,
-  onBirthChanged,
-  onEmailChanged,
-  updateUser
-})(MeuPerfil);
+export default connect(mapStateToProps, null)(MeuPerfil);
