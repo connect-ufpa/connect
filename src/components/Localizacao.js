@@ -5,9 +5,9 @@ import { Spinner, HeaderImage, Input } from './commons';
 import MapView, { Marker, Circle  } from 'react-native-maps';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import Styles from '../Styles';
 import locais from '../data/locais.json';
+import _ from 'lodash';
 
 const { height, width } = Dimensions.get('window');
 
