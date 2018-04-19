@@ -77,9 +77,29 @@ class Localizacao extends Component {
             placeholder="Pesquise local desejado:"
             value={this.props.local}
             onChangeText={local => this.props.searchLocal(local, this.props.locais)}
-            addStyle={{ elevation: 3, borderColor: "#2A4065", color: "#2A4065", fontSize: 14 }}
+            addStyle={{ elevation: 8, borderColor: "#2A4065", color: "#2A4065", fontSize: 14 }}
           />
         </View>
+      );
+    }
+  }
+
+  renderLocalizacaoUsuario() {
+    if(_.isEmpty(this.props.localizacaoUsuario)) {
+      console.log("Verificando localização do usuário...");
+    } else {
+      console.log(this.props.localizacaoUsuario.coords);
+      return (
+        <Circle
+          center={{
+            latitude: this.props.localizacaoUsuario.coords.latitude,
+            longitude: this.props.localizacaoUsuario.coords.longitude
+          }}  
+          radius={3}
+          zIndex={5}
+          strokeColor={'#2A4065'}
+          fillColor={'#2A4065'}
+        />
       );
     }
   }
@@ -90,10 +110,10 @@ class Localizacao extends Component {
         <View style={styles.containerLista}>
           <FlatList
             data={this.props.locaisAchados}
-            style={{ borderWidth: 2,  borderColor: "#2A4065"}}
+            style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, borderWidth: 2,  borderColor: "#2A4065"}}
             renderItem={({item}) =>
             <TouchableOpacity  onPress={() => { this.props.markLocal(item) }}> 
-              <Text style={{ backgroundColor: 'white', color: "#777", fontSize: 12 , padding: 10 }}>
+              <Text style={{ backgroundColor: 'white', color: "#777", fontSize: 12 , padding: 12.5 }}>
                 {item.nome}
               </Text>
             </TouchableOpacity >}
@@ -126,25 +146,44 @@ class Localizacao extends Component {
       );
     }
   }
-
-  renderLocalizacaoUsuario() {
-    if(_.isEmpty(this.props.localizacaoUsuario)) {
-      console.log("Verificando localização do usuário...");
-    } else {
-      console.log(this.props.localizacaoUsuario.coords);
-      return (
-        <Circle
-          center={{
-            latitude: this.props.localizacaoUsuario.coords.latitude,
-            longitude: this.props.localizacaoUsuario.coords.longitude
-          }}  
-          radius={3}
-          zIndex={5}
-          strokeColor={'#2A4065'}
-          fillColor={'#2A4065'}
-        />
-      );
-    }
+  
+  renderButtons () {
+    return (
+      <View style={styles.containerButtons}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>  
+          <TouchableOpacity>
+            <View style={{ height: 60, width: 60, margin: 15, backgroundColor: '#2BA3DA', elevation: 8, borderRadius: 150, alignContent: 'center', justifyContent: 'center' }}>
+              <Icon
+                type='font-awesome'
+                name='location-arrow'
+                color='#FFF'
+                size={25}
+              />
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <View style={{ height: 60, width: 60, margin: 15, backgroundColor: '#2A4065', elevation: 8, borderRadius: 150, alignContent: 'center', justifyContent: 'center' }}>
+              <Icon
+                type='font-awesome'
+                name='eye'
+                color='#FFF'
+                size={25}
+              />
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <View style={{ height: 60, width: 60, margin: 15, backgroundColor: '#CC2820', elevation: 8, borderRadius: 150, alignContent: 'center', justifyContent: 'center'}}>
+              <Icon
+                type='font-awesome'
+                name='comments'
+                color='#FFF'
+                size={25}
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
   }
 
   render() {
@@ -164,6 +203,7 @@ class Localizacao extends Component {
         </MapView>
         {this.renderInputPesquisarLocais()}
         {this.renderListLocaisAchados()}
+        {this.renderButtons()}
       </ScrollView>
     );
   }
@@ -198,6 +238,14 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     elevation: 8,
     width: '100%'
+  },
+  containerButtons: { 
+    flex: 1, 
+    flexDirection: 'row', 
+    bottom: 0, 
+    zIndex: 1, 
+    position: 'absolute', 
+    marginBottom: 15 
   }
 });
 
