@@ -27,7 +27,6 @@ export const INVALID_EMAIL_FORGOT = 'invalid_email_forgot';
 
 export const RETRIEVE_LOCAIS = 'retrieve_locais';
 export const RETRIVING_LOCAIS = 'retrieving_locais';
-
 export const SEARCHING_LOCAL = 'searching_local';
 export const SEARCHED_LOCAL = 'searched_local';
 export const MARK_LOCAL = 'mark_local';
@@ -53,3 +52,5 @@ export const SAVED_EDITED_EVENT = 'saved_edited_event';
 
 export const EVENTS_TO_SHOW_SUCCESS = 'events_to_show_success';
 
+export const SEARCHING_USER_LOCALIZATION = 'searching_user_localization';
+export const SEARCHED_USER_LOCALIZATION = 'searched_user_localization';

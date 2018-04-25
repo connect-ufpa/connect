@@ -1,6 +1,5 @@
 apply plugin: "com.android.application"
 
-
 import com.android.build.OutputFile
 
 /**
@@ -99,7 +98,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.appufpa"
+        applicationId "com.connect"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -138,10 +137,10 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-maps')
     compile project(':react-native-vector-icons')
-    compile project(':react-native-linear-gradient')
     compile project(':react-native-orientation')
+    compile project(':react-native-maps')
+    compile project(':react-native-linear-gradient')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules

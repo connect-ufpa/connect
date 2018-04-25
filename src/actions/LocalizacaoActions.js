@@ -1,5 +1,13 @@
 import { database } from '../config/Config';
-import { RETRIEVE_LOCAIS, RETRIVING_LOCAIS, SEARCHING_LOCAL, SEARCHED_LOCAL, MARK_LOCAL } from './types';
+import { 
+  RETRIEVE_LOCAIS, 
+  RETRIVING_LOCAIS,
+  SEARCHING_LOCAL, 
+  SEARCHED_LOCAL, 
+  MARK_LOCAL, 
+  SEARCHING_USER_LOCALIZATION,
+  SEARCHED_USER_LOCALIZATION,
+} from './types';
 
 export const saveLocais = (locais) => {
   for(var i = 0; i < locais.local.length; i++){
@@ -43,11 +51,26 @@ export const searchLocal = (localPesquisado, locais) => {
 
 export const markLocal = (local) => {
   return (dispatch) => {
-    console.log('Local foi clicado: ', local);
-
     dispatch({ type: MARK_LOCAL, payload: local });
   }
 }
+
+export const searchLocalizacaoUsuario = () => {
+  return (dispatch) => {
+    dispatch({ type: SEARCHING_USER_LOCALIZATION });
+
+    navigator.geolocation.getCurrentPosition((localizacao) => {
+      searchLocalizacaoUsuarioSuccess(dispatch, localizacao);
+    });
+  }
+}
+
+const searchLocalizacaoUsuarioSuccess = (dispatch, localizacao) => {
+  dispatch({
+    type: SEARCHED_USER_LOCALIZATION,
+    payload: localizacao
+  })
+};
 
 const retriveLocaisSuccess = (dispatch, locais) => {
   dispatch({

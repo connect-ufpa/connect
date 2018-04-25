@@ -3,7 +3,9 @@ import {
   RETRIVING_LOCAIS,
   SEARCHING_LOCAL,
   SEARCHED_LOCAL,
-  MARK_LOCAL
+  MARK_LOCAL,
+  SEARCHING_USER_LOCALIZATION,
+  SEARCHED_USER_LOCALIZATION
 } from '../actions/types';
 
 const INITIAL_STATE = {  
@@ -11,6 +13,7 @@ const INITIAL_STATE = {
   locaisAchados: [],
   localPesquisado: '',
   localMarcado: {},
+  localizacaoUsuario: {},
   loading: true
 };
 
@@ -26,6 +29,10 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, locaisAchados: action.payload }
     case MARK_LOCAL:
       return { ...state, locaisAchados: [], localPesquisado: '', localMarcado: action.payload }
+    case SEARCHING_USER_LOCALIZATION:
+      return { ...state }
+    case SEARCHED_USER_LOCALIZATION:
+      return { ...state, localizacaoUsuario: action.payload }
     default:
       return state;
   }
