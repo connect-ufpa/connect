@@ -1,4 +1,5 @@
 import { firebaseAuth, database } from '../config/Config';
+import { dataPerfil } from '../actions';
 
 import {
     VALID_NAME,
@@ -9,24 +10,23 @@ import {
     INVALID_BIRTHDAY,
     VALID_EMAIL,
     INVALID_EMAIL,
-    VALID_PASSWORD,
-    INVALID_PASSWORD,
-    MATCH_PASSWORD,
-    MISMATCH_PASSWORD,
-    CREATING_ACCOUNT,
-    CREATE_ACCOUNT_SUCCESS,
-    CREATE_ACCOUNT_ERROR
+    VALID_PERFIL
 } from '../actions/types';
 
 
 const INITIAL_STATE = {
-    namePerfil: 'Hugo Bragança da Silva',
-    registrationPerfil: '201206840011',
-    birthdayPerfil: '16/02/1994',
+    namePerfil: '',
+    registrationPerfil: '',
+    birthdayPerfil: '',
+    teste: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
+    // console.log('cheguei aqui!!');
+    console.log(action.payload);
     switch (action.type) {
+        case VALID_PERFIL:
+            return { ...state, namePerfil: action.payload.nome, registrationPerfil: action.payload.matricula, birthdayPerfil: action.payload.nascimento }
         default:
             return state;
     }
