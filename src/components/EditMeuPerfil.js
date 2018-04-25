@@ -4,62 +4,36 @@ import { Dimensions, Text, ScrollView, View, Alert } from 'react-native';
 import { Card, CardSection, Texts, HeaderImage, Input, Button } from './commons';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { StackNavigator } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
 import Styles from '../Styles';
 
 
-class MeuPerfil extends Component {
-  static navigationOptions = ({navigation}) => {
-    const { navigate } = navigation;
-    return {
-      title: <HeaderImage />,
-      headerStyle: {
-        paddingLeft: 15,
-        paddingRight: 15,
-        height: 55
-      },
+class EditMeuPerfil extends Component {
+    static navigationOptions = {
+      title: 'Editar Perfil',
+      headerTintColor: '#2A4065',
       headerTitleStyle: {
-        alignSelf: 'center',
+        fontFamily: 'Ubuntu',
+        fontSize: 20,
+        fontWeight: '200',
+        textAlign: 'center'
       },
-      drawerLabel: 'Meu perfil',
-      drawerIcon: ({ tintColor }) => (
-        <Icon
-          type='font-awesome'
-          name='user'
-          color='#2a4065'
-          size={25}
-         />
-      ),
-      headerLeft: <Icon
-                    name='bars'
-                    type='font-awesome'
-                    color='#2a4065'
-                    size={25}
-                    onPress={() => navigate('DrawerOpen')}
-                  />,
-      headerRight: <Icon
-                    name='search'
-                    type='font-awesome'
-                    color='#2a4065'
-                    size={25}
-                    onPress={() => navigate('DrawerOpen')}
-                  />,
-    }
-  }
+      headerStyle: { 
+        elevation: 5
+      }
+    };
   componentWillMount() {
     this.props.dataPerfil();
-
   }
   
 
-  renderNavigateToEditPerfilButton() {
+  renderUpdateUserButton() {
     const user = {
-        name: this.props.updateName,
-        registration: this.props.updateRegistration,
-        birthday: this.props.updateBirthday,
+        name: this.props.namePerfil,
+        registration: this.props.registrationPerfil,
+        birthday: this.props.birthdayPerfil,
         // email: this.props.email,
-        error: this.props.error
+        // error: this.props.error
     }
 
     if (this.props.loading) {
@@ -68,9 +42,9 @@ class MeuPerfil extends Component {
 
         return (
           <Button
-            text="Editar Dados"
+            text="Salvar"
             styles={Styles.btnConfirm}
-            onPress={() => { this.props.navigation.navigate('EditMeuPerfil'); }}
+            onPress={() => { this.props.dataPerfil(); }}
           />
         );
     }
@@ -112,7 +86,7 @@ class MeuPerfil extends Component {
               <Texts text={this.props.errorMessageBirthday} />
             </View>
             <CardSection>
-              {this.renderNavigateToEditPerfilButton()}
+              {this.renderUpdateUserButton()}
             </CardSection>
             <View>
               <Texts text={this.props.errorMessageCreateAccountFail} />
@@ -131,4 +105,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {dataPerfil})(MeuPerfil);
+export default connect(mapStateToProps, {dataPerfil})(EditMeuPerfil);

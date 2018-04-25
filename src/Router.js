@@ -12,6 +12,7 @@ import MeuPerfil from './components/MeuPerfil';
 import Eventos from './components/Eventos';
 import Ajuda from './components/Ajuda';
 import Sobre from './components/Sobre';
+import EditMeuPerfil from './components/EditMeuPerfil';
 
 const Logout = () => {
   return (
@@ -37,6 +38,10 @@ export const AjudaScreen = StackNavigator({
 
 export const SobreScreen = StackNavigator({
   Sobre: { screen: Sobre },
+});
+
+export const EditPerfilScreen = StackNavigator({
+  EditMeuPerfil: { screen: EditMeuPerfil },
 });
 
 
@@ -94,4 +99,5 @@ export const AuthorizedScreens = StackNavigator({
   Eventos: { screen: Eventos },
   Ajuda: { screen: Ajuda },
   Sobre: { screen: Sobre },
+  EditMeuPerfil: {screen: EditMeuPerfil }
 });
