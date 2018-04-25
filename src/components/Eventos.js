@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Card, CardSection, HeaderImage, Button } from '../components/commons';
 import { StackNavigator } from 'react-navigation';

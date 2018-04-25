@@ -1,5 +1,5 @@
 import React from 'react';
-import { StackNavigator, DrawerNavigator } from "react-navigation";
+import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import { firebaseAuth } from './config/Config';
 import Splash from './components/Splash';
