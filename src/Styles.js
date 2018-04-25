@@ -5,13 +5,13 @@ const { height, width } = Dimensions.get('window');
 
 export default StyleSheet.create({
     logoTextStyle: {
+        fontFamily: 'Ubuntu',
         fontSize: 28,
-        fontFamily: 'Righteous',
         color: '#ffffff'
     },
     smallBlueTextStyle: {
-        fontSize: 12,
         fontFamily: 'Ubuntu',
+        fontSize: 12,
         color: '#2A4065'
     },
     xLargeTextStyle: {
@@ -20,20 +20,19 @@ export default StyleSheet.create({
         color: '#ffffff'
     },
     largeTextStyle: {
-        fontSize: 28,
         fontFamily: 'Ubuntu',
+        fontSize: 28,
         color: '#ffffff'
     },
     mediumTextStyle: {
-        fontSize: 20,
         fontFamily: 'Ubuntu',
-        color: '#FFF'
-        
+        fontSize: 20,
+        color: '#ffffff'
     },
     smallTextStyle: {
         fontFamily: 'Ubuntu',
         fontSize: 12,
-        color: '#FFF'
+        color: '#ffffff'
     },
     inputStyle: {
         flex: 1,

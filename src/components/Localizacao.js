@@ -59,8 +59,20 @@ class Localizacao extends Component {
     this.props.searchLocalizacaoUsuario();
   }
 
-  salvarLocais() {
-    saveLocais(locais);
+  renderMarcadorLocalPesquisado() {
+    if(_.isEmpty(this.props.localMarcado)) {
+      console.log("Nenhum local foi pesquisado até o momento...");
+    } else {
+      return (
+        <Marker 
+          coordinate={{
+            latitude: this.props.localMarcado.coords.lat,
+            longitude: this.props.localMarcado.coords.lng
+          }}
+          title={this.props.localMarcado.nome}
+        />
+      );
+    }
   }
 
   renderInputPesquisarLocais() {
@@ -104,7 +116,7 @@ class Localizacao extends Component {
     }
   }
 
-  renderListLocaisAchados() {
+  renderListaLocaisAchados() {
     if(this.props.locaisAchados.length !== 0) {
       return(
         <View style={styles.containerLista}>
@@ -123,27 +135,25 @@ class Localizacao extends Component {
     }
   }
 
-  renderMarcador() {
-    if(_.isEmpty(this.props.localMarcado)) {
-      return (
-        <Marker 
-          coordinate={{
-            latitude: -1.473987,
-            longitude: -48.452267
-          }}
-          title={'Universidade Federal do Pará'}
-        />
-      );
+  renderMarcadoresLocais() {
+    if(this.props.loading) {
+      console.log("Pesquisando locais no banco de dados...");
     } else {
-      return (
-        <Marker 
-          coordinate={{
-            latitude: this.props.localMarcado.coords.lat,
-            longitude: this.props.localMarcado.coords.lng
-          }}
-          title={this.props.localMarcado.nome}
-        />
-      );
+      if(_.isEmpty(this.props.localMarcado)) {
+        return (
+          this.props.locais.map(marker => (
+            <Marker key={marker.nome}
+              coordinate={{
+                latitude: marker.coords.lat,
+                longitude: marker.coords.lng
+              }}
+              title={marker.nome}
+            />
+          ) 
+        ))
+      } else {
+        console.log("Usuário pesquisou um local específico...");
+      }
     }
   }
   
@@ -198,11 +208,12 @@ class Localizacao extends Component {
             longitudeDelta: 0.004
           }}
         >
-        {this.renderMarcador()}
+        {this.renderMarcadorLocalPesquisado()}
         {this.renderLocalizacaoUsuario()}
+        {this.renderMarcadoresLocais()}
         </MapView>
         {this.renderInputPesquisarLocais()}
-        {this.renderListLocaisAchados()}
+        {this.renderListaLocaisAchados()}
         {this.renderButtons()}
       </ScrollView>
     );
@@ -251,12 +262,12 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    localizacaoUsuario: state.localizacao.localizacaoUsuario,
     locais: state.localizacao.locais,
-    locaisAchados: state.localizacao.locaisAchados,
+    loading: state.localizacao.loading,
     localPesquisado: state.localizacao.local,
     localMarcado: state.localizacao.localMarcado,
-    loading: state.localizacao.loading,
+    locaisAchados: state.localizacao.locaisAchados,
+    localizacaoUsuario: state.localizacao.localizacaoUsuario,
   };
 };
 
@@ -266,3 +277,7 @@ export default connect(mapStateToProps, {
   markLocal,
   searchLocalizacaoUsuario
 })(Localizacao);
+
+// salvarLocais() {
+//   saveLocais(locais);
+// }
