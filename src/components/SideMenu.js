@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, Dimensions, StyleSheet } from 'react-native';
+import { View, Dimensions, StyleSheet, Text } from 'react-native';
 import { DrawerItems } from 'react-navigation';
 
 const { width, height } = Dimensions.get('window');
