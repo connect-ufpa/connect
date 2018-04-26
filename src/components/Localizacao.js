@@ -156,8 +156,12 @@ class Localizacao extends Component {
       }
     }
   }
-  
-  renderButtons () {
+
+  renderFiltroButtons() {
+    
+  }
+
+  renderButtons() {
     return (
       <View style={styles.containerButtons}>
         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center'}}>  
@@ -214,6 +218,7 @@ class Localizacao extends Component {
         </MapView>
         {this.renderInputPesquisarLocais()}
         {this.renderListaLocaisAchados()}
+        {this.renderFiltroButtons()}
         {this.renderButtons()}
       </ScrollView>
     );
