@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Card, CardSection, HeaderImage, Button } from '../components/commons';
 import { StackNavigator } from 'react-navigation';
@@ -9,7 +10,7 @@ class Eventos extends Component {
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
     return {
-      title: <HeaderImage />,
+      headerTitle: <View style={{ flex: 1, alignContent: 'center' }}><HeaderImage /></View>,
       headerStyle: {
         paddingLeft: 15,
         paddingRight: 15,

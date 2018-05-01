@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.appufpa"
+    package="com.connect"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -27,7 +27,7 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-      <meta-data
+       <meta-data
         android:name="com.google.android.geo.API_KEY"
         android:value="AIzaSyDs39LTHBTeq5xQoR6HJDkFtoLuWARdhCY"/>
     </application>

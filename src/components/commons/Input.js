@@ -5,7 +5,6 @@ import Styles from '../../Styles';
 const Input = ({ value, onChangeText, placeholder, secureTextEntry, editable, addStyle }) => {
   
   return (
-    
       <TextInput 
         style={[Styles.inputStyle, addStyle]}
         secureTextEntry={secureTextEntry}
@@ -16,7 +15,6 @@ const Input = ({ value, onChangeText, placeholder, secureTextEntry, editable, ad
         onChangeText={onChangeText}
         underlineColorAndroid='transparent'
       />
-   
   );
 };
 

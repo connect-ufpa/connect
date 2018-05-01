@@ -1,6 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 
 const grey = '#777';
+const { height, width } = Dimensions.get('window');
 
 export default StyleSheet.create({
     logoTextStyle: {
@@ -26,21 +27,21 @@ export default StyleSheet.create({
     mediumTextStyle: {
         fontSize: 20,
         fontFamily: 'Ubuntu',
-        color: '#ffffff'
+        color: '#FFF'
         
     },
     smallTextStyle: {
         fontFamily: 'Ubuntu',
         fontSize: 12,
-        color: '#ffffff'
+        color: '#FFF'
     },
     inputStyle: {
-        backgroundColor: '#ffff',
-        paddingLeft: 20,
-        fontSize: 16,
-        fontFamily: 'Ubuntu',
         flex: 1,
-        borderColor: grey,
+        paddingLeft: 20,
+        fontSize: 14,
+        backgroundColor: '#FFF',
+        fontFamily: 'Ubuntu',
+        borderColor: '#777',
         borderWidth: 2,
         borderRadius: 5
     },
@@ -93,7 +94,11 @@ export default StyleSheet.create({
         height: '100%'
     },
     mapStyle: {
-        height: 200,
+        height: 300,
+        width: '100%'
+    },
+    mapLocalizacaoStyle: {
+        height: height - 80,
         width: '100%'
     },
     eventCardStyle: {
