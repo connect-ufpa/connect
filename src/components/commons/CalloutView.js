@@ -2,10 +2,15 @@ import React from 'react';
 import { Text, View, Dimensions } from 'react-native';
 import Styles from '../../Styles';
 
-const CalloutView = ({ onPress, text, styles }) => {
+const { height, width } = Dimensions.get('window');
+
+const CalloutView = ({ name, desc }) => {
   return (
-    <View style={{ flex: 1, backgroundColor: '#fff'}}>
-      <Text>Callout View</Text>
+    <View style={{ flex: 1, backgroundColor: '#fff', height: height * 0.25, width: width * 0.85, padding: 10 }}>
+      <Text style={{ fontFamily: 'Ubuntu', fontSize: 12, color: '#777', textAlign: 'center'}}>{name}</Text>
+      <Text style={{ fontFamily: 'Ubuntu', fontSize: 10, color: '#777', marginTop: 10}}>
+        Descrição: {desc}
+      </Text>
     </View>
   );
 };

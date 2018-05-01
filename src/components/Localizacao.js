@@ -200,7 +200,10 @@ class Localizacao extends Component {
             title={marker.nome}
           > 
             <Callout>
-              <CalloutView {...marker} />
+              <CalloutView
+                name={marker.nome}
+                desc={null}
+              />
             </Callout>
           </Marker>
         ));
