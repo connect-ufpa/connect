@@ -175,6 +175,7 @@ class SalvarEventos extends Component {
                             <View style={{ alignItems: 'center' }}>
                                 <Texts text={this.props.errorData} color='grey' />
                                 <Texts text={this.props.errorHora} color='grey' />
+                                <Texts text={this.props.createFail} color='grey' />
                             </View>
                             <CardSection>
                                 {this.renderSaveEventButton()}
@@ -210,7 +211,8 @@ const mapStatesToProps = (state) => {
         marker: state.evento.marker,
         modal: state.evento.modal,
         loading: state.evento.loading,
-        error: state.evento.error
+        error: state.evento.error,
+        createFail: state.evento.createFail
     };
 };
 

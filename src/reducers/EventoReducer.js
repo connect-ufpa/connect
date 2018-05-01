@@ -48,7 +48,7 @@ export default (state = INITIAL_STATE, action) => {
         case CLOSE_MODAL:
             return INITIAL_STATE;
         case SAVE_EVENT_FIELD_CHANGE:
-            return { ...state, [action.payload.prop]: action.payload.value, errorData: '', errorHora: '', error: false };
+            return { ...state, [action.payload.prop]: action.payload.value, errorData: '', errorHora: '', createFail: '', error: false };
         case INVALID_START_EVENT_DATE:
             return { ...state, [action.payload.prop]: action.payload.value, errorData: 'Preencha uma data válida!', error: true };
         case INVALID_START_EVENT_HOUR:
