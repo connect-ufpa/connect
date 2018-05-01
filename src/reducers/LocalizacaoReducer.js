@@ -1,20 +1,20 @@
 import {
+  MARK_LOCAL,
+  SEARCHED_LOCAL,
+  SEARCHING_LOCAL,
   RETRIEVE_LOCAIS,
   RETRIVING_LOCAIS,
-  SEARCHING_LOCAL,
-  SEARCHED_LOCAL,
-  MARK_LOCAL,
   SEARCHING_USER_LOCALIZATION,
   SEARCHED_USER_LOCALIZATION
 } from '../actions/types';
 
 const INITIAL_STATE = {  
   locais: [],
+  loading: true,
+  localMarcado: {},
   locaisAchados: [],
   localPesquisado: '',
-  localMarcado: {},
   localizacaoUsuario: {},
-  loading: true
 };
 
 export default (state = INITIAL_STATE, action) => {
