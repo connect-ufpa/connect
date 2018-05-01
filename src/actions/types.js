@@ -33,13 +33,11 @@ export const MARK_LOCAL = 'mark_local';
 export const MARKER = 'marker';
 
 export const CLOSE_MODAL = 'close_modal';
-export const EVENT_NAME = 'event_name';
-export const DESCRIPTION = 'description';
-export const LOCAL = 'local';
-export const VALID_START_EVENT_DATE = 'valid_start_event_date';
+export const SAVE_EVENT_FIELD_CHANGE = 'save_event_field_change';
 export const INVALID_START_EVENT_DATE = 'invalid_start_event_date';
-export const VALID_START_HOUR_EVENT = 'valid_start_hour_event';
-export const INVALID_START_HOUR_EVENT = 'invalid_start_hour_event';
+export const INVALID_START_EVENT_HOUR = 'invalid_start_hour_event';
+export const INVALID_END_EVENT_DATE = 'invalid_end_event_date';
+export const INVALID_END_EVENT_HOUR = 'invalid_end_event_hour';
 export const LOADING_EVENT = 'loading_event';
 export const CREATE_EVENT_SUCCESS = 'create_event_successs';
 

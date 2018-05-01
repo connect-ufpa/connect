@@ -37,7 +37,7 @@ export const matchPasswords = (confirmPassword, password) => {
 };
 
 export const validateUser = (user) => {
-    if(!user.error) {
+    if (!user.error) {
         if ((user.name === '') || (user.registration === '') || (user.birth === '') || (user.email === '') || (user.password === ''))
             return false;
         else
@@ -47,7 +47,7 @@ export const validateUser = (user) => {
 
 export const validateEvent = (evento) => {
     if (!evento.error) {
-        if ((evento.nome === '') || (evento.descricao === '') || (evento.local === '') || (evento.data === '') || ( evento.hora === '') || (evento.coords === '')) {
+        if ((evento.nome === '') || (evento.descricao === '') || (evento.local === '') || (evento.data_inicio === '') || (evento.hora_inicio === '') || (evento.data_fim === '') || (evento.hora_fim === '') || (evento.coords === '')) {
             return false;
        } 
         return true;

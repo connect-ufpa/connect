@@ -3,7 +3,7 @@ import { View, Modal, TouchableHighlight, Dimensions, ScrollView, TextInput } fr
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
-import { showMarkerAndModal, closeModal, eventNameChange, eventDescriptionChange, eventLocalChange, eventDateChange, eventHourChange, saveEvent } from '../actions';
+import { showMarkerAndModal, closeModal, eventFieldChange, saveEvent } from '../actions';
 import { Button, Input, CardSection, Texts, Spinner, HeaderImage } from './commons/';
 import Styles from '../Styles';
 
@@ -35,15 +35,17 @@ class SalvarEventos extends Component {
 
     renderSaveEventButton() {
         const evento = {
-            nome: this.props.nomeEvento,
-            descricao: this.props.descricaoEvento,
-            local: this.props.localEvento,
+            nome: this.props.nome,
+            descricao: this.props.descricao,
+            local: this.props.local,
             coords: {
                 lat: this.props.region.latitude,
                 long: this.props.region.longitude
             },
-            data: this.props.dataInicioEvento,
-            hora: this.props.horaInicioEvento,
+            data_inicio: this.props.dataInicio,
+            hora_inicio: this.props.horaInicio,
+            data_fim: this.props.dataFim,
+            hora_fim: this.props.horaFim,
             error: this.props.error
         };
         if (this.props.loading) {
@@ -96,16 +98,16 @@ class SalvarEventos extends Component {
                             <CardSection>
                                 <Input
                                     placeholder="Nome do evento:"
-                                    onChangeText={texto => this.props.eventNameChange(texto)}
-                                    value={this.props.nomeEvento}
+                                    onChangeText={texto => this.props.eventFieldChange({ prop: 'nome', value: texto })}
+                                    value={this.props.nome}
                                 />
                             </CardSection>
                             <CardSection>
                                 <TextInput
                                     style={Styles.inputStyle}
                                     placeholder="Descrição do evento:"
-                                    onChangeText={texto => this.props.eventDescriptionChange(texto)}
-                                    value={this.props.descricaoEvento}
+                                    onChangeText={texto => this.props.eventFieldChange({ prop: 'descricao', value: texto })}
+                                    value={this.props.descricao}
                                     underlineColorAndroid='transparent'
                                     multiline
                                     numberOfLines={4}
@@ -115,25 +117,43 @@ class SalvarEventos extends Component {
                             <CardSection>
                                 <Input
                                     placeholder="Local:"
-                                    onChangeText={texto => this.props.eventLocalChange(texto)}
-                                    value={this.props.localEvento}
+                                    onChangeText={texto => this.props.eventFieldChange({ prop: 'local', value: texto })}
+                                    value={this.props.local}
                                 />
+                            </CardSection>
+                            <CardSection>
+                                <Texts text='Início do Evento' style='medium' />
                             </CardSection>
                             <CardSection>
                                 <Input
                                     placeholder="00/00/000"
-                                    onChangeText={texto => this.props.eventDateChange(texto)}
-                                    value={this.props.dataInicioEvento}
+                                    onChangeText={texto => this.props.eventFieldChange({ prop: 'dataInicio', value: texto })}
+                                    value={this.props.dataInicio}
                                 />
                                 <Input
                                     placeholder="00:00"
-                                    onChangeText={texto => this.props.eventHourChange(texto)}
-                                    value={this.props.horaInicioEvento}
+                                    onChangeText={texto => this.props.eventFieldChange({ prop: 'horaInicio', value: texto })}
+                                    value={this.props.horaInicio}
+                                />
+                            </CardSection>
+                            <CardSection>
+                                <Texts text='Término do Evento' style='medium' />
+                            </CardSection>
+                            <CardSection>
+                                <Input
+                                    placeholder="00/00/000"
+                                    onChangeText={texto => this.props.eventFieldChange({ prop: 'dataFim', value: texto })}
+                                    value={this.props.dataFim}
+                                />
+                                <Input
+                                    placeholder="00:00"
+                                    onChangeText={texto => this.props.eventFieldChange({ prop: 'horaFim', value: texto })}
+                                    value={this.props.horaFim}
                                 />
                             </CardSection>
                             <View style={{ alignItems: 'center' }}>
-                                <Texts text={this.props.msgErrorDataInicioEvento} color='grey' />
-                                <Texts text={this.props.msgErrorHoraInicioEvento} color='grey' />
+                                <Texts text={this.props.errorData} color='grey' />
+                                <Texts text={this.props.errorHora} color='grey' />
                             </View>
                             <CardSection>
                                 {this.renderSaveEventButton()}
@@ -153,17 +173,20 @@ const styles = {
     }
 };
 const mapStatesToProps = (state) => {
+    const { nome, descricao, local, dataInicio, horaInicio, dataFim, horaFim, errorData, errorHora } = state.evento;
     return {
+        nome,
+        descricao,
+        local,
+        dataInicio,
+        horaInicio,
+        dataFim,
+        horaFim,
+        errorData,
+        errorHora,
         region: state.evento.region,
         marker: state.evento.marker,
         modal: state.evento.modal,
-        nomeEvento: state.evento.nomeEvento,
-        descricaoEvento: state.evento.descricaoEvento,
-        localEvento: state.evento.localEvento,
-        dataInicioEvento: state.evento.dataInicioEvento,
-        msgErrorDataInicioEvento: state.evento.msgErrorDataInicioEvento,
-        horaInicioEvento: state.evento.horaInicioEvento,
-        msgErrorHoraInicioEvento: state.evento.msgErrorHoraInicioEvento,
         loading: state.evento.loading,
         error: state.evento.error
     };
@@ -172,11 +195,7 @@ const mapStatesToProps = (state) => {
 export default connect(mapStatesToProps, {
     showMarkerAndModal,
     closeModal,
-    eventNameChange,
-    eventDescriptionChange,
-    eventLocalChange,
-    eventDateChange,
-    eventHourChange,
+    eventFieldChange,
     saveEvent
 })(SalvarEventos);
 
