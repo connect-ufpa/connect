@@ -2,7 +2,7 @@ import { firebaseAuth, database } from '../config/Config';
 import { validateDates, validateHours, validateEvent } from '../helpers/HandleData';
 import {
     MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR,
-    INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, CREATE_EVENT_SUCCESS, EVENTS_TO_EDIT_SUCCESS, EDIT_EVENT,
+    INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EVENTS_TO_EDIT_SUCCESS, EDIT_EVENT,
     EVENT_EDIT_DATA, EVENT_EDIT_HORA, SAVED_EDITED_EVENT, EVENTS_TO_SHOW_SUCCESS,
     CLEAR
 } from './types';
@@ -50,18 +50,21 @@ export const saveEvent = (evento) => {
         const validate = validateEvent(evento);
         if (validate) {
             const usuario = firebaseAuth().currentUser;
-            database().ref(`evento/`).push({
+            database().ref('evento/').push({
                 nome: evento.nome,
                 descricao: evento.descricao,
                 local: evento.local,
+                area_tematica: evento.area_tematica,
                 coords: evento.coords,
                 usuario_id: usuario.uid,
-                data: evento.data,
-                hora: evento.hora
+                data_inicio: evento.data_inicio,
+                hora_inicio: evento.hora_inicio,
+                data_fim: evento.data_fim,
+                hora_fim: evento.hora_fim
             }).then((response) => {
                 database().ref(`usuario/${usuario.uid}/`).once('value').then(snap => {
                     const user = snap.val();
-                    if (user.hasOwnProperty("eventos_criados")) {
+                    if (user.hasOwnProperty('eventos_criados')) {
                         database().ref().child(`usuario/${usuario.uid}/`).update({ eventos_criados: [...user.eventos_criados, response.path.pieces_[1]] })
                             .then(() => { dispatch({ type: CREATE_EVENT_SUCCESS }); });
                     } else {
@@ -70,7 +73,9 @@ export const saveEvent = (evento) => {
                     }
                 });
             });
-        } 
+        } else {
+            dispatch({ type: CREATE_EVENT_FAIL });
+        }
     };
 };
 
@@ -80,7 +85,7 @@ export const searchEventsToEdit = () => {
         dispatch({ type: CLEAR });
         database().ref(`usuario/${usuario.uid}`).once('value').then(snap => {
             const user = snap.val();
-            if (user.hasOwnProperty("eventos_criados")) {
+            if (user.hasOwnProperty('eventos_criados')) {
                 for (var eventoID in user.eventos_criados) {
                     const id = user.eventos_criados[eventoID];
                     database().ref(`evento/${user.eventos_criados[eventoID]}`).once('value')

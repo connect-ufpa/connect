@@ -2,7 +2,7 @@
     "extends": "rallycoding",
     "rules": {
         "arrow-body-style": 0,
-        "max-len": ["error", 250, 2, {
+        "max-len": ["error", 300, 2, {
             "ignoreUrls": true,
             "ignoreComments": false
           }]

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Modal, TouchableHighlight, Dimensions, ScrollView, TextInput } from 'react-native';
+import { View, Modal, TouchableHighlight, Dimensions, ScrollView, TextInput, Picker } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
@@ -32,12 +32,13 @@ class SalvarEventos extends Component {
             ),
         };
     }
-
+   
     renderSaveEventButton() {
         const evento = {
             nome: this.props.nome,
             descricao: this.props.descricao,
             local: this.props.local,
+            area_tematica: this.props.area,
             coords: {
                 lat: this.props.region.latitude,
                 long: this.props.region.longitude
@@ -122,6 +123,26 @@ class SalvarEventos extends Component {
                                 />
                             </CardSection>
                             <CardSection>
+                                <Texts text='Área Temática' style='medium' />
+                            </CardSection>
+                            <CardSection>
+                                <Picker
+                                    selectedValue={this.props.area}
+                                    style={{ height: 50, width: 250 }}
+                                    onValueChange={texto => this.props.eventFieldChange({ prop: 'area', value: texto })}
+                                >
+                                    <Picker.Item label="Comunição" value="Comunição" />
+                                    <Picker.Item label="Cultura" value="Cultura" />
+                                    <Picker.Item label="Direitos Humanos e Justiça" value="Direitos Humanos e Justiça" />
+                                    <Picker.Item label="Educação" value="Educação" />
+                                    <Picker.Item label="Meio Ambiente" value="Meio Ambiente" />
+                                    <Picker.Item label="Ciências Sociais e Aplicadas" value="Ciências Sociais e Aplicadas" />
+                                    <Picker.Item label="Saúde" value="Saúde" />
+                                    <Picker.Item label="Tecnologia e Produção" value="Tecnologia e Produção" />
+                                    <Picker.Item label="Trabalho" value="Trabalho" />
+                                </Picker>
+                            </CardSection>
+                            <CardSection>
                                 <Texts text='Início do Evento' style='medium' />
                             </CardSection>
                             <CardSection>
@@ -173,11 +194,12 @@ const styles = {
     }
 };
 const mapStatesToProps = (state) => {
-    const { nome, descricao, local, dataInicio, horaInicio, dataFim, horaFim, errorData, errorHora } = state.evento;
+    const { nome, descricao, local, area, dataInicio, horaInicio, dataFim, horaFim, errorData, errorHora } = state.evento;
     return {
         nome,
         descricao,
         local,
+        area,
         dataInicio,
         horaInicio,
         dataFim,

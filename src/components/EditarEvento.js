@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, ScrollView } from 'react-native';
+import { View, TextInput, ScrollView, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import { editEvent, saveEditedEvent } from '../actions';
 import { HeaderImage, CardSection, Input, Texts, Button, Spinner } from '../components/commons';
@@ -28,7 +28,6 @@ class EditarEvento extends Component {
             ),
         };
     }
-
     componentWillMount() {
         const { params } = this.props.navigation.state;
         const key = Object.keys(params);

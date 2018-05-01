@@ -1,6 +1,6 @@
 import {
     MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR,
-    INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, CREATE_EVENT_SUCCESS, EVENTS_TO_EDIT_SUCCESS, EVENTS_TO_SHOW_SUCCESS, CLEAR
+    INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EVENTS_TO_EDIT_SUCCESS, EVENTS_TO_SHOW_SUCCESS, CLEAR
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -15,12 +15,14 @@ const INITIAL_STATE = {
     nome: '',
     descricao: '',
     local: '',
+    area: '',
     dataInicio: '',
     horaInicio: '',
     dataFim: '',
     horaFim: '',
     errorData: '',
     errorHora: '',
+    createFail: '',
     loading: false,
     error: false,
     eventosToEdit: [],
@@ -59,6 +61,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, loading: true };
         case CREATE_EVENT_SUCCESS:
             return INITIAL_STATE;
+        case CREATE_EVENT_FAIL:
+            return { ...state, createFail: 'Preencha todos os campos corretamente!', loading: false, error: true };
         case CLEAR:
             return { ...state, eventosToEdit: [], eventosToShow: [] };
         case EVENTS_TO_EDIT_SUCCESS:

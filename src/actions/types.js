@@ -40,6 +40,7 @@ export const INVALID_END_EVENT_DATE = 'invalid_end_event_date';
 export const INVALID_END_EVENT_HOUR = 'invalid_end_event_hour';
 export const LOADING_EVENT = 'loading_event';
 export const CREATE_EVENT_SUCCESS = 'create_event_successs';
+export const CREATE_EVENT_FAIL = 'create_event_fail';
 
 export const EVENTS_TO_EDIT_SUCCESS = 'events_to_edit_success';
 export const CLEAR = 'clear';
