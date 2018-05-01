@@ -25,6 +25,7 @@ const INITIAL_STATE = {
     createFail: '',
     loading: false,
     error: false,
+    successModal: false,
     eventosToEdit: [],
     eventosToShow: [],
     fetchingEvents: true,
@@ -60,7 +61,7 @@ export default (state = INITIAL_STATE, action) => {
         case LOADING_EVENT:
             return { ...state, loading: true };
         case CREATE_EVENT_SUCCESS:
-            return INITIAL_STATE;
+            return { ...state, modal: false, successModal: true };
         case CREATE_EVENT_FAIL:
             return { ...state, createFail: 'Preencha todos os campos corretamente!', loading: false, error: true };
         case CLEAR:

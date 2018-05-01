@@ -4,11 +4,12 @@ import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { showMarkerAndModal, closeModal, eventFieldChange, saveEvent } from '../actions';
-import { Button, Input, CardSection, Texts, Spinner, HeaderImage } from './commons/';
+import { Button, Input, CardSection, Texts, Spinner, HeaderImage, Card } from './commons/';
 import Styles from '../Styles';
 
-const Height = Dimensions.get('window').height;
-const HalfHeight = Height * 0.55;
+const HEIGHT = Dimensions.get('window').height;
+const HALFHEIGTH = HEIGHT * 0.55;
+const MODALSUCCESS = HEIGHT * 0.4;
 
 class SalvarEventos extends Component {
     static navigationOptions = () => {
@@ -32,7 +33,7 @@ class SalvarEventos extends Component {
             ),
         };
     }
-   
+
     renderSaveEventButton() {
         const evento = {
             nome: this.props.nome,
@@ -81,7 +82,7 @@ class SalvarEventos extends Component {
                     onRequestClose={() => { }}
                 >
                     <ScrollView style={Styles.scrollViewStyle} >
-                        <View style={[Styles.eventCardStyle, { marginTop: HalfHeight }]}>
+                        <View style={[Styles.eventCardStyle, { marginTop: HALFHEIGTH }]}>
                             <View style={{ alignItems: 'flex-end', paddingTop: 5, paddingRight: 10 }}>
                                 <TouchableHighlight
                                     onPress={() => { this.props.closeModal(); }}
@@ -183,6 +184,26 @@ class SalvarEventos extends Component {
                         </View>
                     </ScrollView>
                 </Modal>
+                <Modal
+                    animationType="slide"
+                    transparent
+                    visible={this.props.successModal}
+                    onRequestClose={() => { }}
+                >
+                    <View style={[Styles.eventCardStyle, { marginTop: MODALSUCCESS }]}>
+                        <CardSection>
+                            <Texts text='Evento salvo com sucesso!' style='medium' />
+                        </CardSection>
+                        <CardSection>
+                            <Button
+                                text="Voltar"
+                                styles={Styles.btnCancel}
+                                onPress={() => { this.props.navigation.navigate('Eventos'); this.props.closeModal(); }}
+                            />
+                        </CardSection>
+                    </View>
+                </Modal>
+
             </View>
         );
     }
@@ -210,6 +231,7 @@ const mapStatesToProps = (state) => {
         region: state.evento.region,
         marker: state.evento.marker,
         modal: state.evento.modal,
+        successModal: state.evento.successModal,
         loading: state.evento.loading,
         error: state.evento.error,
         createFail: state.evento.createFail
