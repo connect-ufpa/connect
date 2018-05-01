@@ -1,27 +1,24 @@
 import React, { Component } from 'react';
 import { View, TextInput, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { StackNavigator } from 'react-navigation';
 import { editEvent, saveEditedEvent } from '../actions';
 import { HeaderImage, CardSection, Input, Texts, Button, Spinner } from '../components/commons';
 import { Icon } from 'react-native-elements';
 import Styles from '../Styles';
 
 class EditarEvento extends Component {
-    static navigationOptions = ({ navigation }) => {
-        const { navigate } = navigation;
+    static navigationOptions = () => {
         return {
-            title: <HeaderImage />,
+            headerTitle: <View style={{ flex: 1, alignContent: 'center' }}><HeaderImage /></View>,
             headerStyle: {
-                paddingLeft: 15,
-                paddingRight: 35,
+                paddingRight: 60,
                 height: 55
             },
             headerTitleStyle: {
                 alignSelf: 'center',
             },
-            drawerLabel: 'Salvar Evento',
-            drawerIcon: ({ tintColor }) => (
+            drawerLabel: 'Eventos',
+            drawerIcon: () => (
                 <Icon
                     type='font-awesome'
                     name='calendar'
@@ -29,14 +26,6 @@ class EditarEvento extends Component {
                     size={25}
                 />
             ),
-            headerLeft:
-                <Icon
-                    name='arrow-left'
-                    type='font-awesome'
-                    color='#2a4065'
-                    size={25}
-                    onPress={() => navigate('EditarEventos')}
-                />
         };
     }
 

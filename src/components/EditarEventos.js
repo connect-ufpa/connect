@@ -7,20 +7,18 @@ import { CardSection, HeaderImage, Button, Spinner, Input } from '../components/
 import Styles from '../Styles';
 
 class EditarEventos extends Component {
-    static navigationOptions = ({ navigation }) => {
-        const { navigate } = navigation;
+    static navigationOptions = () => {
         return {
-            title: <HeaderImage />,
+            headerTitle: <View style={{ flex: 1, alignContent: 'center' }}><HeaderImage /></View>,
             headerStyle: {
-                paddingLeft: 15,
-                paddingRight: 35,
+                paddingRight: 60,
                 height: 55
             },
             headerTitleStyle: {
                 alignSelf: 'center',
             },
-            drawerLabel: 'Salvar Evento',
-            drawerIcon: ({ tintColor }) => (
+            drawerLabel: 'Eventos',
+            drawerIcon: () => (
                 <Icon
                     type='font-awesome'
                     name='calendar'
@@ -28,14 +26,6 @@ class EditarEventos extends Component {
                     size={25}
                 />
             ),
-            headerLeft:
-                <Icon
-                    name='arrow-left'
-                    type='font-awesome'
-                    color='#2a4065'
-                    size={25}
-                    onPress={() => navigate('Eventos')}
-                />
         };
     }
 

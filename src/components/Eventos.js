@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { Card, CardSection, HeaderImage, Button } from '../components/commons';
-import { StackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
+import { Card, CardSection, HeaderImage, Button } from '../components/commons';
 import Styles from '../Styles';
 
 class Eventos extends Component {
@@ -20,7 +19,7 @@ class Eventos extends Component {
         alignSelf: 'center',
       },
       drawerLabel: 'Eventos',
-      drawerIcon: ({ tintColor }) => (
+      drawerIcon: () => (
         <Icon
           type='font-awesome'
           name='calendar'
@@ -28,14 +27,16 @@ class Eventos extends Component {
           size={25}
         />
       ),
-      headerLeft: <Icon
+      headerLeft: 
+                  <Icon
                     name='bars'
                     type='font-awesome'
                     color='#2a4065'
                     size={25}
                     onPress={() => navigate('DrawerOpen')}
                   />,
-      headerRight: <Icon
+      headerRight: 
+                  <Icon
                     name='search'
                     type='font-awesome'
                     color='#2a4065'
