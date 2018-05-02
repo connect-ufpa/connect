@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { StackNavigator, DrawerNavigator } from "react-navigation";
+import React from 'react';
+import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import { firebaseAuth } from './config/Config';
 import Splash from './components/Splash';
@@ -18,7 +18,7 @@ const Logout = () => {
   return (
     firebaseAuth().signOut(), null
   );
-}
+};
 
 export const LocalizacaoScreen = StackNavigator({
   Localizacao: { screen: Localizacao },
@@ -40,17 +40,13 @@ export const SobreScreen = StackNavigator({
   Sobre: { screen: Sobre },
 });
 
-export const EditPerfilScreen = StackNavigator({
-  EditMeuPerfil: { screen: EditMeuPerfil },
-});
-
-
 export const SideMenu = DrawerNavigator({
   Localizacao: { screen: LocalizacaoScreen },
   Perfil: { screen: PerfilScreen },
   Eventos: { screen: EventosScreen },
   Ajuda: { screen: AjudaScreen },
   Sobre: { screen: SobreScreen },
+  EditMeuPerfil: { screen: EditMeuPerfil },
   Sair: {
 		screen: Logout,
 		navigationOptions: {
@@ -99,5 +95,6 @@ export const AuthorizedScreens = StackNavigator({
   Eventos: { screen: Eventos },
   Ajuda: { screen: Ajuda },
   Sobre: { screen: Sobre },
-  EditMeuPerfil: {screen: EditMeuPerfil }
+  EditMeuPerfil: { screen: EditMeuPerfil }
+  
 });

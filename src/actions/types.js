@@ -29,3 +29,5 @@ export const RETRIEVE_LOCAIS = 'retrieve_locais';
 export const RETRIVING_LOCAIS = 'retrieving_locais';
 
 export const VALID_PERFIL = 'valid_perfil';
+export const UPDATE_DATA_USER_SUCESS = 'update_date_user_sucess';
+export const UPDATE_DATA_USER_ERROR = 'update_data_user_error';

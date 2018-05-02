@@ -1,40 +1,64 @@
 import React, { Component } from 'react';
-import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, authUser, adicionaContato, dataPerfil } from '../actions';
+import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, authUser, dataPerfil, saveDataUser } from '../actions';
 import { Dimensions, Text, ScrollView, View, Alert } from 'react-native';
-import { Card, CardSection, Texts, HeaderImage, Input, Button } from './commons';
+import { Card, CardSection, Texts, HeaderImage, Input, Button, ButtonBack, Spinner } from './commons';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { StackNavigator } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
 import Styles from '../Styles';
 
 
 class EditMeuPerfil extends Component {
-    static navigationOptions = {
-      title: 'Editar Perfil',
-      headerTintColor: '#2A4065',
-      headerTitleStyle: {
-        fontFamily: 'Ubuntu',
-        fontSize: 20,
-        fontWeight: '200',
-        textAlign: 'center'
+  static navigationOptions = ({navigation}) => {
+    const { navigate } = navigation;
+    return {
+      title: <HeaderImage />,
+      headerStyle: {
+        paddingLeft: 15,
+        paddingRight: 15,
+        height: 55
       },
-      headerStyle: { 
-        elevation: 5
-      }
-    };
+      headerTitleStyle: {
+        alignSelf: 'center',
+      },
+      drawerLabel: 'Meu perfil',
+      drawerIcon: ({ tintColor }) => (
+        <Icon
+          type='font-awesome'
+          name='user'
+          color='#2a4065'
+          size={25}
+         />
+      ),
+      headerLeft: <Icon
+                    name='bars'
+                    type='font-awesome'
+                    color='#2a4065'
+                    size={25}
+                    onPress={() => navigate('DrawerOpen')}
+                  />,
+      headerRight: <Icon
+                    name='search'
+                    type='font-awesome'
+                    color='#2a4065'
+                    size={25}
+                    onPress={() => navigate('DrawerOpen')}
+                  />,
+    }
+  }
   componentWillMount() {
     this.props.dataPerfil();
+
   }
   
 
-  renderUpdateUserButton() {
+  renderSaveDataUserButton() {
     const user = {
-        name: this.props.namePerfil,
-        registration: this.props.registrationPerfil,
-        birthday: this.props.birthdayPerfil,
-        // email: this.props.email,
-        // error: this.props.error
-    }
+      namePerfil: this.props.namePerfil,
+      registrationPerfil: this.props.registrationPerfil,
+      birthdayPerfil: this.props.birthdayPerfil,
+  }
 
     if (this.props.loading) {
       return (<Spinner size="large" color="#ffff" />);
@@ -44,7 +68,7 @@ class EditMeuPerfil extends Component {
           <Button
             text="Salvar"
             styles={Styles.btnConfirm}
-            onPress={() => { this.props.dataPerfil(); }}
+            onPress={() => { this.props.saveDataUser(user); }}
           />
         );
     }
@@ -58,7 +82,7 @@ class EditMeuPerfil extends Component {
             <CardSection>
               <Input
                 placeholder="Nome:"
-                onChangeText={false}
+                onChangeText={namePerfil => this.props.onNameChanged(namePerfil)}
                 value={this.props.namePerfil}
               />
             </CardSection>
@@ -68,7 +92,7 @@ class EditMeuPerfil extends Component {
             <CardSection>
               <Input
                 placeholder="Matrícula:"
-                onChangeText={false}
+                onChangeText={registrationPerfil => this.props.onRegistrationChanged(registrationPerfil)}
                 value={this.props.registrationPerfil}
               />
             </CardSection>
@@ -78,7 +102,7 @@ class EditMeuPerfil extends Component {
             <CardSection>
               <Input
                 placeholder="Nascimento: 00/00/0000"
-                onChangeText={false}
+                onChangeText={birthdayPerfil => this.props.onBirthChanged(birthdayPerfil)}
                 value={this.props.birthdayPerfil}
               />
             </CardSection>
@@ -86,7 +110,7 @@ class EditMeuPerfil extends Component {
               <Texts text={this.props.errorMessageBirthday} />
             </View>
             <CardSection>
-              {this.renderUpdateUserButton()}
+              {this.renderSaveDataUserButton()}
             </CardSection>
             <View>
               <Texts text={this.props.errorMessageCreateAccountFail} />
@@ -105,4 +129,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {dataPerfil})(EditMeuPerfil);
+export default connect(mapStateToProps, {
+  dataPerfil,
+  onNameChanged,
+  onRegistrationChanged,
+  onBirthChanged,
+  saveDataUser
+})(EditMeuPerfil);

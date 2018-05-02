@@ -54,13 +54,6 @@ class MeuPerfil extends Component {
   
 
   renderNavigateToEditPerfilButton() {
-    const user = {
-        name: this.props.updateName,
-        registration: this.props.updateRegistration,
-        birthday: this.props.updateBirthday,
-        // email: this.props.email,
-        error: this.props.error
-    }
 
     if (this.props.loading) {
       return (<Spinner size="large" color="#ffff" />);
@@ -70,7 +63,7 @@ class MeuPerfil extends Component {
           <Button
             text="Editar Dados"
             styles={Styles.btnConfirm}
-            onPress={() => { this.props.navigation.navigate('EditMeuPerfil'); }}
+            onPress={() => this.props.navigation.navigate('EditMeuPerfil')}
           />
         );
     }
@@ -112,7 +105,12 @@ class MeuPerfil extends Component {
               <Texts text={this.props.errorMessageBirthday} />
             </View>
             <CardSection>
-              {this.renderNavigateToEditPerfilButton()}
+            <Button
+            text="Editar Dados"
+            styles={Styles.btnConfirm}
+            onPress={() => { this.props.navigation.navigate('EditMeuPerfil'); }}
+          />
+              {/* {this.renderNavigateToEditPerfilButton()} */}
             </CardSection>
             <View>
               <Texts text={this.props.errorMessageCreateAccountFail} />
