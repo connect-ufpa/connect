@@ -11,6 +11,7 @@ import {
 import {
   markLocal,
   saveLocais,
+  createRota,
   searchLocal,
   verifyLocais,
   searchLocalizacaoUsuario,
@@ -28,6 +29,7 @@ import
   Circle,
   Callout 
 } from 'react-native-maps';
+import MapViewDirections from 'react-native-maps-directions';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Styles from '../Styles';
@@ -36,6 +38,7 @@ import _ from 'lodash';
 
 const { height, width } = Dimensions.get('window');
 const initialRegion = { latitude: -1.473987, longitude: -48.452267,  latitudeDelta: 0.004,  longitudeDelta: 0.004 };
+
 
 class Localizacao extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -103,6 +106,7 @@ class Localizacao extends Component {
             longitude: this.props.localMarcado.coords.lng,
           }}
           title={this.props.localMarcado.nome}
+          image={require('../../assets/img/pin.png')}
         />
       );
     }
@@ -198,6 +202,7 @@ class Localizacao extends Component {
               longitude: marker.coords.lng,
             }}
             title={marker.nome}
+            image={require('../../assets/img/pin.png')}
           > 
             <Callout>
               <CalloutView
@@ -215,7 +220,7 @@ class Localizacao extends Component {
 
   renderFiltroButtons() {
     return(
-      <View style={{ flex: 1, bottom: 200, marginRight: 15, right: 0, zIndex: 1, position: 'absolute' }}>
+      <View style={{ flex: 1, bottom: 0, marginBottom: 100, marginRight: 5, right: 0, zIndex: 1, position: 'absolute' }}>
         <Text style={{ textAlign: 'center', fontFamily: 'Ubuntu', fontSize: 8, color: '#777' }}>
           Filtros
         </Text>
@@ -223,7 +228,7 @@ class Localizacao extends Component {
           style={{
             height: 30,
             width: 30,
-            margin: 10,
+            margin: 5,
             borderRadius: 20,
             backgroundColor: '#2A4065',
             elevation: 8,
@@ -241,7 +246,7 @@ class Localizacao extends Component {
           style={{
             height: 30,
             width: 30,
-            margin: 10,
+            margin: 5,
             borderRadius: 20,
             backgroundColor: '#2BA3DA',
             elevation: 8,
@@ -260,7 +265,7 @@ class Localizacao extends Component {
           style={{
             height: 30,
             width: 30,
-            margin: 10,
+            margin: 5,
             borderRadius: 20,
             backgroundColor: '#2BA3DA',
             elevation: 8,
@@ -278,7 +283,7 @@ class Localizacao extends Component {
           style={{
             height: 30,
             width: 30,
-            margin: 10,
+            margin: 5,
             borderRadius: 20,
             backgroundColor: '#2BA3DA',
             elevation: 8,
@@ -296,7 +301,7 @@ class Localizacao extends Component {
           style={{
             height: 30,
             width: 30,
-            margin: 10,
+            margin: 5,
             borderRadius: 20,
             backgroundColor: '#2BA3DA',
             elevation: 8,
@@ -314,7 +319,7 @@ class Localizacao extends Component {
           style={{
             height: 30,
             width: 30,
-            margin: 10,
+            margin: 5,
             borderRadius: 20,
             backgroundColor: '#CC2820',
             elevation: 8,
@@ -336,7 +341,7 @@ class Localizacao extends Component {
     return (
       <View style={styles.containerButtons}>
         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => {this.props.createRota(this.props.localMarcado)}}>
             <View
               style={{
                 height: 60,
@@ -403,6 +408,29 @@ class Localizacao extends Component {
     );
   }
 
+  renderRota() {
+    if (!this.props.creatingRoute) {
+      console.log("Nenhum local foi clicado para se gerar rota...");
+    }
+    if (this.props.erroCreatingRoute) {
+      console.log("Pesquise um local antes de gerar rota...");
+    }
+    if(!this.props.erroCreatingRoute && this.props.creatingRoute) {
+      const origin = { latitude: -1.473987, longitude: -48.452267 };
+      const destination= { latitude: this.props.localMarcado.coords.lat, longitude: this.props.localMarcado.coords.lng };
+      return (
+        <MapViewDirections          
+          origin={this.props.localizacaoUsuario.coords}
+          destination={destination}
+          mode={'walking'}
+          strokeWidth={5}
+          strokeColor={'#2A4065'}
+          apikey={'AIzaSyDs39LTHBTeq5xQoR6HJDkFtoLuWARdhCY'}
+        />
+      );
+    }
+  }
+
   render() {
     return (
       <ScrollView style={Styles.scrollViewStyle}>
@@ -413,8 +441,8 @@ class Localizacao extends Component {
           initialRegion={initialRegion}
         >
           {this.renderMarcadorLocalPesquisado()}
-          {this.renderLocalizacaoUsuario()}
           {this.renderMarcadoresLocais()}
+          {this.renderRota()}
         </MapView>
         {this.renderInputPesquisarLocais()}
         {this.renderListaLocaisAchados()}
@@ -473,6 +501,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
+    erroCreatingRoute: state.localizacao.erroCreatingRoute,
+    creatingRoute: state.localizacao.creatingRoute,
     locais: state.localizacao.locais,
     loading: state.localizacao.loading,
     localMarcado: state.localizacao.localMarcado,
@@ -483,9 +513,10 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  verifyLocais,
-  searchLocal,
   markLocal,
+  createRota,
+  searchLocal,
+  verifyLocais,
   searchLocalizacaoUsuario,
 })(Localizacao);
 

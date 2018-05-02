@@ -1,6 +1,9 @@
 import { database } from '../config/Config';
+import _ from 'lodash';
 import {
   MARK_LOCAL,
+  CREATING_ROUTE,
+  ERRO_CREATING_ROUTE,
   SEARCHED_LOCAL,
   SEARCHING_LOCAL,
   RETRIEVE_LOCAIS,
@@ -9,6 +12,21 @@ import {
   SEARCHING_USER_LOCALIZATION,
 } from './types';
 
+export const createRota = (local) => {
+  if (_.isEmpty(local)) {
+    return dispatch => {
+      dispatch({ 
+        type: ERRO_CREATING_ROUTE
+      });
+    };
+  } else {
+    return dispatch => {
+      dispatch({ 
+        type: CREATING_ROUTE
+      });
+    };
+  }
+};
 
 export const verifyLocais = () => {
   return dispatch => {

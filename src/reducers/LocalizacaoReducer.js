@@ -1,5 +1,7 @@
 import {
   MARK_LOCAL,
+  CREATING_ROUTE,
+  ERRO_CREATING_ROUTE,
   SEARCHED_LOCAL,
   SEARCHING_LOCAL,
   RETRIEVE_LOCAIS,
@@ -15,6 +17,8 @@ const INITIAL_STATE = {
   locaisAchados: [],
   localPesquisado: '',
   localizacaoUsuario: {},
+  creatingRoute: false,
+  erroCreatingRoute: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -24,7 +28,7 @@ export default (state = INITIAL_STATE, action) => {
     case RETRIEVE_LOCAIS:
       return { ...state, loading: false, locais: Object.values(action.payload) };
     case SEARCHING_LOCAL:
-      return { ...state, localPesquisado: action.payload, locaisAchados: [] };
+      return { ...state, localPesquisado: action.payload, locaisAchados: [], creatingRoute: false };
     case SEARCHED_LOCAL:
       return { ...state, locaisAchados: action.payload }
     case MARK_LOCAL:
@@ -33,6 +37,10 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state }
     case SEARCHED_USER_LOCALIZATION:
       return { ...state, localizacaoUsuario: action.payload }
+    case CREATING_ROUTE:
+      return { ...state, creatingRoute: true,  erroCreatingRoute: false}
+    case ERRO_CREATING_ROUTE:
+      return { ...state, creatingRoute: false, erroCreatingRoute: true }
     default:
       return state;
   }
