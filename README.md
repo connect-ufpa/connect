@@ -44,17 +44,17 @@ Below are all the libraries used in the system so far. As well as their respecti
 
 Name | Function 
 |:---:| :-----:|
-lodash | The Lodash library exported as Node.js modules.
-firebase | Provides the tools and infrastructure you need to develop.
-redux | Status container.
-redux-thunk | Middleware for asynchronous actions.
-react-redux | Linking React to Redux.
-react-navigation | Routing and navigation.
-react-native-maps | MapView Component.
-react-native-elements | UI & Icons Components.
-react-native-orientation | Listen to device orientation changes.
-react-native-linear-gradient | Linear Gradient Component .
-react-native-maps-directions | Directions for Maps.
+lodash | The Lodash library exported as Node.js modules
+firebase | Provides the tools and infrastructure you need to develop
+redux | Status container
+redux-thunk | Middleware for asynchronous actions
+react-redux | Linking React to Redux
+react-navigation | Routing and navigation
+react-native-maps | MapView Component
+react-native-elements | UI & Icons Components
+react-native-orientation | Listen to device orientation changes
+react-native-linear-gradient | Linear Gradient Component
+react-native-maps-directions | Directions for Maps
 
 ## Problems
 
@@ -66,9 +66,9 @@ The project was developed to serve as the final project for the course of Comput
 
 It was developed by the following students:
 
-#### Ailson Freire  - github.com/AilsonFreire
-#### Hugo Bragança  - github.com/hugobraganca
-#### Otavio Augusto - github.com/tavioalves
+- Ailson Freire  - github.com/AilsonFreire
+- Hugo Bragança  - github.com/hugobraganca
+- Otavio Augusto - github.com/tavioalves
 
 ## License
 
