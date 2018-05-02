@@ -1,10 +1,10 @@
-# <img src="http://res.cloudinary.com/oaugusto/image/upload/v1525272222/icon.png" width="35px"> Connect UFPa
+# <img src="http://res.cloudinary.com/oaugusto/image/upload/v1525272222/icon.png" width="35px"> Connect
 ![Version](https://img.shields.io/badge/version-1.0-green.svg) 
 [![MIT](https://img.shields.io/dub/l/vibe-d.svg)]() 
 
 ## What is it?
 
-The Connect' project has as main objective be a helper mobile tool for the UFPa community in general. Providing route and informations for places, showing events happening in the university and much more.
+The Connect project has as main objective be a helper mobile tool for the UFPa community in general. Providing route and informations for places, showing events happening in the university and much more.
 
 ## How to use
 
@@ -56,17 +56,19 @@ react-native-orientation | Listen to device orientation changes.
 react-native-linear-gradient | Linear Gradient Component .
 react-native-maps-directions | Directions for Maps.
 
-## Developed by
-
-Ailson Freire
-
-Hugo Bragança
-
-Otavio Augusto 
-
 ## Problems
 
-Create a Issues in the repository. Soon a developer will answer to solve the problem.
+If you have any problem or a feedback, please create a issues in the repository. Soon a developer will answer to solve the problem.
+
+## About
+
+The project was developed to serve as the final project for the course of Computer Engineer of UFPa. Align subjects of Software Engineer, Programming, Agile Methods and Software Architecture.
+
+It was developed by the following students:
+
+#### Ailson Freire  - github.com/AilsonFreire
+#### Hugo Bragança  - github.com/hugobraganca
+#### Otavio Augusto - github.com/tavioalves
 
 ## License
 
