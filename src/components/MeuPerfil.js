@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, authUser, adicionaContato, dataPerfil } from '../actions';
-import { Dimensions, Text, ScrollView, View, Alert } from 'react-native';
-import { Card, CardSection, Texts, HeaderImage, Input, Button } from './commons';
+import { Dimensions, Text, ScrollView, View, Alert, Image } from 'react-native';
+import { Card, CardSection, Texts, HeaderImage, Input, Button, UserImage } from './commons';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
@@ -74,32 +74,27 @@ class MeuPerfil extends Component {
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
         <ScrollView style={Styles.scrollViewStyle}>
           <Card addStyle={{ paddingBottom: 40 }}>
+          <CardSection>
+          <Image
+      style={{ width: 50, height: 50 }}
+      resizeMode={'center'}
+      source={require('../../assets/img/user_male.png')}
+    />
+          </CardSection>
             <CardSection>
-              <Input
-                placeholder="Nome:"
-                onChangeText={false}
-                value={this.props.namePerfil}
-              />
+              <Text style={{fontSize: 16, fontFamily: 'Ubuntu', color: '#fff'}}>{this.props.namePerfil}</Text>
             </CardSection>
             <View>
               <Texts text={this.props.errorMessageName} />
             </View>
             <CardSection>
-              <Input
-                placeholder="Matrícula:"
-                onChangeText={false}
-                value={this.props.registrationPerfil}
-              />
+            <Text style={{fontSize: 16, fontFamily: 'Ubuntu', color: '#fff'}}>Matrícula: {this.props.registrationPerfil}</Text>
             </CardSection>
             <View>
               <Texts text={this.props.errorMessageRegistration} />
             </View>
             <CardSection>
-              <Input
-                placeholder="Nascimento: 00/00/0000"
-                onChangeText={false}
-                value={this.props.birthdayPerfil}
-              />
+            <Text style={{fontSize: 16, fontFamily: 'Ubuntu', color: '#fff'}}>Nascimento: {this.props.birthdayPerfil}</Text>
             </CardSection>
             <View>
               <Texts text={this.props.errorMessageBirthday} />
