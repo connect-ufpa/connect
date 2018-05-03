@@ -68,7 +68,7 @@ export const searchLocal = (localPesquisado, locais) => {
 
     if (localPesquisado !== '') {
       locais.map(localVerificado => {
-        if (localVerificado['nome'].includes(localPesquisado)) {
+        if (localVerificado['nome'].toLowerCase().includes(localPesquisado.toLowerCase())) {
           locaisAchados.push(localVerificado);
         }
       });

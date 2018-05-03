@@ -39,7 +39,6 @@ import _ from 'lodash';
 const { height, width } = Dimensions.get('window');
 const initialRegion = { latitude: -1.473987, longitude: -48.452267,  latitudeDelta: 0.004,  longitudeDelta: 0.004 };
 
-
 class Localizacao extends Component {
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
@@ -123,33 +122,13 @@ class Localizacao extends Component {
       return (
         <View style={styles.containerPesquisar}>
           <Input
-            value={this.props.local}
+            value={this.props.localSendoPesquisado}
             addStyle={styles.inputSearch}
             placeholder="Pesquise local desejado:"
-            onChangeText={local => this.props.searchLocal(local, this.props.locais)}
+            onChangeText={localSendoPesquisado => this.props.searchLocal(localSendoPesquisado, this.props.locais)}
           />
         </View>
       );
-    }
-  }
-
-  renderLocalizacaoUsuario() {
-    if (_.isEmpty(this.props.localizacaoUsuario)) {
-      console.log('Verificando localização do usuário...');
-    } else {
-      console.log(this.props.localizacaoUsuario.coords);
-      // return (
-      //   <Circle
-      //     center={{
-      //       latitude: this.props.localizacaoUsuario.coords.latitude,
-      //       longitude: this.props.localizacaoUsuario.coords.longitude,
-      //     }}
-      //     radius={3}
-      //     zIndex={5}
-      //     strokeColor={'#2A4065'}
-      //     fillColor={'#2A4065'}
-      //   />
-      // );
     }
   }
 
@@ -159,29 +138,24 @@ class Localizacao extends Component {
         <View style={styles.containerLista}>
           <FlatList
             data={this.props.locaisAchados}
-            style={{
-              borderBottomLeftRadius: 6,
-              borderBottomRightRadius: 6,
-              borderWidth: 2,
-              borderColor: '#2A4065',
-            }}
+            style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, borderWidth: 2, borderColor: '#FFF',}}
             renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => {
-                  this.props.markLocal(item);
-                }}
-              >
-                <Text
-                  style={{
-                    backgroundColor: 'white',
-                    color: '#777',
-                    fontSize: 12,
-                    padding: 12.5,
-                  }}
-                >
+              <View style={{ flex: 1, flexDirection: 'row', borderTopColor: '#777', borderTopWidth: 1 }}>
+                <Text style={{ flex: 5, backgroundColor: 'white', color: '#777', fontSize: 12, padding: 13, height: 40 }}>
                   {item.nome}
                 </Text>
-              </TouchableOpacity>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 10, backgroundColor: '#FFF'  }}>
+                  <TouchableOpacity onPress={() => { this.props.markLocal(item)}}>
+                    <View style={{ height: 20, width: 20, justifyContent: 'center', backgroundColor: '#2A4065', borderRadius: 50 }}>
+                      <Icon
+                        name="keyboard-arrow-right"
+                        color="#FFF"
+                        size={20}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>
             )}
           />
         </View>
@@ -376,27 +350,6 @@ class Localizacao extends Component {
             >
               <Icon
                 type="font-awesome"
-                name="eye"
-                color="#FFF"
-                size={25}
-              />
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <View
-              style={{
-                height: 60,
-                width: 60,
-                margin: 15,
-                backgroundColor: '#CC2820',
-                elevation: 8,
-                borderRadius: 150,
-                alignContent: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Icon
-                type="font-awesome"
                 name="comments"
                 color="#FFF"
                 size={25}
@@ -408,15 +361,51 @@ class Localizacao extends Component {
     );
   }
 
+  renderError() {
+    if(this.props.error) {
+      return (
+        <View style={{ flex: 1, alignSelf: 'center', position: 'absolute', bottom: 150, zIndex: 1, backgroundColor: '#FFF', padding: 5, borderRadius: 10, width: width * 0.65, height: height * 0.25 }}>
+          <View style={{ flex: 2, flexDirection: 'row', marginTop: 10 }}>
+            <Text style={{ flex: 5, fontFamily: 'Ubuntu', textAlign: 'center', fontSize: 16, color: "#CC2822", marginLeft: 20, paddingTop: 5 }}> 
+              Erro
+            </Text>
+            <View
+              style={{
+                flex: 1,
+                height: 30,
+                width: 30,
+                borderRadius: 25,
+                marginRight: 10,
+                backgroundColor: '#CC2820',
+                alignContent: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Icon
+                name="clear"
+                color="#FFF"
+                size={15}
+              />
+            </View>
+          </View>
+          <Text style={{ flex: 4, fontSize: 12, padding: 5, margin: 5, fontFamily: 'Ubuntu', color: '#777', textAlign: 'center', marginTop: 10 }}>
+            {this.props.errorMessage}
+          </Text>
+        </View>
+      );
+    } else {
+      console.log("Sem erros...");
+    }
+  }
+
   renderRota() {
     if (!this.props.creatingRoute) {
       console.log("Nenhum local foi clicado para se gerar rota...");
     }
-    if (this.props.erroCreatingRoute) {
+    if (this.props.error) {
       console.log("Pesquise um local antes de gerar rota...");
     }
-    if(!this.props.erroCreatingRoute && this.props.creatingRoute) {
-      const origin = { latitude: -1.473987, longitude: -48.452267 };
+    if(!this.props.error && this.props.creatingRoute) {
       const destination= { latitude: this.props.localMarcado.coords.lat, longitude: this.props.localMarcado.coords.lng };
       return (
         <MapViewDirections          
@@ -437,6 +426,7 @@ class Localizacao extends Component {
         <MapView
           ref={"Map"}
           showsUserLocation={true}
+          showsMyLocationButton={false}
           style={Styles.mapLocalizacaoStyle}
           initialRegion={initialRegion}
         >
@@ -448,6 +438,7 @@ class Localizacao extends Component {
         {this.renderListaLocaisAchados()}
         {this.renderFiltroButtons()}
         {this.renderButtons()}
+        {this.renderError()}
       </ScrollView>
     );
   }
@@ -468,14 +459,14 @@ const styles = StyleSheet.create({
   },
   containerPesquisar: {
     flex: 1,
-    zIndex: 1,
+    zIndex: 2,
     padding: 20,
     width: '100%',
     position: 'absolute',
   },
   containerLista: {
     flex: 1,
-    zIndex: 1,
+    zIndex: 3,
     position: 'absolute',
     marginTop: 70,
     paddingLeft: 20,
@@ -487,27 +478,28 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     bottom: 0,
-    zIndex: 1,
+    zIndex: 4,
     position: 'absolute',
     marginBottom: 15,
   },
   inputSearch: {
     fontSize: 12,
     elevation: 8,
-    color: '#2A4065',
-    borderColor: '#2A4065',
+    borderColor: '#FFF',
   }
 });
 
 const mapStateToProps = state => {
   return {
-    erroCreatingRoute: state.localizacao.erroCreatingRoute,
-    creatingRoute: state.localizacao.creatingRoute,
     locais: state.localizacao.locais,
     loading: state.localizacao.loading,
+    localPesquisado: state.localizacao.local,
+    localSendoPesquisado: state.localizacao.localSendoPesquisado,
     localMarcado: state.localizacao.localMarcado,
     locaisAchados: state.localizacao.locaisAchados,
-    localPesquisado: state.localizacao.local,
+    creatingRoute: state.localizacao.creatingRoute,
+    error: state.localizacao.error,
+    errorMessage: state.localizacao.errorMessage,
     localizacaoUsuario: state.localizacao.localizacaoUsuario,
   };
 };

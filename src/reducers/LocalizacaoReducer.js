@@ -16,9 +16,11 @@ const INITIAL_STATE = {
   localMarcado: {},
   locaisAchados: [],
   localPesquisado: '',
+  localSendoPesquisado: '',
   localizacaoUsuario: {},
   creatingRoute: false,
-  erroCreatingRoute: false
+  error: false,
+  errorMessage: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -28,19 +30,19 @@ export default (state = INITIAL_STATE, action) => {
     case RETRIEVE_LOCAIS:
       return { ...state, loading: false, locais: Object.values(action.payload) };
     case SEARCHING_LOCAL:
-      return { ...state, localPesquisado: action.payload, locaisAchados: [], creatingRoute: false };
+      return { ...state, localPesquisado: action.payload, localSendoPesquisado: action.payload.nome, locaisAchados: [], creatingRoute: false };
     case SEARCHED_LOCAL:
       return { ...state, locaisAchados: action.payload }
     case MARK_LOCAL:
-      return { ...state, locaisAchados: [], localPesquisado: '', localMarcado: action.payload }
+      return { ...state, locaisAchados: [], localPesquisado: '', localMarcado: action.payload, localSendoPesquisado: action.payload.nome, }
     case SEARCHING_USER_LOCALIZATION:
       return { ...state }
     case SEARCHED_USER_LOCALIZATION:
       return { ...state, localizacaoUsuario: action.payload }
     case CREATING_ROUTE:
-      return { ...state, creatingRoute: true,  erroCreatingRoute: false}
+      return { ...state, creatingRoute: true,  error: false }
     case ERRO_CREATING_ROUTE:
-      return { ...state, creatingRoute: false, erroCreatingRoute: true }
+      return { ...state, creatingRoute: false, error: true, errorMessage: 'Clique em um pino ou pesquise um local especifico antes de criar rota.' }
     default:
       return state;
   }
