@@ -2,6 +2,7 @@
   "local": [
     {
       "nome": "Atelier de Artes",
+      "desc": "Atelier de artes da Faculdade de Artes visuais da UFPa.",
       "coords": {
         "lat": -1.473950,
         "lng": -48.453760
@@ -9,6 +10,7 @@
     },
     {
       "nome": "Auditório Setorial Profissional",
+      "desc": "Auditório Setorial do campus profissional, utilizado para apresentações diversas. Está localizado perto do bloco de aulas e do Laboratório de Engenharia Eletrica e Computação.",
       "coords": {
         "lat": -1.474363,
         "lng": -48.451609
@@ -16,6 +18,7 @@
     },
     {
       "nome": "Chalé de Ferro",
+      "desc": "Inaugurado em 11 de Janeiro de 1992, o Chalé de ferro é de origem belga e é o mais expressivo representante no Brasil do sistema construtivo Danly e do modelo de bangalô anglo-indiano, é o único com dois pavimentos totalmente em ferro. Não se conhece com precisão as circunstâncias de sua aquisição.",
       "coords": {
         "lat": -1.475263,
         "lng": -48.451825
@@ -23,6 +26,7 @@
     },
     {
       "nome": "Instituto de Tecnologia (ITEC)",
+      "desc": "O Instituto de Tecnologia da Universidade Federal do Pará, criado por transformação ao Centro Tecnológico, em reunião do CONSUN realizada no dia 21 de maio de 2007, abriga em sua estrutura 18 subunidades, sendo 9 Faculdades, com 11 cursos, e  9 Programas de Pós-Graduação.",
       "coords": {
         "lat": -1.472965,
         "lng": -48.450708
@@ -30,6 +34,7 @@
     },
     {
       "nome": "Instituto de Ciências da Educação (ICED)",
+      "desc": "A história do Instituto de Ciências da Educação (ICED) da Universidade Federal do Pará (UFPA) inicia em 1954, no Colégio Sousa Franco, com a criação da Faculdade de Filosofia, Ciências e Letras.",
       "coords": {
         "lat": -1.472896,
         "lng": -48.449968
@@ -37,6 +42,7 @@
     },
     {
       "nome": "Instituto de Ciências Sociais Aplicadas (ICSA)",
+      "desc": "O Instituto de Ciências Sociais Aplicadas (ICSA) é constituído pelas Faculdades de Administração, Arquivologia, Biblioteconomia, Ciências Contábeis, Ciências Econômicas, Serviço Social e Turismo. Atua na produção e difusão dos saberes e na formação de profissionais compromissados com as transformações socio-econômicas.",
       "coords": {
         "lat": -1.472841,
         "lng": -48.449276
@@ -44,6 +50,7 @@
     },
     {
       "nome": "Instituto de Ciências Jurídicas (ICJ)",
+      "desc": "O Instituto de Ciências Jurídicas da Universidade Federal do Pará, é uma unidade acadêmica de formação superior em graduação e pós-graduação voltada para a área de conhecimento das Ciências Jurídicas. É disciplinado pelo Estatuto e Regimento Geral da UFPA, pelo Regimento Interno e pelas normas complementares deliberadas pelos Órgãos Deliberativos da Administração Superior e, na esfera de sua competência, pelas Resoluções de sua Congregação.",
       "coords": {
         "lat": -1.471246,
         "lng": -48.449825
@@ -51,6 +58,7 @@
     },
     {
       "nome": "Instituto de Ciências da Arte (ICA)",
+      "desc": "O Instituto de Ciências da Arte (ICA) foi criado em fevereiro de 2006, a partir da reunião de cursos e atividades artísticas do Núcleo de Arte e do Departamento de Arte do antigo Centro de Letras e Artes.",
       "coords": {
         "lat": -1.474265,
         "lng": -48.453733
@@ -58,6 +66,7 @@
     },
     {
       "nome": "Incubadora",
+      "desc": "Apoiar entidades sem fins lucrativos, empreendedores sociais e comunidades organizadas que realizam projetos sociais. Essa é a missão da Incubadora de Projetos Sociais da Universidade Federal do Pará (UFPA). Projeto de extensão da Faculdade de Administração (FAAD), do Instituto de Ciências Sociais Aplicadas (ICSA), a empresa abre inscrições anualmente para projetos sociais que visem a captação de recursos por meio de editais abertos por instituições públicas e privadas. O projeto é coordenado pelos professores Bruno Rafael Dias de Lucena e Fibia Guimarães.",
       "coords": {
         "lat": -1.475560,
         "lng": -48.453620
@@ -65,6 +74,7 @@
     },
     {
       "nome": "Núcleo de Altos Estudos Amazônicos (NAEA)",
+      "desc": "O Núcleo de Altos Estudos Amazônicos (NAEA) é uma das unidades acadêmicas da Universidade Federal do Pará (UFPA). Fundado em 1973, com sede em Belém, Pará, Brasil, o NAEA tem como objetivos fundamentais o ensino em nível de pós-graduação, visando em particular a identificação, a descrição, a análise, a interpretação e o auxílio na solução dos problemas regionais amazônicos; a pesquisa em assuntos de natureza socioeconômica relacionados com a região; a intervenção na realidade amazônica, por meio de programas e projetos de extensão universitária; e a difusão de informação, por meio da elaboração, do processamento e da divulgação dos conhecimentos científicos e técnicos disponíveis sobre a região. O NAEA desenvolve trabalhos priorizando a interação entre o ensino, a pesquisa e a extensão.",
       "coords": {
         "lat": -1.472111,
         "lng": -48.449690
@@ -72,6 +82,7 @@
     },
     {
       "nome": "Núcleo de Meio Ambiente (NUMA)",
+      "desc": "O Núcleo de Meio Ambiente (NUMA) é unidade de integração da Universidade Federal do Pará (UFPA), com autonomia acadêmica e administrativa, com foco na capacitação e qualificação superior em nível de pós-graduação na área de conhecimento transdisciplinar em meio ambiente. Surgiu no contexto das discussões sobre as questões ambientais e de desenvolvimento sustentável no início dos anos 1990, buscando integrar diferentes áreas de conhecimento e desenvolver a ciência crítico-propositiva por via de projetos de pesquisa-ação.",
       "coords": {
         "lat": -1.475077,
         "lng": -48.451500
@@ -79,6 +90,7 @@
     },
     {
       "nome": "Restaurante Universitário Profissional",
+      "desc": "Restaurante universitário do campus profissional, onde a comunidade academica pode se alimentar a um valor bem acessível.",
       "coords": {
         "lat": -1.473480,
         "lng": -48.450695
@@ -86,6 +98,7 @@
     },
     {
       "nome": "Restaurante do NAEA",
+      "desc": "Restaurante do Núcleo de Altos Estudos Amazonicos. Está bem ao lado do prédio do núcleo.",
       "coords": {
         "lat": -1.471978,
         "lng": -48.449531
@@ -93,6 +106,7 @@
     },
     {
       "nome": "Ver-o-pesinho Profissional",
+      "desc": "Área de composta por pequenas lanchonetes e uma xerox.",
       "coords": {
         "lat": -1.473789,
         "lng": -48.450580
@@ -100,6 +114,7 @@
     },
     {
       "nome": "Forum Distrital",
+      "desc": "",
       "coords": {
         "lat": -1.471178,
         "lng": -48.449215
@@ -107,6 +122,7 @@
     },
     {
       "nome": "Laboratório de Engenharia Elétrica e Computação (LEEC)",
+      "desc": "Prédio dos laboratórios das faculdades de engenharia elétrica e computação.",
       "coords": {
         "lat": -1.473923,
         "lng": -48.451812
@@ -114,6 +130,7 @@
     },
     {
       "nome": "Laboratório de Engenharia Civil (LEC)",
+      "desc": "Prédio dos laboratórios da faculdade de engenharia cívil.",
       "coords": {
         "lat": -1.474569,
         "lng": -48.452466
@@ -121,13 +138,15 @@
     },
     {
       "nome": "Laboratório de Engenharia Química (LEQ)",
+      "desc": "Prédio dos laboratórios da faculdade de engenharia química",
       "coords": {
         "lat": -1.475596,
         "lng": -48.453327
       }
     },
     {
-      "nome": "Laboratório de Engenharia Mecânica (LEM",
+      "nome": "Laboratório de Engenharia Mecânica (LEM)",
+      "desc": "Prédio dos laboratórios da faculdade de engenharia mecânica.",
       "coords": {
         "lat": -1.473933,
         "lng": -48.452911
@@ -135,6 +154,7 @@
     },
     {
       "nome": "Laboratório de Engenharia de Alimentos (LEA)",
+      "desc": "Prédio dos laboratórios da faculdade de engenharia de alimentos.",
       "coords": {
         "lat": -1.474926,
         "lng": -48.453332
@@ -142,6 +162,7 @@
     },
     {
       "nome": "Prédio de Pós-graduação do ITEC",
+      "desc": "Prédio dos cursos de pós-graduação do ITEC e biblioteca do ITEC.",
       "coords": {
         "lat": -1.474611,
         "lng": -48.453713
@@ -149,6 +170,7 @@
     },
     {
       "nome": "Laboratório de Tecnologias de Informação e Comunicação (LABTIC)",
+      "desc": "Prédio dos laboratórios de tecnologia de informação e comunicação.",
       "coords": {
         "lat": -1.473904,
         "lng": -48.454364
@@ -156,6 +178,7 @@
     },
     {
       "nome": "Laboratório de Desenvolvimento de Ideias (LDI)",
+      "desc": "Laboratório de Desenvolvimento de Ideias (LDI)",
       "coords": {
         "lat": -1.474559,
         "lng": -48.451599
@@ -163,6 +186,7 @@
     },
     {
       "nome": "Sede de canoagem",
+      "desc": "Sede de canoagem",
       "coords": {
         "lat": -1.473716,
         "lng": -48.448657
@@ -170,6 +194,7 @@
     },
     {
       "nome": "Universitec",
+      "desc": "A Universitec é a Agência de Inovação da Universidade Federal do Pará, e tem como objetivo fundamental promover a proteção, aplicação e a difusão do conhecimento, bem como do empreendedorismo inovador em prol da competitividade e desenvolvimento sustentável da Amazônia.",
       "coords": {
         "lat": -1.474996,
         "lng": -48.453682

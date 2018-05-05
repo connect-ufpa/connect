@@ -33,7 +33,9 @@ export const MARK_LOCAL = 'mark_local';
 export const SEARCHING_USER_LOCALIZATION = 'searching_user_localization';
 export const SEARCHED_USER_LOCALIZATION = 'searched_user_localization';
 export const CREATING_ROUTE = 'creating_route';
-export const ERRO_CREATING_ROUTE = 'erro_creating_route';
+export const ERROR_CREATING_ROUTE = 'erro_creating_route';
+export const CLOSE_ERROR_MESSAGE = 'close_error_message';
+export const CLOSE_HELPER_MESSAGE = 'close_helper_message';
 
 export const MARKER = 'marker';
 export const CLOSE_MODAL = 'close_modal';

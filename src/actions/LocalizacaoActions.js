@@ -3,7 +3,9 @@ import _ from 'lodash';
 import {
   MARK_LOCAL,
   CREATING_ROUTE,
-  ERRO_CREATING_ROUTE,
+  ERROR_CREATING_ROUTE,
+  CLOSE_ERROR_MESSAGE,
+  CLOSE_HELPER_MESSAGE,
   SEARCHED_LOCAL,
   SEARCHING_LOCAL,
   RETRIEVE_LOCAIS,
@@ -11,34 +13,6 @@ import {
   SEARCHED_USER_LOCALIZATION,
   SEARCHING_USER_LOCALIZATION,
 } from './types';
-
-export const createRota = (local) => {
-  if (_.isEmpty(local)) {
-    return dispatch => {
-      dispatch({ 
-        type: ERRO_CREATING_ROUTE
-      });
-    };
-  } else {
-    return dispatch => {
-      dispatch({ 
-        type: CREATING_ROUTE
-      });
-    };
-  }
-};
-
-export const verifyLocais = () => {
-  return dispatch => {
-    dispatch({ type: RETRIVING_LOCAIS });
-
-    database()
-      .ref('local/')
-      .on('value', snap => {
-        retriveLocaisSuccess(dispatch, snap.val());
-      });
-  };
-};
 
 export const markLocal = (local) => {
   return dispatch => {
@@ -52,12 +26,53 @@ export const saveLocais = (locais) => {
       .ref(`local/`)
       .push({
         nome: locais.local[i].nome,
+        desc: locais.local[i].desc,
         coords: {
           lat: locais.local[i].coords.lat,
           lng: locais.local[i].coords.lng,
         },
       });
   }
+};
+
+export const createRota = (local) => {
+  if (_.isEmpty(local)) {
+    return dispatch => {
+      dispatch({ 
+        type: ERROR_CREATING_ROUTE
+      });
+    };
+  } else {
+    return dispatch => {
+      dispatch({ 
+        type: CREATING_ROUTE
+      });
+    };
+  }
+};
+
+export const closeHelper = () => {
+  return dispatch => {
+    dispatch({ type: CLOSE_HELPER_MESSAGE });
+  };
+};
+
+export const closeError = () => {
+  return dispatch => {
+    dispatch({ type: CLOSE_ERROR_MESSAGE });
+  };
+};
+
+export const verifyLocais = () => {
+  return dispatch => {
+    dispatch({ type: RETRIVING_LOCAIS });
+
+    database()
+      .ref('local/')
+      .on('value', snap => {
+        retriveLocaisSuccess(dispatch, snap.val());
+      });
+  };
 };
 
 export const searchLocal = (localPesquisado, locais) => {
