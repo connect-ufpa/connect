@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { View, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
-import { Card, CardSection, HeaderImage, Button } from '../components/commons';
+import { Card, CardSection, HeaderImage, Button, Texts, Input } from '../components/commons';
+import { StackNavigator } from 'react-navigation';
 import Styles from '../Styles';
 
 class Eventos extends Component {
@@ -19,7 +19,7 @@ class Eventos extends Component {
         alignSelf: 'center',
       },
       drawerLabel: 'Eventos',
-      drawerIcon: () => (
+      drawerIcon: ({ tintColor }) => (
         <Icon
           type='font-awesome'
           name='calendar'
@@ -27,52 +27,62 @@ class Eventos extends Component {
           size={25}
         />
       ),
-      headerLeft: 
-                  <Icon
-                    name='bars'
-                    type='font-awesome'
-                    color='#2a4065'
-                    size={25}
-                    onPress={() => navigate('DrawerOpen')}
-                  />,
-      headerRight: 
-                  <Icon
-                    name='search'
-                    type='font-awesome'
-                    color='#2a4065'
-                    size={25}
-                    onPress={() => navigate('DrawerOpen')}
-                  />,
+      headerLeft:
+        <Icon
+          name='bars'
+          type='font-awesome'
+          color='#2a4065'
+          size={25}
+          onPress={() => navigate('DrawerOpen')}
+        />,
+      headerRight:
+        <Icon
+          name='search'
+          type='font-awesome'
+          color='#2a4065'
+          size={25}
+          onPress={() => navigate('DrawerOpen')}
+        />,
     };
   }
 
   render() {
     return (
-      <LinearGradient colors={['#2A4065', '#2BA3DA']}>
-        <Card>
-          <CardSection>
-            <Button
-              text="Salvar Evento"
-              styles={Styles.btnConfirm}
-              onPress={() => { this.props.navigation.navigate('SalvarEventos'); }}
-            />
-          </CardSection>
-          <CardSection>
-            <Button
-              text="Editar Eventos"
-              styles={Styles.btnConfirm}
-              onPress={() => { this.props.navigation.navigate('EditarEventos'); }}
-            />
-          </CardSection>
+      <Card>
         <CardSection>
-            <Button
-              text="Visualizar Eventos"
-              styles={Styles.btnConfirm}
-              onPress={() => { this.props.navigation.navigate('VisualizarEventos'); }}
+          <View style={{ flex: 1, zIndex: 1, padding: 20, width: '100%', position: 'absolute' }}>
+            <Input
+              placeholder="Pesquise evento desejado:"
+              addStyle={{ elevation: 8, borderColor: "#2A4065", color: "#2A4065", fontSize: 14 }}
             />
-          </CardSection>
-        </Card>
-      </LinearGradient>
+          </View>
+        </CardSection>
+        <TouchableOpacity onPress={() => { this.props.navigation.navigate('SalvarEventos'); }} >
+          <View style={{ height: 60, width: 60, margin: 15, backgroundColor: '#2BA3DA', elevation: 8, borderRadius: 150, alignContent: 'center', justifyContent: 'center' }}>
+            <Icon
+              type='font-awesome'
+              name='calendar'
+              color='#FFF'
+              size={25}
+            />
+          </View>
+        </TouchableOpacity>
+        <Texts text="Criar evento" />
+        <CardSection>
+          <Button
+            text="Editar Eventos"
+            styles={Styles.btnConfirm}
+            onPress={() => { this.props.navigation.navigate('EditarEventos'); }}
+          />
+        </CardSection>
+        <CardSection>
+          <Button
+            text="Visualizar Eventos"
+            styles={Styles.btnConfirm}
+            onPress={() => { this.props.navigation.navigate('VisualizarEventos'); }}
+          />
+        </CardSection>
+      </Card>
     );
   }
 }

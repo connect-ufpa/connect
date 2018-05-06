@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Dimensions, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 import { saveLocais, verifyLocais, searchLocal, markLocal, searchLocalizacaoUsuario } from '../actions';
+import { StackNavigator } from 'react-navigation';
 import { Spinner, HeaderImage, Input } from './commons';
 import MapView, { Marker, Circle  } from 'react-native-maps';
 import { Icon } from 'react-native-elements';
@@ -39,8 +40,7 @@ class Localizacao extends Component {
             size={25}
             onPress={() => navigate('DrawerOpen')}
           />
-        </View>
-        ,
+        </View>,
       headerRight: 
         <View>
           <Icon
