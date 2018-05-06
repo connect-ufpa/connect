@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { firebaseAuth, database } from '../config/Config';
 import { validateDates, validateHours, validateEvent } from '../helpers/HandleData';
 import {
@@ -159,14 +160,15 @@ export const saveEditedEvent = (evento) => {
 };
 
 export const serachEventsToShow = () => {
+    const currentDate = moment().format('DD/MM/YYYY');
     return (dispatch) => {
         dispatch({ type: CLEAR });
-        database().ref('evento/').once('value', snap => {
+        database().ref('evento/').orderByChild('data_inicio').startAt(`${currentDate}`).once('value', snap => {
             const eventos = snap.val();
             const key = Object.keys(eventos);
             key.forEach(id => {
-                const { nome, descricao, local, data, hora, coords } = eventos[id];
-                dispatch({ type: EVENTS_TO_SHOW_SUCCESS, payload: { id, nome, descricao, local, data, hora, coords } });
+                const { nome, descricao, local, data_inicio, hora_inicio, coords } = eventos[id];
+                dispatch({ type: EVENTS_TO_SHOW_SUCCESS, payload: { id, nome, descricao, local, data_inicio, hora_inicio, coords } });
             });
         });
     };
