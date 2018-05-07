@@ -50,6 +50,8 @@ export const EVENT_EDIT_HORA = 'event_edit_hora';
 export const SAVED_EDITED_EVENT = 'saved_edited_event';
 
 export const EVENTS_TO_SHOW_SUCCESS = 'events_to_show_success';
+export const SEARCHING_EVENT = 'searching_event';
+export const SEARCHED_EVENTO = 'searched_evento';
 
 export const SEARCHING_USER_LOCALIZATION = 'searching_user_localization';
 export const SEARCHED_USER_LOCALIZATION = 'searched_user_localization';

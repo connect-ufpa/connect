@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, FlatList, Text } from 'react-native';
+import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
-import { Card, CardSection, HeaderImage, Button, Texts, Input } from '../components/commons';
 import { StackNavigator } from 'react-navigation';
+import { Card, CardSection, HeaderImage, Button, Texts, Input } from '../components/commons';
+import { serachEventsToShow, searchEvento } from '../actions';
 import Styles from '../Styles';
 
 class Eventos extends Component {
@@ -46,17 +48,45 @@ class Eventos extends Component {
     };
   }
 
+  componentWillMount() {
+    this.props.serachEventsToShow();
+  }
+  renderInputPesquisaEvento() {
+    return (
+      <View style={{ flex: 1, zIndex: 1, padding: 20, width: '100%', position: 'absolute' }}>
+        <Input
+          placeholder='Pesquise evento desejado:'
+          value={this.props.eventoNome}
+          onChangeText={evento => this.props.searchEvento(evento, this.props.eventos)}
+          addStyle={{ elevation: 8, borderColor: '#2A4065', color: '#2A4065', fontSize: 14 }}
+        />
+      </View>
+    );
+  }
+
+  renderListEventosAchados() {
+    if (this.props.eventosAchados.length !== 0) {
+      return (
+        <View style={{ flex: 1, zIndex: 1, position: 'absolute', marginTop: 70, paddingLeft: 20, paddingRight: 20, elevation: 8, width: '100%' }}>
+          <FlatList
+            data={this.props.eventosAchados}
+            style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, borderWidth: 2, borderColor: '#2A4065' }}
+            renderItem={({ item }) =>
+              <TouchableOpacity>
+                <Text style={{ backgroundColor: 'white', color: '#777', fontSize: 12, padding: 12.5 }}>
+                  {item.nome}
+                </Text>
+              </TouchableOpacity >}
+          />
+        </View>
+      );
+    }
+  }
   render() {
     return (
-      <Card>
-        <CardSection>
-          <View style={{ flex: 1, zIndex: 1, padding: 20, width: '100%', position: 'absolute' }}>
-            <Input
-              placeholder="Pesquise evento desejado:"
-              addStyle={{ elevation: 8, borderColor: "#2A4065", color: "#2A4065", fontSize: 14 }}
-            />
-          </View>
-        </CardSection>
+      <View>
+        {this.renderInputPesquisaEvento()}
+        {this.renderListEventosAchados()}
         <TouchableOpacity onPress={() => { this.props.navigation.navigate('SalvarEventos'); }} >
           <View style={{ height: 60, width: 60, margin: 15, backgroundColor: '#2BA3DA', elevation: 8, borderRadius: 150, alignContent: 'center', justifyContent: 'center' }}>
             <Icon
@@ -82,8 +112,16 @@ class Eventos extends Component {
             onPress={() => { this.props.navigation.navigate('VisualizarEventos'); }}
           />
         </CardSection>
-      </Card>
+      </View>
     );
   }
 }
-export default Eventos; 
+const mapStateToProps = (state) => {
+  return {
+    loading: state.evento.fetchingEventsToShow,
+    eventos: state.evento.eventosToShow,
+    eventoNome: state.evento.eventoPesquisado,
+    eventosAchados: state.evento.eventosAchados
+  };
+};
+export default connect(mapStateToProps, { serachEventsToShow, searchEvento })(Eventos);

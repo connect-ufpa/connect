@@ -1,6 +1,7 @@
 import {
     MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR,
-    INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EVENTS_TO_EDIT_SUCCESS, EVENTS_TO_SHOW_SUCCESS, CLEAR
+    INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EVENTS_TO_EDIT_SUCCESS, EVENTS_TO_SHOW_SUCCESS, 
+    SEARCHING_EVENT, SEARCHED_EVENTO, CLEAR
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -26,6 +27,8 @@ const INITIAL_STATE = {
     loading: false,
     error: false,
     successModal: false,
+    eventoPesquisado: '',
+    eventosAchados: [],
     eventosToEdit: [],
     eventosToShow: [],
     fetchingEvents: true,
@@ -68,6 +71,10 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, eventosToEdit: [], eventosToShow: [] };
         case EVENTS_TO_EDIT_SUCCESS:
             return { ...state, eventosToEdit: [...state.eventosToEdit, action.payload], fetchingEvents: false };
+        case SEARCHING_EVENT: 
+            return { ...state, eventoPesquisado: action.payload, eventosAchados: [] };
+        case SEARCHED_EVENTO: 
+            return { ...state, eventosAchados: action.payload };
         case EVENTS_TO_SHOW_SUCCESS:
             return { ...state, eventosToShow: [...state.eventosToShow, action.payload], fetchingEventsToShow: false };
         default:
