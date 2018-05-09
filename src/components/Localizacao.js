@@ -17,7 +17,11 @@ import {
   verifyLocais,
   closeHelper,
   closeError,
+  loadingRoute,
+  showInfoRota,
   clearInputSearch,
+  createRouteError,
+  createRouteSuccess,  
   searchLocalizacaoUsuario,
 } from '../actions';
 import { Map, Input, Spinner, CalloutView, HeaderImage } from './commons';
@@ -120,7 +124,15 @@ class Localizacao extends Component {
     if (this.props.loading) {
       return (
         <View style={styles.containerLoading}>
-          <Spinner size={60} color="#2A4065" />
+          <View style={{
+            height: 100,
+            width: 100,
+            backgroundColor: '#FFF',
+            borderRadius: 5,
+            elevation: 8,
+          }}>
+            <Spinner size={60} color="#2A4065" />
+          </View>
         </View>
       );
     } else {
@@ -128,7 +140,7 @@ class Localizacao extends Component {
         <View style={styles.containerPesquisar}>
           <TextInput
             autoCorrect={false}
-            style={styles.inputSearch}
+            style={styles.inputPesquisar}
             underlineColorAndroid={'transparent'}
             value={this.props.localSendoPesquisado}
             placeholder={'Pesquise um local desejado:'}
@@ -153,8 +165,8 @@ class Localizacao extends Component {
               {this.props.inputSearchFocused ? (
                 <Icon name="clear" color="#777" size={25} />
               ) : (
-                <Icon name="search" color="#777" size={25} />
-              )}
+                  <Icon name="search" color="#777" size={25} />
+                )}
             </View>
           </TouchableOpacity>
         </View>
@@ -367,6 +379,50 @@ class Localizacao extends Component {
     );
   }
 
+  renderLoadingRota() {
+    if (this.props.creatingRoute) {
+      return (
+        <View style={styles.containerLoading}>
+          <View style={{
+            height: 100,
+            width: 100,
+            backgroundColor: '#FFF',
+            borderRadius: 5,
+            elevation: 8,
+          }}>
+            <Spinner size={60} color="#2A4065" />
+          </View>
+        </View>
+      );
+    }
+  }
+
+  renderRotaInfo() {
+    if(!_.isEmpty(this.props.infoRota)) {
+      const map = this.refs.Map;
+      map.animateToCoordinate(
+        {
+          latitude: this.props.localizacaoUsuario.coords.latitude,
+          longitude: this.props.localizacaoUsuario.coords.longitude,
+        }
+      );
+
+      return (
+        <View style={styles.containerInfoRota}>
+          <Text style={{ textAlign: 'center', color: '#2D2D2D', fontSize: 12, fontFamily: 'Ubuntu', borderBottomColor: '#2D2D2D', borderBottomWidth: 2, paddingBottom: 5 }}>
+            Informações da rota
+          </Text>
+          <Text style={{ textAlign: 'center', color: '#777', fontSize: 11, fontFamily: 'Ubuntu', marginTop: 10 }}>
+            Distância:{` ${this.props.infoRota.distance.toFixed(2)} km`} 
+          </Text>
+          <Text style={{ textAlign: 'center', color: '#777', fontSize: 11, fontFamily: 'Ubuntu', marginTop: 10 }}>
+            Tempo:{` ${this.props.infoRota.duration.toFixed(2)} min`} 
+          </Text>
+        </View>
+      );
+    }
+  }
+
   renderButtons() {
     if (!this.props.loading) {
       return (
@@ -377,35 +433,9 @@ class Localizacao extends Component {
             <TouchableOpacity
               onPress={() => {
                 if (!_.isEmpty(this.props.localMarcado)) {
-                  const map = this.refs.Map;
-                  const coordinatesToFit = [
-                    {
-                      latitude: this.props.localizacaoUsuario.coords.latitude,
-                      longitude: this.props.localizacaoUsuario.coords.longitude,
-                    },
-                    {
-                      latitude: this.props.localMarcado.coords.lat,
-                      longitude: this.props.localMarcado.coords.lng,
-                    },
-                  ];
-
-                  map.animateToCoordinate(
-                    {
-                      latitude: this.props.localizacaoUsuario.coords.latitude,
-                      longitude: this.props.localizacaoUsuario.coords.longitude,
-                    }
-                  );
-
-                  setTimeout(() => {
-                    map.fitToCoordinates(coordinatesToFit, {
-                      edgePadding: { top: 175, right: 50, bottom: 50, left: 50 },
-                      animated: true,
-                    });
-                  }, 1500);
-
-                  setTimeout(() => {
-                    this.props.createRota(this.props.localMarcado);
-                  }, 4000);
+                  this.props.createRota(this.props.localMarcado);
+                } else {
+                  this.props.createRouteError();
                 }
               }}
             >
@@ -425,21 +455,21 @@ class Localizacao extends Component {
                   <Icon name="near-me" color="#FFF" size={25} />
                 </View>
               ) : (
-                <View
-                  style={{
-                    height: 60,
-                    width: 60,
-                    margin: 15,
-                    elevation: 8,
-                    borderRadius: 150,
-                    alignContent: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: '#2A4065',
-                  }}
-                >
-                  <Icon name="near-me" color="#FFF" size={25} />
-                </View>
-              )}
+                  <View
+                    style={{
+                      height: 60,
+                      width: 60,
+                      margin: 15,
+                      elevation: 8,
+                      borderRadius: 150,
+                      alignContent: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: '#2A4065',
+                    }}
+                  >
+                    <Icon name="near-me" color="#FFF" size={25} />
+                  </View>
+                )}
             </TouchableOpacity>
           </View>
         </View>
@@ -456,13 +486,13 @@ class Localizacao extends Component {
             flex: 1,
             alignSelf: 'center',
             position: 'absolute',
-            bottom: 150,
+            bottom: 130,
             zIndex: 1,
             backgroundColor: '#FFF',
             padding: 5,
             borderRadius: 10,
-            width: width * 0.6,
-            height: height * 0.25,
+            width: width * 0.5,
+            height: height * 0.2,
           }}
         >
           <View style={{ flex: 2, flexDirection: 'row', marginTop: 10 }}>
@@ -525,13 +555,13 @@ class Localizacao extends Component {
             flex: 1,
             alignSelf: 'center',
             position: 'absolute',
-            bottom: 150,
+            bottom: 135,
             zIndex: 1,
             backgroundColor: '#FFF',
             padding: 5,
             borderRadius: 10,
-            width: width * 0.6,
-            height: height * 0.25,
+            width: width * 0.5,
+            height: height * 0.2,
           }}
         >
           <View style={{ flex: 2, flexDirection: 'row', marginTop: 10 }}>
@@ -586,19 +616,25 @@ class Localizacao extends Component {
   }
 
   renderRota() {
-    if (!this.props.error && this.props.creatingRoute) {
-      const destination = {
-        latitude: this.props.localMarcado.coords.lat,
-        longitude: this.props.localMarcado.coords.lng,
-      };
+    if (!this.props.error && this.props.showRoute) {
       return (
         <MapViewDirections
           origin={this.props.localizacaoUsuario.coords}
-          destination={destination}
+          destination={{
+            latitude: this.props.localMarcado.coords.lat,
+            longitude: this.props.localMarcado.coords.lng,
+          }}
           strokeWidth={6}
           mode={'walking'}
           strokeColor={'#2BA3DA'}
           apikey={'AIzaSyDs39LTHBTeq5xQoR6HJDkFtoLuWARdhCY'}
+          onStart={() => {
+            this.props.loadingRoute();
+          }}
+          onReady={(result) => {
+            this.props.showInfoRota(result);
+            this.props.createRouteSuccess();
+          }}
         />
       );
     }
@@ -622,12 +658,14 @@ class Localizacao extends Component {
           {this.renderMarcadoresLocais()}
           {this.renderRota()}
         </MapView>
+        {/* {this.renderFiltroButtons()} */}
         {this.renderInputPesquisarLocais()}
         {this.renderListaLocaisAchados()}
-        {/* {this.renderFiltroButtons()} */}
+        {this.renderLoadingRota()}
+        {this.renderRotaInfo()}
         {this.renderButtons()}
-        {this.renderError()}
         {this.renderHelper()}
+        {this.renderError()}
         {this.debugState()}
       </ScrollView>
     );
@@ -651,7 +689,7 @@ const styles = StyleSheet.create({
     flex: 1,
     zIndex: 3,
     elevation: 8,
-    marginTop: 70,
+    marginTop: 75,
     paddingLeft: 20,
     paddingRight: 20,
     width: '100%',
@@ -678,7 +716,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#FFF',
   },
-  inputSearch: {
+  inputPesquisar: {
     flex: 5,
     color: '#2D2D2D',
     fontSize: 14,
@@ -688,10 +726,29 @@ const styles = StyleSheet.create({
     fontFamily: 'Ubuntu',
     backgroundColor: '#FFF',
   },
+  containerInfoRota: {
+    flex: 1,
+    zIndex: 2,
+    padding: 5,
+    margin: 20,
+    right: 0,
+    bottom: 100,
+    elevation: 8,
+    borderRadius: 5,
+    width: width * 0.35,
+    height: height * 0.20,
+    borderColor: '#FFF',
+    position: 'absolute',
+    alignItems: 'center',
+    alignContent: 'center',
+    backgroundColor: '#FFF',
+    justifyContent: 'center',
+  }
 });
 
 const mapStateToProps = state => {
   return {
+    infoRota: state.localizacao.infoRota,
     helper: state.localizacao.helper,
     error: state.localizacao.error,
     locais: state.localizacao.locais,
@@ -705,6 +762,7 @@ const mapStateToProps = state => {
     localizacaoUsuario: state.localizacao.localizacaoUsuario,
     inputSearchFocused: state.localizacao.inputSearchFocused,
     localSendoPesquisado: state.localizacao.localSendoPesquisado,
+    showRoute: state.localizacao.showRoute
   };
 };
 
@@ -715,6 +773,10 @@ export default connect(mapStateToProps, {
   verifyLocais,
   closeHelper,
   closeError,
+  showInfoRota,
+  loadingRoute,
+  createRouteError,
   clearInputSearch,
+  createRouteSuccess,
   searchLocalizacaoUsuario,
 })(Localizacao);

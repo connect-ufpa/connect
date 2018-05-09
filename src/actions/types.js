@@ -25,6 +25,9 @@ export const CHECKING_CREDENTIAL = 'checking_credential';
 export const VALID_EMAIL_FORGOT = 'valid_email_forgot';
 export const INVALID_EMAIL_FORGOT = 'invalid_email_forgot';
 
+export const LOADING_ROUTE = 'loading_route';
+export const CREATE_ROUTE_SUCCESS = 'create_route_success';
+export const ROUTE_INFO = 'route_info';
 export const CLEAR_INPUT_SEARCH = 'clear_input_search';
 export const INPUT_SEARCH_UNFOCUSED = 'input_search_unfocused';
 export const RETRIEVE_LOCAIS = 'retrieve_locais';
@@ -58,4 +61,3 @@ export const EVENT_EDIT_DATA = 'event_edit_data';
 export const EVENT_EDIT_HORA = 'event_edit_hora';
 export const SAVED_EDITED_EVENT = 'saved_edited_event';
 export const EVENTS_TO_SHOW_SUCCESS = 'events_to_show_success';
-
