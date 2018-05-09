@@ -376,35 +376,37 @@ class Localizacao extends Component {
           >
             <TouchableOpacity
               onPress={() => {
-                const map = this.refs.Map;
-                const coordinatesToFit = [
-                  {
-                    latitude: this.props.localizacaoUsuario.coords.latitude,
-                    longitude: this.props.localizacaoUsuario.coords.longitude,
-                  },
-                  {
-                    latitude: this.props.localMarcado.coords.lat,
-                    longitude: this.props.localMarcado.coords.lng,
-                  },
-                ];
+                if (!_.isEmpty(this.props.localMarcado)) {
+                  const map = this.refs.Map;
+                  const coordinatesToFit = [
+                    {
+                      latitude: this.props.localizacaoUsuario.coords.latitude,
+                      longitude: this.props.localizacaoUsuario.coords.longitude,
+                    },
+                    {
+                      latitude: this.props.localMarcado.coords.lat,
+                      longitude: this.props.localMarcado.coords.lng,
+                    },
+                  ];
 
-                map.animateToCoordinate(
-                  {
-                    latitude: this.props.localizacaoUsuario.coords.latitude,
-                    longitude: this.props.localizacaoUsuario.coords.longitude,
-                  }
-                );
+                  map.animateToCoordinate(
+                    {
+                      latitude: this.props.localizacaoUsuario.coords.latitude,
+                      longitude: this.props.localizacaoUsuario.coords.longitude,
+                    }
+                  );
 
-                setTimeout(() => {
-                  map.fitToCoordinates(coordinatesToFit, {
-                    edgePadding: { top: 175, right: 50, bottom: 50, left: 50 },
-                    animated: true,
-                  });
-                }, 1500);
+                  setTimeout(() => {
+                    map.fitToCoordinates(coordinatesToFit, {
+                      edgePadding: { top: 175, right: 50, bottom: 50, left: 50 },
+                      animated: true,
+                    });
+                  }, 1500);
 
-                setTimeout(() => {
-                  this.props.createRota(this.props.localMarcado);
-                }, 4000);
+                  setTimeout(() => {
+                    this.props.createRota(this.props.localMarcado);
+                  }, 4000);
+                }
               }}
             >
               {_.isEmpty(this.props.localMarcado) ? (
