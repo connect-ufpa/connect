@@ -92,7 +92,7 @@ class SalvarEventos extends Component {
                                         <Icon
                                             type='font-awesome'
                                             name='times-circle'
-                                            color='#2a4065'
+                                            color='#CC2820'
                                             size={30}
                                         />
                                     </View>
@@ -204,7 +204,6 @@ class SalvarEventos extends Component {
                         </CardSection>
                     </View>
                 </Modal>
-
             </View>
         );
     }

@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, FlatList, Text, Dimensions } from 'react-native';
+import { View, TouchableOpacity, FlatList, Text, Dimensions, Modal, TouchableHighlight, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { Calendar } from 'react-native-calendars';
 import { StackNavigator } from 'react-navigation';
 import { firebaseAuth } from '../config/Config';
-import { HeaderImage, Texts, Input } from '../components/commons';
+import { HeaderImage, Texts, Input, CardSection } from '../components/commons';
 import { serachEventsToShow, searchEvento } from '../actions';
 import Styles from '../Styles';
 
 const HEIGHT = Dimensions.get('window').height;
 const HALFHEIGHT = HEIGHT * 0.15;
+const MODALSUCCESS = HEIGHT * 0.4;
 
 class Eventos extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -52,9 +53,59 @@ class Eventos extends Component {
         />,
     };
   }
-
+  state = {
+    modal: false,
+    datas_eventos: []
+  }
   componentWillMount() {
     this.props.serachEventsToShow();
+  }
+  infoEventoModal() {
+    const { datas_eventos } = this.state;
+    const keys = Object.keys(this.state.datas_eventos);
+    return (
+      keys.map(index => {
+        return (
+          <View key={index} style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+            <Text style={{ flex: 1, color: '#777', fontSize: 15, margin: 5, height: 40, paddingTop: 7, paddingLeft: 5 }}>
+              {datas_eventos[index].nome}
+            </Text>
+            {this.renderEditEventIcon(datas_eventos[index])}
+            <View style={{ marginTop: 7 }}>
+              <TouchableOpacity onPress={() => { this.props.navigation.navigate('VisualizarEvento', datas_eventos[index]); this.setState({ modal: false }); }} >
+                <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2BA3DA' }]}>
+                  <Icon
+                    type='font-awesome'
+                    name='eye'
+                    color='#FFF'
+                    size={20}
+                  />
+                </View>
+              </TouchableOpacity >
+            </View>
+          </View>
+        );
+      })
+    );
+  }
+
+  showPoupUpEventoDia(data) {
+    const formatData = data.split('-').reverse().join('/');
+    let datas_eventos = {};
+    let id = '';
+    this.props.eventos.map(evento => {
+      if (evento.data_inicio === formatData) {
+        id = evento.id;
+        datas_eventos = { ...datas_eventos, [evento.id]: evento };
+      }
+      return datas_eventos;
+    });
+    if (datas_eventos.hasOwnProperty(id)) {
+      this.setState({
+        modal: true,
+        datas_eventos
+      });
+    }
   }
 
   renderInputPesquisaEvento() {
@@ -75,7 +126,7 @@ class Eventos extends Component {
     if (usuario.uid === evento.usuario_id) {
       return (
         <View style={{ marginTop: 7 }}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('EditarEvento', evento)} >
+          <TouchableOpacity onPress={() => { this.props.navigation.navigate('EditarEvento', evento); this.setState({ modal: false }); }} >
             <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#CC2820' }]}>
               <Icon
                 type='material-community'
@@ -140,7 +191,7 @@ class Eventos extends Component {
     return (
       <View style={{ flex: 1, marginTop: HALFHEIGHT }}>
         <Calendar
-          onDayPress={(day) => { console.log('selected day', day.dateString) }}
+          onDayPress={(day) => { this.showPoupUpEventoDia(day.dateString); }}
           markedDates={datas_eventos}
         />
       </View>
@@ -173,10 +224,37 @@ class Eventos extends Component {
         {this.renderListEventosAchados()}
         {this.renderCalendar()}
         {this.renderButtomSaveEvento()}
+        <Modal
+          animationType="slide"
+          transparent
+          visible={this.state.modal}
+          onRequestClose={() => { }}
+        >
+          <ScrollView style={Styles.scrollViewStyle} >
+            <View style={[Styles.eventCardStyle, { marginTop: MODALSUCCESS }]}>
+              <View style={{ alignItems: 'flex-end', paddingTop: 5, paddingRight: 10 }}>
+                <TouchableHighlight
+                  onPress={() => { this.setState({ modal: false }); }}
+                >
+                  <View>
+                    <Icon
+                      type='font-awesome'
+                      name='times-circle'
+                      color='#CC2820'
+                      size={30}
+                    />
+                  </View>
+                </TouchableHighlight>
+              </View>
+              {this.infoEventoModal()}
+            </View>
+          </ScrollView>
+        </Modal>
       </View>
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     loading: state.evento.fetchingEventsToShow,
