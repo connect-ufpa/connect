@@ -5,6 +5,7 @@
         "max-len": ["error", 300, 2, {
             "ignoreUrls": true,
             "ignoreComments": false
-          }]
+          }],
+        "camelcase": 0
     }
 }

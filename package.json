@@ -18,6 +18,7 @@
     "moment": "^2.22.1",
     "react": "16.2.0",
     "react-native": "0.51.0",
+    "react-native-calendars": "^1.19.3",
     "react-native-elements": "^0.19.0",
     "react-native-linear-gradient": "^2.4.0",
     "react-native-maps": "^0.20.1",

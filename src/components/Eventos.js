@@ -3,6 +3,7 @@ import { View, TouchableOpacity, FlatList, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
+import { firebaseAuth } from '../config/Config';
 import { HeaderImage, Texts, Input } from '../components/commons';
 import { serachEventsToShow, searchEvento } from '../actions';
 
@@ -63,6 +64,26 @@ class Eventos extends Component {
     );
   }
 
+  renderEditEventIcon(evento) {
+    const usuario = firebaseAuth().currentUser;
+    if (usuario.uid === evento.usuario_id) {
+      return (
+        <View style={{ marginTop: 7 }}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('EditarEvento', evento)} >
+            <View style={{ height: 30, width: 30, justifyContent: 'center', backgroundColor: '#CC2820', borderRadius: 50, marginRight: 5 }}>
+              <Icon
+                type='material-community'
+                name='calendar'
+                color='#FFF'
+                size={20}
+              />
+            </View>
+          </TouchableOpacity >
+        </View>
+      );
+    }
+  };
+
   renderListEventosAchados() {
     if (this.props.eventosAchados.length !== 0) {
       return (
@@ -71,12 +92,13 @@ class Eventos extends Component {
             data={this.props.eventosAchados}
             style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, borderWidth: 2, borderColor: '#2A4065' }}
             renderItem={({ item }) =>
-            <View style={{ flex: 1, flexDirection: 'row', borderTopColor: '#777', borderTopWidth: 2, backgroundColor: 'white' }}>
+              <View style={{ flex: 1, flexDirection: 'row', borderTopColor: '#777', borderTopWidth: 2, backgroundColor: 'white' }}>
                 <Text style={{ flex: 1, color: '#777', fontSize: 12, margin: 5, height: 40, paddingTop: 7, paddingLeft: 5 }}>
                   {item.nome}
                 </Text>
+                {this.renderEditEventIcon(item)}
                 <View style={{ marginTop: 7 }}>
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate('VisualizarEvento', item)}>
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate('VisualizarEvento', item)} >
                     <View style={{ height: 30, width: 30, justifyContent: 'center', backgroundColor: '#2A4065', borderRadius: 50, marginRight: 5 }}>
                       <Icon
                         type='font-awesome'
@@ -86,10 +108,8 @@ class Eventos extends Component {
                       />
                     </View>
                   </TouchableOpacity >
-
                 </View>
-              </View>
-            }
+              </View>}
           />
         </View>
       );
@@ -102,8 +122,8 @@ class Eventos extends Component {
         <TouchableOpacity onPress={() => { this.props.navigation.navigate('SalvarEventos'); }} >
           <View style={{ height: 60, width: 60, margin: 15, backgroundColor: '#2BA3DA', elevation: 8, borderRadius: 150, alignContent: 'center', justifyContent: 'center' }}>
             <Icon
-              type='font-awesome'
-              name='calendar'
+              type='material-community'
+              name='calendar-plus'
               color='#FFF'
               size={25}
             />
@@ -121,22 +141,6 @@ class Eventos extends Component {
         {this.renderInputPesquisaEvento()}
         {this.renderListEventosAchados()}
         {this.renderButtomSaveEvento()}
-
-        {/* 
-        <CardSection>
-          <Button
-            text="Editar Eventos"
-            styles={Styles.btnConfirm}
-            onPress={() => { this.props.navigation.navigate('EditarEventos'); }}
-          />
-        </CardSection>
-        <CardSection>
-          <Button
-            text="Visualizar Eventos"
-            styles={Styles.btnConfirm}
-            onPress={() => { this.props.navigation.navigate('VisualizarEventos'); }}
-          />
-        </CardSection> */}
       </View>
     );
   }
