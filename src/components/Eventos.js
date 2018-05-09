@@ -52,19 +52,10 @@ class Eventos extends Component {
     };
   }
 
-  state = {
-    datas_eventos: ''
-  }
-
-  componentWillMount() {
+   componentWillMount() {
     this.props.serachEventsToShow();
   }
-  // componentWillReceiveProps() {
-  //   this.renderData();
-  // }
-  // // renderData = () => {
-  
-  // // }
+ 
   renderInputPesquisaEvento() {
     return (
       <View style={{ flex: 1, zIndex: 1, padding: 20, width: '100%', position: 'absolute' }}>
@@ -131,20 +122,25 @@ class Eventos extends Component {
   }
 
   renderCalendar() {
+    const selected = true;
     const marked = true;
+    const selectedColor = '#2BA3DA';
     let markedDates = {};
+    markedDates = { ...markedDates, ...{ selected } };
     markedDates = { ...markedDates, ...{ marked } };
-    let obj = {};
+    markedDates = { ...markedDates, ...{ selectedColor } };
+    let datas_eventos = {};
     this.props.eventos.map(evento => {
       const evento_data = evento.data_inicio.split('/').reverse().join('-');
-      const updatedMarkedDates = { ...obj, [evento_data]: markedDates  };
-     obj = Object.assign(updatedMarkedDates);
+      const updatedMarkedDates = { ...datas_eventos, [evento_data]: markedDates };
+      datas_eventos = { ...updatedMarkedDates };
+      return datas_eventos;
     });
-    console.log(obj);
+    console.log(datas_eventos);
     return (
       <View style={{ flex: 1, marginTop: HALFHEIGHT }}>
         <Calendar
-          markedDates={obj}
+          markedDates={datas_eventos}
         />
       </View>
     );
