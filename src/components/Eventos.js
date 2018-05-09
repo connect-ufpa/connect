@@ -137,7 +137,7 @@ class Eventos extends Component {
     let obj = {};
     this.props.eventos.map(evento => {
       const evento_data = evento.data_inicio.split('/').reverse().join('-');
-      const updatedMarkedDates = {  [evento_data]: markedDates  };
+      const updatedMarkedDates = { ...obj, [evento_data]: markedDates  };
      obj = Object.assign(updatedMarkedDates);
     });
     console.log(obj);
