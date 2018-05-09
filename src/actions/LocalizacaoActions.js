@@ -10,17 +10,25 @@ import {
   SEARCHING_LOCAL,
   RETRIEVE_LOCAIS,
   RETRIVING_LOCAIS,
+  CLEAR_INPUT_SEARCH,
+  INPUT_SEARCH_UNFOCUSED,
   SEARCHED_USER_LOCALIZATION,
   SEARCHING_USER_LOCALIZATION,
 } from './types';
 
-export const markLocal = (local) => {
+export const markLocal = local => {
   return dispatch => {
     dispatch({ type: MARK_LOCAL, payload: local });
   };
 };
 
-export const saveLocais = (locais) => {
+export const clearInputSearch = () => {
+  return dispatch => {
+    dispatch({ type: CLEAR_INPUT_SEARCH });
+  };
+};
+
+export const saveLocais = locais => {
   for (var i = 0; i < locais.local.length; i++) {
     database()
       .ref(`local/`)
@@ -35,17 +43,17 @@ export const saveLocais = (locais) => {
   }
 };
 
-export const createRota = (local) => {
+export const createRota = local => {
   if (_.isEmpty(local)) {
     return dispatch => {
-      dispatch({ 
-        type: ERROR_CREATING_ROUTE
+      dispatch({
+        type: ERROR_CREATING_ROUTE,
       });
     };
   } else {
     return dispatch => {
-      dispatch({ 
-        type: CREATING_ROUTE
+      dispatch({
+        type: CREATING_ROUTE,
       });
     };
   }
@@ -81,9 +89,17 @@ export const searchLocal = (localPesquisado, locais) => {
 
     let locaisAchados = [];
 
+    if (localPesquisado === '') {
+      dispatch({ type: INPUT_SEARCH_UNFOCUSED });
+    }
+
     if (localPesquisado !== '') {
       locais.map(localVerificado => {
-        if (localVerificado['nome'].toLowerCase().includes(localPesquisado.toLowerCase())) {
+        if (
+          localVerificado['nome']
+            .toLowerCase()
+            .includes(localPesquisado.toLowerCase())
+        ) {
           locaisAchados.push(localVerificado);
         }
       });
@@ -96,11 +112,14 @@ export const searchLocalizacaoUsuario = () => {
   return dispatch => {
     dispatch({ type: SEARCHING_USER_LOCALIZATION });
 
-    navigator.geolocation.getCurrentPosition(localizacao => {
-      searchLocalizacaoUsuarioSuccess(dispatch, localizacao);
-    }, error => {
-      console.log(error);
-    });
+    navigator.geolocation.getCurrentPosition(
+      localizacao => {
+        searchLocalizacaoUsuarioSuccess(dispatch, localizacao);
+      },
+      error => {
+        console.log(error);
+      }
+    );
   };
 };
 

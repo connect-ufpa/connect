@@ -3,6 +3,7 @@ import {
   Text,
   View,
   FlatList,
+  TextInput,
   Dimensions,
   StyleSheet,
   ScrollView,
@@ -16,21 +17,11 @@ import {
   verifyLocais,
   closeHelper,
   closeError,
+  clearInputSearch,
   searchLocalizacaoUsuario,
 } from '../actions';
-import {
-  Map,
-  Input,
-  Spinner, 
-  CalloutView,
-  HeaderImage,
-} from './commons';
-import 
-  MapView, { 
-  Marker,
-  Circle,
-  Callout 
-} from 'react-native-maps';
+import { Map, Input, Spinner, CalloutView, HeaderImage } from './commons';
+import MapView, { Marker, Circle, Callout } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -39,7 +30,12 @@ import locais from '../data/locais.json';
 import _ from 'lodash';
 
 const { height, width } = Dimensions.get('window');
-const initialRegion = { latitude: -1.473987, longitude: -48.452267,  latitudeDelta: 0.004,  longitudeDelta: 0.004 };
+const initialRegion = {
+  latitude: -1.473987,
+  longitude: -48.452267,
+  latitudeDelta: 0.004,
+  longitudeDelta: 0.004,
+};
 
 class Localizacao extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -73,8 +69,7 @@ class Localizacao extends Component {
       headerRight: (
         <View>
           <Icon
-            name="search"
-            type="font-awesome"
+            name="settings"
             color="#2a4065"
             size={25}
             onPress={() => navigate('DrawerOpen')}
@@ -94,16 +89,14 @@ class Localizacao extends Component {
   }
 
   renderMarcadorLocalPesquisado() {
-    if (_.isEmpty(this.props.localMarcado)) {
-      console.log('Nenhum local foi pesquisado até o momento...');
-    } else {
+    if (!_.isEmpty(this.props.localMarcado)) {
       const map = this.refs.Map;
-      map.animateToCoordinate(coordinate={
-        latitude: this.props.localMarcado.coords.lat,
-        longitude: this.props.localMarcado.coords.lng,
-        }
+      map.animateToCoordinate(
+        (coordinate = {
+          latitude: this.props.localMarcado.coords.lat,
+          longitude: this.props.localMarcado.coords.lng,
+        })
       );
-
       return (
         <Marker
           coordinate={{
@@ -112,7 +105,7 @@ class Localizacao extends Component {
           }}
           image={require('../../assets/img/pin.png')}
         >
-          <Callout>
+          <Callout tooltip={true}>
             <CalloutView
               name={this.props.localMarcado.nome}
               desc={this.props.localMarcado.desc}
@@ -133,12 +126,37 @@ class Localizacao extends Component {
     } else {
       return (
         <View style={styles.containerPesquisar}>
-          <Input
+          <TextInput
+            autoCorrect={false}
+            style={styles.inputSearch}
+            underlineColorAndroid={'transparent'}
             value={this.props.localSendoPesquisado}
-            addStyle={styles.inputSearch}
-            placeholder="Pesquise local desejado:"
-            onChangeText={localSendoPesquisado => this.props.searchLocal(localSendoPesquisado, this.props.locais)}
+            placeholder={'Pesquise um local desejado:'}
+            onChangeText={localSendoPesquisado =>
+              this.props.searchLocal(localSendoPesquisado, this.props.locais)
+            }
           />
+          <TouchableOpacity
+            onPress={() => {
+              this.props.clearInputSearch();
+            }}
+          >
+            <View
+              style={{
+                flex: 1,
+                padding: 10,
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#FFF',
+              }}
+            >
+              {this.props.inputSearchFocused ? (
+                <Icon name="clear" color="#777" size={25} />
+              ) : (
+                <Icon name="search" color="#777" size={25} />
+              )}
+            </View>
+          </TouchableOpacity>
         </View>
       );
     }
@@ -150,24 +168,65 @@ class Localizacao extends Component {
         <View style={styles.containerLista}>
           <FlatList
             data={this.props.locaisAchados}
-            style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, borderWidth: 2, borderColor: '#FFF',}}
+            style={{
+              borderBottomLeftRadius: 6,
+              borderBottomRightRadius: 6,
+              borderWidth: 2,
+              borderColor: '#FFF',
+            }}
             renderItem={({ item }) => (
-              <View style={{ flex: 1, flexDirection: 'row', borderTopColor: '#777', borderTopWidth: 1 }}>
-                <Text style={{ flex: 5, backgroundColor: 'white', color: '#777', fontSize: 12, padding: 13, height: 40 }}>
-                  {item.nome}
-                </Text>
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 10, backgroundColor: '#FFF'  }}>
-                  <TouchableOpacity onPress={() => { this.props.markLocal(item)}}>
-                    <View style={{ height: 20, width: 20, justifyContent: 'center', backgroundColor: '#2A4065', borderRadius: 50 }}>
+              <TouchableOpacity
+                onPress={() => {
+                  this.props.markLocal(item);
+                }}
+              >
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: 'row',
+                    borderTopColor: '#777',
+                    borderTopWidth: 1,
+                  }}
+                >
+                  <Text
+                    style={{
+                      flex: 5,
+                      backgroundColor: 'white',
+                      color: '#777',
+                      fontSize: 12,
+                      padding: 13,
+                      height: 40,
+                    }}
+                  >
+                    {item.nome}
+                  </Text>
+                  <View
+                    style={{
+                      flex: 1,
+                      padding: 10,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: '#FFF',
+                    }}
+                  >
+                    <View
+                      style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: 50,
+                        justifyContent: 'center',
+                        backgroundColor: '#2A4065',
+                      }}
+                    >
                       <Icon
                         name="keyboard-arrow-right"
                         color="#FFF"
                         size={20}
                       />
                     </View>
-                  </TouchableOpacity>
+                  </View>
                 </View>
-              </View>
+              </TouchableOpacity>
             )}
           />
         </View>
@@ -176,9 +235,7 @@ class Localizacao extends Component {
   }
 
   renderMarcadoresLocais() {
-    if (this.props.loading) {
-      console.log('Pesquisando locais no banco de dados...');
-    } else {
+    if (!this.props.loading) {
       if (_.isEmpty(this.props.localMarcado)) {
         return this.props.locais.map(marker => (
           <Marker
@@ -189,25 +246,37 @@ class Localizacao extends Component {
             }}
             title={marker.nome}
             image={require('../../assets/img/pin.png')}
-          > 
-            <Callout>
-              <CalloutView
-                name={marker.nome}
-                desc={marker.desc}
-              />
+          >
+            <Callout tooltip={true}>
+              <CalloutView name={marker.nome} desc={marker.desc} />
             </Callout>
           </Marker>
         ));
-      } else {
-        console.log('Usuário pesquisou um local específico...');
       }
     }
   }
 
   renderFiltroButtons() {
-    return(
-      <View style={{ flex: 1, bottom: 0, marginBottom: 100, marginRight: 5, right: 0, zIndex: 1, position: 'absolute' }}>
-        <Text style={{ textAlign: 'center', fontFamily: 'Ubuntu', fontSize: 8, color: '#777' }}>
+    return (
+      <View
+        style={{
+          flex: 1,
+          bottom: 0,
+          marginBottom: 100,
+          marginRight: 5,
+          right: 0,
+          zIndex: 1,
+          position: 'absolute',
+        }}
+      >
+        <Text
+          style={{
+            textAlign: 'center',
+            fontFamily: 'Ubuntu',
+            fontSize: 8,
+            color: '#777',
+          }}
+        >
           Filtros
         </Text>
         <View
@@ -222,11 +291,7 @@ class Localizacao extends Component {
             justifyContent: 'center',
           }}
         >
-          <Icon
-            name="place"
-            color="#FFF"
-            size={15}
-          />
+          <Icon name="place" color="#FFF" size={15} />
         </View>
         <View
           style={{
@@ -240,12 +305,7 @@ class Localizacao extends Component {
             justifyContent: 'center',
           }}
         >
-          <Icon
-            type="font-awesome"
-            name="flask"
-            color="#FFF"
-            size={15}
-          />
+          <Icon type="font-awesome" name="flask" color="#FFF" size={15} />
         </View>
         <View
           style={{
@@ -259,11 +319,7 @@ class Localizacao extends Component {
             justifyContent: 'center',
           }}
         >
-          <Icon
-            name="event-seat"
-            color="#FFF"
-            size={15}
-          />
+          <Icon name="event-seat" color="#FFF" size={15} />
         </View>
         <View
           style={{
@@ -277,11 +333,7 @@ class Localizacao extends Component {
             justifyContent: 'center',
           }}
         >
-          <Icon
-            name="local-dining"
-            color="#FFF"
-            size={15}
-          />
+          <Icon name="local-dining" color="#FFF" size={15} />
         </View>
         <View
           style={{
@@ -295,11 +347,7 @@ class Localizacao extends Component {
             justifyContent: 'center',
           }}
         >
-          <Icon
-            name="local-library"
-            color="#FFF"
-            size={15}
-          />
+          <Icon name="local-library" color="#FFF" size={15} />
         </View>
         <View
           style={{
@@ -313,82 +361,127 @@ class Localizacao extends Component {
             justifyContent: 'center',
           }}
         >
-          <Icon
-            name="clear"
-            color="#FFF"
-            size={15}
-          />
+          <Icon name="clear" color="#FFF" size={15} />
         </View>
-      </View>
-    )
-  }
-
-  renderButtons() {
-    return (
-      <View style={styles.containerButtons}>
-        <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center'  }}>
-          <TouchableOpacity onPress={() => {this.props.createRota(this.props.localMarcado)}}>
-            <View
-              style={{
-                height: 60,
-                width: 60,
-                margin: 15,
-                backgroundColor: '#2A4065',
-                elevation: 8,
-                borderRadius: 150,
-                alignContent: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Icon 
-                name="navigation" 
-                color="#FFF" 
-                size={25} 
-              />
-            </View>
-          </TouchableOpacity>
-        </View>
-        
-        {/* <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
-          {( this.props.showHelperMessageRoute == true ? 
-            <View style={{ borderRadius: 5, backgroundColor: '#FFF', marginBottom: 10, height: 75, width: width * 0.3, margin: 15 }}>
-            </View> 
-            : null )}
-          <TouchableOpacity>
-            <View
-              style={{
-                height: 60,
-                width: 60,
-                margin: 15,
-                backgroundColor: '#2BA3DA',
-                elevation: 8,
-                borderRadius: 150,
-                alignContent: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Icon
-                type="font-awesome"
-                name="comments"
-                color="#FFF"
-                size={25}
-              />
-            </View>
-          </TouchableOpacity>
-        </View> */}
       </View>
     );
   }
 
-  renderHelper() {
-    if(this.props.helper && !this.props.loading) {
+  renderButtons() {
+    if (!this.props.loading) {
       return (
-        <View style={{ elevation: 8, flex: 1, alignSelf: 'center', position: 'absolute', bottom: 150, zIndex: 1, backgroundColor: '#FFF', padding: 5, borderRadius: 10, width: width * 0.6, height: height * 0.25 }}>
+        <View style={styles.containerButtons}>
+          <View
+            style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}
+          >
+            <TouchableOpacity
+              onPress={() => {
+                const map = this.refs.Map;
+                const coordinatesToFit = [
+                  {
+                    latitude: this.props.localizacaoUsuario.coords.latitude,
+                    longitude: this.props.localizacaoUsuario.coords.longitude,
+                  },
+                  {
+                    latitude: this.props.localMarcado.coords.lat,
+                    longitude: this.props.localMarcado.coords.lng,
+                  },
+                ];
+
+                map.animateToCoordinate(
+                  {
+                    latitude: this.props.localizacaoUsuario.coords.latitude,
+                    longitude: this.props.localizacaoUsuario.coords.longitude,
+                  }
+                );
+
+                setTimeout(() => {
+                  map.fitToCoordinates(coordinatesToFit, {
+                    edgePadding: { top: 175, right: 50, bottom: 50, left: 50 },
+                    animated: true,
+                  });
+                }, 1500);
+
+                setTimeout(() => {
+                  this.props.createRota(this.props.localMarcado);
+                }, 4000);
+              }}
+            >
+              {_.isEmpty(this.props.localMarcado) ? (
+                <View
+                  style={{
+                    height: 60,
+                    width: 60,
+                    margin: 15,
+                    elevation: 8,
+                    borderRadius: 150,
+                    alignContent: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: '#777',
+                  }}
+                >
+                  <Icon name="near-me" color="#FFF" size={25} />
+                </View>
+              ) : (
+                <View
+                  style={{
+                    height: 60,
+                    width: 60,
+                    margin: 15,
+                    elevation: 8,
+                    borderRadius: 150,
+                    alignContent: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: '#2A4065',
+                  }}
+                >
+                  <Icon name="near-me" color="#FFF" size={25} />
+                </View>
+              )}
+            </TouchableOpacity>
+          </View>
+        </View>
+      );
+    }
+  }
+
+  renderHelper() {
+    if (this.props.helper && !this.props.loading) {
+      return (
+        <View
+          style={{
+            elevation: 8,
+            flex: 1,
+            alignSelf: 'center',
+            position: 'absolute',
+            bottom: 150,
+            zIndex: 1,
+            backgroundColor: '#FFF',
+            padding: 5,
+            borderRadius: 10,
+            width: width * 0.6,
+            height: height * 0.25,
+          }}
+        >
           <View style={{ flex: 2, flexDirection: 'row', marginTop: 10 }}>
-            <Text style={{ flex: 5, fontFamily: 'Ubuntu', textAlign: 'center', fontSize: 14, color: "#2BA3DA", marginLeft: 20, paddingTop: 5 }}> 
+            <Text
+              style={{
+                flex: 5,
+                fontFamily: 'Ubuntu',
+                textAlign: 'center',
+                fontSize: 14,
+                color: '#2BA3DA',
+                marginLeft: 20,
+                paddingTop: 5,
+              }}
+            >
               Dica
             </Text>
-            <TouchableOpacity onPress={() => {this.props.closeHelper()}}>
+            <TouchableOpacity
+              onPress={() => {
+                this.props.closeHelper();
+              }}
+            >
               <View
                 style={{
                   height: 30,
@@ -400,33 +493,64 @@ class Localizacao extends Component {
                   justifyContent: 'center',
                 }}
               >
-                <Icon
-                  name="clear"
-                  color="#FFF"
-                  size={15}
-                />
+                <Icon name="clear" color="#FFF" size={15} />
               </View>
             </TouchableOpacity>
           </View>
-          <Text style={{ flex: 4, fontSize: 11, padding: 5, fontFamily: 'Ubuntu', color: '#777', textAlign: 'center' }}>
+          <Text
+            style={{
+              flex: 4,
+              fontSize: 11,
+              padding: 5,
+              fontFamily: 'Ubuntu',
+              color: '#777',
+              textAlign: 'center',
+            }}
+          >
             {this.props.helperMessage}
           </Text>
         </View>
       );
-    } else {
-      console.log("Sem helpers...");
     }
   }
 
   renderError() {
-    if(this.props.error) {
+    if (this.props.error) {
       return (
-        <View style={{ elevation: 8, flex: 1, alignSelf: 'center', position: 'absolute', bottom: 150, zIndex: 1, backgroundColor: '#FFF', padding: 5, borderRadius: 10, width: width * 0.6, height: height * 0.25 }}>
+        <View
+          style={{
+            elevation: 8,
+            flex: 1,
+            alignSelf: 'center',
+            position: 'absolute',
+            bottom: 150,
+            zIndex: 1,
+            backgroundColor: '#FFF',
+            padding: 5,
+            borderRadius: 10,
+            width: width * 0.6,
+            height: height * 0.25,
+          }}
+        >
           <View style={{ flex: 2, flexDirection: 'row', marginTop: 10 }}>
-            <Text style={{ flex: 5, fontFamily: 'Ubuntu', textAlign: 'center', fontSize: 14, color: "#CC2822", marginLeft: 20, paddingTop: 5 }}> 
+            <Text
+              style={{
+                flex: 5,
+                fontFamily: 'Ubuntu',
+                textAlign: 'center',
+                fontSize: 14,
+                color: '#CC2822',
+                marginLeft: 20,
+                paddingTop: 5,
+              }}
+            >
               Erro
             </Text>
-            <TouchableOpacity onPress={() => {this.props.closeError()}}>
+            <TouchableOpacity
+              onPress={() => {
+                this.props.closeError();
+              }}
+            >
               <View
                 style={{
                   height: 30,
@@ -438,40 +562,40 @@ class Localizacao extends Component {
                   justifyContent: 'center',
                 }}
               >
-                <Icon
-                  name="clear"
-                  color="#FFF"
-                  size={15}
-                />
+                <Icon name="clear" color="#FFF" size={15} />
               </View>
             </TouchableOpacity>
           </View>
-          <Text style={{ flex: 4, fontSize: 11, padding: 5, fontFamily: 'Ubuntu', color: '#777', textAlign: 'center' }}>
+          <Text
+            style={{
+              flex: 4,
+              fontSize: 11,
+              padding: 5,
+              fontFamily: 'Ubuntu',
+              color: '#777',
+              textAlign: 'center',
+            }}
+          >
             {this.props.errorMessage}
           </Text>
         </View>
       );
-    } else {
-      console.log("Sem erros...");
     }
   }
 
   renderRota() {
-    if (!this.props.creatingRoute) {
-      console.log("Nenhum local foi clicado para se gerar rota...");
-    }
-    if (this.props.error) {
-      console.log("Pesquise um local antes de gerar rota...");
-    }
-    if(!this.props.error && this.props.creatingRoute) {
-      const destination= { latitude: this.props.localMarcado.coords.lat, longitude: this.props.localMarcado.coords.lng };
+    if (!this.props.error && this.props.creatingRoute) {
+      const destination = {
+        latitude: this.props.localMarcado.coords.lat,
+        longitude: this.props.localMarcado.coords.lng,
+      };
       return (
-        <MapViewDirections          
+        <MapViewDirections
           origin={this.props.localizacaoUsuario.coords}
           destination={destination}
+          strokeWidth={6}
           mode={'walking'}
-          strokeWidth={5}
-          strokeColor={'#2A4065'}
+          strokeColor={'#2BA3DA'}
           apikey={'AIzaSyDs39LTHBTeq5xQoR6HJDkFtoLuWARdhCY'}
         />
       );
@@ -486,7 +610,7 @@ class Localizacao extends Component {
     return (
       <ScrollView style={Styles.scrollViewStyle}>
         <MapView
-          ref={"Map"}
+          ref={'Map'}
           showsUserLocation={true}
           showsMyLocationButton={false}
           style={Styles.mapLocalizacaoStyle}
@@ -498,7 +622,7 @@ class Localizacao extends Component {
         </MapView>
         {this.renderInputPesquisarLocais()}
         {this.renderListaLocaisAchados()}
-        {this.renderFiltroButtons()}
+        {/* {this.renderFiltroButtons()} */}
         {this.renderButtons()}
         {this.renderError()}
         {this.renderHelper()}
@@ -521,13 +645,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
-  containerPesquisar: {
-    flex: 1,
-    zIndex: 2,
-    padding: 20,
-    width: '100%',
-    position: 'absolute',
-  },
   containerLista: {
     flex: 1,
     zIndex: 3,
@@ -547,27 +664,45 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
   },
-  inputSearch: {
-    fontSize: 12,
+  containerPesquisar: {
+    flex: 1,
+    zIndex: 2,
+    padding: 5,
+    margin: 20,
     elevation: 8,
+    borderRadius: 5,
     borderColor: '#FFF',
-  }
+    position: 'absolute',
+    flexDirection: 'row',
+    backgroundColor: '#FFF',
+  },
+  inputSearch: {
+    flex: 5,
+    color: '#2D2D2D',
+    fontSize: 14,
+    paddingLeft: 20,
+    paddingRight: 20,
+    borderColor: '#FFF',
+    fontFamily: 'Ubuntu',
+    backgroundColor: '#FFF',
+  },
 });
 
 const mapStateToProps = state => {
   return {
+    helper: state.localizacao.helper,
+    error: state.localizacao.error,
     locais: state.localizacao.locais,
     loading: state.localizacao.loading,
     localPesquisado: state.localizacao.local,
-    localSendoPesquisado: state.localizacao.localSendoPesquisado,
     localMarcado: state.localizacao.localMarcado,
     locaisAchados: state.localizacao.locaisAchados,
     creatingRoute: state.localizacao.creatingRoute,
-    helper: state.localizacao.helper,
-    helperMessage: state.localizacao.helperMessage,
-    error: state.localizacao.error,
     errorMessage: state.localizacao.errorMessage,
+    helperMessage: state.localizacao.helperMessage,
     localizacaoUsuario: state.localizacao.localizacaoUsuario,
+    inputSearchFocused: state.localizacao.inputSearchFocused,
+    localSendoPesquisado: state.localizacao.localSendoPesquisado,
   };
 };
 
@@ -578,6 +713,6 @@ export default connect(mapStateToProps, {
   verifyLocais,
   closeHelper,
   closeError,
+  clearInputSearch,
   searchLocalizacaoUsuario,
 })(Localizacao);
-
