@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, FlatList, Text } from 'react-native';
+import { View, TouchableOpacity, FlatList, Text, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
+import { Calendar } from 'react-native-calendars';
 import { StackNavigator } from 'react-navigation';
 import { firebaseAuth } from '../config/Config';
 import { HeaderImage, Texts, Input } from '../components/commons';
 import { serachEventsToShow, searchEvento } from '../actions';
+
+const HEIGHT = Dimensions.get('window').height;
+const HALFHEIGHT = HEIGHT * 0.15;
 
 class Eventos extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -48,9 +52,19 @@ class Eventos extends Component {
     };
   }
 
+  state = {
+    datas_eventos: ''
+  }
+
   componentWillMount() {
     this.props.serachEventsToShow();
   }
+  // componentWillReceiveProps() {
+  //   this.renderData();
+  // }
+  // // renderData = () => {
+  
+  // // }
   renderInputPesquisaEvento() {
     return (
       <View style={{ flex: 1, zIndex: 1, padding: 20, width: '100%', position: 'absolute' }}>
@@ -82,7 +96,7 @@ class Eventos extends Component {
         </View>
       );
     }
-  };
+  }
 
   renderListEventosAchados() {
     if (this.props.eventosAchados.length !== 0) {
@@ -116,6 +130,26 @@ class Eventos extends Component {
     }
   }
 
+  renderCalendar() {
+    const marked = true;
+    let markedDates = {};
+    markedDates = { ...markedDates, ...{ marked } };
+    let obj = {};
+    this.props.eventos.map(evento => {
+      const evento_data = evento.data_inicio.split('/').reverse().join('-');
+      const updatedMarkedDates = {  [evento_data]: markedDates  };
+     obj = Object.assign(updatedMarkedDates);
+    });
+    console.log(obj);
+    return (
+      <View style={{ flex: 1, marginTop: HALFHEIGHT }}>
+        <Calendar
+          markedDates={obj}
+        />
+      </View>
+    );
+  }
+
   renderButtomSaveEvento() {
     return (
       <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-end' }}>
@@ -137,9 +171,10 @@ class Eventos extends Component {
   }
   render() {
     return (
-      <View style={{ flex: 1, flexDirection: 'row' }}>
+      <View style={{ flex: 1, flexDirection: 'column' }}>
         {this.renderInputPesquisaEvento()}
         {this.renderListEventosAchados()}
+        {this.renderCalendar()}
         {this.renderButtomSaveEvento()}
       </View>
     );
