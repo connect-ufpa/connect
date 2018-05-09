@@ -10,6 +10,7 @@ import Styles from '../Styles';
 const HEIGHT = Dimensions.get('window').height;
 const HALFHEIGTH = HEIGHT * 0.55;
 const MODALSUCCESS = HEIGHT * 0.4;
+const ICON = require('../../assets/img/marker.png');
 
 class SalvarEventos extends Component {
     static navigationOptions = () => {
@@ -70,7 +71,7 @@ class SalvarEventos extends Component {
                     onPress={(e) => { this.props.showMarkerAndModal(e); }}
                 >
                     {this.props.marker.map((marker) => {
-                        return (<Marker key={marker} {...marker} image={require('../../assets/img/marker.png')} />);
+                        return (<Marker key={marker} {...marker} image={ICON} />);
                     }
                     )}
                 </MapView>

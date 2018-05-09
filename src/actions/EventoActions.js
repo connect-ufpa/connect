@@ -63,7 +63,8 @@ export const saveEvent = (evento) => {
                 data_fim: evento.data_fim,
                 hora_fim: evento.hora_fim
             }).then((response) => {
-                database().ref(`usuario/${usuario.uid}/`).once('value').then(snap => {
+                console.log("RESPOSTA VINDO DO SERVIDOR", response.path.pieces_[1])
+                database().ref(`usuario/${usuario.uid}/`).once('value', snap => {
                     const user = snap.val();
                     if (user.hasOwnProperty('eventos_criados')) {
                         database().ref().child(`usuario/${usuario.uid}/`).update({ eventos_criados: [...user.eventos_criados, response.path.pieces_[1]] })

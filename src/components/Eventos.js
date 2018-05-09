@@ -3,9 +3,8 @@ import { View, TouchableOpacity, FlatList, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
-import { CardSection, HeaderImage, Button, Texts, Input } from '../components/commons';
+import { HeaderImage, Texts, Input } from '../components/commons';
 import { serachEventsToShow, searchEvento } from '../actions';
-import Styles from '../Styles';
 
 class Eventos extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -72,11 +71,25 @@ class Eventos extends Component {
             data={this.props.eventosAchados}
             style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, borderWidth: 2, borderColor: '#2A4065' }}
             renderItem={({ item }) =>
-              <TouchableOpacity onPress={evento => this.props.searchEvento(evento, this.props.eventos)}>
-                <Text style={{ backgroundColor: 'white', color: '#777', fontSize: 12, padding: 12.5 }}>
+            <View style={{ flex: 1, flexDirection: 'row', borderTopColor: '#777', borderTopWidth: 2, backgroundColor: 'white' }}>
+                <Text style={{ flex: 1, color: '#777', fontSize: 12, margin: 5, height: 40, paddingTop: 7, paddingLeft: 5 }}>
                   {item.nome}
                 </Text>
-              </TouchableOpacity >}
+                <View style={{ marginTop: 7 }}>
+                  <TouchableOpacity onPress={() => this.props.navigation.navigate('VisualizarEvento', item)}>
+                    <View style={{ height: 30, width: 30, justifyContent: 'center', backgroundColor: '#2A4065', borderRadius: 50, marginRight: 5 }}>
+                      <Icon
+                        type='font-awesome'
+                        name='eye'
+                        color='#FFF'
+                        size={20}
+                      />
+                    </View>
+                  </TouchableOpacity >
+
+                </View>
+              </View>
+            }
           />
         </View>
       );

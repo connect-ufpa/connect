@@ -102,7 +102,7 @@ export default StyleSheet.create({
     },
     eventCardStyle: {
         backgroundColor: '#ffff',
-        borderRadius: 20,
+        borderRadius: 5,
         marginLeft: 10,
         marginRight: 10,
     },

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { View, Dimensions } from 'react-native';
-import { connect } from 'react-redux';
+import { View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { Icon } from 'react-native-elements';
-import { HeaderImage, Button, CardSection } from '../components/commons';
-import Styles from '../Styles';
+import { HeaderImage } from '../components/commons';
+
+const ICON = require('../../assets/img/marker.png');
 
 class VisualizarEventoNoMapa extends Component {
     static navigationOptions = () => {
@@ -31,8 +31,8 @@ class VisualizarEventoNoMapa extends Component {
   
     render() {
         const { params } = this.props.navigation.state;
-        const lat = params.coords.lat;
-        const long = params.coords.long;
+        const lat = params.lat;
+        const long = params.long;
         const latLng = {
             latitude: lat,
             longitude: long
@@ -56,7 +56,7 @@ class VisualizarEventoNoMapa extends Component {
                         this.props.editEvent({ prop, value });
                     }}
                 >
-                    <Marker coordinate={latLng} image={require('../../assets/img/marker.png')} />
+                    <Marker coordinate={latLng} image={ICON} />
                 </MapView>
             </View>
         );
