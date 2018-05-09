@@ -27,7 +27,7 @@ export default StyleSheet.create({
         fontSize: 20,
         fontFamily: 'Ubuntu',
         color: '#FFF'
-        
+
     },
     smallTextStyle: {
         fontFamily: 'Ubuntu',
@@ -106,4 +106,58 @@ export default StyleSheet.create({
         marginLeft: 10,
         marginRight: 10,
     },
+    searchBarStyle: {
+        flex: 1,
+        padding: 20,
+        width: '100%',
+        position: 'absolute'
+    },
+    iconInsideSearchBarStyle: {
+        height: 30,
+        width: 30,
+        justifyContent: 'center',
+        borderRadius: 50,
+        marginRight: 5
+    },
+    iconButtomStyle: {
+        height: 60,
+        width: 60,
+        margin: 15,
+        elevation: 8,
+        borderRadius: 150,
+        alignContent: 'center',
+        justifyContent: 'center'
+    },
+    viewListItensFoundStyle: {
+        flex: 1,
+        zIndex: 1,
+        position: 'absolute',
+        marginTop: 70,
+        paddingLeft: 20,
+        paddingRight: 20,
+        elevation: 8,
+        width: '100%'
+    },
+    flatListStyle: {
+        borderBottomLeftRadius: 6,
+        borderBottomRightRadius: 6,
+        borderWidth: 2,
+        borderColor: '#2A4065'
+    },
+    backgroudTextFlatListStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        borderTopColor: '#777',
+        borderTopWidth: 2,
+        backgroundColor: 'white'
+    },
+    textFlatListStyle: {
+        flex: 1,
+        color: '#777',
+        fontSize: 12,
+        margin: 5,
+        height: 40,
+        paddingTop: 7,
+        paddingLeft: 5
+    }
 });

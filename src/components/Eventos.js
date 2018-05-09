@@ -7,6 +7,7 @@ import { StackNavigator } from 'react-navigation';
 import { firebaseAuth } from '../config/Config';
 import { HeaderImage, Texts, Input } from '../components/commons';
 import { serachEventsToShow, searchEvento } from '../actions';
+import Styles from '../Styles';
 
 const HEIGHT = Dimensions.get('window').height;
 const HALFHEIGHT = HEIGHT * 0.15;
@@ -52,13 +53,13 @@ class Eventos extends Component {
     };
   }
 
-   componentWillMount() {
+  componentWillMount() {
     this.props.serachEventsToShow();
   }
- 
+
   renderInputPesquisaEvento() {
     return (
-      <View style={{ flex: 1, zIndex: 1, padding: 20, width: '100%', position: 'absolute' }}>
+      <View style={Styles.searchBarStyle}>
         <Input
           placeholder='Pesquise evento desejado:'
           value={this.props.eventoNome}
@@ -75,7 +76,7 @@ class Eventos extends Component {
       return (
         <View style={{ marginTop: 7 }}>
           <TouchableOpacity onPress={() => this.props.navigation.navigate('EditarEvento', evento)} >
-            <View style={{ height: 30, width: 30, justifyContent: 'center', backgroundColor: '#CC2820', borderRadius: 50, marginRight: 5 }}>
+            <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#CC2820' }]}>
               <Icon
                 type='material-community'
                 name='calendar'
@@ -92,19 +93,19 @@ class Eventos extends Component {
   renderListEventosAchados() {
     if (this.props.eventosAchados.length !== 0) {
       return (
-        <View style={{ flex: 1, zIndex: 1, position: 'absolute', marginTop: 70, paddingLeft: 20, paddingRight: 20, elevation: 8, width: '100%' }}>
+        <View style={Styles.viewListItensFoundStyle}>
           <FlatList
             data={this.props.eventosAchados}
-            style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, borderWidth: 2, borderColor: '#2A4065' }}
+            style={Styles.flatListStyle}
             renderItem={({ item }) =>
-              <View style={{ flex: 1, flexDirection: 'row', borderTopColor: '#777', borderTopWidth: 2, backgroundColor: 'white' }}>
-                <Text style={{ flex: 1, color: '#777', fontSize: 12, margin: 5, height: 40, paddingTop: 7, paddingLeft: 5 }}>
+              <View style={Styles.backgroudTextFlatListStyle}>
+                <Text style={Styles.textFlatListStyle}>
                   {item.nome}
                 </Text>
                 {this.renderEditEventIcon(item)}
                 <View style={{ marginTop: 7 }}>
                   <TouchableOpacity onPress={() => this.props.navigation.navigate('VisualizarEvento', item)} >
-                    <View style={{ height: 30, width: 30, justifyContent: 'center', backgroundColor: '#2A4065', borderRadius: 50, marginRight: 5 }}>
+                    <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2BA3DA' }]}>
                       <Icon
                         type='font-awesome'
                         name='eye'
@@ -136,10 +137,10 @@ class Eventos extends Component {
       datas_eventos = { ...updatedMarkedDates };
       return datas_eventos;
     });
-    console.log(datas_eventos);
     return (
       <View style={{ flex: 1, marginTop: HALFHEIGHT }}>
         <Calendar
+          onDayPress={(day) => { console.log('selected day', day.dateString) }}
           markedDates={datas_eventos}
         />
       </View>
@@ -150,7 +151,7 @@ class Eventos extends Component {
     return (
       <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-end' }}>
         <TouchableOpacity onPress={() => { this.props.navigation.navigate('SalvarEventos'); }} >
-          <View style={{ height: 60, width: 60, margin: 15, backgroundColor: '#2BA3DA', elevation: 8, borderRadius: 150, alignContent: 'center', justifyContent: 'center' }}>
+          <View style={[Styles.iconButtomStyle, { backgroundColor: '#2BA3DA' }]}>
             <Icon
               type='material-community'
               name='calendar-plus'
