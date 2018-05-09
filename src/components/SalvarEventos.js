@@ -4,7 +4,7 @@ import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { showMarkerAndModal, closeModal, eventFieldChange, saveEvent } from '../actions';
-import { Button, Input, CardSection, Texts, Spinner, HeaderImage, Card } from './commons/';
+import { Button, Input, CardSection, Texts, Spinner, HeaderImage } from './commons/';
 import Styles from '../Styles';
 
 const HEIGHT = Dimensions.get('window').height;
@@ -39,15 +39,15 @@ class SalvarEventos extends Component {
             nome: this.props.nome,
             descricao: this.props.descricao,
             local: this.props.local,
-            area_tematica: this.props.area,
+            area_tematica: this.props.area_tematica,
             coords: {
                 lat: this.props.region.latitude,
                 long: this.props.region.longitude
             },
-            data_inicio: this.props.dataInicio,
-            hora_inicio: this.props.horaInicio,
-            data_fim: this.props.dataFim,
-            hora_fim: this.props.horaFim,
+            data_inicio: this.props.data_inicio,
+            hora_inicio: this.props.hora_inicio,
+            data_fim: this.props.data_fim,
+            hora_fim: this.props.hora_fim,
             error: this.props.error
         };
         if (this.props.loading) {
@@ -128,11 +128,11 @@ class SalvarEventos extends Component {
                             </CardSection>
                             <CardSection>
                                 <Picker
-                                    selectedValue={this.props.area}
+                                    selectedValue={this.props.area_tematica}
                                     style={{ height: 50, width: 250 }}
-                                    onValueChange={texto => this.props.eventFieldChange({ prop: 'area', value: texto })}
+                                    onValueChange={texto => this.props.eventFieldChange({ prop: 'area_tematica', value: texto })}
                                 >
-                                    <Picker.Item label="Comunição" value="Comunição" />
+                                    <Picker.Item label="Comunicação" value="Comunicação" />
                                     <Picker.Item label="Cultura" value="Cultura" />
                                     <Picker.Item label="Direitos Humanos e Justiça" value="Direitos Humanos e Justiça" />
                                     <Picker.Item label="Educação" value="Educação" />
@@ -149,13 +149,13 @@ class SalvarEventos extends Component {
                             <CardSection>
                                 <Input
                                     placeholder="00/00/000"
-                                    onChangeText={texto => this.props.eventFieldChange({ prop: 'dataInicio', value: texto })}
-                                    value={this.props.dataInicio}
+                                    onChangeText={texto => this.props.eventFieldChange({ prop: 'data_inicio', value: texto })}
+                                    value={this.props.data_inicio}
                                 />
                                 <Input
                                     placeholder="00:00"
-                                    onChangeText={texto => this.props.eventFieldChange({ prop: 'horaInicio', value: texto })}
-                                    value={this.props.horaInicio}
+                                    onChangeText={texto => this.props.eventFieldChange({ prop: 'hora_inicio', value: texto })}
+                                    value={this.props.hora_inicio}
                                 />
                             </CardSection>
                             <CardSection>
@@ -164,13 +164,13 @@ class SalvarEventos extends Component {
                             <CardSection>
                                 <Input
                                     placeholder="00/00/000"
-                                    onChangeText={texto => this.props.eventFieldChange({ prop: 'dataFim', value: texto })}
-                                    value={this.props.dataFim}
+                                    onChangeText={texto => this.props.eventFieldChange({ prop: 'data_fim', value: texto })}
+                                    value={this.props.data_fim}
                                 />
                                 <Input
                                     placeholder="00:00"
-                                    onChangeText={texto => this.props.eventFieldChange({ prop: 'horaFim', value: texto })}
-                                    value={this.props.horaFim}
+                                    onChangeText={texto => this.props.eventFieldChange({ prop: 'hora_fim', value: texto })}
+                                    value={this.props.hora_fim}
                                 />
                             </CardSection>
                             <View style={{ alignItems: 'center' }}>
@@ -216,16 +216,16 @@ const styles = {
     }
 };
 const mapStatesToProps = (state) => {
-    const { nome, descricao, local, area, dataInicio, horaInicio, dataFim, horaFim, errorData, errorHora } = state.evento;
+    const { nome, descricao, local, area_tematica, data_inicio, hora_inicio, data_fim, hora_fim, errorData, errorHora } = state.evento;
     return {
         nome,
         descricao,
         local,
-        area,
-        dataInicio,
-        horaInicio,
-        dataFim,
-        horaFim,
+        area_tematica,
+        data_inicio,
+        hora_inicio,
+        data_fim,
+        hora_fim,
         errorData,
         errorHora,
         region: state.evento.region,

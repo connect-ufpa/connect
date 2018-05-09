@@ -17,25 +17,25 @@ export const closeModal = () => {
 };
 
 export const eventFieldChange = ({ prop, value }) => {
-    if (prop === 'dataInicio') {
+    if (prop === 'data_inicio') {
         const validate = validateDates(value);
         if (validate) return { type: SAVE_EVENT_FIELD_CHANGE, payload: { prop, value } };
 
         return { type: INVALID_START_EVENT_DATE, payload: { prop, value } };
     }
-    if (prop === 'horaInicio') {
+    if (prop === 'hora_inicio') {
         const validate = validateHours(value);
         if (validate) return { type: SAVE_EVENT_FIELD_CHANGE, payload: { prop, value } };
 
         return { type: INVALID_START_EVENT_HOUR, payload: { prop, value } };
     }
-    if (prop === 'dataFim') {
+    if (prop === 'data_fim') {
         const validate = validateDates(value);
         if (validate) return { type: SAVE_EVENT_FIELD_CHANGE, payload: { prop, value } };
 
         return { type: INVALID_END_EVENT_DATE, payload: { prop, value } };
     }
-    if (prop === 'horaFim') {
+    if (prop === 'hora_fim') {
         const validate = validateHours(value);
         if (validate) return { type: SAVE_EVENT_FIELD_CHANGE, payload: { prop, value } };
 
@@ -140,10 +140,13 @@ export const saveEditedEvent = (evento) => {
                 nome: evento.nome,
                 descricao: evento.descricao,
                 local: evento.local,
+                area_tematica: evento.area_tematica,
                 coords: evento.coords,
                 usuario_id: usuario.uid,
-                data: evento.data,
-                hora: evento.hora
+                data_inicio: evento.data_inicio,
+                hora_inicio: evento.hora_inicio,
+                data_fim: evento.data_fim,
+                hora_fim: evento.hora_fim
             }).then(() => {
                 dispatch({ type: SAVED_EDITED_EVENT });
                 database().ref(`evento/${id}`).on('value', snap => {
@@ -184,12 +187,13 @@ export const serachEventsToShow = () => {
     const currentDate = moment().format('DD/MM/YYYY');
     return (dispatch) => {
         dispatch({ type: CLEAR });
-        database().ref('evento/').orderByChild('data_inicio').startAt(`${currentDate}`).once('value', snap => {
+        database().ref('evento/').orderByChild('data_inicio').startAt(`${currentDate}`)
+        .once('value', snap => {
             const eventos = snap.val();
             const key = Object.keys(eventos);
             key.forEach(id => {
-                const { nome, descricao, local, data_inicio, hora_inicio, coords } = eventos[id];
-                dispatch({ type: EVENTS_TO_SHOW_SUCCESS, payload: { id, nome, descricao, local, data_inicio, hora_inicio, coords } });
+                const { nome, descricao, local, data_inicio, hora_inicio, coords, hora_fim, data_fim, area_tematica, usuario_id } = eventos[id];
+                dispatch({ type: EVENTS_TO_SHOW_SUCCESS, payload: { id, nome, descricao, local, data_inicio, hora_inicio, coords, hora_fim, data_fim, area_tematica, usuario_id } });
             });
         });
     };

@@ -48,7 +48,7 @@ export const validateUser = (user) => {
 
 export const validateEvent = (evento) => {
     if (!evento.error) {
-        if ((evento.nome === '') || (evento.descricao === '') || (evento.local === '') || (evento.area_tematicaa === '') || (evento.data_inicio === '') || (evento.hora_inicio === '') || (evento.data_fim === '') || (evento.hora_fim === '') || (evento.coords === '')) {
+        if ((evento.nome === '') || (evento.descricao === '') || (evento.local === '') || (evento.area_tematica === '') || (evento.data_inicio === '') || (evento.hora_inicio === '') || (evento.data_fim === '') || (evento.hora_fim === '') || (evento.coords === '')) {
             return false;
         }
         return true;

@@ -3,7 +3,7 @@ import { View, TouchableOpacity, FlatList, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
-import { Card, CardSection, HeaderImage, Button, Texts, Input } from '../components/commons';
+import { CardSection, HeaderImage, Button, Texts, Input } from '../components/commons';
 import { serachEventsToShow, searchEvento } from '../actions';
 import Styles from '../Styles';
 
@@ -72,7 +72,7 @@ class Eventos extends Component {
             data={this.props.eventosAchados}
             style={{ borderBottomLeftRadius: 6, borderBottomRightRadius: 6, borderWidth: 2, borderColor: '#2A4065' }}
             renderItem={({ item }) =>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={evento => this.props.searchEvento(evento, this.props.eventos)}>
                 <Text style={{ backgroundColor: 'white', color: '#777', fontSize: 12, padding: 12.5 }}>
                   {item.nome}
                 </Text>
@@ -82,11 +82,10 @@ class Eventos extends Component {
       );
     }
   }
-  render() {
+
+  renderButtomSaveEvento() {
     return (
-      <View>
-        {this.renderInputPesquisaEvento()}
-        {this.renderListEventosAchados()}
+      <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-end' }}>
         <TouchableOpacity onPress={() => { this.props.navigation.navigate('SalvarEventos'); }} >
           <View style={{ height: 60, width: 60, margin: 15, backgroundColor: '#2BA3DA', elevation: 8, borderRadius: 150, alignContent: 'center', justifyContent: 'center' }}>
             <Icon
@@ -97,7 +96,20 @@ class Eventos extends Component {
             />
           </View>
         </TouchableOpacity>
-        <Texts text="Criar evento" />
+        <View style={{ marginLeft: 10 }} >
+          <Texts text="Criar evento" />
+        </View>
+      </View>
+    );
+  }
+  render() {
+    return (
+      <View style={{ flex: 1, flexDirection: 'row' }}>
+        {this.renderInputPesquisaEvento()}
+        {this.renderListEventosAchados()}
+        {this.renderButtomSaveEvento()}
+
+        {/* 
         <CardSection>
           <Button
             text="Editar Eventos"
@@ -111,7 +123,7 @@ class Eventos extends Component {
             styles={Styles.btnConfirm}
             onPress={() => { this.props.navigation.navigate('VisualizarEventos'); }}
           />
-        </CardSection>
+        </CardSection> */}
       </View>
     );
   }
