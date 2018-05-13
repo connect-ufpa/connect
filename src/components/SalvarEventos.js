@@ -3,7 +3,7 @@ import { View, Modal, TouchableHighlight, Dimensions, ScrollView, TextInput, Pic
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
-import { showMarkerAndModal, closeModal, eventFieldChange, saveEvent } from '../actions';
+import { showMarkerAndModal, closeModal, eventFieldChange, saveEvent, closeEventHelper } from '../actions';
 import { Button, Input, CardSection, Texts, Spinner, HeaderImage } from './commons/';
 import Styles from '../Styles';
 
@@ -28,50 +28,20 @@ class SalvarEventos extends Component {
         };
     }
 
-    state = {
-        helper: true
-    }
-
     renderHelper() {
-        if (this.state.helper) {
+        const { positionHelper } = this.props;
+        if (this.props.helper && this.props.typeHelper === 'start') {
             return (
-                <View style={[Styles.cardHelperStyle, { marginBottom: HEIGHT * 0.4, width: width * 0.5, height: height * 0.2, }]} >
+                <View style={[Styles.cardHelperStyle, { marginBottom: HEIGHT * positionHelper, width: width * 0.5, height: height * 0.2, }]} >
                     <View style={{ flex: 2, flexDirection: 'row', marginTop: 10 }}>
-                        <Text
-                            style={{
-                                flex: 5,
-                                fontFamily: 'Ubuntu',
-                                textAlign: 'center',
-                                fontSize: 14,
-                                color: '#2BA3DA',
-                                marginLeft: 20,
-                                paddingTop: 5,
-                            }}
-                        >
-                            Dica
-                </Text>
-                        <TouchableOpacity
-                            onPress={() => {
-                                this.state({ helper: false });
-                            }}
-                        >
-                            <View
-                                style={Styles.buttomCloseStyle}
-                            >
+                        <Text style={Styles.dicaTextStyle}>Dica</Text>
+                        <TouchableOpacity onPress={() => { this.props.closeEventHelper(); }} >
+                            <View style={Styles.buttomCloseStyle} >
                                 <Icon name="clear" color="#FFF" size={15} />
                             </View>
                         </TouchableOpacity>
                     </View>
-                    <Text
-                        style={{
-                            flex: 4,
-                            fontSize: 11,
-                            padding: 5,
-                            fontFamily: 'Ubuntu',
-                            color: '#777',
-                            textAlign: 'center',
-                        }}
-                    >
+                    <Text style={Styles.textCardHelperStyle} >
                         {this.props.helperMessage}
                     </Text>
                 </View>
@@ -274,6 +244,9 @@ const mapStatesToProps = (state) => {
         hora_fim,
         errorData,
         errorHora,
+        helper: state.evento.helper,
+        typeHelper: state.evento.typeHelper,
+        positionHelper: state.evento.positionHelper,
         region: state.evento.region,
         marker: state.evento.marker,
         modal: state.evento.modal,
@@ -288,6 +261,7 @@ export default connect(mapStatesToProps, {
     showMarkerAndModal,
     closeModal,
     eventFieldChange,
-    saveEvent
+    saveEvent,
+    closeEventHelper
 })(SalvarEventos);
 

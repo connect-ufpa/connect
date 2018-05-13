@@ -3,7 +3,7 @@ import { firebaseAuth, database } from '../config/Config';
 import { validateDates, validateHours, validateEvent } from '../helpers/HandleData';
 import {
     MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR,
-    INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EVENTS_TO_EDIT_SUCCESS, EDIT_EVENT,
+    INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, CLOSE_HELPER_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EVENTS_TO_EDIT_SUCCESS, EDIT_EVENT,
     EVENT_EDIT_DATA, EVENT_EDIT_HORA, SAVED_EDITED_EVENT, EVENTS_TO_SHOW_SUCCESS, SEARCHING_EVENT, SEARCHED_EVENTO,
     CLEAR
 } from './types';
@@ -43,6 +43,9 @@ export const eventFieldChange = ({ prop, value }) => {
     }
 
     return { type: SAVE_EVENT_FIELD_CHANGE, payload: { prop, value } };
+};
+export const closeEventHelper = () => {
+    return { type: CLOSE_HELPER_EVENT }; 
 };
 
 export const saveEvent = (evento) => {

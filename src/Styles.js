@@ -179,5 +179,22 @@ export default StyleSheet.create({
         backgroundColor: '#FFF',
         padding: 5,
         borderRadius: 10,
+    },
+    dicaTextStyle: {
+        flex: 5,
+        fontFamily: 'Ubuntu',
+        textAlign: 'center',
+        fontSize: 14,
+        color: '#2BA3DA',
+        marginLeft: 20,
+        paddingTop: 5,
+    }, 
+    textCardHelperStyle: {
+        flex: 4,
+        fontSize: 11,
+        padding: 5,
+        fontFamily: 'Ubuntu',
+        color: '#777',
+        textAlign: 'center',
     }
 });
