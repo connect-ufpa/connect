@@ -15,23 +15,15 @@ const ICON = require('../../assets/img/marker.png');
 class SalvarEventos extends Component {
     static navigationOptions = () => {
         return {
-            headerTitle: <View style={{ flex: 1, alignContent: 'center' }}><HeaderImage /></View>,
+            headerTitle:
+                <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row', justifyContent: 'center' }}>
+                    <View style={{ marginRight: 5 }}>
+                        <Texts text='Salvar Evento' />
+                    </View><HeaderImage />
+                </View>,
             headerStyle: {
                 paddingRight: 60,
-                height: 55
             },
-            headerTitleStyle: {
-                alignSelf: 'center',
-            },
-            drawerLabel: 'Eventos',
-            drawerIcon: () => (
-                <Icon
-                    type='font-awesome'
-                    name='calendar'
-                    color='#2a4065'
-                    size={25}
-                />
-            ),
         };
     }
 
