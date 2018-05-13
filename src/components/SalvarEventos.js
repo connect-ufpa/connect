@@ -192,15 +192,22 @@ class SalvarEventos extends Component {
                     onRequestClose={() => { }}
                 >
                     <View style={[Styles.eventCardStyle, { marginTop: MODALSUCCESS }]}>
+                        <View style={{ alignItems: 'flex-end', paddingTop: 5, paddingRight: 10 }}>
+                            <TouchableHighlight
+                                onPress={() => { this.props.closeModal(); }}
+                            >
+                                <View>
+                                    <Icon
+                                        type='font-awesome'
+                                        name='times-circle'
+                                        color='#CC2820'
+                                        size={30}
+                                    />
+                                </View>
+                            </TouchableHighlight>
+                        </View>
                         <CardSection>
                             <Texts text='Evento salvo com sucesso!' style='medium' />
-                        </CardSection>
-                        <CardSection>
-                            <Button
-                                text="Voltar"
-                                styles={Styles.btnCancel}
-                                onPress={() => { this.props.navigation.navigate('Eventos'); this.props.closeModal(); }}
-                            />
                         </CardSection>
                     </View>
                 </Modal>

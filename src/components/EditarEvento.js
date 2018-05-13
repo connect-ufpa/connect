@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, TextInput, ScrollView, Picker } from 'react-native';
 import { connect } from 'react-redux';
+import { Icon } from 'react-native-elements';
 import { editEvent, saveEditedEvent } from '../actions';
 import { HeaderImage, CardSection, Input, Texts, Button, Spinner } from '../components/commons';
-import { Icon } from 'react-native-elements';
 import Styles from '../Styles';
 
 class EditarEvento extends Component {

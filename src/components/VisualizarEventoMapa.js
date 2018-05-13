@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { connect } from 'react-redux';
 import MapView, { Marker } from 'react-native-maps';
 import { Icon } from 'react-native-elements';
 import { HeaderImage } from '../components/commons';
@@ -39,6 +40,7 @@ class VisualizarEventoNoMapa extends Component {
         };
         return (
             <View>
+            {console.log(this.props.localizacaoUsuario)}
                 <MapView
                     style={styles.mapStyle}
                     region={{
@@ -70,4 +72,8 @@ const styles = {
     }
 };
 
-export default VisualizarEventoNoMapa;
+const mapStateToProps = (state) => {
+    return { localizacaoUsuario: state.localizacao.localizacaoUsuario };
+};
+
+export default connect(mapStateToProps)(VisualizarEventoNoMapa);

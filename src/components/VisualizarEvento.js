@@ -27,10 +27,6 @@ class VisualizarEventos extends Component {
         };
     }
 
-    state = {
-        evento: '',
-    };
-
     componentWillMount() {
         const { params } = this.props.navigation.state;
         this.setState({ evento: params });

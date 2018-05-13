@@ -6,6 +6,7 @@
             "ignoreUrls": true,
             "ignoreComments": false
           }],
-        "camelcase": 0
+        "camelcase": 0,
+        "no-shadow": 0
     }
 }

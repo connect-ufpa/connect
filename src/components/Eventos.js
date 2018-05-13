@@ -3,9 +3,8 @@ import { View, TouchableOpacity, FlatList, Text, Dimensions, Modal, TouchableHig
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { Calendar } from 'react-native-calendars';
-import { StackNavigator } from 'react-navigation';
 import { firebaseAuth } from '../config/Config';
-import { HeaderImage, Texts, Input, CardSection } from '../components/commons';
+import { HeaderImage, Texts, Input } from '../components/commons';
 import { serachEventsToShow, searchEvento } from '../actions';
 import Styles from '../Styles';
 
@@ -27,7 +26,7 @@ class Eventos extends Component {
         alignSelf: 'center',
       },
       drawerLabel: 'Eventos',
-      drawerIcon: ({ tintColor }) => (
+      drawerIcon: () => (
         <Icon
           type='font-awesome'
           name='calendar'
@@ -55,8 +54,10 @@ class Eventos extends Component {
   }
   state = {
     modal: false,
-    datas_eventos: []
+    datas_eventos: [],
+    trabalho: 'Trabalho'
   }
+
   componentWillMount() {
     this.props.serachEventsToShow();
   }
@@ -100,12 +101,16 @@ class Eventos extends Component {
       }
       return datas_eventos;
     });
-    if (datas_eventos.hasOwnProperty(id)) {
+    if (Object.prototype.hasOwnProperty.call(datas_eventos, id)) {
       this.setState({
         modal: true,
         datas_eventos
       });
     }
+  }
+
+  setEventosToState(eventos) {
+    this.setState({ datas_eventos: eventos, modal: true });
   }
 
   renderInputPesquisaEvento() {
@@ -200,7 +205,7 @@ class Eventos extends Component {
 
   renderButtomSaveEvento() {
     return (
-      <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-end' }}>
+      <View style={{ alignItems: 'center' }}>
         <TouchableOpacity onPress={() => { this.props.navigation.navigate('SalvarEventos'); }} >
           <View style={[Styles.iconButtomStyle, { backgroundColor: '#2BA3DA' }]}>
             <Icon
@@ -217,13 +222,50 @@ class Eventos extends Component {
       </View>
     );
   }
+
+  renderButtomEventosRelated() {
+    let render_button_once = 0;
+    const eventos = [];
+    return (
+      this.props.eventos.map(evento => {
+        if (this.state.trabalho === evento.area_tematica) {
+          eventos.push(evento);
+           if (render_button_once === 0) {
+            render_button_once = 1;
+             return (
+               <View key={evento.id} style={{ alignItems: 'center', marginLeft: 10 }}>
+                 <TouchableOpacity onPress={() => { this.setEventosToState(eventos); }} >
+                   <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
+                     <Icon
+                       type='material-community'
+                       name='calendar-text'
+                       color='#FFF'
+                       size={25}
+                     />
+                   </View>
+                 </TouchableOpacity>
+                 <View>
+                   <Texts text="Eventos Relacionados" />
+                 </View>
+               </View>
+             );
+           }
+        } 
+        return null;
+      })
+    );
+  }
+
   render() {
     return (
       <View style={{ flex: 1, flexDirection: 'column' }}>
         {this.renderInputPesquisaEvento()}
         {this.renderListEventosAchados()}
         {this.renderCalendar()}
-        {this.renderButtomSaveEvento()}
+        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end' }}>
+          {this.renderButtomSaveEvento()}
+          {this.renderButtomEventosRelated()}
+        </View>
         <Modal
           animationType="slide"
           transparent

@@ -63,10 +63,9 @@ export const saveEvent = (evento) => {
                 data_fim: evento.data_fim,
                 hora_fim: evento.hora_fim
             }).then((response) => {
-                console.log("RESPOSTA VINDO DO SERVIDOR", response.path.pieces_[1])
                 database().ref(`usuario/${usuario.uid}/`).once('value', snap => {
                     const user = snap.val();
-                    if (user.hasOwnProperty('eventos_criados')) {
+                    if (Object.prototype.hasOwnProperty.call(user, 'eventos_criados')) {
                         database().ref().child(`usuario/${usuario.uid}/`).update({ eventos_criados: [...user.eventos_criados, response.path.pieces_[1]] })
                             .then(() => { dispatch({ type: CREATE_EVENT_SUCCESS }); });
                     } else {
@@ -87,8 +86,8 @@ export const searchEventsToEdit = () => {
         dispatch({ type: CLEAR });
         database().ref(`usuario/${usuario.uid}`).once('value').then(snap => {
             const user = snap.val();
-            if (user.hasOwnProperty('eventos_criados')) {
-                for (var eventoID in user.eventos_criados) {
+            if (Object.prototype.hasOwnProperty.call(user, 'eventos_criados')) {
+                for (const eventoID in user.eventos_criados) {
                     const id = user.eventos_criados[eventoID];
                     database().ref(`evento/${user.eventos_criados[eventoID]}`).once('value')
                         .then(snap => {
@@ -174,6 +173,7 @@ export const searchEvento = (nomeEvento, eventos) => {
                 if (eventoVerificado.nome.includes(nomeEvento)) {
                     eventosAchados.push(eventoVerificado);
                 }
+                return null;
             });
             searchedEventosSuccess(dispatch, eventosAchados);
         }

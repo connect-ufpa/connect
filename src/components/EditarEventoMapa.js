@@ -9,6 +9,7 @@ import Styles from '../Styles';
 
 const Height = Dimensions.get('window').height;
 const HalfHeight = Height * 0.75;
+const ICON = require('../../assets/img/marker.png');
 
 let lat = -1.473987;
 let long = -48.452267;
@@ -81,7 +82,7 @@ class EditarEventoMapa extends Component {
                         this.props.editEvent({ prop, value });
                     }}
                 >
-                    <Marker coordinate={LatLng} image={require('../../assets/img/marker.png')} />
+                    <Marker coordinate={LatLng} image={ICON} />
                 </MapView>
                 <CardSection styleSection={{ position: 'absolute', marginTop: HalfHeight }}>
                     <Button
