@@ -159,5 +159,25 @@ export default StyleSheet.create({
         height: 40,
         paddingTop: 7,
         paddingLeft: 5
+    },
+    buttomCloseStyle: {
+        height: 30,
+        width: 30,
+        borderRadius: 25,
+        marginRight: 10,
+        backgroundColor: '#CC2820',
+        alignContent: 'center',
+        justifyContent: 'center',
+    },
+    cardHelperStyle: {
+        elevation: 8,
+        flex: 1,
+        alignSelf: 'center',
+        position: 'absolute',
+        bottom: 130,
+        zIndex: 1,
+        backgroundColor: '#FFF',
+        padding: 5,
+        borderRadius: 10,
     }
 });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Modal, TouchableHighlight, Dimensions, ScrollView, TextInput, Picker } from 'react-native';
+import { View, Modal, TouchableHighlight, Dimensions, ScrollView, TextInput, Picker, Text, TouchableOpacity } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
@@ -7,6 +7,7 @@ import { showMarkerAndModal, closeModal, eventFieldChange, saveEvent } from '../
 import { Button, Input, CardSection, Texts, Spinner, HeaderImage } from './commons/';
 import Styles from '../Styles';
 
+const { height, width } = Dimensions.get('window');
 const HEIGHT = Dimensions.get('window').height;
 const HALFHEIGTH = HEIGHT * 0.55;
 const MODALSUCCESS = HEIGHT * 0.4;
@@ -25,6 +26,57 @@ class SalvarEventos extends Component {
                 paddingRight: 60,
             },
         };
+    }
+
+    state = {
+        helper: true
+    }
+
+    renderHelper() {
+        if (this.state.helper) {
+            return (
+                <View style={[Styles.cardHelperStyle, { marginBottom: HEIGHT * 0.4, width: width * 0.5, height: height * 0.2, }]} >
+                    <View style={{ flex: 2, flexDirection: 'row', marginTop: 10 }}>
+                        <Text
+                            style={{
+                                flex: 5,
+                                fontFamily: 'Ubuntu',
+                                textAlign: 'center',
+                                fontSize: 14,
+                                color: '#2BA3DA',
+                                marginLeft: 20,
+                                paddingTop: 5,
+                            }}
+                        >
+                            Dica
+                </Text>
+                        <TouchableOpacity
+                            onPress={() => {
+                                this.state({ helper: false });
+                            }}
+                        >
+                            <View
+                                style={Styles.buttomCloseStyle}
+                            >
+                                <Icon name="clear" color="#FFF" size={15} />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <Text
+                        style={{
+                            flex: 4,
+                            fontSize: 11,
+                            padding: 5,
+                            fontFamily: 'Ubuntu',
+                            color: '#777',
+                            textAlign: 'center',
+                        }}
+                    >
+                        {this.props.helperMessage}
+                    </Text>
+                </View>
+            );
+        }
     }
 
     renderSaveEventButton() {
@@ -67,7 +119,7 @@ class SalvarEventos extends Component {
                     }
                     )}
                 </MapView>
-
+                {this.renderHelper()}
                 <Modal
                     animationType="slide"
                     transparent
@@ -80,13 +132,8 @@ class SalvarEventos extends Component {
                                 <TouchableHighlight
                                     onPress={() => { this.props.closeModal(); }}
                                 >
-                                    <View>
-                                        <Icon
-                                            type='font-awesome'
-                                            name='times-circle'
-                                            color='#CC2820'
-                                            size={30}
-                                        />
+                                    <View style={Styles.buttomCloseStyle} >
+                                        <Icon name="clear" color="#FFF" size={15} />
                                     </View>
                                 </TouchableHighlight>
                             </View>

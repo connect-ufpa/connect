@@ -61,6 +61,30 @@ class Eventos extends Component {
   componentWillMount() {
     this.props.serachEventsToShow();
   }
+
+  setEventosToState(eventos) {
+    this.setState({ datas_eventos: eventos, modal: true });
+  }
+
+  showPoupUpEventoDia(data) {
+    const formatData = data.split('-').reverse().join('/');
+    let datas_eventos = {};
+    let id = '';
+    this.props.eventos.map(evento => {
+      if (evento.data_inicio === formatData) {
+        id = evento.id;
+        datas_eventos = { ...datas_eventos, [evento.id]: evento };
+      }
+      return datas_eventos;
+    });
+    if (Object.prototype.hasOwnProperty.call(datas_eventos, id)) {
+      this.setState({
+        modal: true,
+        datas_eventos
+      });
+    }
+  }
+
   infoEventoModal() {
     const { datas_eventos } = this.state;
     const keys = Object.keys(this.state.datas_eventos);
@@ -88,29 +112,6 @@ class Eventos extends Component {
         );
       })
     );
-  }
-
-  showPoupUpEventoDia(data) {
-    const formatData = data.split('-').reverse().join('/');
-    let datas_eventos = {};
-    let id = '';
-    this.props.eventos.map(evento => {
-      if (evento.data_inicio === formatData) {
-        id = evento.id;
-        datas_eventos = { ...datas_eventos, [evento.id]: evento };
-      }
-      return datas_eventos;
-    });
-    if (Object.prototype.hasOwnProperty.call(datas_eventos, id)) {
-      this.setState({
-        modal: true,
-        datas_eventos
-      });
-    }
-  }
-
-  setEventosToState(eventos) {
-    this.setState({ datas_eventos: eventos, modal: true });
   }
 
   renderInputPesquisaEvento() {
