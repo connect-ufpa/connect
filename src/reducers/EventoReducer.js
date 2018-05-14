@@ -1,6 +1,6 @@
 import {
     MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR,
-    INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, CLOSE_HELPER_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EVENTS_TO_EDIT_SUCCESS, EVENTS_TO_SHOW_SUCCESS, 
+    INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, CLOSE_HELPER_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EVENTS_TO_SHOW_SUCCESS, 
     SEARCHING_EVENT, SEARCHED_EVENTO, CLEAR
 } from '../actions/types';
 
@@ -29,10 +29,10 @@ const INITIAL_STATE = {
     helper: true,
     typeHelper: 'start',
     positionHelper: 0.4,
+    helperMessage: 'Clique em um lugar no mapa para definir o local do evento',
     successModal: false,
     eventoPesquisado: '',
     eventosAchados: [],
-    eventosToEdit: [],
     eventosToShow: [],
     fetchingEvents: true,
     fetchingEventsToShow: true
@@ -92,19 +92,17 @@ export default (state = INITIAL_STATE, action) => {
         case CLOSE_HELPER_EVENT:
             return { ...state, helper: false };
         case CREATE_EVENT_SUCCESS:
-            return { ...state, modal: false, successModal: true };
+            return { ...state, modal: false, helper: true, positionHelper: 0.2, helperMessage: 'Evento salvo com sucesso! Clique na seta acima para voltar para a tela de evento' };
         case CREATE_EVENT_FAIL:
             return { ...state, createFail: 'Preencha todos os campos corretamente!', loading: false, error: true };
         case CLEAR:
             return { ...state, eventosToEdit: [], eventosToShow: [] };
-        case EVENTS_TO_EDIT_SUCCESS:
-            return { ...state, eventosToEdit: [...state.eventosToEdit, action.payload], fetchingEvents: false };
         case SEARCHING_EVENT: 
             return { ...state, eventoPesquisado: action.payload, eventosAchados: [] };
         case SEARCHED_EVENTO: 
             return { ...state, eventosAchados: action.payload };
         case EVENTS_TO_SHOW_SUCCESS:
-            return { ...state, eventosToShow: [...state.eventosToShow, action.payload], fetchingEventsToShow: false };
+            return { ...state, eventosToShow: [...state.eventosToShow, action.payload], fetchingEventsToShow: false, helper: false };
         default:
             return state;
     }

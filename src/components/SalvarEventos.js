@@ -247,6 +247,7 @@ const mapStatesToProps = (state) => {
         helper: state.evento.helper,
         typeHelper: state.evento.typeHelper,
         positionHelper: state.evento.positionHelper,
+        helperMessage: state.evento.helperMessage,
         region: state.evento.region,
         marker: state.evento.marker,
         modal: state.evento.modal,

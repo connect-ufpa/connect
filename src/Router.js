@@ -13,7 +13,6 @@ import Eventos from './components/Eventos';
 import Ajuda from './components/Ajuda';
 import Sobre from './components/Sobre';
 import SalvarEventos from './components/SalvarEventos';
-import EditarEventos from './components/EditarEventos';
 import EditarEvento from './components/EditarEvento';
 import EditarEventoMapa from './components/EditarEventoMapa';
 import VisualizarEvento from './components/VisualizarEvento';
@@ -101,7 +100,6 @@ export const AuthorizedScreens = StackNavigator({
   Ajuda: { screen: Ajuda },
   Sobre: { screen: Sobre },
   SalvarEventos: { screen: SalvarEventos },
-  EditarEventos: { screen: EditarEventos },
   EditarEvento: { screen: EditarEvento },
   EditarEventoMapa: { screen: EditarEventoMapa },
   VisualizarEvento: { screen: VisualizarEvento },

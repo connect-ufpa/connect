@@ -43,7 +43,6 @@ export const CLOSE_HELPER_EVENT = 'close_helper_event';
 export const CREATE_EVENT_SUCCESS = 'create_event_successs';
 export const CREATE_EVENT_FAIL = 'create_event_fail';
 
-export const EVENTS_TO_EDIT_SUCCESS = 'events_to_edit_success';
 export const CLEAR = 'clear';
 export const EDIT_EVENT = 'edit_event';
 export const EVENT_EDIT_DATA = 'event_edit_data';
