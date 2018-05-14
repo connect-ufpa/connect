@@ -3,7 +3,7 @@ import { View, Modal, TouchableHighlight, Dimensions, ScrollView, TextInput, Pic
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
-import { showMarkerAndModal, closeModal, eventFieldChange, saveEvent, closeEventHelper } from '../actions';
+import { showMarkerAndModal, closeModal, eventFieldChange, saveEvent, showHelper, closeEventHelper } from '../actions';
 import { Button, Input, CardSection, Texts, Spinner, HeaderImage } from './commons/';
 import Styles from '../Styles';
 
@@ -28,9 +28,13 @@ class SalvarEventos extends Component {
         };
     }
 
+    componentWillMount() {
+        if (this.props.positionHelper === 0.2 || !this.props.helper) this.props.showHelper();
+    }
+
     renderHelper() {
         const { positionHelper } = this.props;
-        if (this.props.helper && this.props.typeHelper === 'start') {
+        if (this.props.helper) {
             return (
                 <View style={[Styles.cardHelperStyle, { marginBottom: HEIGHT * positionHelper, width: width * 0.5, height: height * 0.2, }]} >
                     <View style={{ flex: 2, flexDirection: 'row', marginTop: 10 }}>
@@ -245,7 +249,6 @@ const mapStatesToProps = (state) => {
         errorData,
         errorHora,
         helper: state.evento.helper,
-        typeHelper: state.evento.typeHelper,
         positionHelper: state.evento.positionHelper,
         helperMessage: state.evento.helperMessage,
         region: state.evento.region,
@@ -263,6 +266,7 @@ export default connect(mapStatesToProps, {
     closeModal,
     eventFieldChange,
     saveEvent,
+    showHelper,
     closeEventHelper
 })(SalvarEventos);
 

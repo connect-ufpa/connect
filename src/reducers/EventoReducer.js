@@ -1,6 +1,6 @@
 import {
     MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR,
-    INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, CLOSE_HELPER_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EVENTS_TO_SHOW_SUCCESS, 
+    INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, SHOW_HELPER_EVENT, CLOSE_HELPER_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EVENTS_TO_SHOW_SUCCESS,
     SEARCHING_EVENT, SEARCHED_EVENTO, CLEAR
 } from '../actions/types';
 
@@ -27,7 +27,6 @@ const INITIAL_STATE = {
     loading: false,
     error: false,
     helper: true,
-    typeHelper: 'start',
     positionHelper: 0.4,
     helperMessage: 'Clique em um lugar no mapa para definir o local do evento',
     successModal: false,
@@ -53,15 +52,15 @@ export default (state = INITIAL_STATE, action) => {
                 modal: true
             };
         case CLOSE_MODAL:
-            return { 
+            return {
                 ...state,
+                marker: [],
                 region: {
                     latitude: -1.4753622,
                     longitude: -48.4557933,
                     latitudeDelta: 0.00121,
                     longitudeDelta: 0.0025
                 },
-                marker: [],
                 modal: false,
                 nome: '',
                 descricao: '',
@@ -89,6 +88,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, [action.payload.prop]: action.payload.value, errorHora: 'Preencha uma hora válida!', error: true };
         case LOADING_EVENT:
             return { ...state, loading: true };
+        case SHOW_HELPER_EVENT:
+            return { ...state, helper: true, positionHelper: 0.4, marker: [], helperMessage: 'Clique em um lugar no mapa para definir o local do evento' };
         case CLOSE_HELPER_EVENT:
             return { ...state, helper: false };
         case CREATE_EVENT_SUCCESS:
@@ -97,12 +98,12 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, createFail: 'Preencha todos os campos corretamente!', loading: false, error: true };
         case CLEAR:
             return { ...state, eventosToEdit: [], eventosToShow: [] };
-        case SEARCHING_EVENT: 
+        case SEARCHING_EVENT:
             return { ...state, eventoPesquisado: action.payload, eventosAchados: [] };
-        case SEARCHED_EVENTO: 
+        case SEARCHED_EVENTO:
             return { ...state, eventosAchados: action.payload };
         case EVENTS_TO_SHOW_SUCCESS:
-            return { ...state, eventosToShow: [...state.eventosToShow, action.payload], fetchingEventsToShow: false, helper: false };
+            return { ...state, eventosToShow: [...state.eventosToShow, action.payload], fetchingEventsToShow: false };
         default:
             return state;
     }

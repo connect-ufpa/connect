@@ -9,7 +9,7 @@ import { serachEventsToShow, searchEvento } from '../actions';
 import Styles from '../Styles';
 
 const HEIGHT = Dimensions.get('window').height;
-const HALFHEIGHT = HEIGHT * 0.15;
+const HALFHEIGHT = HEIGHT * 0.13;
 const MODALSUCCESS = HEIGHT * 0.4;
 
 class Eventos extends Component {
@@ -231,27 +231,27 @@ class Eventos extends Component {
       this.props.eventos.map(evento => {
         if (this.state.trabalho === evento.area_tematica) {
           eventos.push(evento);
-           if (render_button_once === 0) {
+          if (render_button_once === 0) {
             render_button_once = 1;
-             return (
-               <View key={evento.id} style={{ alignItems: 'center', marginLeft: 10 }}>
-                 <TouchableOpacity onPress={() => { this.setEventosToState(eventos); }} >
-                   <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
-                     <Icon
-                       type='material-community'
-                       name='calendar-text'
-                       color='#FFF'
-                       size={25}
-                     />
-                   </View>
-                 </TouchableOpacity>
-                 <View>
-                   <Texts text="Eventos Relacionados" />
-                 </View>
-               </View>
-             );
-           }
-        } 
+            return (
+              <View key={evento.id} style={{ alignItems: 'center', marginLeft: 10 }}>
+                <TouchableOpacity onPress={() => { this.setEventosToState(eventos); }} >
+                  <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
+                    <Icon
+                      type='material-community'
+                      name='calendar-text'
+                      color='#FFF'
+                      size={25}
+                    />
+                  </View>
+                </TouchableOpacity>
+                <View>
+                  <Texts text="Eventos Relacionados" />
+                </View>
+              </View>
+            );
+          }
+        }
         return null;
       })
     );
@@ -301,6 +301,8 @@ class Eventos extends Component {
 const mapStateToProps = (state) => {
   return {
     loading: state.evento.fetchingEventsToShow,
+    helper: state.evento.helper,
+    positionHelper: state.evento.positionHelper,
     eventos: state.evento.eventosToShow,
     eventoNome: state.evento.eventoPesquisado,
     eventosAchados: state.evento.eventosAchados
