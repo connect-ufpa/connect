@@ -105,7 +105,7 @@ class Localizacao extends Component {
             latitude: this.props.localMarcado.coords.lat,
             longitude: this.props.localMarcado.coords.lng,
           }}
-          image={require('../../assets/img/pin.png')}
+          image={require(`../../assets/img/pin/${this.props.localMarcado.tipo}.png`)}
         >
           <Callout tooltip={true}>
             <CalloutView
