@@ -105,7 +105,7 @@ class Localizacao extends Component {
             latitude: this.props.localMarcado.coords.lat,
             longitude: this.props.localMarcado.coords.lng,
           }}
-          image={require(`../../assets/img/pin/${this.props.localMarcado.tipo}.png`)}
+          image={require('../../assets/img/pin.png')}
         >
           <Callout tooltip={true}>
             <CalloutView
@@ -247,21 +247,243 @@ class Localizacao extends Component {
   renderMarcadoresLocais() {
     if (!this.props.loading) {
       if (_.isEmpty(this.props.localMarcado)) {
-        return this.props.locais.map(marker => (
-          <Marker
-            key={marker.nome}
-            coordinate={{
-              latitude: marker.coords.lat,
-              longitude: marker.coords.lng,
-            }}
-            title={marker.nome}
-            image={require('../../assets/img/pin.png')}
-          >
-            <Callout tooltip={true}>
-              <CalloutView name={marker.nome} desc={marker.desc} />
-            </Callout>
-          </Marker>
-        ));
+        return this.props.locais.map((local) => {
+          switch (local.tipo) {
+            case "Instituto":
+              return(
+                <Marker
+                  key={local.nome}
+                  coordinate={{
+                    latitude: local.coords.lat,
+                    longitude: local.coords.lng,
+                  }}
+                  title={local.nome}
+                  image={require('../../assets/img/pin/Instituto.png')}
+                >
+                  <Callout tooltip={true}>
+                    <CalloutView name={local.nome} desc={local.desc} />
+                  </Callout>
+                </Marker>
+              );
+              break;
+            
+            case "Laboratório":
+              return(
+                <Marker
+                  key={local.nome}
+                  coordinate={{
+                    latitude: local.coords.lat,
+                    longitude: local.coords.lng,
+                  }}
+                  title={local.nome}
+                  image={require('../../assets/img/pin/Laboratório.png')}
+                >
+                  <Callout tooltip={true}>
+                    <CalloutView name={local.nome} desc={local.desc} />
+                  </Callout>
+                </Marker>
+              );
+              break;
+            
+            case "Biblioteca":
+              return(
+                <Marker
+                  key={local.nome}
+                  coordinate={{
+                    latitude: local.coords.lat,
+                    longitude: local.coords.lng,
+                  }}
+                  title={local.nome}
+                  image={require('../../assets/img/pin/Biblioteca.png')}
+                >
+                  <Callout tooltip={true}>
+                    <CalloutView name={local.nome} desc={local.desc} />
+                  </Callout>
+                </Marker>
+              );
+              break;
+            
+            case "Bloco":
+              return(
+                <Marker
+                  key={local.nome}
+                  coordinate={{
+                    latitude: local.coords.lat,
+                    longitude: local.coords.lng,
+                  }}
+                  title={local.nome}
+                  image={require('../../assets/img/pin/Bloco.png')}
+                >
+                  <Callout tooltip={true}>
+                    <CalloutView name={local.nome} desc={local.desc} />
+                  </Callout>
+                </Marker>
+              );
+              break;
+            
+            case "Banheiro":
+              return(
+                <Marker
+                  key={local.nome}
+                  coordinate={{
+                    latitude: local.coords.lat,
+                    longitude: local.coords.lng,
+                  }}
+                  title={local.nome}
+                  image={require('../../assets/img/pin/Banheiro.png')}
+                >
+                  <Callout tooltip={true}>
+                    <CalloutView name={local.nome} desc={local.desc} />
+                  </Callout>
+                </Marker>
+              );
+              break;
+              
+            case "Administração":
+              return(
+                <Marker
+                  key={local.nome}
+                  coordinate={{
+                    latitude: local.coords.lat,
+                    longitude: local.coords.lng,
+                  }}
+                  title={local.nome}
+                  image={require('../../assets/img/pin/Administração.png')}
+                >
+                  <Callout tooltip={true}>
+                    <CalloutView name={local.nome} desc={local.desc} />
+                  </Callout>
+                </Marker>
+              );
+              break
+            
+            case "Restaurante":
+              return(
+                <Marker
+                  key={local.nome}
+                  coordinate={{
+                    latitude: local.coords.lat,
+                    longitude: local.coords.lng,
+                  }}
+                  title={local.nome}
+                  image={require('../../assets/img/pin/Restaurante.png')}
+                >
+                  <Callout tooltip={true}>
+                    <CalloutView name={local.nome} desc={local.desc} />
+                  </Callout>
+                </Marker>
+              );
+              break
+            
+            case "Centro Acadêmico":
+              return(
+                <Marker
+                  key={local.nome}
+                  coordinate={{
+                    latitude: local.coords.lat,
+                    longitude: local.coords.lng,
+                  }}
+                  title={local.nome}
+                  image={require('../../assets/img/pin/Centro Acadêmico.png')}
+                >
+                  <Callout tooltip={true}>
+                    <CalloutView name={local.nome} desc={local.desc} />
+                  </Callout>
+                </Marker>
+              );
+              break
+            
+            case "Desporto":
+              return(
+                <Marker
+                  key={local.nome}
+                  coordinate={{
+                    latitude: local.coords.lat,
+                    longitude: local.coords.lng,
+                  }}
+                  title={local.nome}
+                  image={require('../../assets/img/pin/Desporto.png')}
+                >
+                  <Callout tooltip={true}>
+                    <CalloutView name={local.nome} desc={local.desc} />
+                  </Callout>
+                </Marker>
+              );
+              break
+
+            case "Convenções":
+              return(
+                <Marker
+                  key={local.nome}
+                  coordinate={{
+                    latitude: local.coords.lat,
+                    longitude: local.coords.lng,
+                  }}
+                  title={local.nome}
+                  image={require('../../assets/img/pin/Convenções.png')}
+                >
+                  <Callout tooltip={true}>
+                    <CalloutView name={local.nome} desc={local.desc} />
+                  </Callout>
+                </Marker>
+              );
+              break
+            
+            case "Serviço":
+              return(
+                <Marker
+                  key={local.nome}
+                  coordinate={{
+                    latitude: local.coords.lat,
+                    longitude: local.coords.lng,
+                  }}
+                  title={local.nome}
+                  image={require('../../assets/img/pin/Serviço.png')}
+                >
+                  <Callout tooltip={true}>
+                    <CalloutView name={local.nome} desc={local.desc} />
+                  </Callout>
+                </Marker>
+              );
+              break            
+              
+            case "Hospital":
+              return(
+                <Marker
+                  key={local.nome}
+                  coordinate={{
+                    latitude: local.coords.lat,
+                    longitude: local.coords.lng,
+                  }}
+                  title={local.nome}
+                  image={require('../../assets/img/pin/Hospital.png')}
+                >
+                  <Callout tooltip={true}>
+                    <CalloutView name={local.nome} desc={local.desc} />
+                  </Callout>
+                </Marker>
+              );
+              break
+
+            default:
+              return(
+                <Marker
+                  key={local.nome}
+                  coordinate={{
+                    latitude: local.coords.lat,
+                    longitude: local.coords.lng,
+                  }}
+                  title={local.nome}
+                  image={require('../../assets/img/pin.png')}
+                >
+                  <Callout tooltip={true}>
+                    <CalloutView name={local.nome} desc={local.desc} />
+                  </Callout>
+                </Marker>
+              );                
+              break;
+          }
+        });
       }
     }
   }
