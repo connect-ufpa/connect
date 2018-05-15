@@ -7,8 +7,6 @@ import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
 import Styles from '../Styles';
-import Bar from './Bar';
-
 
 class MeuPerfil extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -99,55 +97,16 @@ class MeuPerfil extends Component {
           </View>
 
         </View>
-
-        {/* <LinearGradient colors={['#2A4065', '#2BA3DA']} style={styles.viewbtn}>
-
-          <Button
-            text="Editar"
-            styles={Styles.btnEditar}
-            onPress={() => { this.props.navigation.navigate('EditMeuPerfil'); }}
-          />
-
-        </ LinearGradient> */}
         <View style={styles.areaBtn}>
           <View style={styles.photoGrid}>
             <Button
             text="Editar"
-            styles={Styles.btnEditar}
+            styles={styles.btnEditar}
             onPress={() => { this.props.navigation.navigate('EditMeuPerfil'); }}
           />
           </View>
         </View>
-
       </View>
-
-      // <LinearGradient colors={['#2A4065', '#2BA3DA']}>
-      //   <ScrollView style={Styles.scrollViewStyle}>
-      //     <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-      //     <StatusBar backgroundColor="#2A4065" />
-      //       <View style={{ borderRadius: 100,  marginTop: 30, marginBottom: 20, backgroundColor: '#fff', borderColor: '#fff', borderWidth: 6 }}>
-      //         <Image
-      //           style={{ width: 100, height: 100}}
-      //           //resizeMode={'center'}
-      //           source={require('../../assets/img/user_male.png')}
-      //         />
-      //       </View>
-
-      //       <Text style={{ fontSize: 25, fontFamily: 'Ubuntu', color: '#fff', marginBottom: 10 }}>{this.props.namePerfil}</Text>
-
-      //       <Text style={{ fontSize: 16, fontFamily: 'Ubuntu', color: '#fff', marginBottom: 5 }}>Matrícula: {this.props.registrationPerfil}</Text>
-
-      //       <Text style={{ fontSize: 16, fontFamily: 'Ubuntu', color: '#fff', marginBottom: 5 }}>Nascimento: {this.props.birthdayPerfil}</Text>
-      //     </View>
-
-      //     <Button
-      //       text="Editar Dados"
-      //       styles={Styles.btnConfirm} 
-      //       onPress={() => { this.props.navigation.navigate('EditMeuPerfil'); }}
-      //     />
-      //     {/* {this.renderNavigateToEditPerfilButton()} */}
-      //   </ScrollView>
-      // </LinearGradient>
     );
   }
 }
@@ -189,15 +148,14 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontSize: 20,
     color: '#fff',
-    //fontWeight: 'bold',
     fontFamily: 'Ubuntu'
   },
   idade: {
     fontSize: 16,
     color: '#fff',
     fontWeight: '300',
-    fontFamily: 'Ubuntu'
-
+    fontFamily: 'Ubuntu',
+    marginBottom: 10
   },
 
   //Barra//////////////////////////
@@ -231,35 +189,24 @@ const styles = StyleSheet.create({
     fontFamily: 'Ubuntu'
   },
 
-
-  //PhotoGrid
-
-  photoGrid: {
-
-    flexWrap: 'wrap'
-  },
-  photoMap: {
-    margin: 2,
-    height: 120,
-    width: (Dimensions.get('window').width / 2) - 4,
-  },
-  photo: {
-    flex: 1,
-    width: null,
-    alignSelf: 'stretch'
-  },
   areaBtn: {
-    height: 180,
-    backgroundColor: 'rgba(255,255,255, 1)'
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   btnEditar: {
+    width: 80,
+    height: 80,
     alignSelf: 'stretch',
-    backgroundColor: '#000',
-    borderRadius: 5,
-    borderWidth: 2,
-    borderColor: '#000',
+    backgroundColor: '#2A4065',
+    borderRadius: 50,
     elevation: 4,
-    color: '#000'
+    color: '#000',
+    marginTop: 100,
+    alignItems: 'center',
+    justifyContent: 'center'
+    
   }
 })
 
