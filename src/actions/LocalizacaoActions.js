@@ -39,6 +39,7 @@ export const saveLocais = locais => {
           lat: locais.local[i].coords.lat,
           lng: locais.local[i].coords.lng,
         },
+        tipo: locais.local[i].tipo
       });
   }
 };

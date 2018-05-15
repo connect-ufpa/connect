@@ -79,9 +79,7 @@ class Localizacao extends Component {
     };
   };
 
-  // salvarLocais() {
-  //   saveLocais(locais);
-  // }
+  // saveLocais(locais);
 
   componentDidMount() {
     this.props.verifyLocais();
@@ -711,10 +709,10 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   markLocal,
   createRota,
+  closeError,
+  closeHelper,
   searchLocal,
   verifyLocais,
-  closeHelper,
-  closeError,
   clearInputSearch,
   searchLocalizacaoUsuario,
 })(Localizacao);

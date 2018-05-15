@@ -1,0 +1,40 @@
+{
+  "local": 
+  [
+    {
+      "nome": "Atelier de Artes",
+      "coords": {
+        "lat": -1.473950,
+        "lng": -48.453760
+      }
+    },
+    {
+      "nome": "Auditório Setorial Profissional",
+      "coords": {
+        "lat": -1.474363,
+        "lng": -48.451609
+      }
+    },
+    {
+      "nome": "Chalé de Ferro",
+      "coords": {
+        "lat": -1.475263,
+        "lng": -48.451825
+      }
+    },
+    {
+      "nome": "Instituto de Tecnologia (ITEC)",
+      "coords": {
+        "lat": -1.472965,
+        "lng": -48.450708
+      }
+    },
+    {
+      "nome": "Instituto de Ciências da Educação (ICED)",
+      "coords": {
+        "lat": -1.472896,
+        "lng": -48.449968
+      }
+    }
+  ]
+}

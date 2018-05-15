@@ -1,12 +1,14 @@
 {
-  "local": [
+  "local": 
+  [
     {
       "nome": "Atelier de Artes",
       "desc": "Atelier de artes da Faculdade de Artes visuais da UFPa.",
       "coords": {
         "lat": -1.473950,
         "lng": -48.453760
-      }
+      },
+      "tipo": "Laboratório"
     },
     {
       "nome": "Auditório Setorial Profissional",
@@ -14,7 +16,8 @@
       "coords": {
         "lat": -1.474363,
         "lng": -48.451609
-      }
+      },
+      "tipo": "Convenções"
     },
     {
       "nome": "Chalé de Ferro",
@@ -22,7 +25,8 @@
       "coords": {
         "lat": -1.475263,
         "lng": -48.451825
-      }
+      },
+      "tipo": "Administração"
     },
     {
       "nome": "Instituto de Tecnologia (ITEC)",
@@ -30,7 +34,8 @@
       "coords": {
         "lat": -1.472965,
         "lng": -48.450708
-      }
+      },
+      "tipo": "Instituto"
     },
     {
       "nome": "Instituto de Ciências da Educação (ICED)",
@@ -38,7 +43,8 @@
       "coords": {
         "lat": -1.472896,
         "lng": -48.449968
-      }
+      },
+      "tipo": "Instituto"
     },
     {
       "nome": "Instituto de Ciências Sociais Aplicadas (ICSA)",
@@ -46,7 +52,8 @@
       "coords": {
         "lat": -1.472841,
         "lng": -48.449276
-      }
+      },
+      "tipo": "Instituto"
     },
     {
       "nome": "Instituto de Ciências Jurídicas (ICJ)",
@@ -54,7 +61,8 @@
       "coords": {
         "lat": -1.471246,
         "lng": -48.449825
-      }
+      },
+      "tipo": "Instituto"
     },
     {
       "nome": "Instituto de Ciências da Arte (ICA)",
@@ -62,7 +70,8 @@
       "coords": {
         "lat": -1.474265,
         "lng": -48.453733
-      }
+      },
+      "tipo": "Instituto"
     },
     {
       "nome": "Incubadora",
@@ -70,7 +79,8 @@
       "coords": {
         "lat": -1.475560,
         "lng": -48.453620
-      }
+      },
+      "tipo": "Serviço"
     },
     {
       "nome": "Núcleo de Altos Estudos Amazônicos (NAEA)",
@@ -78,7 +88,8 @@
       "coords": {
         "lat": -1.472111,
         "lng": -48.449690
-      }
+      },
+      "tipo": "Instituto"
     },
     {
       "nome": "Núcleo de Meio Ambiente (NUMA)",
@@ -86,7 +97,8 @@
       "coords": {
         "lat": -1.475077,
         "lng": -48.451500
-      }
+      },
+      "tipo": "Instituto"
     },
     {
       "nome": "Restaurante Universitário Profissional",
@@ -94,7 +106,8 @@
       "coords": {
         "lat": -1.473480,
         "lng": -48.450695
-      }
+      },
+      "tipo": "Restaurante"
     },
     {
       "nome": "Restaurante do NAEA",
@@ -102,7 +115,8 @@
       "coords": {
         "lat": -1.471978,
         "lng": -48.449531
-      }
+      },
+      "tipo": "Restaurante"
     },
     {
       "nome": "Ver-o-pesinho Profissional",
@@ -110,7 +124,8 @@
       "coords": {
         "lat": -1.473789,
         "lng": -48.450580
-      }
+      },
+      "tipo": "Restaurante"
     },
     {
       "nome": "Forum Distrital",
@@ -118,7 +133,8 @@
       "coords": {
         "lat": -1.471178,
         "lng": -48.449215
-      }
+      },
+      "tipo": "Serviço"
     },
     {
       "nome": "Laboratório de Engenharia Elétrica e Computação (LEEC)",
@@ -134,7 +150,8 @@
       "coords": {
         "lat": -1.474569,
         "lng": -48.452466
-      }
+      },
+      "tipo": "Laboratório"
     },
     {
       "nome": "Laboratório de Engenharia Química (LEQ)",
@@ -142,7 +159,8 @@
       "coords": {
         "lat": -1.475596,
         "lng": -48.453327
-      }
+      },
+      "tipo": "Laboratório"
     },
     {
       "nome": "Laboratório de Engenharia Mecânica (LEM)",
@@ -150,7 +168,8 @@
       "coords": {
         "lat": -1.473933,
         "lng": -48.452911
-      }
+      },
+      "tipo": "Laboratório"
     },
     {
       "nome": "Laboratório de Engenharia de Alimentos (LEA)",
@@ -158,7 +177,8 @@
       "coords": {
         "lat": -1.474926,
         "lng": -48.453332
-      }
+      },
+      "tipo": "Laboratório"
     },
     {
       "nome": "Prédio de Pós-graduação do ITEC",
@@ -166,7 +186,8 @@
       "coords": {
         "lat": -1.474611,
         "lng": -48.453713
-      }
+      },
+      "tipo": "Bloco"
     },
     {
       "nome": "Laboratório de Tecnologias de Informação e Comunicação (LABTIC)",
@@ -174,7 +195,8 @@
       "coords": {
         "lat": -1.473904,
         "lng": -48.454364
-      }
+      },
+      "tipo": "Laboratório"
     },
     {
       "nome": "Laboratório de Desenvolvimento de Ideias (LDI)",
@@ -182,7 +204,8 @@
       "coords": {
         "lat": -1.474559,
         "lng": -48.451599
-      }
+      },
+      "tipo": "Laboratório"
     },
     {
       "nome": "Sede de canoagem",
@@ -190,7 +213,8 @@
       "coords": {
         "lat": -1.473716,
         "lng": -48.448657
-      }
+      },
+      "tipo": "Desporto"
     },
     {
       "nome": "Universitec",
@@ -198,7 +222,8 @@
       "coords": {
         "lat": -1.474996,
         "lng": -48.453682
-      }
+      },
+      "tipo": "Serviço"
     }
   ]
 }
