@@ -142,7 +142,8 @@
       "coords": {
         "lat": -1.473923,
         "lng": -48.451812
-      }
+      },
+      "tipo": "Laboratório"
     },
     {
       "nome": "Laboratório de Engenharia Civil (LEC)",
