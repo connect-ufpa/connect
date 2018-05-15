@@ -10,7 +10,6 @@ import Styles from '../Styles';
 const { height, width } = Dimensions.get('window');
 const HEIGHT = Dimensions.get('window').height;
 const HALFHEIGTH = HEIGHT * 0.55;
-const MODALSUCCESS = HEIGHT * 0.4;
 const ICON = require('../../assets/img/marker.png');
 
 class SalvarEventos extends Component {
@@ -197,32 +196,6 @@ class SalvarEventos extends Component {
                             </CardSection>
                         </View>
                     </ScrollView>
-                </Modal>
-                <Modal
-                    animationType="slide"
-                    transparent
-                    visible={this.props.successModal}
-                    onRequestClose={() => { }}
-                >
-                    <View style={[Styles.eventCardStyle, { marginTop: MODALSUCCESS }]}>
-                        <View style={{ alignItems: 'flex-end', paddingTop: 5, paddingRight: 10 }}>
-                            <TouchableHighlight
-                                onPress={() => { this.props.closeModal(); }}
-                            >
-                                <View>
-                                    <Icon
-                                        type='font-awesome'
-                                        name='times-circle'
-                                        color='#CC2820'
-                                        size={30}
-                                    />
-                                </View>
-                            </TouchableHighlight>
-                        </View>
-                        <CardSection>
-                            <Texts text='Evento salvo com sucesso!' style='medium' />
-                        </CardSection>
-                    </View>
                 </Modal>
             </View>
         );

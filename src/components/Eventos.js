@@ -13,8 +13,7 @@ const HALFHEIGHT = HEIGHT * 0.13;
 const MODALSUCCESS = HEIGHT * 0.4;
 
 class Eventos extends Component {
-  static navigationOptions = ({ navigation }) => {
-    const { navigate } = navigation;
+  static navigationOptions = () => {
     return {
       headerTitle: <View style={{ flex: 1, alignContent: 'center' }}><HeaderImage /></View>,
       headerStyle: {
@@ -34,22 +33,6 @@ class Eventos extends Component {
           size={25}
         />
       ),
-      headerLeft:
-        <Icon
-          name='bars'
-          type='font-awesome'
-          color='#2a4065'
-          size={25}
-          onPress={() => navigate('DrawerOpen')}
-        />,
-      headerRight:
-        <Icon
-          name='search'
-          type='font-awesome'
-          color='#2a4065'
-          size={25}
-          onPress={() => navigate('DrawerOpen')}
-        />,
     };
   }
   state = {
