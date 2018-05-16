@@ -57,7 +57,11 @@ class Localizacao extends Component {
       },
       drawerLabel: 'Localização',
       drawerIcon: ({ tintColor }) => (
-        <Icon type="font-awesome" name="map-marker" color="#2a4065" size={25} />
+        <Icon
+          name="place" 
+          color="#2a4065" 
+          size={27} 
+        />
       ),
       headerLeft: (
         <View>

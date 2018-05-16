@@ -57,17 +57,16 @@ export const SideMenu = DrawerNavigator({
 		navigationOptions: {
 			title: 'Sair',
 			style: {
-        color: 'black',
-        fontSize: 20,
+        color: '#CC2820',
       },
 			drawerLabel: 'Sair',
 			drawerIcon: ({ tintColor }) => (
-				<Icon
-					name='sign-out'
-	        type='font-awesome'
-	        size={24}
-					color='black'
-				/>
+        <Icon
+          name='sign-out'
+          type='font-awesome'
+          size={24}
+          color='#CC2820'
+        />
     	),
   	}
 	},

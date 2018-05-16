@@ -24,10 +24,9 @@ class MeuPerfil extends Component {
       drawerLabel: 'Meu perfil',
       drawerIcon: ({ tintColor }) => (
         <Icon
-          type='font-awesome'
-          name='user'
+          name='person'
           color='#2a4065'
-          size={25}
+          size={27}
          />
       ),
       headerLeft: <Icon
