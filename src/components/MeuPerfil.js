@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, authUser, adicionaContato, dataPerfil } from '../actions';
-import { Dimensions, Text, ScrollView, View, Alert, Image, StatusBar, StyleSheet, ImageBackground } from 'react-native';
+import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, authUser, adicionaContato, dataPerfil, saveDataUser } from '../actions';
+import { Dimensions, Text, ScrollView, View, Alert, Image, StatusBar, StyleSheet, ImageBackground, TouchableHighlight, Modal } from 'react-native';
+//import Modal from 'react-native-modal';
 import { Card, CardSection, Texts, HeaderImage, Input, Button, UserImage } from './commons';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -62,9 +63,37 @@ class MeuPerfil extends Component {
       <Button
         text="Editar Dados"
         styles={Styles.btnConfirm}
-        onPress={() => this.props.navigation.navigate('EditMeuPerfil')}
+        onPress={() => this._showModal}
       />
     );
+  }
+
+  renderSaveDataUserButton() {
+    const user = {
+      namePerfil: this.props.namePerfil,
+      registrationPerfil: this.props.registrationPerfil,
+      birthdayPerfil: this.props.birthdayPerfil,
+  }
+
+    if (this.props.loading) {
+      return (<Spinner size="large" color="#ffff" />);
+    }
+
+        return (
+          <Button
+            text="Salvar"
+            styles={Styles.btnConfirm}
+            onPress={() => { this.props.saveDataUser(user); this.setModalVisible(!this.state.modalVisible);}}
+          />
+        );
+    }
+
+  state = {
+    modalVisible: false
+      }
+
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
   }
 
 
@@ -100,18 +129,94 @@ class MeuPerfil extends Component {
         <View style={styles.areaBtn}>
           <View style={styles.photoGrid}>
             <Button
-            text="Editar"
-            styles={styles.btnEditar}
-            onPress={() => { this.props.navigation.navigate('EditMeuPerfil'); }}
-          />
+              text="Editar"
+              styles={styles.btnEditar}
+              onPress={() => { this.setModalVisible(true); }}
+            />
           </View>
         </View>
+
+
+        <Modal style={styles.modal}
+          animationType="fade"
+          presentationStyle="pageSheet"
+          transparent={false}
+          visible={this.state.modalVisible}
+          onRequestClose={() => {
+            alert('Modal has been closed.');
+          }}
+          supportedOrientations={false}
+          >
+          <LinearGradient colors={['#2A4065', '#2BA3DA']} >
+        <ScrollView style={Styles.scrollViewStyle}>
+          <Card addStyle={{ paddingBottom: 40 }}>
+          <Text style={styles.titulo}>Editar Perfil</Text>
+            <CardSection>
+              <Input
+                placeholder="Nome:"
+                onChangeText={namePerfil => this.props.onNameChanged(namePerfil)}
+                value={this.props.namePerfil}
+              />
+            </CardSection>
+            <View>
+              <Texts text={this.props.errorMessageName} />
+            </View>
+            <CardSection>
+              <Input
+                placeholder="Matrícula:"
+                onChangeText={registrationPerfil => this.props.onRegistrationChanged(registrationPerfil)}
+                value={this.props.registrationPerfil}
+              />
+            </CardSection>
+            <View>
+              <Texts text={this.props.errorMessageRegistration} />
+            </View>
+            <CardSection>
+              <Input
+                placeholder="Nascimento: 00/00/0000"
+                onChangeText={birthdayPerfil => this.props.onBirthChanged(birthdayPerfil)}
+                value={this.props.birthdayPerfil}
+              />
+            </CardSection>
+            <View>
+              <Texts text={this.props.errorMessageBirthday} />
+            </View>
+            <CardSection>
+              {this.renderSaveDataUserButton()}
+            </CardSection>
+
+            <TouchableHighlight
+                onPress={() => {
+                  this.setModalVisible(!this.state.modalVisible);
+                }}>
+                <Text style={{fontSize: 30}}>Hide Modal</Text>
+              </TouchableHighlight>
+          </Card>
+        </ScrollView>
+      </LinearGradient>
+        </Modal>
       </View>
+
+
+
     );
   }
 }
 
 const styles = StyleSheet.create({
+  titulo:{
+    fontSize: 20,
+    fontFamily: 'Ubuntu',
+    marginBottom: 10,
+    color: '#000',
+    backgroundColor: '#fff',
+    paddingRight: 120,
+    paddingLeft: 120,
+    paddingBottom: 15,
+    paddingTop: 15,
+    marginTop: -22
+
+  },
   container: {
     flex: 1,
     backgroundColor: '#000',
@@ -151,7 +256,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Ubuntu'
   },
   idade: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#fff',
     fontWeight: '300',
     fontFamily: 'Ubuntu',
@@ -206,7 +311,12 @@ const styles = StyleSheet.create({
     marginTop: 100,
     alignItems: 'center',
     justifyContent: 'center'
-    
+  },
+  modal: {
+    flex: 1,
+    borderWidth: 6,
+    borderRadius: 4
+
   }
 })
 
@@ -219,4 +329,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { dataPerfil })(MeuPerfil);
+export default connect(mapStateToProps, { 
+  dataPerfil,
+  onNameChanged,
+  onRegistrationChanged,
+  onBirthChanged,
+  saveDataUser
+ })(MeuPerfil);
