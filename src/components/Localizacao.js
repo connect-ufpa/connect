@@ -118,8 +118,8 @@ class Localizacao extends Component {
               title={local.nome}
               image={require('../../assets/img/pin/Instituto.png')}
             >
-              <Callout tooltip={true}>
-                <CalloutView name={local.nome} desc={local.desc} />
+              <Callout style={{ elevation: 8 }} tooltip={true}>
+                  <CalloutView name={local.nome} desc={local.desc} />
               </Callout>
             </Marker>
           );
@@ -427,6 +427,7 @@ class Localizacao extends Component {
                   <Text
                     style={{
                       flex: 5,
+                      fontFamily: 'Ubuntu-Regular',
                       backgroundColor: 'white',
                       color: '#777',
                       fontSize: 12,
@@ -945,7 +946,7 @@ class Localizacao extends Component {
             <Text
               style={{
                 flex: 5,
-                fontFamily: 'Ubuntu',
+                fontFamily: 'Ubuntu-Medium',
                 textAlign: 'center',
                 fontSize: 14,
                 color: '#2BA3DA',
@@ -980,7 +981,7 @@ class Localizacao extends Component {
               flex: 4,
               fontSize: 11,
               padding: 5,
-              fontFamily: 'Ubuntu',
+              fontFamily: 'Ubuntu-Regular',
               color: '#777',
               textAlign: 'center',
             }}
@@ -1014,7 +1015,7 @@ class Localizacao extends Component {
             <Text
               style={{
                 flex: 5,
-                fontFamily: 'Ubuntu',
+                fontFamily: 'Ubuntu-Medium',
                 textAlign: 'center',
                 fontSize: 14,
                 color: '#CC2822',
@@ -1049,7 +1050,7 @@ class Localizacao extends Component {
               flex: 4,
               fontSize: 11,
               padding: 5,
-              fontFamily: 'Ubuntu',
+              fontFamily: 'Ubuntu-Regular',
               color: '#777',
               textAlign: 'center',
             }}
@@ -1169,7 +1170,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     borderColor: '#FFF',
-    fontFamily: 'Ubuntu',
+    fontFamily: 'Ubuntu-Regular',
     backgroundColor: '#FFF',
   },
   containerInfoRota: {
