@@ -88,7 +88,6 @@ class Localizacao extends Component {
     if(_.isEmpty(this.props.localizacaoUsuario)) {
       console.log("Verificando localização do usuário...");
     } else {
-      console.log(this.props.localizacaoUsuario.coords);
       return (
         <Circle
           center={{

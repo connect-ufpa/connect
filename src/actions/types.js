@@ -43,6 +43,8 @@ export const SHOW_HELPER_EVENT = 'show_helper_event';
 export const CLOSE_HELPER_EVENT = 'close_helper_event';
 export const CREATE_EVENT_SUCCESS = 'create_event_successs';
 export const CREATE_EVENT_FAIL = 'create_event_fail';
+export const INICIAL_POSITION = 'inicial_position';
+export const MOVING = 'moving';
 
 export const CLEAR = 'clear';
 export const EDIT_EVENT = 'edit_event';

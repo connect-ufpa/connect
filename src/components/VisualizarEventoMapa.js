@@ -5,6 +5,7 @@ import MapView, { Marker } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Icon } from 'react-native-elements';
 import { HeaderImage, Texts } from '../components/commons';
+import { getLocation } from '../actions';
 import Styles from '../Styles';
 
 const { height, width } = Dimensions.get('window');
@@ -71,10 +72,13 @@ class VisualizarEventoNoMapa extends Component {
         const { params } = this.props.navigation.state;
         const lat = params.lat;
         const long = params.long;
-        if (this.state.showRota) {
+
+        if (this.props.latitude) {
+            const user_lat = this.props.latitude;
+            const user_long = this.props.longitude;
             return (
                 <MapViewDirections
-                    origin={{ latitude: -1.433551, longitude: -48.464247 }}
+                    origin={{ latitude: user_lat, longitude: user_long }}
                     destination={{
                         latitude: lat,
                         longitude: long,
@@ -92,7 +96,7 @@ class VisualizarEventoNoMapa extends Component {
     renderButtomRoute() {
         return (
             <View style={{ flex: 1, position: 'absolute' }}>
-                <TouchableOpacity onPress={() => { this.setState({ showRota: true }); }} >
+                <TouchableOpacity onPress={() => { this.props.getLocation(); this.setState({ showRota: true }); }} >
                     <View style={[Styles.iconButtomStyle, { backgroundColor: '#2BA3DA' }]}>
                         <Icon
                             type='material-community'
@@ -148,7 +152,10 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    return { localizacaoUsuario: state.localizacao.localizacaoUsuario };
+    return { 
+        latitude: state.evento.user_latitude,
+        longitude: state.evento.user_longitude
+     };
 };
 
-export default connect(mapStateToProps)(VisualizarEventoNoMapa);
+export default connect(mapStateToProps, { getLocation })(VisualizarEventoNoMapa);

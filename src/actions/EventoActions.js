@@ -5,7 +5,7 @@ import {
     MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR,
     INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, SHOW_HELPER_EVENT, CLOSE_HELPER_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EDIT_EVENT,
     EVENT_EDIT_DATA, EVENT_EDIT_HORA, SAVED_EDITED_EVENT, EVENTS_TO_SHOW_SUCCESS, SEARCHING_EVENT, SEARCHED_EVENTO,
-    CLEAR
+    CLEAR, INICIAL_POSITION, MOVING
 } from './types';
 
 export const showMarkerAndModal = (e) => {
@@ -183,6 +183,29 @@ export const serachEventsToShow = () => {
                 const { nome, descricao, local, data_inicio, hora_inicio, coords, hora_fim, data_fim, area_tematica, usuario_id } = eventos[id];
                 dispatch({ type: EVENTS_TO_SHOW_SUCCESS, payload: { id, nome, descricao, local, data_inicio, hora_inicio, coords, hora_fim, data_fim, area_tematica, usuario_id } });
             });
+        });
+    };
+};
+
+export const getLocation = () => {
+    return (dispatch) => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const lat = parseFloat(position.coords.latitude);
+            const long = parseFloat(position.coords.longitude);
+            const initialPosition = {
+                latitude: lat,
+                longitude: long
+            };
+            dispatch({ type: INICIAL_POSITION, payload: initialPosition });
+        },
+            (error) => console.log(error.message),
+        );
+        this.wathID = navigator.geolocation.watchPosition((position) => {
+            const movingPosition = {
+                latitude: position.coords.loadingData,
+                longitude: position.coords.longitude,
+            };
+            dispatch({ type: MOVING, payload: movingPosition });
         });
     };
 };

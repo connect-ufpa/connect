@@ -1,7 +1,7 @@
 import {
     MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR,
     INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, SHOW_HELPER_EVENT, CLOSE_HELPER_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EVENTS_TO_SHOW_SUCCESS,
-    SEARCHING_EVENT, SEARCHED_EVENTO, CLEAR
+    SEARCHING_EVENT, SEARCHED_EVENTO, CLEAR, INICIAL_POSITION, MOVING
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -34,7 +34,9 @@ const INITIAL_STATE = {
     eventosAchados: [],
     eventosToShow: [],
     fetchingEvents: true,
-    fetchingEventsToShow: true
+    fetchingEventsToShow: true,
+    user_latitude: '',
+    user_longitude: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -104,6 +106,10 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, eventosAchados: action.payload };
         case EVENTS_TO_SHOW_SUCCESS:
             return { ...state, eventosToShow: [...state.eventosToShow, action.payload], fetchingEventsToShow: false };
+        case INICIAL_POSITION:
+            return { ...state, user_latitude: action.payload.latitude, user_longitude: action.payload.longitude };
+        case MOVING:
+            return { ...state, user_latitude: action.payload.latitude, user_logintude: action.payload.longitude };
         default:
             return state;
     }
