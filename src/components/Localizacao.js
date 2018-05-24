@@ -519,7 +519,3 @@ export default connect(mapStateToProps, {
   verifyLocais,
   searchLocalizacaoUsuario,
 })(Localizacao);
-
-// salvarLocais() {
-//   saveLocais(locais);
-// }

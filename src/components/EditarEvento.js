@@ -1,27 +1,24 @@
 import React, { Component } from 'react';
-import { View, TextInput, ScrollView } from 'react-native';
+import { View, TextInput, ScrollView, Picker } from 'react-native';
 import { connect } from 'react-redux';
-import { StackNavigator } from 'react-navigation';
+import { Icon } from 'react-native-elements';
 import { editEvent, saveEditedEvent } from '../actions';
 import { HeaderImage, CardSection, Input, Texts, Button, Spinner } from '../components/commons';
-import { Icon } from 'react-native-elements';
 import Styles from '../Styles';
 
 class EditarEvento extends Component {
-    static navigationOptions = ({ navigation }) => {
-        const { navigate } = navigation;
+    static navigationOptions = () => {
         return {
-            title: <HeaderImage />,
+            headerTitle: <View style={{ flex: 1, alignContent: 'center' }}><HeaderImage /></View>,
             headerStyle: {
-                paddingLeft: 15,
-                paddingRight: 35,
+                paddingRight: 60,
                 height: 55
             },
             headerTitleStyle: {
                 alignSelf: 'center',
             },
-            drawerLabel: 'Salvar Evento',
-            drawerIcon: ({ tintColor }) => (
+            drawerLabel: 'Eventos',
+            drawerIcon: () => (
                 <Icon
                     type='font-awesome'
                     name='calendar'
@@ -29,17 +26,8 @@ class EditarEvento extends Component {
                     size={25}
                 />
             ),
-            headerLeft:
-                <Icon
-                    name='arrow-left'
-                    type='font-awesome'
-                    color='#2a4065'
-                    size={25}
-                    onPress={() => navigate('EditarEventos')}
-                />
         };
     }
-
     componentWillMount() {
         const { params } = this.props.navigation.state;
         const key = Object.keys(params);
@@ -102,13 +90,49 @@ class EditarEvento extends Component {
                         />
                     </CardSection>
                     <CardSection>
+                        <Texts text='Área Temática' style='medium' />
+                    </CardSection>
+                    <CardSection>
+                        <Picker
+                            selectedValue={this.props.area_tematica}
+                            style={{ height: 50, width: 250 }}
+                            onValueChange={texto => this.props.eventFieldChange({ prop: 'area_tematica', value: texto })}
+                        >
+                            <Picker.Item label="Comunicação" value="Comunicação" />
+                            <Picker.Item label="Cultura" value="Cultura" />
+                            <Picker.Item label="Direitos Humanos e Justiça" value="Direitos Humanos e Justiça" />
+                            <Picker.Item label="Educação" value="Educação" />
+                            <Picker.Item label="Meio Ambiente" value="Meio Ambiente" />
+                            <Picker.Item label="Ciências Sociais e Aplicadas" value="Ciências Sociais e Aplicadas" />
+                            <Picker.Item label="Saúde" value="Saúde" />
+                            <Picker.Item label="Tecnologia e Produção" value="Tecnologia e Produção" />
+                            <Picker.Item label="Trabalho" value="Trabalho" />
+                        </Picker>
+                    </CardSection>
+                    <CardSection>
+                        <Texts text='Início do Evento' style='medium' />
+                    </CardSection>
+                    <CardSection>
                         <Input
-                            onChangeText={text => this.props.editEvent({ prop: 'data', value: text })}
-                            value={this.props.data}
+                            onChangeText={text => this.props.editEvent({ prop: 'data_inicio', value: text })}
+                            value={this.props.data_inicio}
                         />
                         <Input
-                            onChangeText={text => this.props.editEvent({ prop: 'hora', value: text })}
-                            value={this.props.hora}
+                            onChangeText={text => this.props.editEvent({ prop: 'hora_inicio', value: text })}
+                            value={this.props.hora_inicio}
+                        />
+                    </CardSection>
+                    <CardSection>
+                        <Texts text='Término do Evento' style='medium' />
+                    </CardSection>
+                    <CardSection>
+                        <Input
+                            onChangeText={text => this.props.editEvent({ prop: 'data_fim', value: text })}
+                            value={this.props.data_fim}
+                        />
+                        <Input
+                            onChangeText={text => this.props.editEvent({ prop: 'hora_fim', value: text })}
+                            value={this.props.hora_fim}
                         />
                     </CardSection>
                     <View style={{ alignItems: 'center' }}>
@@ -131,9 +155,9 @@ class EditarEvento extends Component {
     }
 }
 const mapStateToProps = (state) => {
-    const { id, nome, descricao, local, data, hora, coords, loading, errorData, errorHora, error } = state.eventoEdicao;
+    const { id, nome, descricao, local, area_tematica, data_inicio, hora_inicio, data_fim, hora_fim, coords, loading, errorData, errorHora, error } = state.eventoEdicao;
 
-    return { id, nome, descricao, local, data, hora, coords, errorData, errorHora, error, loading };
+    return { id, nome, descricao, local, area_tematica, data_inicio, hora_inicio, data_fim, hora_fim, coords, errorData, errorHora, error, loading };
 };
 
 export default connect(mapStateToProps, { editEvent, saveEditedEvent })(EditarEvento);

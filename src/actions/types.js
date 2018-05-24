@@ -37,23 +37,27 @@ export const ERRO_CREATING_ROUTE = 'erro_creating_route';
 
 export const MARKER = 'marker';
 export const CLOSE_MODAL = 'close_modal';
-export const EVENT_NAME = 'event_name';
-export const DESCRIPTION = 'description';
-export const LOCAL = 'local';
-export const VALID_START_EVENT_DATE = 'valid_start_event_date';
+export const SAVE_EVENT_FIELD_CHANGE = 'save_event_field_change';
 export const INVALID_START_EVENT_DATE = 'invalid_start_event_date';
-export const VALID_START_HOUR_EVENT = 'valid_start_hour_event';
-export const INVALID_START_HOUR_EVENT = 'invalid_start_hour_event';
+export const INVALID_START_EVENT_HOUR = 'invalid_start_hour_event';
+export const INVALID_END_EVENT_DATE = 'invalid_end_event_date';
+export const INVALID_END_EVENT_HOUR = 'invalid_end_event_hour';
 export const LOADING_EVENT = 'loading_event';
+export const SHOW_HELPER_EVENT = 'show_helper_event';
+export const CLOSE_HELPER_EVENT = 'close_helper_event';
 export const CREATE_EVENT_SUCCESS = 'create_event_successs';
+export const CREATE_EVENT_FAIL = 'create_event_fail';
+export const INICIAL_POSITION = 'inicial_position';
+export const MOVING = 'moving';
 
-export const EVENTS_TO_EDIT_SUCCESS = 'events_to_edit_success';
 export const CLEAR = 'clear';
 export const EDIT_EVENT = 'edit_event';
 export const EVENT_EDIT_DATA = 'event_edit_data';
 export const EVENT_EDIT_HORA = 'event_edit_hora';
 export const SAVED_EDITED_EVENT = 'saved_edited_event';
 export const EVENTS_TO_SHOW_SUCCESS = 'events_to_show_success';
+export const SEARCHING_EVENT = 'searching_event';
+export const SEARCHED_EVENTO = 'searched_evento';
 
 
 export const VALID_PERFIL = 'valid_perfil';

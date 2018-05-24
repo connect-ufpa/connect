@@ -1,69 +1,116 @@
-import { MARKER, CLOSE_MODAL, EVENT_NAME, DESCRIPTION, LOCAL, VALID_START_EVENT_DATE, 
-         INVALID_START_EVENT_DATE, VALID_START_HOUR_EVENT, INVALID_START_HOUR_EVENT, LOADING_EVENT, 
-         CREATE_EVENT_SUCCESS, EVENTS_TO_EDIT_SUCCESS, EVENTS_TO_SHOW_SUCCESS, CLEAR } from '../actions/types';
+import {
+    MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR,
+    INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, SHOW_HELPER_EVENT, CLOSE_HELPER_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EVENTS_TO_SHOW_SUCCESS,
+    SEARCHING_EVENT, SEARCHED_EVENTO, CLEAR, INICIAL_POSITION, MOVING
+} from '../actions/types';
 
 const INITIAL_STATE = {
     region: {
         latitude: -1.4753622,
         longitude: -48.4557933,
         latitudeDelta: 0.00121,
-        longitudeDelta: 0.0025 }, 
+        longitudeDelta: 0.0025
+    },
     marker: [],
     modal: false,
-    nomeEvento: '',
-    descricaoEvento: '',
-    localEvento: '',
-    dataInicioEvento: '',
-    msgErrorDataInicioEvento: '',
-    horaInicioEvento: '',
-    msgErrorHoraInicioEvento: '',
+    nome: '',
+    descricao: '',
+    local: '',
+    area_tematica: 'Comunicação',
+    data_inicio: '',
+    hora_inicio: '',
+    data_fim: '',
+    hora_fim: '',
+    errorData: '',
+    errorHora: '',
+    createFail: '',
     loading: false,
     error: false,
-    eventosToEdit: [],
+    helper: true,
+    positionHelper: 0.4,
+    helperMessage: 'Clique em um lugar no mapa para definir o local do evento',
+    successModal: false,
+    eventoPesquisado: '',
+    eventosAchados: [],
     eventosToShow: [],
     fetchingEvents: true,
-    fetchingEventsToShow: true
+    fetchingEventsToShow: true,
+    user_latitude: '',
+    user_longitude: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case MARKER:
-            return { ...state, 
-                    marker: [action.payload], 
-                    region: {
-                        latitude: action.payload.coordinate.latitude,
-                        longitude: action.payload.coordinate.longitude,
-                        latitudeDelta: 0.00021,
-                        longitudeDelta: 0.0025
-                    }, 
-                    modal: true };
+            return {
+                ...state,
+                marker: [action.payload],
+                region: {
+                    latitude: action.payload.coordinate.latitude,
+                    longitude: action.payload.coordinate.longitude,
+                    latitudeDelta: 0.00021,
+                    longitudeDelta: 0.0025
+                },
+                modal: true
+            };
         case CLOSE_MODAL:
-            return INITIAL_STATE;
-        case EVENT_NAME:
-            return { ...state, nomeEvento: action.payload };
-        case DESCRIPTION:
-            return { ...state, descricaoEvento: action.payload };
-        case LOCAL:
-            return { ...state, localEvento: action.payload };
-        case VALID_START_EVENT_DATE:
-            return { ...state, dataInicioEvento: action.payload, msgErrorDataInicioEvento: '', error: false };
+            return {
+                ...state,
+                marker: [],
+                region: {
+                    latitude: -1.4753622,
+                    longitude: -48.4557933,
+                    latitudeDelta: 0.00121,
+                    longitudeDelta: 0.0025
+                },
+                modal: false,
+                nome: '',
+                descricao: '',
+                local: '',
+                area_tematica: 'Comunicação',
+                data_inicio: '',
+                hora_inicio: '',
+                data_fim: '',
+                hora_fim: '',
+                errorData: '',
+                errorHora: '',
+                createFail: '',
+                loading: false,
+                error: false
+            };
+        case SAVE_EVENT_FIELD_CHANGE:
+            return { ...state, [action.payload.prop]: action.payload.value, errorData: '', errorHora: '', createFail: '', error: false };
         case INVALID_START_EVENT_DATE:
-            return { ...state, dataInicioEvento: action.payload, msgErrorDataInicioEvento: 'Preencha uma data válida!', error: true }; 
-        case VALID_START_HOUR_EVENT:
-            return { ...state, horaInicioEvento: action.payload, msgErrorHoraInicioEvento: '', error: false };
-        case INVALID_START_HOUR_EVENT:
-            return { ...state, horaInicioEvento: action.payload, msgErrorHoraInicioEvento: 'Preencha uma hora válida!', error: true };
+            return { ...state, [action.payload.prop]: action.payload.value, errorData: 'Preencha uma data válida!', error: true };
+        case INVALID_START_EVENT_HOUR:
+            return { ...state, [action.payload.prop]: action.payload.value, errorHora: 'Preencha uma hora válida!', error: true };
+        case INVALID_END_EVENT_DATE:
+            return { ...state, [action.payload.prop]: action.payload.value, errorData: 'Preencha uma data válida!', error: true };
+        case INVALID_END_EVENT_HOUR:
+            return { ...state, [action.payload.prop]: action.payload.value, errorHora: 'Preencha uma hora válida!', error: true };
         case LOADING_EVENT:
             return { ...state, loading: true };
+        case SHOW_HELPER_EVENT:
+            return { ...state, helper: true, positionHelper: 0.4, marker: [], helperMessage: 'Clique em um lugar no mapa para definir o local do evento' };
+        case CLOSE_HELPER_EVENT:
+            return { ...state, helper: false };
         case CREATE_EVENT_SUCCESS:
-            return INITIAL_STATE;
-        case CLEAR: 
+            return { ...state, modal: false, helper: true, positionHelper: 0.2, helperMessage: 'Evento salvo com sucesso! Clique na seta acima para voltar para a tela de evento' };
+        case CREATE_EVENT_FAIL:
+            return { ...state, createFail: 'Preencha todos os campos corretamente!', loading: false, error: true };
+        case CLEAR:
             return { ...state, eventosToEdit: [], eventosToShow: [] };
-        case EVENTS_TO_EDIT_SUCCESS:
-            return { ...state, eventosToEdit: [...state.eventosToEdit, action.payload], fetchingEvents: false };
+        case SEARCHING_EVENT:
+            return { ...state, eventoPesquisado: action.payload, eventosAchados: [] };
+        case SEARCHED_EVENTO:
+            return { ...state, eventosAchados: action.payload };
         case EVENTS_TO_SHOW_SUCCESS:
             return { ...state, eventosToShow: [...state.eventosToShow, action.payload], fetchingEventsToShow: false };
+        case INICIAL_POSITION:
+            return { ...state, user_latitude: action.payload.latitude, user_longitude: action.payload.longitude };
+        case MOVING:
+            return { ...state, user_latitude: action.payload.latitude, user_logintude: action.payload.longitude };
         default:
-           return state;
+            return state;
     }
 };

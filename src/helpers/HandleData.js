@@ -33,33 +33,34 @@ export const validatePasswords = (password) => {
 };
 
 export const matchPasswords = (confirmPassword, password) => {
-    if (confirmPassword === password) return true; 
+    if (confirmPassword === password) return true;
 };
 
 export const validateUser = (user) => {
-    if(!user.error) {
-        if ((user.name === '') || (user.registration === '') || (user.birth === '') || (user.email === '') || (user.password === ''))
+    if (!user.error) {
+        if ((user.name === '') || (user.registration === '') || (user.birth === '') || (user.email === '') || (user.password === '')) {
             return false;
-        else
-            return true;
-    }  return false;
+        }
+        return true;
+    }
+    return false;
 };
 
 export const validateEvent = (evento) => {
     if (!evento.error) {
-        if ((evento.nome === '') || (evento.descricao === '') || (evento.local === '') || (evento.data === '') || ( evento.hora === '') || (evento.coords === '')) {
+        if ((evento.nome === '') || (evento.descricao === '') || (evento.local === '') || (evento.area_tematica === '') || (evento.data_inicio === '') || (evento.hora_inicio === '') || (evento.data_fim === '') || (evento.hora_fim === '') || (evento.coords === '')) {
             return false;
-       } 
+        }
         return true;
     } return false;
 };
 
 export const validateLogin = (credentials) => {
     if (!credentials.error) {
-        if ((credentials.email === '') || (credentials.password === '')) 
+        if ((credentials.email === '') || (credentials.password === '')) {
             return false;
-        else 
-          return true;
+        }
+        return true;
     }
     return false;
-}
+};
