@@ -51,7 +51,6 @@ export const SideMenu = DrawerNavigator({
   Eventos: { screen: EventosScreen },
   Ajuda: { screen: AjudaScreen },
   Sobre: { screen: SobreScreen },
-  EditMeuPerfil: { screen: EditMeuPerfil },
   Sair: {
 		screen: Logout,
 		navigationOptions: {
@@ -71,7 +70,7 @@ export const SideMenu = DrawerNavigator({
   	}
 	},
   },{
-    initialRouteName: 'Perfil',
+    initialRouteName: 'Localizacao',
     contentComponent: props => <MenuLateral {...props} />,
     drawerBackgroundColor: 'transparent',
     contentOptions: {
@@ -102,7 +101,7 @@ export const AuthorizedScreens = StackNavigator({
   SalvarEventos: { screen: SalvarEventos },
   EditarEvento: { screen: EditarEvento },
   EditarEventoMapa: { screen: EditarEventoMapa },
-  VisualizarEventos: { screen: VisualizarEventos },
+  VisualizarEvento: { screen: VisualizarEvento },
   VisualizarEventoMapa: { screen: VisualizarEventoMapa },
   EditMeuPerfil: { screen: EditMeuPerfil }
 });

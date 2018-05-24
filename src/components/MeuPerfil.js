@@ -28,7 +28,7 @@ class MeuPerfil extends Component {
           name='person'
           color='#2a4065'
           size={27}
-         />
+        />
       ),
       headerLeft: <Icon
         name='bars'
@@ -48,7 +48,6 @@ class MeuPerfil extends Component {
   }
   componentWillMount() {
     this.props.dataPerfil();
-
   }
 
 
@@ -72,27 +71,27 @@ class MeuPerfil extends Component {
       namePerfil: this.props.namePerfil,
       registrationPerfil: this.props.registrationPerfil,
       birthdayPerfil: this.props.birthdayPerfil,
-  }
+    }
 
     if (this.props.loading) {
       return (<Spinner size="large" color="#ffff" />);
     }
 
-        return (
-          <Button
-            text="Salvar"
-            styles={Styles.btnConfirm}
-            onPress={() => { this.props.saveDataUser(user); this.setModalVisible(!this.state.modalVisible);}}
-          />
-        );
-    }
+    return (
+      <Button
+        text="Salvar"
+        styles={Styles.btnConfirm}
+        onPress={() => { this.props.saveDataUser(user); this.setModalVisible(!this.state.modalVisible); }}
+      />
+    );
+  }
 
   state = {
     modalVisible: false
-      }
+  }
 
   setModalVisible(visible) {
-    this.setState({modalVisible: visible});
+    this.setState({ modalVisible: visible });
   }
 
 
@@ -145,54 +144,54 @@ class MeuPerfil extends Component {
             alert('Modal has been closed.');
           }}
           supportedOrientations={false}
-          >
+        >
           <LinearGradient colors={['#2A4065', '#2BA3DA']} >
-        <ScrollView style={Styles.scrollViewStyle}>
-          <Card addStyle={{ paddingBottom: 40 }}>
-          <Text style={styles.titulo}>Editar Perfil</Text>
-            <CardSection>
-              <Input
-                placeholder="Nome:"
-                onChangeText={namePerfil => this.props.onNameChanged(namePerfil)}
-                value={this.props.namePerfil}
-              />
-            </CardSection>
-            <View>
-              <Texts text={this.props.errorMessageName} />
-            </View>
-            <CardSection>
-              <Input
-                placeholder="Matrícula:"
-                onChangeText={registrationPerfil => this.props.onRegistrationChanged(registrationPerfil)}
-                value={this.props.registrationPerfil}
-              />
-            </CardSection>
-            <View>
-              <Texts text={this.props.errorMessageRegistration} />
-            </View>
-            <CardSection>
-              <Input
-                placeholder="Nascimento: 00/00/0000"
-                onChangeText={birthdayPerfil => this.props.onBirthChanged(birthdayPerfil)}
-                value={this.props.birthdayPerfil}
-              />
-            </CardSection>
-            <View>
-              <Texts text={this.props.errorMessageBirthday} />
-            </View>
-            <CardSection>
-              {this.renderSaveDataUserButton()}
-            </CardSection>
+            <ScrollView style={Styles.scrollViewStyle}>
+              <Card addStyle={{ paddingBottom: 40 }}>
+                <Text style={styles.titulo}>Editar Perfil</Text>
+                <CardSection>
+                  <Input
+                    placeholder="Nome:"
+                    onChangeText={namePerfil => this.props.onNameChanged(namePerfil)}
+                    value={this.props.namePerfil}
+                  />
+                </CardSection>
+                <View>
+                  <Texts text={this.props.errorMessageName} />
+                </View>
+                <CardSection>
+                  <Input
+                    placeholder="Matrícula:"
+                    onChangeText={registrationPerfil => this.props.onRegistrationChanged(registrationPerfil)}
+                    value={this.props.registrationPerfil}
+                  />
+                </CardSection>
+                <View>
+                  <Texts text={this.props.errorMessageRegistration} />
+                </View>
+                <CardSection>
+                  <Input
+                    placeholder="Nascimento: 00/00/0000"
+                    onChangeText={birthdayPerfil => this.props.onBirthChanged(birthdayPerfil)}
+                    value={this.props.birthdayPerfil}
+                  />
+                </CardSection>
+                <View>
+                  <Texts text={this.props.errorMessageBirthday} />
+                </View>
+                <CardSection>
+                  {this.renderSaveDataUserButton()}
+                </CardSection>
 
-            <TouchableHighlight
-                onPress={() => {
-                  this.setModalVisible(!this.state.modalVisible);
-                }}>
-                <Text style={{fontSize: 30}}>Hide Modal</Text>
-              </TouchableHighlight>
-          </Card>
-        </ScrollView>
-      </LinearGradient>
+                <TouchableHighlight
+                  onPress={() => {
+                    this.setModalVisible(!this.state.modalVisible);
+                  }}>
+                  <Text style={{ fontSize: 30 }}>Hide Modal</Text>
+                </TouchableHighlight>
+              </Card>
+            </ScrollView>
+          </LinearGradient>
         </Modal>
       </View>
 
@@ -203,7 +202,7 @@ class MeuPerfil extends Component {
 }
 
 const styles = StyleSheet.create({
-  titulo:{
+  titulo: {
     fontSize: 20,
     fontFamily: 'Ubuntu',
     marginBottom: 10,
@@ -328,10 +327,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { 
+export default connect(mapStateToProps, {
   dataPerfil,
   onNameChanged,
   onRegistrationChanged,
   onBirthChanged,
   saveDataUser
- })(MeuPerfil);
+})(MeuPerfil);

@@ -28,7 +28,7 @@ export default (state = INITIAL_STATE, action) => {
     console.log(action.payload);
     switch (action.type) {
         case VALID_PERFIL:
-            return { ...state, namePerfil: action.payload.nome, registrationPerfil: action.payload.matricula, birthdayPerfil: action.payload.nascimento }
+            return { ...state }
         case VALID_NAME:
             return { ...state, namePerfil: action.payload, errorMessageName: '', error: false };
         case INVALID_NAME:
