@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { firebaseAuth } from './config/Config';
 import { createStore, applyMiddleware } from 'redux';
 import { UnauthorizedScreens, AuthorizedScreens } from './Router';
+import SplashScreen from 'react-native-splash-screen'
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 
@@ -13,6 +14,10 @@ class App extends Component {
   state = {
     signedIn: null,
     checkedSignIn: false
+  }
+
+  componentDidMount() {
+    SplashScreen.hide();
   }
 
   componentWillMount() {
