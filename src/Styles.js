@@ -4,7 +4,7 @@ const { height } = Dimensions.get('window');
 
 export default StyleSheet.create({
     logoTextStyle: {
-        fontFamily: 'Ubuntu',
+        fontFamily: 'Ubuntu-Medium',
         fontSize: 28,
         color: '#ffffff'
     },
@@ -14,22 +14,22 @@ export default StyleSheet.create({
         color: '#2A4065'
     },
     xLargeTextStyle: {
-        fontFamily: 'Ubuntu',
+        fontFamily: 'Ubuntu-Bold',
         fontSize: 48,
         color: '#ffffff'
     },
     largeTextStyle: {
-        fontFamily: 'Ubuntu',
+        fontFamily: 'Ubuntu-Regular',
         fontSize: 28,
         color: '#ffffff'
     },
     mediumTextStyle: {
-        fontFamily: 'Ubuntu',
+        fontFamily: 'Ubuntu-Regular',
         fontSize: 20,
         color: '#ffffff'
     },
     smallTextStyle: {
-        fontFamily: 'Ubuntu',
+        fontFamily: 'Ubuntu-Light',
         fontSize: 12,
         color: '#ffffff'
     },
@@ -38,7 +38,7 @@ export default StyleSheet.create({
         paddingLeft: 20,
         fontSize: 14,
         backgroundColor: '#FFF',
-        fontFamily: 'Ubuntu',
+        fontFamily: 'Ubuntu-Regular',
         borderColor: '#777',
         borderWidth: 2,
         borderRadius: 5
@@ -59,12 +59,13 @@ export default StyleSheet.create({
     },
     btnConfirm: {
         flex: 1,
+        padding: 5,
         alignSelf: 'stretch',
         backgroundColor: '#2A4065',
         borderRadius: 5,
         borderWidth: 2,
         borderColor: '#2A4065',
-        elevation: 4
+        elevation: 4,
     },
     btnCancel: {
         flex: 1,
@@ -76,7 +77,7 @@ export default StyleSheet.create({
         elevation: 4
     },
     btnTextStyle: {
-        fontFamily: 'Ubuntu',
+        fontFamily: 'Ubuntu-Medium',
         fontSize: 16,
         alignSelf: 'center',
         color: '#fff',

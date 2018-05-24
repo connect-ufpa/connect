@@ -11,25 +11,26 @@ const logo = require('../../assets/img/logo.png');
 
 class Login extends Component {
   static navigationOptions = {
-    header: null
-  }
+    header: null,
+  };
 
   renderLoginButton() {
     const user = {
-        email: this.props.email,
-        password: this.props.password,
-        error: this.props.error,
-        loading: false
-    }
+      email: this.props.email,
+      password: this.props.password,
+      error: this.props.error,
+      loading: false,
+    };
 
-    if (this.props.loading)
-      return <Spinner size="large" color="#ffff" />;
+    if (this.props.loading) return <Spinner size="large" color="#ffff" />;
 
     return (
       <Button
         text="Entrar"
         styles={Styles.btnConfirm}
-        onPress={() => {this.props.loginUser(user); }}
+        onPress={() => {
+          this.props.loginUser(user);
+        }}
       />
     );
   }
@@ -37,7 +38,7 @@ class Login extends Component {
   render() {
     return (
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
-        <ScrollView style={Styles.scrollViewStyle} >
+        <ScrollView style={Styles.scrollViewStyle}>
           <Card>
             <CardSection>
               <Image
@@ -46,9 +47,7 @@ class Login extends Component {
               />
             </CardSection>
             <CardSection>
-              <Text style={Styles.logoTextStyle}>
-                Connect UFPa
-              </Text>
+              <Text style={Styles.logoTextStyle}>Connect UFPa</Text>
             </CardSection>
             <CardSection>
               <Input
@@ -64,28 +63,40 @@ class Login extends Component {
               <Input
                 secureTextEntry
                 placeholder="Senha:"
-                onChangeText={password => this.props.loginPasswordChange(password)}
+                onChangeText={password =>
+                  this.props.loginPasswordChange(password)
+                }
                 value={this.props.password}
               />
             </CardSection>
             <View>
               <Texts text={this.props.errorMessagePassword} />
             </View>
-            <CardSection styleSection={{ alignSelf: 'flex-end', marginTop: 0 }}>
+            <CardSection
+              styleSection={{
+                alignSelf: 'flex-end',
+                marginTop: 0,
+                marginRight: 5,
+              }}
+            >
               <View>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('ForgotPasword')}>
-                  <Texts text="Esqueci a senha" style="small" />
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate('ForgotPasword')
+                  }
+                >
+                  <Texts text="Esqueci minha senha" style="small" />
                 </TouchableOpacity>
               </View>
             </CardSection>
-            <CardSection>
-              {this.renderLoginButton()}
-            </CardSection>
+            <CardSection>{this.renderLoginButton()}</CardSection>
             <View>
               <Texts text={this.props.errorMessageLogin} />
             </View>
             <CardSection>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateUser')}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('CreateUser')}
+              >
                 <Texts text="Criar conta" style="medium" />
               </TouchableOpacity>
             </CardSection>
@@ -96,7 +107,7 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     email: state.login.email,
     errorMessageEmail: state.login.errorMessageEmail,
@@ -104,12 +115,12 @@ const mapStateToProps = (state) => {
     loading: state.login.loading,
     error: state.login.error,
     errorMessagePassword: state.login.errorMessagePassword,
-    errorMessageLogin: state.login.errorMessageLogin
+    errorMessageLogin: state.login.errorMessageLogin,
   };
 };
 
 export default connect(mapStateToProps, {
   loginEmailChange,
   loginPasswordChange,
-  loginUser
+  loginUser,
 })(Login);

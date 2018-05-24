@@ -11,11 +11,9 @@ class ForgotPassword extends Component {
     title: 'Esqueci minha senha',
     headerTintColor: '#2A4065',
     headerTitleStyle: {
-      fontFamily: 'Ubuntu',
-      fontSize: 20,
+      fontFamily: 'Ubuntu-Medium',
       fontWeight: '200',
-      alignSelf: 'center',
-      paddingRight: 60
+      fontSize: 18,
     },
     headerStyle: {
       elevation: 5
@@ -28,7 +26,7 @@ class ForgotPassword extends Component {
         <ScrollView style={Styles.scrollViewStyle}>
           <Card>
             <CardSection>
-              <Texts style='medium' text={'Digite seu e-mail para redefinição de senha'}/>
+              <Texts style='small' text={'Digite seu e-mail para redefinição de senha'}/>
             </CardSection>
             <CardSection>
               <Input

@@ -10,13 +10,12 @@ const logo = require('../../assets/img/logo.png');
 
 class CreateUser extends Component {
   static navigationOptions = {
-    title: 'Cadastro',
+    title: 'Criar conta',
     headerTintColor: '#2A4065',
     headerTitleStyle: {
-      fontFamily: 'Ubuntu',
-      fontSize: 20,
+      fontFamily: 'Ubuntu-Medium',
       fontWeight: '200',
-      textAlign: 'center'
+      fontSize: 18,
     },
     headerStyle: { 
       elevation: 5
