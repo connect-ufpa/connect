@@ -118,8 +118,8 @@ class Localizacao extends Component {
               title={local.nome}
               image={require('../../assets/img/pin/Instituto.png')}
             >
-              <Callout style={{ elevation: 8 }} tooltip={true}>
-                  <CalloutView name={local.nome} desc={local.desc} />
+              <Callout tooltip={true}>
+                <CalloutView name={local.nome} desc={local.desc} />
               </Callout>
             </Marker>
           );
@@ -856,13 +856,13 @@ class Localizacao extends Component {
 
       return (
         <View style={styles.containerInfoRota}>
-          <Text style={{ textAlign: 'center', color: '#2D2D2D', fontSize: 12, fontFamily: 'Ubuntu', borderBottomColor: '#2D2D2D', borderBottomWidth: 2, paddingBottom: 5 }}>
+          <Text style={{ textAlign: 'center', color: '#2D2D2D', fontSize: 12, fontFamily: 'Ubuntu-Medium', borderBottomColor: '#2D2D2D', borderBottomWidth: 2, paddingBottom: 5 }}>
             Informações da rota
           </Text>
-          <Text style={{ textAlign: 'center', color: '#777', fontSize: 11, fontFamily: 'Ubuntu', marginTop: 10 }}>
+          <Text style={{ textAlign: 'center', color: '#777', fontSize: 11, fontFamily: 'Ubuntu-Regular', marginTop: 10 }}>
             Distância:{` ${this.props.infoRota.distance.toFixed(2)} km`} 
           </Text>
-          <Text style={{ textAlign: 'center', color: '#777', fontSize: 11, fontFamily: 'Ubuntu', marginTop: 10 }}>
+          <Text style={{ textAlign: 'center', color: '#777', fontSize: 11, fontFamily: 'Ubuntu-Regular', marginTop: 10 }}>
             Tempo:{` ${this.props.infoRota.duration.toFixed(2)} min`} 
           </Text>
         </View>
