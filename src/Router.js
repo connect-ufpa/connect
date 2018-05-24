@@ -18,6 +18,7 @@ import EditarEvento from './components/EditarEvento';
 import EditarEventoMapa from './components/EditarEventoMapa';
 import VisualizarEventos from './components/VisualizarEventos';
 import VisualizarEventoMapa from './components/VisualizarEventoMapa';
+import EditMeuPerfil from './components/EditMeuPerfil';
 
 const Logout = () => {
   return (
@@ -45,13 +46,13 @@ export const SobreScreen = StackNavigator({
   Sobre: { screen: Sobre },
 });
 
-
 export const SideMenu = DrawerNavigator({
   Localizacao: { screen: LocalizacaoScreen },
   Perfil: { screen: PerfilScreen },
   Eventos: { screen: EventosScreen },
   Ajuda: { screen: AjudaScreen },
   Sobre: { screen: SobreScreen },
+  EditMeuPerfil: { screen: EditMeuPerfil },
   Sair: {
 		screen: Logout,
 		navigationOptions: {
@@ -72,7 +73,7 @@ export const SideMenu = DrawerNavigator({
   	}
 	},
   },{
-    initialRouteName: 'Localizacao',
+    initialRouteName: 'Perfil',
     contentComponent: props => <MenuLateral {...props} />,
     drawerBackgroundColor: 'transparent',
     contentOptions: {
@@ -105,5 +106,6 @@ export const AuthorizedScreens = StackNavigator({
   EditarEvento: { screen: EditarEvento },
   EditarEventoMapa: { screen: EditarEventoMapa },
   VisualizarEventos: { screen: VisualizarEventos },
-  VisualizarEventoMapa: { screen: VisualizarEventoMapa } 
+  VisualizarEventoMapa: { screen: VisualizarEventoMapa },
+  EditMeuPerfil: { screen: EditMeuPerfil }
 });

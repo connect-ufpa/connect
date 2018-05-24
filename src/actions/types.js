@@ -55,3 +55,7 @@ export const EVENT_EDIT_HORA = 'event_edit_hora';
 export const SAVED_EDITED_EVENT = 'saved_edited_event';
 export const EVENTS_TO_SHOW_SUCCESS = 'events_to_show_success';
 
+
+export const VALID_PERFIL = 'valid_perfil';
+export const UPDATE_DATA_USER_SUCESS = 'update_date_user_sucess';
+export const UPDATE_DATA_USER_ERROR = 'update_data_user_error';

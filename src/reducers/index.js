@@ -5,6 +5,7 @@ import ForgotPasswordReducer from './ForgotPasswordReducer';
 import LocalizacaoReducer from './LocalizacaoReducer';
 import EventoReducer from './EventoReducer';
 import EventEditReducer from './EventEditReducer';
+import PerfilReducer from './PerfilReducer' ;
 
 export default combineReducers({
    createUser: CreateUserReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
    forgotPassword: ForgotPasswordReducer,
    localizacao: LocalizacaoReducer,
    evento: EventoReducer,
-   eventoEdicao: EventEditReducer
+   eventoEdicao: EventEditReducer,
+   perfil: PerfilReducer
 });
