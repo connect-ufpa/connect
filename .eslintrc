@@ -3,6 +3,13 @@
   "extends": "rallycoding",
   "rules": {
     "arrow-body-style": 0,
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "max-len": ["error", 300, 2, {
+      "ignoreUrls": true,
+      "ignoreComments": false
+    }],
+    "camelcase": 0,
+    "no-shadow": 0,
+    "no-underscore-dangle": 0
   }
 }

@@ -13,11 +13,11 @@ import Eventos from './components/Eventos';
 import Ajuda from './components/Ajuda';
 import Sobre from './components/Sobre';
 import SalvarEventos from './components/SalvarEventos';
-import EditarEventos from './components/EditarEventos';
 import EditarEvento from './components/EditarEvento';
 import EditarEventoMapa from './components/EditarEventoMapa';
-import VisualizarEventos from './components/VisualizarEventos';
+import VisualizarEvento from './components/VisualizarEvento';
 import VisualizarEventoMapa from './components/VisualizarEventoMapa';
+import EditMeuPerfil from './components/EditMeuPerfil';
 
 const Logout = () => {
   return (
@@ -45,7 +45,6 @@ export const SobreScreen = StackNavigator({
   Sobre: { screen: Sobre },
 });
 
-
 export const SideMenu = DrawerNavigator({
   Localizacao: { screen: LocalizacaoScreen },
   Perfil: { screen: PerfilScreen },
@@ -57,17 +56,16 @@ export const SideMenu = DrawerNavigator({
 		navigationOptions: {
 			title: 'Sair',
 			style: {
-        color: 'black',
-        fontSize: 20,
+        color: '#CC2820',
       },
 			drawerLabel: 'Sair',
 			drawerIcon: ({ tintColor }) => (
-				<Icon
-					name='sign-out'
-	        type='font-awesome'
-	        size={24}
-					color='black'
-				/>
+        <Icon
+          name='sign-out'
+          type='font-awesome'
+          size={24}
+          color='#CC2820'
+        />
     	),
   	}
 	},
@@ -101,9 +99,9 @@ export const AuthorizedScreens = StackNavigator({
   Ajuda: { screen: Ajuda },
   Sobre: { screen: Sobre },
   SalvarEventos: { screen: SalvarEventos },
-  EditarEventos: { screen: EditarEventos },
   EditarEvento: { screen: EditarEvento },
   EditarEventoMapa: { screen: EditarEventoMapa },
-  VisualizarEventos: { screen: VisualizarEventos },
-  VisualizarEventoMapa: { screen: VisualizarEventoMapa } 
+  VisualizarEvento: { screen: VisualizarEvento },
+  VisualizarEventoMapa: { screen: VisualizarEventoMapa },
+  EditMeuPerfil: { screen: EditMeuPerfil }
 });
