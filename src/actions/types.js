@@ -25,6 +25,11 @@ export const CHECKING_CREDENTIAL = 'checking_credential';
 export const VALID_EMAIL_FORGOT = 'valid_email_forgot';
 export const INVALID_EMAIL_FORGOT = 'invalid_email_forgot';
 
+export const LOADING_ROUTE = 'loading_route';
+export const CREATE_ROUTE_SUCCESS = 'create_route_success';
+export const ROUTE_INFO = 'route_info';
+export const CLEAR_INPUT_SEARCH = 'clear_input_search';
+export const INPUT_SEARCH_UNFOCUSED = 'input_search_unfocused';
 export const RETRIEVE_LOCAIS = 'retrieve_locais';
 export const RETRIVING_LOCAIS = 'retrieving_locais';
 export const SEARCHING_LOCAL = 'searching_local';
@@ -33,7 +38,9 @@ export const MARK_LOCAL = 'mark_local';
 export const SEARCHING_USER_LOCALIZATION = 'searching_user_localization';
 export const SEARCHED_USER_LOCALIZATION = 'searched_user_localization';
 export const CREATING_ROUTE = 'creating_route';
-export const ERRO_CREATING_ROUTE = 'erro_creating_route';
+export const ERROR_CREATING_ROUTE = 'erro_creating_route';
+export const CLOSE_ERROR_MESSAGE = 'close_error_message';
+export const CLOSE_HELPER_MESSAGE = 'close_helper_message';
 
 export const MARKER = 'marker';
 export const CLOSE_MODAL = 'close_modal';
