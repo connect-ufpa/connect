@@ -24,7 +24,8 @@ import {
   createRouteSuccess,  
   searchLocalizacaoUsuario,
 } from '../actions';
-import { Map, Input, Spinner, CalloutView, HeaderImage } from './commons';
+import Loading from './commons/Loading';
+import { Input, Spinner, CalloutView, HeaderImage } from './commons';
 import MapView, { Marker, Circle, Callout } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Icon } from 'react-native-elements';
@@ -347,17 +348,7 @@ class Localizacao extends Component {
   renderInputPesquisarLocais() {
     if (this.props.loading) {
       return (
-        <View style={styles.containerLoading}>
-          <View style={{
-            height: 100,
-            width: 100,
-            backgroundColor: '#FFF',
-            borderRadius: 5,
-            elevation: 8,
-          }}>
-            <Spinner size={60} color="#2A4065" />
-          </View>
-        </View>
+        <Loading />
       );
     } else {
       return (

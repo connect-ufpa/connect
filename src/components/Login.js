@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ScrollView, Image, TouchableOpacity, View, Text } from 'react-native';
 import { Input, Card, CardSection, Button, Texts, Spinner } from './commons/';
+import Loading from './commons/Loading.js';
 import { loginEmailChange, loginPasswordChange, loginUser } from '../actions/';
 import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
@@ -22,8 +23,6 @@ class Login extends Component {
       loading: false,
     };
 
-    if (this.props.loading) return <Spinner size="large" color="#ffff" />;
-
     return (
       <Button
         text="Entrar"
@@ -35,10 +34,15 @@ class Login extends Component {
     );
   }
 
+  showLoading() {
+    if (this.props.loading) return (<Loading />);
+  }
+
   render() {
     return (
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
         <ScrollView style={Styles.scrollViewStyle}>
+          {this.showLoading()}
           <Card>
             <CardSection>
               <Image
