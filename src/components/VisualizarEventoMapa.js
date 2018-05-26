@@ -9,7 +9,7 @@ import { getLocation } from '../actions';
 import Styles from '../Styles';
 
 const { height, width } = Dimensions.get('window');
-const ICON = require('../../assets/img/marker.png');
+const ICON = require('../../assets/img/pin.png');
 
 class VisualizarEventoNoMapa extends Component {
     static navigationOptions = () => {

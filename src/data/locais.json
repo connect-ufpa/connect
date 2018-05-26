@@ -2,6 +2,15 @@
   "local": 
   [
     {
+      "nome": "Auditório Benedito Nunes (Hangarzinho)",
+      "desc": "Localizado às margens do Rio Guamá, em um ambiente natural privilegiado e de singular beleza cênica, o Centro de Eventos Benedito Nunes (CEBN), com uma infraestrutura particular, reforça a presença do Estado do Pará em oportunidades globais, na conquista de novos mercados voltados para o turismo de negócios e eventos.",
+      "coords": {
+        "lat": -1.475166,
+        "lng": -48.455458
+      },
+      "tipo": "Convenções"
+    },
+    {
       "nome": "Atelier de Artes",
       "desc": "Atelier de artes da Faculdade de Artes visuais da UFPa.",
       "coords": {

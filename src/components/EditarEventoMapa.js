@@ -9,7 +9,7 @@ import Styles from '../Styles';
 
 const Height = Dimensions.get('window').height;
 const HalfHeight = Height * 0.75;
-const ICON = require('../../assets/img/marker.png');
+const ICON = require('../../assets/img/pin.png');
 
 let lat = -1.473987;
 let long = -48.452267;

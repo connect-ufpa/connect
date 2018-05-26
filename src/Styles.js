@@ -92,7 +92,12 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     scrollViewStyle: {
-        height: '100%'
+        height: '100%',
+    },    
+    modalScrollViewStyle: {
+        height: '100%',
+        marginBottom: 20,
+        marginTop: 75
     },
     mapStyle: {
         height: 300,
@@ -103,10 +108,12 @@ export default StyleSheet.create({
         width: '100%'
     },
     eventCardStyle: {
+        elevation: 8,
         backgroundColor: '#ffff',
-        borderRadius: 5,
+        borderRadius: 10,
         marginLeft: 10,
         marginRight: 10,
+        marginBottom: 10,
     },
     searchBarStyle: {
         flex: 1,

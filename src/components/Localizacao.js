@@ -86,7 +86,7 @@ class Localizacao extends Component {
       ),
     };
   };
-
+  
   // saveLocais(locais);
 
   componentDidMount() {
@@ -379,8 +379,8 @@ class Localizacao extends Component {
               {this.props.inputSearchFocused ? (
                 <Icon name="clear" color="#777" size={25} />
               ) : (
-                  <Icon name="search" color="#777" size={25} />
-                )}
+                <Icon name="search" color="#777" size={25} />
+              )}
             </View>
           </TouchableOpacity>
         </View>

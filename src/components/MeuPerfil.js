@@ -265,18 +265,16 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 1,
+    padding: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
     backgroundColor: 'rgba(0,0,0, 0.5)',
   },
   perfilFotoWwrap: {
-    marginTop: 10,
     width: 150,
-    height: 150,
+    height: 150,    
+    marginTop: 10,
     borderRadius: 100,
-    borderColor: 'rgba(0,0,0, 0.4)',
-    borderWidth: 6,
   },
   perfilFoto: {
     flex: 1,

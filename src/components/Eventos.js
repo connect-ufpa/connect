@@ -13,7 +13,8 @@ const HALFHEIGHT = HEIGHT * 0.13;
 const MODALSUCCESS = HEIGHT * 0.4;
 
 class Eventos extends Component {
-  static navigationOptions = () => {
+  static navigationOptions = ({ navigation }) => {
+    const { navigate } = navigation;
     return {
       headerTitle: <View style={{ flex: 1, alignContent: 'center' }}><HeaderImage /></View>,
       headerStyle: {
@@ -32,6 +33,27 @@ class Eventos extends Component {
           color='#2a4065'
           size={25}
         />
+      ),
+      headerLeft: (
+        <View>
+          <Icon
+            name="bars"
+            type="font-awesome"
+            color="#2a4065"
+            size={25}
+            onPress={() => navigate('DrawerOpen')}
+          />
+        </View>
+      ),
+      headerRight: (
+        <View>
+          <Icon
+            name="settings"
+            color="#2a4065"
+            size={25}
+            onPress={() => navigate('DrawerOpen')}
+          />
+        </View>
       ),
     };
   }
@@ -178,11 +200,13 @@ class Eventos extends Component {
       return datas_eventos;
     });
     return (
-      <View style={{ flex: 1, marginTop: HALFHEIGHT }}>
-        <Calendar
-          onDayPress={(day) => { this.showPoupUpEventoDia(day.dateString); }}
-          markedDates={datas_eventos}
-        />
+      <View style={{ margin: 18.5, marginTop: HALFHEIGHT, borderRadius: 5, borderWidth: 3, borderColor: '#FFF', elevation: 8 }}>
+        <View style={{ padding: 5, backgroundColor: '#FFF' }}> 
+          <Calendar
+            onDayPress={(day) => { this.showPoupUpEventoDia(day.dateString); }}
+            markedDates={datas_eventos}
+          />
+        </View>
       </View>
     );
   }
