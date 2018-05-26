@@ -24,8 +24,7 @@ import {
   createRouteSuccess,  
   searchLocalizacaoUsuario,
 } from '../actions';
-import Loading from './commons/Loading';
-import { Input, Spinner, CalloutView, HeaderImage } from './commons';
+import { Input, Spinner, CalloutView, HeaderImage, Loading } from './commons';
 import MapView, { Marker, Circle, Callout } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Icon } from 'react-native-elements';
@@ -1154,16 +1153,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#FFF',
   },
-  inputPesquisar: {
-    flex: 5,
-    color: '#2D2D2D',
-    fontSize: 14,
-    paddingLeft: 20,
-    paddingRight: 20,
-    borderColor: '#FFF',
-    fontFamily: 'Ubuntu-Regular',
-    backgroundColor: '#FFF',
-  },
   containerInfoRota: {
     flex: 1,
     zIndex: 2,
@@ -1181,7 +1170,17 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     backgroundColor: '#FFF',
     justifyContent: 'center',
-  }
+  },  
+  inputPesquisar: {
+    flex: 5,
+    color: '#2D2D2D',
+    fontSize: 14,
+    paddingLeft: 20,
+    paddingRight: 20,
+    borderColor: '#FFF',
+    fontFamily: 'Ubuntu-Regular',
+    backgroundColor: '#FFF',
+  },
 });
 
 const mapStateToProps = state => {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, Image, TouchableOpacity, View, Text } from 'react-native';
-import { Input, Card, CardSection, Button, Texts, Spinner } from './commons/';
-import Loading from './commons/Loading.js';
+import { Input, Card, CardSection, Button, Texts, Loading } from './commons/';
 import { loginEmailChange, loginPasswordChange, loginUser } from '../actions/';
 import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
@@ -35,14 +34,13 @@ class Login extends Component {
   }
 
   showLoading() {
-    if (this.props.loading) return (<Loading />);
+    if (this.props.loading) return <Loading />;
   }
 
   render() {
     return (
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
         <ScrollView style={Styles.scrollViewStyle}>
-          {this.showLoading()}
           <Card>
             <CardSection>
               <Image
@@ -55,6 +53,7 @@ class Login extends Component {
             </CardSection>
             <CardSection>
               <Input
+                keyboardType={'email-address'}
                 placeholder="E-mail:"
                 onChangeText={email => this.props.loginEmailChange(email)}
                 value={this.props.email}
@@ -105,6 +104,7 @@ class Login extends Component {
               </TouchableOpacity>
             </CardSection>
           </Card>
+          {this.showLoading()}
         </ScrollView>
       </LinearGradient>
     );

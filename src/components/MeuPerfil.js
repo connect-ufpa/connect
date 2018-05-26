@@ -1,8 +1,37 @@
 import React, { Component } from 'react';
-import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, authUser, adicionaContato, dataPerfil, saveDataUser } from '../actions';
-import { Dimensions, Text, ScrollView, View, Alert, Image, StatusBar, StyleSheet, ImageBackground, TouchableHighlight, Modal } from 'react-native';
+import {
+  onNameChanged,
+  onRegistrationChanged,
+  onBirthChanged,
+  onEmailChanged,
+  authUser,
+  adicionaContato,
+  dataPerfil,
+  saveDataUser,
+} from '../actions';
+import {
+  Dimensions,
+  Text,
+  ScrollView,
+  View,
+  Alert,
+  Image,
+  StatusBar,
+  StyleSheet,
+  ImageBackground,
+  TouchableHighlight,
+  Modal,
+} from 'react-native';
 //import Modal from 'react-native-modal';
-import { Card, CardSection, Texts, HeaderImage, Input, Button, UserImage } from './commons';
+import {
+  Card,
+  CardSection,
+  Texts,
+  HeaderImage,
+  Input,
+  Button,
+  UserImage,
+} from './commons';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
@@ -13,48 +42,50 @@ class MeuPerfil extends Component {
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
     return {
-      headerTitle: <View style={{ flex: 1, alignContent: 'center' }}><HeaderImage /></View>,
+      headerTitle: (
+        <View style={{ flex: 1, alignContent: 'center' }}>
+          <HeaderImage />
+        </View>
+      ),
       headerStyle: {
         paddingLeft: 15,
         paddingRight: 15,
-        height: 55
+        height: 55,
       },
       headerTitleStyle: {
         alignSelf: 'center',
       },
       drawerLabel: 'Meu perfil',
       drawerIcon: ({ tintColor }) => (
+        <Icon name="person" color="#2a4065" size={27} />
+      ),
+      headerLeft: (
         <Icon
-          name='person'
-          color='#2a4065'
-          size={27}
+          name="bars"
+          type="font-awesome"
+          color="#2a4065"
+          size={25}
+          onPress={() => navigate('DrawerOpen')}
         />
       ),
-      headerLeft: <Icon
-        name='bars'
-        type='font-awesome'
-        color='#2a4065'
-        size={25}
-        onPress={() => navigate('DrawerOpen')}
-      />,
-      headerRight: <Icon
-        name='search'
-        type='font-awesome'
-        color='#2a4065'
-        size={25}
-        onPress={() => navigate('DrawerOpen')}
-      />,
-    }
-  }
+      headerRight: (
+        <Icon
+          name="search"
+          type="font-awesome"
+          color="#2a4065"
+          size={25}
+          onPress={() => navigate('DrawerOpen')}
+        />
+      ),
+    };
+  };
   componentWillMount() {
     this.props.dataPerfil();
   }
 
-
   renderNavigateToEditPerfilButton() {
-
     if (this.props.loading) {
-      return (<Spinner size="large" color="#ffff" />);
+      return <Spinner size="large" color="#ffff" />;
     }
 
     return (
@@ -71,41 +102,47 @@ class MeuPerfil extends Component {
       namePerfil: this.props.namePerfil,
       registrationPerfil: this.props.registrationPerfil,
       birthdayPerfil: this.props.birthdayPerfil,
-    }
+    };
 
     if (this.props.loading) {
-      return (<Spinner size="large" color="#ffff" />);
+      return <Spinner size="large" color="#ffff" />;
     }
 
     return (
       <Button
         text="Salvar"
         styles={Styles.btnConfirm}
-        onPress={() => { this.props.saveDataUser(user); this.setModalVisible(!this.state.modalVisible); }}
+        onPress={() => {
+          this.props.saveDataUser(user);
+          this.setModalVisible(!this.state.modalVisible);
+        }}
       />
     );
   }
 
   state = {
-    modalVisible: false
-  }
+    modalVisible: false,
+  };
 
   setModalVisible(visible) {
     this.setState({ modalVisible: visible });
   }
 
-
   render() {
     return (
-
-
       <View style={styles.container}>
         <StatusBar backgroundColor="#2A4065" />
 
-        <ImageBackground style={styles.headerBackground} source={require('../../assets/img/paisagem2.jpg')}>
+        <ImageBackground
+          style={styles.headerBackground}
+          source={require('../../assets/img/background.jpg')}
+        >
           <View style={styles.header}>
             <View style={styles.perfilFotoWwrap}>
-              <Image style={styles.perfilFoto} source={require('../../assets/img/user_male.png')} />
+              <Image
+                style={styles.perfilFoto}
+                source={require('../../assets/img/user_male.png')}
+              />
             </View>
             <Text style={styles.name}>{this.props.namePerfil}</Text>
             <Text style={styles.idade}>{this.props.idadePerfil} anos</Text>
@@ -122,20 +159,21 @@ class MeuPerfil extends Component {
             <Text style={styles.barraTop}>332</Text>
             <Text style={styles.barraBottom}>Locais Adicionados</Text>
           </View>
-
         </View>
         <View style={styles.areaBtn}>
           <View style={styles.photoGrid}>
             <Button
               text="Editar"
               styles={styles.btnEditar}
-              onPress={() => { this.setModalVisible(true); }}
+              onPress={() => {
+                this.setModalVisible(true);
+              }}
             />
           </View>
         </View>
 
-
-        <Modal style={styles.modal}
+        <Modal
+          style={styles.modal}
           animationType="fade"
           presentationStyle="pageSheet"
           transparent={false}
@@ -145,14 +183,16 @@ class MeuPerfil extends Component {
           }}
           supportedOrientations={false}
         >
-          <LinearGradient colors={['#2A4065', '#2BA3DA']} >
+          <LinearGradient colors={['#2A4065', '#2BA3DA']}>
             <ScrollView style={Styles.scrollViewStyle}>
               <Card addStyle={{ paddingBottom: 40 }}>
                 <Text style={styles.titulo}>Editar Perfil</Text>
                 <CardSection>
                   <Input
                     placeholder="Nome:"
-                    onChangeText={namePerfil => this.props.onNameChanged(namePerfil)}
+                    onChangeText={namePerfil =>
+                      this.props.onNameChanged(namePerfil)
+                    }
                     value={this.props.namePerfil}
                   />
                 </CardSection>
@@ -162,7 +202,9 @@ class MeuPerfil extends Component {
                 <CardSection>
                   <Input
                     placeholder="Matrícula:"
-                    onChangeText={registrationPerfil => this.props.onRegistrationChanged(registrationPerfil)}
+                    onChangeText={registrationPerfil =>
+                      this.props.onRegistrationChanged(registrationPerfil)
+                    }
                     value={this.props.registrationPerfil}
                   />
                 </CardSection>
@@ -172,21 +214,22 @@ class MeuPerfil extends Component {
                 <CardSection>
                   <Input
                     placeholder="Nascimento: 00/00/0000"
-                    onChangeText={birthdayPerfil => this.props.onBirthChanged(birthdayPerfil)}
+                    onChangeText={birthdayPerfil =>
+                      this.props.onBirthChanged(birthdayPerfil)
+                    }
                     value={this.props.birthdayPerfil}
                   />
                 </CardSection>
                 <View>
                   <Texts text={this.props.errorMessageBirthday} />
                 </View>
-                <CardSection>
-                  {this.renderSaveDataUserButton()}
-                </CardSection>
+                <CardSection>{this.renderSaveDataUserButton()}</CardSection>
 
                 <TouchableHighlight
                   onPress={() => {
                     this.setModalVisible(!this.state.modalVisible);
-                  }}>
+                  }}
+                >
                   <Text style={{ fontSize: 30 }}>Hide Modal</Text>
                 </TouchableHighlight>
               </Card>
@@ -194,9 +237,6 @@ class MeuPerfil extends Component {
           </LinearGradient>
         </Modal>
       </View>
-
-
-
     );
   }
 }
@@ -212,8 +252,7 @@ const styles = StyleSheet.create({
     paddingLeft: 120,
     paddingBottom: 15,
     paddingTop: 15,
-    marginTop: -22
-
+    marginTop: -22,
   },
   container: {
     flex: 1,
@@ -222,14 +261,14 @@ const styles = StyleSheet.create({
   headerBackground: {
     flex: 1,
     width: null,
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
   },
   header: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
-    backgroundColor: 'rgba(0,0,0, 0.5)'
+    backgroundColor: 'rgba(0,0,0, 0.5)',
   },
   perfilFotoWwrap: {
     marginTop: 10,
@@ -251,52 +290,51 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontSize: 20,
     color: '#fff',
-    fontFamily: 'Ubuntu'
+    fontFamily: 'Ubuntu',
   },
   idade: {
     fontSize: 14,
     color: '#fff',
     fontWeight: '300',
     fontFamily: 'Ubuntu',
-    marginBottom: 10
+    marginBottom: 10,
   },
 
   //Barra//////////////////////////
 
-
   barra: {
-    borderTopColor: "#fff",
+    borderTopColor: '#fff',
     borderTopWidth: 4,
     backgroundColor: '#2A4065',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   barraSeparador: {
-    borderRightWidth: 4
+    borderRightWidth: 4,
   },
   barraItem: {
     flex: 1,
     padding: 18,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   barraTop: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
     // fontStyle: 'italic',
-    fontFamily: 'Ubuntu'
+    fontFamily: 'Ubuntu',
   },
   barraBottom: {
     color: '#fff',
     fontSize: 14,
     fontWeight: 'bold',
-    fontFamily: 'Ubuntu'
+    fontFamily: 'Ubuntu',
   },
 
   areaBtn: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   btnEditar: {
     width: 80,
@@ -308,17 +346,16 @@ const styles = StyleSheet.create({
     color: '#000',
     marginTop: 100,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   modal: {
     flex: 1,
     borderWidth: 6,
-    borderRadius: 4
+    borderRadius: 4,
+  },
+});
 
-  }
-})
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     namePerfil: state.perfil.namePerfil,
     registrationPerfil: state.perfil.registrationPerfil,
@@ -332,5 +369,5 @@ export default connect(mapStateToProps, {
   onNameChanged,
   onRegistrationChanged,
   onBirthChanged,
-  saveDataUser
+  saveDataUser,
 })(MeuPerfil);

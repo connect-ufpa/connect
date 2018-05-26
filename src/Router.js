@@ -2,7 +2,6 @@ import React from 'react';
 import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import { firebaseAuth } from './config/Config';
-import Splash from './components/Splash';
 import Login from './components/Login';
 import CreateUser from './components/CreateUser';
 import ForgotPassword from './components/ForgotPassword';

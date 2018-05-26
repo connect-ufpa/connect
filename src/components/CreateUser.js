@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, onPasswordChanged, onConfirmPasswordChanged, authUser } from '../actions';
-import { Card, CardSection, Texts, Input, Button, ButtonBack, Spinner } from './commons';
+import { Card, CardSection, Texts, Input, Button, ButtonBack, Loading } from './commons';
 import { ScrollView, Image, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
@@ -17,24 +17,21 @@ class CreateUser extends Component {
       fontWeight: '200',
       fontSize: 18,
     },
-    headerStyle: { 
+    headerStyle: {
       elevation: 5
     }
   };
 
   renderCreateUserButton() {
     const user = {
-        name: this.props.name,
-        registration: this.props.registration,
-        birthday: this.props.birthday,
-        email: this.props.email,
-        password: this.props.password,
-        error: this.props.error
+      name: this.props.name,
+      registration: this.props.registration,
+      birthday: this.props.birthday,
+      email: this.props.email,
+      password: this.props.password,
+      error: this.props.error
     }
-    
-    if (this.props.loading) {
-      return (<Spinner size="large" color="#ffff" />);
-    }
+
     return (
       <Button
         text="Cadastrar"
@@ -44,10 +41,15 @@ class CreateUser extends Component {
     );
   }
 
+  showLoading() {
+    if (this.props.loading) return (<Loading />);
+  }
+
   render() {
     return (
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
         <ScrollView style={Styles.scrollViewStyle}>
+          {this.showLoading()}
           <Card addStyle={{ paddingBottom: 40 }}>
             <CardSection>
               <Input
@@ -61,6 +63,7 @@ class CreateUser extends Component {
             </View>
             <CardSection>
               <Input
+                keyboardType={'numeric'}
                 placeholder="Matrícula:"
                 onChangeText={registration => this.props.onRegistrationChanged(registration)}
                 value={this.props.registration}
@@ -81,7 +84,8 @@ class CreateUser extends Component {
             </View>
 
             <CardSection>
-              <Input
+              <Input                
+                keyboardType={'email-address'}
                 placeholder="E-mail: aluno@email.com"
                 onChangeText={email => this.props.onEmailChanged(email)}
                 value={this.props.email}

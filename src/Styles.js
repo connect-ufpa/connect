@@ -35,21 +35,22 @@ export default StyleSheet.create({
     },
     inputStyle: {
         flex: 1,
+        elevation: 4,
+        padding: 11.5,
+        borderRadius: 5,
         paddingLeft: 20,
-        fontSize: 14,
+        color: '#2D2D2D',
+        borderColor: '#FFF',
+        flexDirection: 'row',
         backgroundColor: '#FFF',
-        fontFamily: 'Ubuntu-Regular',
-        borderColor: '#777',
-        borderWidth: 2,
-        borderRadius: 5
     },
     containerStyle: {
         padding: 10,
-        paddingRight: 20,
         paddingLeft: 20,
-        justifyContent: 'center',
+        paddingRight: 20,
+        position: 'relative',
         flexDirection: 'row',
-        position: 'relative'
+        justifyContent: 'center',
     },
     cardStyle: {
         height: '100%',
@@ -60,21 +61,22 @@ export default StyleSheet.create({
     btnConfirm: {
         flex: 1,
         padding: 5,
-        alignSelf: 'stretch',
-        backgroundColor: '#2A4065',
-        borderRadius: 5,
-        borderWidth: 2,
-        borderColor: '#2A4065',
         elevation: 4,
+        borderWidth: 2,
+        borderRadius: 5,
+        alignSelf: 'stretch',
+        borderColor: '#2A4065',
+        backgroundColor: '#2A4065',
     },
     btnCancel: {
         flex: 1,
-        alignSelf: 'stretch',
-        backgroundColor: '#CC2820',
-        borderRadius: 5,
+        elevation: 4,
         borderWidth: 2,
+        borderRadius: 5,
+        alignSelf: 'stretch',
         borderColor: '#CC2820',
-        elevation: 4
+        backgroundColor: '#CC2820',
+
     },
     btnTextStyle: {
         fontFamily: 'Ubuntu-Medium',
