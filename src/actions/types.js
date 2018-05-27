@@ -30,8 +30,12 @@ export const RETRIVING_LOCAIS = 'retrieving_locais';
 export const SEARCHING_LOCAL = 'searching_local';
 export const SEARCHED_LOCAL = 'searched_local';
 export const MARK_LOCAL = 'mark_local';
-export const MARKER = 'marker';
+export const SEARCHING_USER_LOCALIZATION = 'searching_user_localization';
+export const SEARCHED_USER_LOCALIZATION = 'searched_user_localization';
+export const CREATING_ROUTE = 'creating_route';
+export const ERRO_CREATING_ROUTE = 'erro_creating_route';
 
+export const MARKER = 'marker';
 export const CLOSE_MODAL = 'close_modal';
 export const SAVE_EVENT_FIELD_CHANGE = 'save_event_field_change';
 export const INVALID_START_EVENT_DATE = 'invalid_start_event_date';
@@ -51,10 +55,7 @@ export const EDIT_EVENT = 'edit_event';
 export const EVENT_EDIT_DATA = 'event_edit_data';
 export const EVENT_EDIT_HORA = 'event_edit_hora';
 export const SAVED_EDITED_EVENT = 'saved_edited_event';
-
 export const EVENTS_TO_SHOW_SUCCESS = 'events_to_show_success';
 export const SEARCHING_EVENT = 'searching_event';
 export const SEARCHED_EVENTO = 'searched_evento';
 
-export const SEARCHING_USER_LOCALIZATION = 'searching_user_localization';
-export const SEARCHED_USER_LOCALIZATION = 'searched_user_localization';
