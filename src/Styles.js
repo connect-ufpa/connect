@@ -93,7 +93,7 @@ export default StyleSheet.create({
     },
     scrollViewStyle: {
         height: '100%',
-    },    
+    },
     modalScrollViewStyle: {
         height: '100%',
         marginBottom: 20,
@@ -151,7 +151,7 @@ export default StyleSheet.create({
         borderBottomLeftRadius: 6,
         borderBottomRightRadius: 6,
         borderWidth: 2,
-        borderColor: '#2A4065'
+        borderColor: '#FFF',
     },
     backgroudTextFlatListStyle: {
         flex: 1,
@@ -161,13 +161,13 @@ export default StyleSheet.create({
         backgroundColor: 'white'
     },
     textFlatListStyle: {
-        flex: 1,
+        flex: 5,
+        fontFamily: 'Ubuntu-Regular',
+        backgroundColor: 'white',
         color: '#777',
         fontSize: 12,
-        margin: 5,
+        padding: 13,
         height: 40,
-        paddingTop: 7,
-        paddingLeft: 5
     },
     buttomCloseStyle: {
         height: 30,
@@ -197,7 +197,7 @@ export default StyleSheet.create({
         color: '#2BA3DA',
         marginLeft: 20,
         paddingTop: 5,
-    }, 
+    },
     textCardHelperStyle: {
         flex: 4,
         fontSize: 11,
@@ -205,5 +205,30 @@ export default StyleSheet.create({
         fontFamily: 'Ubuntu',
         color: '#777',
         textAlign: 'center',
+    },
+    headerModalStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        borderBottomWidth: 1,
+        borderBottomColor: '#777',
+        paddingBottom: 3,
+    },
+    titleModalStyle: {
+        flex: 1,
+        color: '#777',
+        fontSize: 17,
+        paddingTop: 5,
+        marginLeft: 50,
+        fontFamily: 'Ubuntu-Regular',
+        borderBottomLeftRadius: 6,
+        borderBottomRightRadius: 6,
+    },
+    textModalStyle: { 
+        flex: 1, 
+        color: '#777', 
+        fontSize: 12, 
+        fontFamily: 'Ubuntu-Regular',
+        alignItems: 'center',
+        paddingLeft: 5, 
     }
 });

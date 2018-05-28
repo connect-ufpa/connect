@@ -61,7 +61,7 @@ class Eventos extends Component {
     modal: false,
     datas_eventos: [],
     trabalho: 'Trabalho',
-    loading: true
+    tituloModal: ''
   }
 
   componentWillMount() {
@@ -69,7 +69,7 @@ class Eventos extends Component {
   }
 
   setEventosToState(eventos) {
-    this.setState({ datas_eventos: eventos, modal: true });
+    this.setState({ datas_eventos: eventos, modal: true, tituloModal: 'Eventos na sua area' });
   }
 
   showLoading() {
@@ -90,7 +90,8 @@ class Eventos extends Component {
     if (Object.prototype.hasOwnProperty.call(datas_eventos, id)) {
       this.setState({
         modal: true,
-        datas_eventos
+        datas_eventos,
+        tituloModal: 'Eventos nesta data'
       });
     }
   }
@@ -101,17 +102,16 @@ class Eventos extends Component {
     return (
       keys.map(index => {
         return (
-          <View key={index} style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-            <Text style={{ flex: 1, color: '#777', fontSize: 15, margin: 5, height: 40, paddingTop: 7, paddingLeft: 5 }}>
+          <View key={index} style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', paddingBottom: 7, borderTopWidth: 3, borderBottomColor: '#FFF' }}>
+            <Text style={Styles.textModalStyle}>
               {datas_eventos[index].nome}
             </Text>
             {this.renderEditEventIcon(datas_eventos[index])}
             <View style={{ marginTop: 7 }}>
               <TouchableOpacity onPress={() => { this.props.navigation.navigate('VisualizarEvento', datas_eventos[index]); this.setState({ modal: false }); }} >
-                <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2BA3DA' }]}>
+                <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2A4065' }]}>
                   <Icon
-                    type='font-awesome'
-                    name='eye'
+                    name='keyboard-arrow-right'
                     color='#FFF'
                     size={20}
                   />
@@ -143,7 +143,7 @@ class Eventos extends Component {
       return (
         <View style={{ marginTop: 7 }}>
           <TouchableOpacity onPress={() => { this.props.navigation.navigate('EditarEvento', evento); this.setState({ modal: false }); }} >
-            <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#CC2820' }]}>
+            <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2BA3DA' }]}>
               <Icon
                 type='material-community'
                 name='calendar'
@@ -172,10 +172,9 @@ class Eventos extends Component {
                 {this.renderEditEventIcon(item)}
                 <View style={{ marginTop: 7 }}>
                   <TouchableOpacity onPress={() => this.props.navigation.navigate('VisualizarEvento', item)} >
-                    <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2BA3DA' }]}>
+                    <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2A4065' }]}>
                       <Icon
-                        type='font-awesome'
-                        name='eye'
+                        name='keyboard-arrow-right'
                         color='#FFF'
                         size={20}
                       />
@@ -281,20 +280,18 @@ class Eventos extends Component {
           onRequestClose={() => { this.setState({ modal: false }); }}
         >
           <ScrollView style={Styles.scrollViewStyle} >
-            <View style={[Styles.eventCardStyle, { marginTop: MODALSUCCESS }]}>
-              <View style={{ alignItems: 'flex-end', paddingTop: 5, paddingRight: 10 }}>
-                <TouchableHighlight
-                  onPress={() => { this.setState({ modal: false }); }}
-                >
-                  <View>
-                    <Icon
-                      type='font-awesome'
-                      name='times-circle'
-                      color='#CC2820'
-                      size={30}
-                    />
-                  </View>
-                </TouchableHighlight>
+            <View style={[Styles.eventCardStyle, { marginTop: MODALSUCCESS, marginLeft: 18, marginRight: 18 }]}>
+              <View style={Styles.headerModalStyle}>
+                <Text style={Styles.titleModalStyle}>
+                  {this.state.tituloModal}
+                </Text>
+                <View style={{ alignItems: 'flex-end', paddingTop: 5, marginLeft: 20 }}>
+                  <TouchableHighlight onPress={() => { this.setState({ modal: false }); }}>
+                    <View style={Styles.buttomCloseStyle} >
+                      <Icon name="clear" color="#FFF" size={15} />
+                    </View>
+                  </TouchableHighlight>
+                </View>
               </View>
               {this.infoEventoModal()}
             </View>
