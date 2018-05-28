@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { Calendar } from 'react-native-calendars';
 import { firebaseAuth } from '../config/Config';
-import { HeaderImage, Texts, Input } from '../components/commons';
+import { HeaderImage, Input, Loading } from '../components/commons';
 import { serachEventsToShow, searchEvento } from '../actions';
 import Styles from '../Styles';
 
@@ -60,7 +60,8 @@ class Eventos extends Component {
   state = {
     modal: false,
     datas_eventos: [],
-    trabalho: 'Trabalho'
+    trabalho: 'Trabalho',
+    loading: true
   }
 
   componentWillMount() {
@@ -69,6 +70,10 @@ class Eventos extends Component {
 
   setEventosToState(eventos) {
     this.setState({ datas_eventos: eventos, modal: true });
+  }
+
+  showLoading() {
+    if (this.props.loading) return (<Loading />);
   }
 
   showPoupUpEventoDia(data) {
@@ -201,7 +206,7 @@ class Eventos extends Component {
     });
     return (
       <View style={{ margin: 18.5, marginTop: HALFHEIGHT, borderRadius: 5, borderWidth: 3, borderColor: '#FFF', elevation: 8 }}>
-        <View style={{ padding: 5, backgroundColor: '#FFF' }}> 
+        <View style={{ padding: 5, backgroundColor: '#FFF' }}>
           <Calendar
             onDayPress={(day) => { this.showPoupUpEventoDia(day.dateString); }}
             markedDates={datas_eventos}
@@ -224,9 +229,6 @@ class Eventos extends Component {
             />
           </View>
         </TouchableOpacity>
-        <View style={{ marginLeft: 10 }} >
-          <Texts text="Criar evento" />
-        </View>
       </View>
     );
   }
@@ -252,9 +254,6 @@ class Eventos extends Component {
                     />
                   </View>
                 </TouchableOpacity>
-                <View>
-                  <Texts text="Eventos Relacionados" />
-                </View>
               </View>
             );
           }
@@ -269,8 +268,9 @@ class Eventos extends Component {
       <View style={{ flex: 1, flexDirection: 'column' }}>
         {this.renderInputPesquisaEvento()}
         {this.renderListEventosAchados()}
+        {this.showLoading()}
         {this.renderCalendar()}
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end' }}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
           {this.renderButtomSaveEvento()}
           {this.renderButtomEventosRelated()}
         </View>
@@ -312,7 +312,7 @@ const mapStateToProps = (state) => {
     positionHelper: state.evento.positionHelper,
     eventos: state.evento.eventosToShow,
     eventoNome: state.evento.eventoPesquisado,
-    eventosAchados: state.evento.eventosAchados
+    eventosAchados: state.evento.eventosAchados,
   };
 };
 export default connect(mapStateToProps, { serachEventsToShow, searchEvento })(Eventos);

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, onPasswordChanged, onConfirmPasswordChanged, authUser } from '../actions';
-import { Card, CardSection, Texts, Input, Button, ButtonBack, Loading } from './commons';
-import { ScrollView, Image, View, Text } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
+import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, onPasswordChanged, onConfirmPasswordChanged, authUser } from '../actions';
+import { Card, CardSection, Texts, Input, Button, Loading } from './commons';
 import Styles from '../Styles';
-
-const logo = require('../../assets/img/logo.png');
 
 class CreateUser extends Component {
   static navigationOptions = {
@@ -22,6 +20,10 @@ class CreateUser extends Component {
     }
   };
 
+  showLoading() {
+    if (this.props.loading) return (<Loading />);
+  }
+
   renderCreateUserButton() {
     const user = {
       name: this.props.name,
@@ -30,8 +32,7 @@ class CreateUser extends Component {
       email: this.props.email,
       password: this.props.password,
       error: this.props.error
-    }
-
+    };
     return (
       <Button
         text="Cadastrar"
@@ -39,10 +40,6 @@ class CreateUser extends Component {
         onPress={() => { this.props.authUser(user); }}
       />
     );
-  }
-
-  showLoading() {
-    if (this.props.loading) return (<Loading />);
   }
 
   render() {

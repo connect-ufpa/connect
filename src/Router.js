@@ -45,30 +45,30 @@ export const SobreScreen = StackNavigator({
 
 export const SideMenu = DrawerNavigator({
   Localizacao: { screen: LocalizacaoScreen },
-  Eventos: { screen: EventosScreen },  
+  Eventos: { screen: EventosScreen },
   Perfil: { screen: PerfilScreen },
   Ajuda: { screen: AjudaScreen },
   Sobre: { screen: SobreScreen },
   Sair: {
-		screen: Logout,
-		navigationOptions: {
-			title: 'Sair',
-			style: {
+    screen: Logout,
+    navigationOptions: {
+      title: 'Sair',
+      style: {
         color: '#CC2820',
       },
-			drawerLabel: 'Sair',
-			drawerIcon: ({ tintColor }) => (
+      drawerLabel: 'Sair',
+      drawerIcon: () => (
         <Icon
           name='sign-out'
           type='font-awesome'
           size={24}
           color='#CC2820'
         />
-    	),
-  	}
-	},
-  },{
-    initialRouteName: 'Localizacao',
+      ),
+    }
+  },
+}, {
+    initialRouteName: 'Eventos',
     contentComponent: props => <MenuLateral {...props} />,
     drawerBackgroundColor: 'transparent',
     contentOptions: {
@@ -81,18 +81,18 @@ export const UnauthorizedScreens = StackNavigator({
   Login: { screen: Login },
   CreateUser: { screen: CreateUser },
   ForgotPasword: { screen: ForgotPassword }
-  },{
+}, {
     initialRouteName: 'Login'
-});
+  });
 
 export const AuthorizedScreens = StackNavigator({
-	SideMenu: {
-		screen: SideMenu,
-		navigationOptions: ({navigation}) => ({
-			header: null
+  SideMenu: {
+    screen: SideMenu,
+    navigationOptions: () => ({
+      header: null
     }),
-	},
-  Eventos: { screen: Eventos },  
+  },
+  Eventos: { screen: Eventos },
   MeuPerfil: { screen: MeuPerfil },
   Ajuda: { screen: Ajuda },
   Sobre: { screen: Sobre },
