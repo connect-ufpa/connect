@@ -4,7 +4,7 @@ import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { showMarkerAndModal, closeModal, eventFieldChange, saveEvent, showHelper, closeEventHelper } from '../actions';
-import { Button, Input, CardSection, Texts, Spinner, HeaderImage } from './commons/';
+import { Button, Input, CardSection, Texts, Loading } from './commons/';
 import Styles from '../Styles';
 
 const { height, width } = Dimensions.get('window');
@@ -68,7 +68,7 @@ class SalvarEventos extends Component {
       error: this.props.error
     };
     if (this.props.loading) {
-      return (<Spinner size="large" color="#ffff" />);
+      return (<Loading />);
     }
     return (
       <Button

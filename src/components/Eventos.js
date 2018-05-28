@@ -278,7 +278,7 @@ class Eventos extends Component {
           animationType="slide"
           transparent
           visible={this.state.modal}
-          onRequestClose={() => { }}
+          onRequestClose={() => { this.setState({ modal: false }); }}
         >
           <ScrollView style={Styles.scrollViewStyle} >
             <View style={[Styles.eventCardStyle, { marginTop: MODALSUCCESS }]}>
