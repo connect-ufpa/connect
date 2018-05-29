@@ -57,6 +57,7 @@ class Eventos extends Component {
       ),
     };
   }
+  
   state = {
     modal: false,
     datas_eventos: [],

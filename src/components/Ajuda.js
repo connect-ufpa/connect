@@ -51,6 +51,11 @@ class Ajuda extends Component {
     };
   };
 
+  state = {
+    question1: false,
+    question2: false,
+  }
+
   render() {
     return (
       <ScrollView style={{ flex: 1, height: height, width: width}}>
