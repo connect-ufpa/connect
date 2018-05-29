@@ -40,7 +40,6 @@ export default StyleSheet.create({
         paddingRight: 20,
         color: '#2D2D2D',
         fontFamily: 'Ubuntu-Regular',
-
     },
     containerStyle: {
         padding: 10,

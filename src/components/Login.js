@@ -45,12 +45,29 @@ class Login extends Component {
             <CardSection>
               <Image
                 source={logo}
-                style={{ width: 100, height: 100, marginBottom: 10 }}
+                style={{ width: 50, height: 50, marginBottom: 10 }}
               />
             </CardSection>
-            <CardSection>
+            {/* <CardSection>
               <Text style={Styles.logoTextStyle}>Connect UFPa</Text>
-            </CardSection>
+            </CardSection> */}
+            <View style={{ alignSelf: 'flex-start', padding: 20 }}>
+              <Texts
+                text={'Olá.'}
+                style={'xlarge'}
+                addStyle={{ textAlign: 'left' }}
+              />
+              <Texts
+                text={'Seja bem-vindo ao Connect!'}                
+                style={'medium'}
+                addStyle={{ fontSize: 18 }}
+              />
+              <Texts
+                text={'Por favor, entre com seu e-mail e senha.'}
+                style={'medium'}
+                addStyle={{ fontSize: 18 }}
+              />
+            </View>
             <CardSection>
               <Input
                 iconName={'email'}
