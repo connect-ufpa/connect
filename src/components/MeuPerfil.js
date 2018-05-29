@@ -19,6 +19,7 @@ import {
   StatusBar,
   StyleSheet,
   ImageBackground,
+  TouchableOpacity,
   TouchableHighlight,
   Modal,
 } from 'react-native';
@@ -60,13 +61,15 @@ class MeuPerfil extends Component {
         <Icon name="person" color="#2a4065" size={27} />
       ),
       headerLeft: (
-        <Icon
-          name="bars"
-          type="font-awesome"
-          color="#2a4065"
-          size={25}
-          onPress={() => navigate('DrawerOpen')}
-        />
+        <TouchableOpacity style={{ flex: 1, paddingTop: 20, paddingBottom: 20, paddingRight: 20 }} onPress={() => navigate('DrawerOpen')}>
+          <Icon
+            type="font-awesome"
+            name="bars"
+            color="#2a4065"
+            size={25}
+            
+          />
+        </TouchableOpacity>
       ),
       headerRight: (
         <Icon

@@ -64,15 +64,15 @@ class Localizacao extends Component {
         />
       ),
       headerLeft: (
-        <View>
+        <TouchableOpacity style={{ flex: 1, paddingTop: 20, paddingBottom: 20, paddingRight: 20 }} onPress={() => navigate('DrawerOpen')}>
           <Icon
-            name="bars"
             type="font-awesome"
+            name="bars"
             color="#2a4065"
             size={25}
-            onPress={() => navigate('DrawerOpen')}
+            
           />
-        </View>
+        </TouchableOpacity>
       ),
       headerRight: (
         <View>

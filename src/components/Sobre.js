@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Dimensions, Text, ScrollView, View, Alert, Image } from 'react-native';
+import { Dimensions, Text, ScrollView, View, Alert, Image, TouchableOpacity } from 'react-native';
 import { Card, CardSection, Texts, HeaderImage } from '../components/commons';
 import { Icon } from 'react-native-elements';
 
@@ -27,13 +27,15 @@ class Sobre extends Component {
         <Icon type="font-awesome" name="heart" color="#2a4065" size={24} />
       ),
       headerLeft: (
-        <Icon
-          name="bars"
-          type="font-awesome"
-          color="#2a4065"
-          size={25}
-          onPress={() => navigate('DrawerOpen')}
-        />
+        <TouchableOpacity style={{ flex: 1, paddingTop: 20, paddingBottom: 20, paddingRight: 20 }} onPress={() => navigate('DrawerOpen')}>
+          <Icon
+            type="font-awesome"
+            name="bars"
+            color="#2a4065"
+            size={25}
+            
+          />
+        </TouchableOpacity>
       ),
       headerRight: (
         <Icon

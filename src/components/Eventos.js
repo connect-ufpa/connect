@@ -35,15 +35,15 @@ class Eventos extends Component {
         />
       ),
       headerLeft: (
-        <View>
-          <Icon
-            name="bars"
-            type="font-awesome"
-            color="#2a4065"
-            size={25}
-            onPress={() => navigate('DrawerOpen')}
-          />
-        </View>
+        <TouchableOpacity style={{ flex: 1, paddingTop: 20, paddingBottom: 20, paddingRight: 20 }} onPress={() => navigate('DrawerOpen')}>
+        <Icon
+          type="font-awesome"
+          name="bars"
+          color="#2a4065"
+          size={25}
+          
+        />
+      </TouchableOpacity>
       ),
       headerRight: (
         <View>
