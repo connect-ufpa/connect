@@ -72,8 +72,8 @@ class Ajuda extends Component {
           <Text
             style={{
               color: '#2A4065',
-              fontFamily: 'Ubuntu-Bold',
-              fontSize: 18,
+              fontFamily: 'Ubuntu-Medium',
+              fontSize: 16,
               textAlign: 'left',
             }}
           >
@@ -501,8 +501,8 @@ class Ajuda extends Component {
           <Text
             style={{
               color: '#2A4065',
-              fontFamily: 'Ubuntu-Bold',
-              fontSize: 18,
+              fontFamily: 'Ubuntu-Medium',
+              fontSize: 16,
               textAlign: 'left',
             }}
           >

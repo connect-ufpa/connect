@@ -34,15 +34,13 @@ export default StyleSheet.create({
         color: '#ffffff'
     },
     inputStyle: {
-        flex: 1,
-        elevation: 4,
-        padding: 11.5,
-        borderRadius: 5,
+        flex: 5,
+        fontSize: 14,
         paddingLeft: 20,
+        paddingRight: 20,
         color: '#2D2D2D',
-        borderColor: '#FFF',
-        flexDirection: 'row',
-        backgroundColor: '#FFF',
+        fontFamily: 'Ubuntu-Regular',
+
     },
     containerStyle: {
         padding: 10,
@@ -56,7 +54,7 @@ export default StyleSheet.create({
         height: '100%',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: 25
+        paddingTop: 10
     },
     btnConfirm: {
         flex: 1,

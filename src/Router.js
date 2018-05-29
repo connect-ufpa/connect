@@ -3,8 +3,8 @@ import { StackNavigator, DrawerNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import { firebaseAuth } from './config/Config';
 import Login from './components/Login';
-import CreateUser from './components/CreateUser';
-import ForgotPassword from './components/ForgotPassword';
+import CriarConta from './components/CriarConta';
+import EsqueciSenha from './components/EsqueciSenha';
 import Localizacao from './components/Localizacao';
 import MenuLateral from './components/SideMenu';
 import MeuPerfil from './components/MeuPerfil';
@@ -79,8 +79,8 @@ export const SideMenu = DrawerNavigator({
 
 export const UnauthorizedScreens = StackNavigator({
   Login: { screen: Login },
-  CreateUser: { screen: CreateUser },
-  ForgotPasword: { screen: ForgotPassword }
+  CriarConta: { screen: CriarConta },
+  EsqueciSenha: { screen: EsqueciSenha }
   },{
     initialRouteName: 'Login'
 });

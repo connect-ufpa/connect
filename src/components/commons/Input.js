@@ -1,22 +1,45 @@
 import React from 'react';
-import { TextInput } from 'react-native';
+import { TextInput, View, Text } from 'react-native';
+import { Icon } from 'react-native-elements';
 import Styles from '../../Styles';
 
-const Input = ({ value, onChangeText, placeholder, secureTextEntry, editable, addStyle, keyboardType }) => {
-  
+const Input = ({ value, onChangeText, placeholder, secureTextEntry, editable, addStyle, keyboardType, iconName }) => {
+
   return (
-      <TextInput
-        keyboardType={keyboardType}
-        style={[Styles.inputStyle, addStyle]}
-        secureTextEntry={secureTextEntry}
-        placeholder={placeholder}
-        autoCorrect={false}
-        value={value}
-        editable={editable}
-        onChangeText={onChangeText}
-        underlineColorAndroid='transparent'
-      />
+      <View style={{
+        flex: 1,
+        elevation: 8,
+        padding: 5,
+        borderRadius: 5,
+        borderColor: '#FFF',
+        flexDirection: 'row',
+        backgroundColor: '#FFF',
+      }}>
+        <TextInput
+          value={value}
+          editable={editable}
+          autoCorrect={false}
+          placeholder={placeholder}
+          onChangeText={onChangeText}
+          keyboardType={keyboardType}
+          underlineColorAndroid='transparent'
+          secureTextEntry={secureTextEntry}
+          style={[Styles.inputStyle, addStyle]}
+        />
+        <View
+          style={{
+            flex: 1,
+            padding: 5,
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#FFF',
+          }}
+        >
+          <Icon name={iconName} color="#777" size={22} />
+        </View>
+      </View>
   );
 };
 
 export { Input };
+

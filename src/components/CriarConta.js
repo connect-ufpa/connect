@@ -8,7 +8,7 @@ import Styles from '../Styles';
 
 const logo = require('../../assets/img/logo.png');
 
-class CreateUser extends Component {
+class CriarConta extends Component {
   static navigationOptions = {
     title: 'Criar conta',
     headerTintColor: '#2A4065',
@@ -22,7 +22,7 @@ class CreateUser extends Component {
     }
   };
 
-  renderCreateUserButton() {
+  renderCriarContaButton() {
     const user = {
       name: this.props.name,
       registration: this.props.registration,
@@ -53,6 +53,7 @@ class CreateUser extends Component {
           <Card addStyle={{ paddingBottom: 40 }}>
             <CardSection>
               <Input
+                iconName={'person'}
                 placeholder="Nome:"
                 onChangeText={name => this.props.onNameChanged(name)}
                 value={this.props.name}
@@ -63,10 +64,11 @@ class CreateUser extends Component {
             </View>
             <CardSection>
               <Input
+                iconName={'school'}
                 keyboardType={'numeric'}
                 placeholder="Matrícula:"
-                onChangeText={registration => this.props.onRegistrationChanged(registration)}
                 value={this.props.registration}
+                onChangeText={registration => this.props.onRegistrationChanged(registration)}
               />
             </CardSection>
             <View>
@@ -74,9 +76,10 @@ class CreateUser extends Component {
             </View>
             <CardSection>
               <Input
-                placeholder="Nascimento: 00/00/0000"
-                onChangeText={birthday => this.props.onBirthChanged(birthday)}
+                iconName={'date-range'}
                 value={this.props.birthday}
+                placeholder={"Nascimento: 00/00/0000"}
+                onChangeText={birthday => this.props.onBirthChanged(birthday)}
               />
             </CardSection>
             <View>
@@ -84,11 +87,12 @@ class CreateUser extends Component {
             </View>
 
             <CardSection>
-              <Input                
-                keyboardType={'email-address'}
-                placeholder="E-mail: aluno@email.com"
-                onChangeText={email => this.props.onEmailChanged(email)}
+              <Input
+                iconName={'email'}
                 value={this.props.email}
+                keyboardType={'email-address'}
+                placeholder={"E-mail: aluno@email.com"}
+              onChangeText={email => this.props.onEmailChanged(email)}
               />
             </CardSection>
             <View>
@@ -96,13 +100,14 @@ class CreateUser extends Component {
             </View>
             <CardSection>
               <Input
-                placeholder="Senha:"
                 secureTextEntry
+                iconName={'vpn-key'}
+                placeholder={"Senha:"}
+                value={this.props.password}
                 onChangeText={
                   password =>
                     this.props.onPasswordChanged(password)
                 }
-                value={this.props.password}
               />
             </CardSection>
             <View>
@@ -110,17 +115,18 @@ class CreateUser extends Component {
             </View>
             <CardSection>
               <Input
-                placeholder="Confirmação de senha:"
                 secureTextEntry
-                onChangeText={confirmPassword => this.props.onConfirmPasswordChanged(confirmPassword, this.props.password)}
+                iconName={'vpn-key'}
+                placeholder={"Confirmação de senha:"}
                 value={this.props.confirmPassword}
+                onChangeText={confirmPassword => this.props.onConfirmPasswordChanged(confirmPassword, this.props.password)}
               />
             </CardSection>
             <View>
               <Texts text={this.props.errorMessageConfirmPassword} />
             </View>
             <CardSection>
-              {this.renderCreateUserButton()}
+              {this.renderCriarContaButton()}
             </CardSection>
             <View>
               <Texts text={this.props.errorMessageCreateAccountFail} />
@@ -161,4 +167,4 @@ export default connect(mapStateToProps, {
   onPasswordChanged,
   onConfirmPasswordChanged,
   authUser
-})(CreateUser);
+})(CriarConta);

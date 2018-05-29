@@ -6,7 +6,7 @@ import { Card, CardSection, Texts, Input, Button, Spinner } from './commons';
 import { onEmailForgotChange } from '../actions';
 import Styles from '../Styles';
 
-class ForgotPassword extends Component {
+class EsqueciSenha extends Component {
   static navigationOptions = {
     title: 'Esqueci minha senha',
     headerTintColor: '#2A4065',
@@ -26,13 +26,14 @@ class ForgotPassword extends Component {
         <ScrollView style={Styles.scrollViewStyle}>
           <Card>
             <CardSection>
-              <Texts style='small' text={'Digite seu e-mail para redefinição de senha'}/>
+              <Texts style='small' text={'Informe seu e-mail cadastrado, um link para redefinição de senha será enviado.'}/>
             </CardSection>
             <CardSection>
               <Input
-                placeholder="E-mail: aluno@email.com"
-                onChangeText={email => this.props.onEmailForgotChange(email)}
+                iconName={'email'}
+                placeholder={"E-mail:"}
                 value={this.props.email}
+                onChangeText={email => this.props.onEmailForgotChange(email)}
               />
             </CardSection>
             <View>
@@ -60,4 +61,4 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   onEmailForgotChange,
-})(ForgotPassword);
+})(EsqueciSenha);

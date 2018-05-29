@@ -53,10 +53,11 @@ class Login extends Component {
             </CardSection>
             <CardSection>
               <Input
+                iconName={'email'}
+                placeholder= {"E-mail:"}
+                value={this.props.email}                
                 keyboardType={'email-address'}
-                placeholder="E-mail:"
                 onChangeText={email => this.props.loginEmailChange(email)}
-                value={this.props.email}
               />
             </CardSection>
             <View>
@@ -65,11 +66,12 @@ class Login extends Component {
             <CardSection>
               <Input
                 secureTextEntry
-                placeholder="Senha:"
+                iconName={'vpn-key'}
+                placeholder={'Senha:'}
+                value={this.props.password}                
                 onChangeText={password =>
                   this.props.loginPasswordChange(password)
                 }
-                value={this.props.password}
               />
             </CardSection>
             <View>
@@ -85,7 +87,7 @@ class Login extends Component {
               <View>
                 <TouchableOpacity
                   onPress={() =>
-                    this.props.navigation.navigate('ForgotPasword')
+                    this.props.navigation.navigate('EsqueciSenha')
                   }
                 >
                   <Texts text="Esqueci minha senha" style="small" />
@@ -98,7 +100,7 @@ class Login extends Component {
             </View>
             <CardSection>
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('CreateUser')}
+                onPress={() => this.props.navigation.navigate('CriarConta')}
               >
                 <Texts text="Criar conta" style="medium" />
               </TouchableOpacity>

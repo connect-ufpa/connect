@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { Calendar } from 'react-native-calendars';
 import { firebaseAuth } from '../config/Config';
-import { HeaderImage, Texts, Input } from '../components/commons';
+import { HeaderImage, Texts, Input, CardSection } from '../components/commons';
 import { serachEventsToShow, searchEvento } from '../actions';
 import Styles from '../Styles';
 
@@ -122,12 +122,17 @@ class Eventos extends Component {
 
   renderInputPesquisaEvento() {
     return (
-      <View style={Styles.searchBarStyle}>
+      <View style={{ 
+        padding: 20,
+        position: 'relative',
+        flexDirection: 'row',
+        justifyContent: 'center' 
+        }}>
         <Input
-          placeholder='Pesquise evento desejado:'
+          iconName={'search'}
           value={this.props.eventoNome}
+          placeholder={'Pesquise evento desejado:'}
           onChangeText={evento => this.props.searchEvento(evento, this.props.eventos)}
-          addStyle={{ elevation: 8, borderColor: '#2A4065', color: '#2A4065', fontSize: 14 }}
         />
       </View>
     );
@@ -201,7 +206,7 @@ class Eventos extends Component {
       return datas_eventos;
     });
     return (
-      <View style={{ margin: 18.5, marginTop: HALFHEIGHT, borderRadius: 5, borderWidth: 3, borderColor: '#FFF', elevation: 8 }}>
+      <View style={{ marginLeft: 20, marginRight: 20, borderRadius: 5, borderWidth: 3, borderColor: '#FFF', elevation: 8 }}>
         <View style={{ padding: 5, backgroundColor: '#FFF' }}> 
           <Calendar
             onDayPress={(day) => { this.showPoupUpEventoDia(day.dateString); }}
