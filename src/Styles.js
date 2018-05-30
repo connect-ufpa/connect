@@ -220,8 +220,6 @@ export default StyleSheet.create({
         paddingTop: 5,
         marginLeft: 50,
         fontFamily: 'Ubuntu-Regular',
-        borderBottomLeftRadius: 6,
-        borderBottomRightRadius: 6,
     },
     textModalStyle: { 
         flex: 1, 

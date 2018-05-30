@@ -23,27 +23,18 @@ let LatLng = {
   };
 
 class EditarEventoMapa extends Component {
-    static navigationOptions = () => {
-        return {
-            headerTitle: <View style={{ flex: 1, alignContent: 'center' }}><HeaderImage /></View>,
-            headerStyle: {
-                paddingRight: 60,
-                height: 55
-            },
-            headerTitleStyle: {
-                alignSelf: 'center',
-            },
-            drawerLabel: 'Eventos',
-            drawerIcon: () => (
-                <Icon
-                    type='font-awesome'
-                    name='calendar'
-                    color='#2a4065'
-                    size={25}
-                />
-            ),
-        };
-    }
+    static navigationOptions = {
+        title: 'Editar local do evento',
+        headerTintColor: '#2A4065',
+        headerTitleStyle: {
+          fontFamily: 'Ubuntu-Medium',
+          fontWeight: '200',
+          fontSize: 18,
+        },
+        headerStyle: {
+          elevation: 5
+        }
+      };
 
     componentWillMount() {
         const { params } = this.props.navigation.state;
