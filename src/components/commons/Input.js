@@ -35,7 +35,7 @@ const Input = ({ value, onChangeText, placeholder, secureTextEntry, editable, ad
             backgroundColor: '#FFF',
           }}
         >
-          <Icon name={iconName} color="#777" size={22} />
+          <Icon name={iconName} color="#777" size={25} />
         </View>
       </View>
   );

@@ -35,14 +35,14 @@ class Eventos extends Component {
       ),
       headerLeft: (
         <TouchableOpacity style={{ flex: 1, paddingTop: 20, paddingBottom: 20, paddingRight: 20 }} onPress={() => navigate('DrawerOpen')}>
-        <Icon
-          type="font-awesome"
-          name="bars"
-          color="#2a4065"
-          size={25}
-          
-        />
-      </TouchableOpacity>
+          <Icon
+            type="font-awesome"
+            name="bars"
+            color="#2a4065"
+            size={25}
+
+          />
+        </TouchableOpacity>
       ),
       headerRight: (
         <View>
@@ -56,77 +56,21 @@ class Eventos extends Component {
       ),
     };
   }
-  
+
   state = {
     modal: false,
     datas_eventos: [],
     trabalho: 'Trabalho',
     tituloModal: ''
-  }
-
+  }  
+  
   componentWillMount() {
     this.props.serachEventsToShow();
   }
 
-  setEventosToState(eventos) {
-    this.setState({ datas_eventos: eventos, modal: true, tituloModal: 'Eventos na sua area' });
-  }
-
-  showLoading() {
-    if (this.props.loading) return (<Loading />);
-  }
-
-  showPoupUpEventoDia(data) {
-    const formatData = data.split('-').reverse().join('/');
-    let datas_eventos = {};
-    let id = '';
-    this.props.eventos.map(evento => {
-      if (evento.data_inicio === formatData) {
-        id = evento.id;
-        datas_eventos = { ...datas_eventos, [evento.id]: evento };
-      }
-      return datas_eventos;
-    });
-    if (Object.prototype.hasOwnProperty.call(datas_eventos, id)) {
-      this.setState({
-        modal: true,
-        datas_eventos,
-        tituloModal: 'Eventos nesta data'
-      });
-    }
-  }
-
-  infoEventoModal() {
-    const { datas_eventos } = this.state;
-    const keys = Object.keys(this.state.datas_eventos);
-    return (
-      keys.map(index => {
-        return (
-          <View key={index} style={Styles.backgroundModalStyle}>
-            <Text style={Styles.textModalStyle}>
-              {datas_eventos[index].nome}
-            </Text>
-            {this.renderEditEventIcon(datas_eventos[index])}
-            <View style={{ marginTop: 7 }}>
-              <TouchableOpacity onPress={() => { this.props.navigation.navigate('VisualizarEvento', datas_eventos[index]); this.setState({ modal: false }); }} >
-                <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2A4065' }]}>
-                  <Icon
-                    name='keyboard-arrow-right'
-                    color='#FFF'
-                    size={20}
-                  />
-                </View>
-              </TouchableOpacity >
-            </View>
-          </View>
-        );
-      })
-    );
-  }
-
   renderInputPesquisaEvento() {
     return (
-      <View style={{ paddingRight: 18, paddingLeft: 18, paddingTop: 10, position: 'relative', flexDirection: 'row', justifyContent: 'center' }}>
+      <View style={{ marginTop: 10, paddingRight: 18, paddingLeft: 18, paddingTop: 10, position: 'relative', flexDirection: 'row', justifyContent: 'center' }}>
         <Input
           iconName={'search'}
           value={this.props.eventoNome}
@@ -141,18 +85,16 @@ class Eventos extends Component {
     const usuario = firebaseAuth().currentUser;
     if (usuario.uid === evento.usuario_id) {
       return (
-        <View style={{ marginTop: 7 }}>
-          <TouchableOpacity onPress={() => { this.props.navigation.navigate('EditarEvento', evento); this.setState({ modal: false }); }} >
-            <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2BA3DA' }]}>
-              <Icon
-                type='font-awsome'
-                name='edit'
-                color='#FFF'
-                size={20}
-              />
-            </View>
-          </TouchableOpacity >
-        </View>
+        <TouchableOpacity onPress={() => { this.props.navigation.navigate('EditarEvento', evento); this.setState({ modal: false }); }} >
+          <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2BA3DA' }]}>
+            <Icon
+              type='font-awsome'
+              name='edit'
+              color='#FFF'
+              size={17}
+            />
+          </View>
+        </TouchableOpacity >
       );
     }
   }
@@ -160,27 +102,48 @@ class Eventos extends Component {
   renderListEventosAchados() {
     if (this.props.eventosAchados.length !== 0) {
       return (
-        <View style={Styles.viewListItensFoundStyle}>
+        <View style={{
+          flex: 1,
+          zIndex: 3,
+          elevation: 8,
+          marginTop: 75,
+          width: '100%',
+          paddingLeft: 18,
+          paddingRight: 18,
+          position: 'absolute',
+        }}>
           <FlatList
             data={this.props.eventosAchados}
-            style={Styles.flatListStyle}
+            style={{
+              borderWidth: 2,
+              borderColor: '#FFF',
+              backgroundColor: '#FFF',              
+              borderBottomLeftRadius: 6,
+              borderBottomRightRadius: 6,
+              
+            }}
             renderItem={({ item }) =>
-              <View style={Styles.backgroudTextFlatListStyle}>
+              <View style={{
+                flex: 1,
+                borderTopWidth: 1,
+                flexDirection: 'row',
+                borderTopColor: '#777',
+                backgroundColor: '#FFF',
+                padding: 10,
+              }}>
                 <Text style={Styles.textFlatListStyle}>
                   {item.nome}
                 </Text>
                 {this.renderEditEventIcon(item)}
-                <View style={{ marginTop: 7 }}>
-                  <TouchableOpacity onPress={() => this.props.navigation.navigate('VisualizarEvento', item)} >
-                    <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2A4065' }]}>
-                      <Icon
-                        name='keyboard-arrow-right'
-                        color='#FFF'
-                        size={20}
-                      />
-                    </View>
-                  </TouchableOpacity >
-                </View>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('VisualizarEvento', item)} >
+                  <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2A4065' }]}>
+                    <Icon
+                      name='keyboard-arrow-right'
+                      color='#FFF'
+                      size={20}
+                    />
+                  </View>
+                </TouchableOpacity >
               </View>}
           />
         </View>
@@ -188,37 +151,10 @@ class Eventos extends Component {
     }
   }
 
-  renderCalendar() {
-    const selected = true;
-    const marked = true;
-    const selectedColor = '#2A4065';
-    let markedDates = {};
-    markedDates = { ...markedDates, ...{ selected } };
-    markedDates = { ...markedDates, ...{ marked } };
-    markedDates = { ...markedDates, ...{ selectedColor } };
-    let datas_eventos = {};
-    this.props.eventos.map(evento => {
-      const evento_data = evento.data_inicio.split('/').reverse().join('-');
-      const updatedMarkedDates = { ...datas_eventos, [evento_data]: markedDates };
-      datas_eventos = { ...updatedMarkedDates };
-      return datas_eventos;
-    });
-    return (
-      <View style={{ margin: 18.5, borderRadius: 5, borderWidth: 3, borderColor: '#FFF', elevation: 8 }}>
-        <View style={{ padding: 5, backgroundColor: '#FFF' }}>
-          <Calendar
-            onDayPress={(day) => { this.showPoupUpEventoDia(day.dateString); }}
-            markedDates={datas_eventos}
-          />
-        </View>
-      </View>
-    );
-  }
-
   renderButtomSaveEvento() {
     return (
       <View style={{ alignItems: 'center' }}>
-        <TouchableOpacity onPress={() => { this.props.navigation.navigate('SalvarEventos'); }} >
+        <TouchableOpacity onPress={() => { this.props.navigation.navigate('CriarEvento'); }} >
           <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
             <Icon
               type='material-community'
@@ -262,6 +198,87 @@ class Eventos extends Component {
     );
   }
 
+  setEventosToState(eventos) {
+    this.setState({ datas_eventos: eventos, modal: true, tituloModal: 'Eventos na sua area' });
+  }
+
+  showPoupUpEventoDia(data) {
+    const formatData = data.split('-').reverse().join('/');
+    let datas_eventos = {};
+    let id = '';
+    this.props.eventos.map(evento => {
+      if (evento.data_inicio === formatData) {
+        id = evento.id;
+        datas_eventos = { ...datas_eventos, [evento.id]: evento };
+      }
+      return datas_eventos;
+    });
+    if (Object.prototype.hasOwnProperty.call(datas_eventos, id)) {
+      this.setState({
+        modal: true,
+        datas_eventos,
+        tituloModal: 'Eventos nesta data'
+      });
+    }
+  }
+
+  renderCalendar() {
+    const selected = true;
+    const marked = true;
+    const selectedColor = '#2A4065';
+    let markedDates = {};
+    markedDates = { ...markedDates, ...{ selected } };
+    markedDates = { ...markedDates, ...{ marked } };
+    markedDates = { ...markedDates, ...{ selectedColor } };
+    let datas_eventos = {};
+    this.props.eventos.map(evento => {
+      const evento_data = evento.data_inicio.split('/').reverse().join('-');
+      const updatedMarkedDates = { ...datas_eventos, [evento_data]: markedDates };
+      datas_eventos = { ...updatedMarkedDates };
+      return datas_eventos;
+    });
+    return (
+      <View style={{ margin: 18.5, borderRadius: 5, borderWidth: 3, borderColor: '#FFF', elevation: 8 }}>
+        <View style={{ padding: 5, backgroundColor: '#FFF' }}>
+          <Calendar
+            onDayPress={(day) => { this.showPoupUpEventoDia(day.dateString); }}
+            markedDates={datas_eventos}
+          />
+        </View>
+      </View>
+    );
+  }
+
+  infoEventoModal() {
+    const { datas_eventos } = this.state;
+    const keys = Object.keys(this.state.datas_eventos);
+    return (
+      keys.map(index => {
+        return (
+          <View key={index} style={Styles.backgroundModalStyle}>
+            <Text style={Styles.textModalStyle}>
+              {datas_eventos[index].nome}
+            </Text>
+            {this.renderEditEventIcon(datas_eventos[index])}
+            <TouchableOpacity style={{ padding: 5 }} onPress={() => { this.props.navigation.navigate('VisualizarEvento', datas_eventos[index]); this.setState({ modal: false }); }} >
+              <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2A4065' }]}>
+                <Icon
+                  name='keyboard-arrow-right'
+                  color='#FFF'
+                  size={20}
+                />
+              </View>
+            </TouchableOpacity>            
+          </View>
+        );
+      })
+    );
+  }
+
+  showLoading() {
+    if (this.props.loading) return (<Loading />);
+  }
+
   render() {
     return (
       <View style={{ flex: 1, flexDirection: 'column' }}>
@@ -285,12 +302,12 @@ class Eventos extends Component {
                 <Text style={Styles.titleModalStyle}>
                   {this.state.tituloModal}
                 </Text>
-                <View style={{ alignItems: 'flex-end', paddingTop: 5, marginLeft: 20 }}>
-                  <TouchableHighlight onPress={() => { this.setState({ modal: false }); }}>
+                <View style={{ alignItems: 'flex-end', marginLeft: 20 }}>
+                  <TouchableOpacity style={{ padding: 5 }} onPress={() => { this.setState({ modal: false }); }}>
                     <View style={Styles.buttomCloseStyle} >
                       <Icon name="clear" color="#FFF" size={15} />
                     </View>
-                  </TouchableHighlight>
+                  </TouchableOpacity>
                 </View>
               </View>
               {this.infoEventoModal()}

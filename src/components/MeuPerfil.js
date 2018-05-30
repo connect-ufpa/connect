@@ -72,13 +72,14 @@ class MeuPerfil extends Component {
         </TouchableOpacity>
       ),
       headerRight: (
-        <Icon
-          name="search"
-          type="font-awesome"
-          color="#2a4065"
-          size={25}
-          onPress={() => navigate('DrawerOpen')}
-        />
+        <View>
+          <Icon
+            name="settings"
+            color="#2a4065"
+            size={25}
+            onPress={() => navigate('DrawerOpen')}
+          />
+        </View>
       ),
     };
   };
