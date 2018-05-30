@@ -96,7 +96,7 @@ class VisualizarEventoNoMapa extends Component {
         return (
             <View style={{ flex: 1, position: 'absolute' }}>
                 <TouchableOpacity onPress={() => { this.props.getLocation(); this.setState({ showRota: true }); }} >
-                    <View style={[Styles.iconButtomStyle, { backgroundColor: '#2BA3DA' }]}>
+                    <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
                         <Icon
                             type='material-community'
                             name='near-me'

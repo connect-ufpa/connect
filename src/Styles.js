@@ -221,12 +221,21 @@ export default StyleSheet.create({
         marginLeft: 50,
         fontFamily: 'Ubuntu-Regular',
     },
-    textModalStyle: { 
-        flex: 1, 
-        color: '#777', 
-        fontSize: 12, 
+    textModalStyle: {
+        flex: 1,
+        color: '#777',
+        fontSize: 12,
         fontFamily: 'Ubuntu-Regular',
         alignItems: 'center',
-        paddingLeft: 5, 
+        paddingLeft: 5,
+    },
+    backgroundModalStyle: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        paddingBottom: 7,
+        borderTopWidth: 1,
+        borderBottomColor: '#777'
     }
 });

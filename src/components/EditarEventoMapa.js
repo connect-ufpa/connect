@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { View, Dimensions } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
+import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import MapView, { Marker } from 'react-native-maps';
-import { Icon } from 'react-native-elements';
 import { editEvent, saveNewEventCoords } from '../actions';
-import { HeaderImage, Button, CardSection } from '../components/commons';
+import { CardSection } from '../components/commons';
 import Styles from '../Styles';
 
-const Height = Dimensions.get('window').height;
-const HalfHeight = Height * 0.75;
 const ICON = require('../../assets/img/pin.png');
 
 let lat = -1.473987;
@@ -16,25 +14,25 @@ let long = -48.452267;
 let coords = {
     lat: -1.473987,
     long: -48.452267
- };
+};
 let LatLng = {
     latitude: -1.473987,
     longitude: -48.452267,
-  };
+};
 
 class EditarEventoMapa extends Component {
     static navigationOptions = {
         title: 'Editar local do evento',
         headerTintColor: '#2A4065',
         headerTitleStyle: {
-          fontFamily: 'Ubuntu-Medium',
-          fontWeight: '200',
-          fontSize: 18,
+            fontFamily: 'Ubuntu-Medium',
+            fontWeight: '200',
+            fontSize: 18,
         },
         headerStyle: {
-          elevation: 5
+            elevation: 5
         }
-      };
+    };
 
     componentWillMount() {
         const { params } = this.props.navigation.state;
@@ -75,17 +73,17 @@ class EditarEventoMapa extends Component {
                 >
                     <Marker coordinate={LatLng} image={ICON} />
                 </MapView>
-                <CardSection styleSection={{ position: 'absolute', marginTop: HalfHeight }}>
-                    <Button
-                        text="Salvar Localização"
-                        styles={Styles.btnConfirm}
-                        onPress={() => {
-                            this.props.saveNewEventCoords({
-                            id: this.props.id,
-                            coords
-                        }); 
-                    }}
-                    />
+                <CardSection styleSection={{ flex: 1, position: 'absolute', right: 0, left: 0, bottom: 0 }}>
+                        <TouchableOpacity onPress={() => { this.props.saveNewEventCoords({ id: this.props.i, coords }); }} >
+                            <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
+                                <Icon
+                                    type='material-community'
+                                    name='check'
+                                    color='#FFF'
+                                    size={25}
+                                />
+                            </View>
+                        </TouchableOpacity>
                 </CardSection>
             </View>
         );
@@ -95,14 +93,14 @@ class EditarEventoMapa extends Component {
 const styles = {
     mapStyle: {
         height: '100%',
-        width: '100%'    
+        width: '100%'
     }
 };
 
 const mapStateToProps = (state) => {
     const { id, coords } = state.eventoEdicao;
-    
+
     return { id, coords };
- };
- 
- export default connect(mapStateToProps, { editEvent, saveNewEventCoords })(EditarEventoMapa);
+};
+
+export default connect(mapStateToProps, { editEvent, saveNewEventCoords })(EditarEventoMapa);

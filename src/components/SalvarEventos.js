@@ -73,7 +73,7 @@ class SalvarEventos extends Component {
     return (
       <View style={{ alignItems: 'center' }}>
         <TouchableOpacity onPress={() => { this.props.saveEvent(evento); }} >
-          <View style={[Styles.iconButtomStyle, { backgroundColor: '#2BA3DA' }]}>
+          <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
             <Icon
               type='material-community'
               name='check'

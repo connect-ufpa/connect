@@ -102,7 +102,7 @@ class Eventos extends Component {
     return (
       keys.map(index => {
         return (
-          <View key={index} style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row', paddingBottom: 7, borderTopWidth: 3, borderBottomColor: '#FFF' }}>
+          <View key={index} style={Styles.backgroundModalStyle}>
             <Text style={Styles.textModalStyle}>
               {datas_eventos[index].nome}
             </Text>
@@ -145,8 +145,8 @@ class Eventos extends Component {
           <TouchableOpacity onPress={() => { this.props.navigation.navigate('EditarEvento', evento); this.setState({ modal: false }); }} >
             <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2BA3DA' }]}>
               <Icon
-                type='material-community'
-                name='calendar'
+                type='font-awsome'
+                name='edit'
                 color='#FFF'
                 size={20}
               />
@@ -191,7 +191,7 @@ class Eventos extends Component {
   renderCalendar() {
     const selected = true;
     const marked = true;
-    const selectedColor = '#2BA3DA';
+    const selectedColor = '#2A4065';
     let markedDates = {};
     markedDates = { ...markedDates, ...{ selected } };
     markedDates = { ...markedDates, ...{ marked } };
@@ -219,7 +219,7 @@ class Eventos extends Component {
     return (
       <View style={{ alignItems: 'center' }}>
         <TouchableOpacity onPress={() => { this.props.navigation.navigate('SalvarEventos'); }} >
-          <View style={[Styles.iconButtomStyle, { backgroundColor: '#2BA3DA' }]}>
+          <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
             <Icon
               type='material-community'
               name='calendar-plus'
@@ -244,7 +244,7 @@ class Eventos extends Component {
             return (
               <View key={evento.id} style={{ alignItems: 'center', marginLeft: 10 }}>
                 <TouchableOpacity onPress={() => { this.setEventosToState(eventos); }} >
-                  <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
+                  <View style={[Styles.iconButtomStyle, { backgroundColor: '#2BA3DA' }]}>
                     <Icon
                       type='material-community'
                       name='calendar-text'
