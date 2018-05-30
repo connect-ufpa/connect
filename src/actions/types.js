@@ -56,6 +56,7 @@ export const CREATE_EVENT_SUCCESS = 'create_event_successs';
 export const CREATE_EVENT_FAIL = 'create_event_fail';
 export const INICIAL_POSITION = 'inicial_position';
 export const MOVING = 'moving';
+export const CLOSE_LOADING_EVENT_SCREEN = 'close_loading_event_sceen';
 
 export const CLEAR = 'clear';
 export const EDIT_EVENT = 'edit_event';

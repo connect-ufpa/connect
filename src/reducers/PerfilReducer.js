@@ -1,6 +1,3 @@
-import { firebaseAuth, database } from '../config/Config';
-import { dataPerfil } from '../actions';
-
 import {
     VALID_NAME,
     INVALID_NAME,
@@ -8,8 +5,6 @@ import {
     INVALID_REGISTRATION,
     VALID_BIRTHDAY,
     INVALID_BIRTHDAY,
-    VALID_EMAIL,
-    INVALID_EMAIL,
     VALID_PERFIL,
     UPDATE_DATA_USER_SUCESS,
     UPDATE_DATA_USER_ERROR
@@ -26,7 +21,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case VALID_PERFIL:
-            return { ...state }
+            return { ...state };
         case VALID_NAME:
             return { ...state, namePerfil: action.payload, errorMessageName: '', error: false };
         case INVALID_NAME:
@@ -40,10 +35,10 @@ export default (state = INITIAL_STATE, action) => {
         case INVALID_BIRTHDAY:
             return { ...state, birthdayPerfil: action.payload, errorMessageBirthday: 'Digite um formato de data válido!', error: true };
         case UPDATE_DATA_USER_SUCESS:
-            return { ...state }
+            return { ...state };
         case UPDATE_DATA_USER_ERROR:
-            return { ...state }
+            return { ...state };
         default:
             return state;
     }
-}
+};

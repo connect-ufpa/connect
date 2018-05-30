@@ -4,7 +4,7 @@ import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { showMarkerAndModal, closeModal, eventFieldChange, saveEvent, showHelper, closeEventHelper } from '../actions';
-import { Button, Input, CardSection, Texts, Spinner, HeaderImage } from './commons/';
+import { Input, CardSection, Texts, Loading } from './commons/';
 import Styles from '../Styles';
 
 const { height, width } = Dimensions.get('window');
@@ -68,17 +68,24 @@ class SalvarEventos extends Component {
       error: this.props.error
     };
     if (this.props.loading) {
-      return (<Spinner size="large" color="#ffff" />);
+      return (<Loading />);
     }
     return (
-      <Button
-        text="Criar"
-        styles={Styles.btnConfirm}
-        onPress={() => { this.props.saveEvent(evento); }}
-      />
+      <View style={{ alignItems: 'center' }}>
+        <TouchableOpacity onPress={() => { this.props.saveEvent(evento); }} >
+          <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
+            <Icon
+              type='material-community'
+              name='check'
+              color='#FFF'
+              size={25}
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
     );
   }
-  
+
   render() {
     return (
       <View>
@@ -97,7 +104,7 @@ class SalvarEventos extends Component {
           animationType="slide"
           transparent
           visible={this.props.modal}
-          onRequestClose={() => { }}
+          onRequestClose={() => { this.props.closeModal(); }}
         >
           <ScrollView style={Styles.modalScrollViewStyle} >
             <View style={[Styles.eventCardStyle, { marginTop: HALFHEIGTH }]}>
@@ -141,7 +148,7 @@ class SalvarEventos extends Component {
               </CardSection>
               <CardSection>
                 <Picker
-                  itemStyle={{ fontFamily: 'Ubuntu-Regular '}}
+                  itemStyle={{ fontFamily: 'Ubuntu-Regular ' }}
                   selectedValue={this.props.area_tematica}
                   style={{ height: 50, width: 250 }}
                   onValueChange={texto => this.props.eventFieldChange({ prop: 'area_tematica', value: texto })}
@@ -161,14 +168,14 @@ class SalvarEventos extends Component {
                 <Texts text='Início' style='medium' />
               </CardSection>
               <CardSection>
-                <View style={{ flex: 1, padding: 5}}>
+                <View style={{ flex: 1, padding: 5 }}>
                   <Input
                     placeholder="00/00/000"
                     onChangeText={texto => this.props.eventFieldChange({ prop: 'data_inicio', value: texto })}
                     value={this.props.data_inicio}
                   />
                 </View>
-                <View style={{ flex: 1, padding: 5}}>
+                <View style={{ flex: 1, padding: 5 }}>
                   <Input
                     placeholder="00:00"
                     onChangeText={texto => this.props.eventFieldChange({ prop: 'hora_inicio', value: texto })}
@@ -180,14 +187,14 @@ class SalvarEventos extends Component {
                 <Texts text='Término' style='medium' />
               </CardSection>
               <CardSection>
-                <View style={{ flex: 1, padding: 5}}>
+                <View style={{ flex: 1, padding: 5 }}>
                   <Input
                     placeholder="00/00/000"
                     onChangeText={texto => this.props.eventFieldChange({ prop: 'data_fim', value: texto })}
                     value={this.props.data_fim}
                   />
                 </View>
-                <View style={{ flex: 1, padding: 5}}>
+                <View style={{ flex: 1, padding: 5 }}>
                   <Input
                     placeholder="00:00"
                     onChangeText={texto => this.props.eventFieldChange({ prop: 'hora_fim', value: texto })}

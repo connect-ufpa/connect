@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { Calendar } from 'react-native-calendars';
 import { firebaseAuth } from '../config/Config';
-import { HeaderImage, Texts, Input, CardSection } from '../components/commons';
+import { HeaderImage, Input, Loading } from '../components/commons';
 import { serachEventsToShow, searchEvento } from '../actions';
 import Styles from '../Styles';
 
@@ -61,7 +61,8 @@ class Eventos extends Component {
   state = {
     modal: false,
     datas_eventos: [],
-    trabalho: 'Trabalho'
+    trabalho: 'Trabalho',
+    tituloModal: ''
   }
 
   componentWillMount() {
@@ -69,7 +70,11 @@ class Eventos extends Component {
   }
 
   setEventosToState(eventos) {
-    this.setState({ datas_eventos: eventos, modal: true });
+    this.setState({ datas_eventos: eventos, modal: true, tituloModal: 'Eventos na sua area' });
+  }
+
+  showLoading() {
+    if (this.props.loading) return (<Loading />);
   }
 
   showPoupUpEventoDia(data) {
@@ -86,7 +91,8 @@ class Eventos extends Component {
     if (Object.prototype.hasOwnProperty.call(datas_eventos, id)) {
       this.setState({
         modal: true,
-        datas_eventos
+        datas_eventos,
+        tituloModal: 'Eventos nesta data'
       });
     }
   }
@@ -97,17 +103,16 @@ class Eventos extends Component {
     return (
       keys.map(index => {
         return (
-          <View key={index} style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
-            <Text style={{ flex: 1, color: '#777', fontSize: 15, margin: 5, height: 40, paddingTop: 7, paddingLeft: 5 }}>
+          <View key={index} style={Styles.backgroundModalStyle}>
+            <Text style={Styles.textModalStyle}>
               {datas_eventos[index].nome}
             </Text>
             {this.renderEditEventIcon(datas_eventos[index])}
             <View style={{ marginTop: 7 }}>
               <TouchableOpacity onPress={() => { this.props.navigation.navigate('VisualizarEvento', datas_eventos[index]); this.setState({ modal: false }); }} >
-                <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2BA3DA' }]}>
+                <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2A4065' }]}>
                   <Icon
-                    type='font-awesome'
-                    name='eye'
+                    name='keyboard-arrow-right'
                     color='#FFF'
                     size={20}
                   />
@@ -122,12 +127,7 @@ class Eventos extends Component {
 
   renderInputPesquisaEvento() {
     return (
-      <View style={{ 
-        padding: 20,
-        position: 'relative',
-        flexDirection: 'row',
-        justifyContent: 'center' 
-        }}>
+      <View style={{ padding: 20, position: 'relative', flexDirection: 'row', justifyContent: 'center' }}>
         <Input
           iconName={'search'}
           value={this.props.eventoNome}
@@ -144,10 +144,10 @@ class Eventos extends Component {
       return (
         <View style={{ marginTop: 7 }}>
           <TouchableOpacity onPress={() => { this.props.navigation.navigate('EditarEvento', evento); this.setState({ modal: false }); }} >
-            <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#CC2820' }]}>
+            <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2BA3DA' }]}>
               <Icon
-                type='material-community'
-                name='calendar'
+                type='font-awsome'
+                name='edit'
                 color='#FFF'
                 size={20}
               />
@@ -173,10 +173,9 @@ class Eventos extends Component {
                 {this.renderEditEventIcon(item)}
                 <View style={{ marginTop: 7 }}>
                   <TouchableOpacity onPress={() => this.props.navigation.navigate('VisualizarEvento', item)} >
-                    <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2BA3DA' }]}>
+                    <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2A4065' }]}>
                       <Icon
-                        type='font-awesome'
-                        name='eye'
+                        name='keyboard-arrow-right'
                         color='#FFF'
                         size={20}
                       />
@@ -193,7 +192,7 @@ class Eventos extends Component {
   renderCalendar() {
     const selected = true;
     const marked = true;
-    const selectedColor = '#2BA3DA';
+    const selectedColor = '#2A4065';
     let markedDates = {};
     markedDates = { ...markedDates, ...{ selected } };
     markedDates = { ...markedDates, ...{ marked } };
@@ -206,8 +205,8 @@ class Eventos extends Component {
       return datas_eventos;
     });
     return (
-      <View style={{ marginLeft: 20, marginRight: 20, borderRadius: 5, borderWidth: 3, borderColor: '#FFF', elevation: 8 }}>
-        <View style={{ padding: 5, backgroundColor: '#FFF' }}> 
+      <View style={{ margin: 18.5, marginTop: HALFHEIGHT, borderRadius: 5, borderWidth: 3, borderColor: '#FFF', elevation: 8 }}>
+        <View style={{ padding: 5, backgroundColor: '#FFF' }}>
           <Calendar
             onDayPress={(day) => { this.showPoupUpEventoDia(day.dateString); }}
             markedDates={datas_eventos}
@@ -221,7 +220,7 @@ class Eventos extends Component {
     return (
       <View style={{ alignItems: 'center' }}>
         <TouchableOpacity onPress={() => { this.props.navigation.navigate('SalvarEventos'); }} >
-          <View style={[Styles.iconButtomStyle, { backgroundColor: '#2BA3DA' }]}>
+          <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
             <Icon
               type='material-community'
               name='calendar-plus'
@@ -230,9 +229,6 @@ class Eventos extends Component {
             />
           </View>
         </TouchableOpacity>
-        <View style={{ marginLeft: 10 }} >
-          <Texts text="Criar evento" />
-        </View>
       </View>
     );
   }
@@ -249,7 +245,7 @@ class Eventos extends Component {
             return (
               <View key={evento.id} style={{ alignItems: 'center', marginLeft: 10 }}>
                 <TouchableOpacity onPress={() => { this.setEventosToState(eventos); }} >
-                  <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
+                  <View style={[Styles.iconButtomStyle, { backgroundColor: '#2BA3DA' }]}>
                     <Icon
                       type='material-community'
                       name='calendar-text'
@@ -258,9 +254,6 @@ class Eventos extends Component {
                     />
                   </View>
                 </TouchableOpacity>
-                <View>
-                  <Texts text="Eventos Relacionados" />
-                </View>
               </View>
             );
           }
@@ -275,8 +268,9 @@ class Eventos extends Component {
       <View style={{ flex: 1, flexDirection: 'column' }}>
         {this.renderInputPesquisaEvento()}
         {this.renderListEventosAchados()}
+        {this.showLoading()}
         {this.renderCalendar()}
-        <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end' }}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
           {this.renderButtomSaveEvento()}
           {this.renderButtomEventosRelated()}
         </View>
@@ -284,23 +278,21 @@ class Eventos extends Component {
           animationType="slide"
           transparent
           visible={this.state.modal}
-          onRequestClose={() => { }}
+          onRequestClose={() => { this.setState({ modal: false }); }}
         >
           <ScrollView style={Styles.scrollViewStyle} >
-            <View style={[Styles.eventCardStyle, { marginTop: MODALSUCCESS }]}>
-              <View style={{ alignItems: 'flex-end', paddingTop: 5, paddingRight: 10 }}>
-                <TouchableHighlight
-                  onPress={() => { this.setState({ modal: false }); }}
-                >
-                  <View>
-                    <Icon
-                      type='font-awesome'
-                      name='times-circle'
-                      color='#CC2820'
-                      size={30}
-                    />
-                  </View>
-                </TouchableHighlight>
+            <View style={[Styles.eventCardStyle, { marginTop: MODALSUCCESS, marginLeft: 18, marginRight: 18 }]}>
+              <View style={Styles.headerModalStyle}>
+                <Text style={Styles.titleModalStyle}>
+                  {this.state.tituloModal}
+                </Text>
+                <View style={{ alignItems: 'flex-end', paddingTop: 5, marginLeft: 20 }}>
+                  <TouchableHighlight onPress={() => { this.setState({ modal: false }); }}>
+                    <View style={Styles.buttomCloseStyle} >
+                      <Icon name="clear" color="#FFF" size={15} />
+                    </View>
+                  </TouchableHighlight>
+                </View>
               </View>
               {this.infoEventoModal()}
             </View>
@@ -318,7 +310,7 @@ const mapStateToProps = (state) => {
     positionHelper: state.evento.positionHelper,
     eventos: state.evento.eventosToShow,
     eventoNome: state.evento.eventoPesquisado,
-    eventosAchados: state.evento.eventosAchados
+    eventosAchados: state.evento.eventosAchados,
   };
 };
 export default connect(mapStateToProps, { serachEventsToShow, searchEvento })(Eventos);

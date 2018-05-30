@@ -1,7 +1,7 @@
 import {
     MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR,
     INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, SHOW_HELPER_EVENT, CLOSE_HELPER_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EVENTS_TO_SHOW_SUCCESS,
-    SEARCHING_EVENT, SEARCHED_EVENTO, CLEAR, INICIAL_POSITION, MOVING
+    SEARCHING_EVENT, SEARCHED_EVENTO, CLEAR, INICIAL_POSITION, MOVING, CLOSE_LOADING_EVENT_SCREEN
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -36,7 +36,7 @@ const INITIAL_STATE = {
     fetchingEvents: true,
     fetchingEventsToShow: true,
     user_latitude: '',
-    user_longitude: ''
+    user_longitude: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -99,17 +99,19 @@ export default (state = INITIAL_STATE, action) => {
         case CREATE_EVENT_FAIL:
             return { ...state, createFail: 'Preencha todos os campos corretamente!', loading: false, error: true };
         case CLEAR:
-            return { ...state, eventosToEdit: [], eventosToShow: [] };
+            return { ...state, eventosToEdit: [], eventosToShow: [], fetchingEventsToShow: true };
         case SEARCHING_EVENT:
             return { ...state, eventoPesquisado: action.payload, eventosAchados: [] };
         case SEARCHED_EVENTO:
             return { ...state, eventosAchados: action.payload };
         case EVENTS_TO_SHOW_SUCCESS:
-            return { ...state, eventosToShow: [...state.eventosToShow, action.payload], fetchingEventsToShow: false };
+            return { ...state, eventosToShow: [...state.eventosToShow, action.payload] };
         case INICIAL_POSITION:
             return { ...state, user_latitude: action.payload.latitude, user_longitude: action.payload.longitude };
         case MOVING:
             return { ...state, user_latitude: action.payload.latitude, user_logintude: action.payload.longitude };
+        case CLOSE_LOADING_EVENT_SCREEN:
+            return { ...state, fetchingEventsToShow: false };
         default:
             return state;
     }

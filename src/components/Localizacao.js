@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  FlatList,
-  TextInput,
-  Dimensions,
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-} from 'react-native';
+import { Text, View, FlatList, TextInput, Dimensions, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import MapView, { Marker, Callout } from 'react-native-maps';
+import { Icon } from 'react-native-elements';
+import MapViewDirections from 'react-native-maps-directions';
+import { connect } from 'react-redux';
+import _ from 'lodash';
+import { Spinner, CalloutView, HeaderImage, Loading } from './commons';
 import {
   markLocal,
-  saveLocais,
+  // saveLocais,
   createRota,
   searchLocal,
   verifyLocais,
@@ -24,14 +21,8 @@ import {
   createRouteSuccess,  
   searchLocalizacaoUsuario,
 } from '../actions';
-import { Input, Spinner, CalloutView, HeaderImage, Loading } from './commons';
-import MapView, { Marker, Circle, Callout } from 'react-native-maps';
-import MapViewDirections from 'react-native-maps-directions';
-import { Icon } from 'react-native-elements';
-import { connect } from 'react-redux';
+// import locais from '../data/locais.json';
 import Styles from '../Styles';
-import locais from '../data/locais.json';
-import _ from 'lodash';
 
 const { height, width } = Dimensions.get('window');
 const initialRegion = {
@@ -56,7 +47,7 @@ class Localizacao extends Component {
         height: 55,
       },
       drawerLabel: 'Localização',
-      drawerIcon: ({ tintColor }) => (
+      drawerIcon: () => (
         <Icon
           name="place" 
           color="#2a4065" 
@@ -107,8 +98,8 @@ class Localizacao extends Component {
       const local = this.props.localMarcado;
 
       switch (local.tipo) {
-        case "Instituto":
-          return(
+        case 'Instituto':
+          return (
             <Marker
               key={local.nome}
               coordinate={{
@@ -118,15 +109,14 @@ class Localizacao extends Component {
               title={local.nome}
               image={require('../../assets/img/pin/Instituto.png')}
             >
-              <Callout tooltip={true}>
+              <Callout tooltip>
                 <CalloutView name={local.nome} desc={local.desc} />
               </Callout>
             </Marker>
           );
-          break;
         
-        case "Laboratório":
-          return(
+        case 'Laboratório':
+          return (
             <Marker
               key={local.nome}
               coordinate={{
@@ -141,10 +131,9 @@ class Localizacao extends Component {
               </Callout>
             </Marker>
           );
-          break;
         
-        case "Biblioteca":
-          return(
+        case 'Biblioteca':
+          return (
             <Marker
               key={local.nome}
               coordinate={{
@@ -154,15 +143,14 @@ class Localizacao extends Component {
               title={local.nome}
               image={require('../../assets/img/pin/Biblioteca.png')}
             >
-              <Callout tooltip={true}>
+              <Callout tooltip>
                 <CalloutView name={local.nome} desc={local.desc} />
               </Callout>
             </Marker>
           );
-          break;
         
-        case "Bloco":
-          return(
+        case 'Bloco':
+          return (
             <Marker
               key={local.nome}
               coordinate={{
@@ -172,15 +160,13 @@ class Localizacao extends Component {
               title={local.nome}
               image={require('../../assets/img/pin/Bloco.png')}
             >
-              <Callout tooltip={true}>
+              <Callout tooltip>
                 <CalloutView name={local.nome} desc={local.desc} />
               </Callout>
             </Marker>
           );
-          break;
-        
-        case "Banheiro":
-          return(
+        case 'Banheiro':
+          return (
             <Marker
               key={local.nome}
               coordinate={{
@@ -190,15 +176,14 @@ class Localizacao extends Component {
               title={local.nome}
               image={require('../../assets/img/pin/Banheiro.png')}
             >
-              <Callout tooltip={true}>
+              <Callout tooltip>
                 <CalloutView name={local.nome} desc={local.desc} />
               </Callout>
             </Marker>
           );
-          break;
           
-        case "Administração":
-          return(
+        case 'Administração':
+          return (
             <Marker
               key={local.nome}
               coordinate={{
@@ -213,7 +198,6 @@ class Localizacao extends Component {
               </Callout>
             </Marker>
           );
-          break
         
         case "Restaurante":
           return(
@@ -1086,7 +1070,7 @@ class Localizacao extends Component {
       <ScrollView style={Styles.scrollViewStyle}>
         <MapView
           ref={'Map'}
-          showsUserLocation={true}
+          showsUserLocation
           showsMyLocationButton={false}
           style={Styles.mapLocalizacaoStyle}
           initialRegion={initialRegion}

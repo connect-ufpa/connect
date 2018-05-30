@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import MapView, { Marker } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Icon } from 'react-native-elements';
-import { HeaderImage, Texts } from '../components/commons';
+import { Texts } from '../components/commons';
 import { getLocation } from '../actions';
 import Styles from '../Styles';
 
@@ -12,19 +12,18 @@ const { height, width } = Dimensions.get('window');
 const ICON = require('../../assets/img/pin.png');
 
 class VisualizarEventoNoMapa extends Component {
-    static navigationOptions = () => {
-        return {
-            headerTitle:
-                <View style={{ flex: 1, alignItems: 'center', flexDirection: 'row', justifyContent: 'center' }}>
-                    <View style={{ marginRight: 5 }}>
-                        <Texts text='Visualizar Local' />
-                    </View><HeaderImage />
-                </View>,
-            headerStyle: {
-                paddingRight: 60,
-            },
-        };
-    }
+    static navigationOptions = {
+        title: 'Local do evento',
+        headerTintColor: '#2A4065',
+        headerTitleStyle: {
+          fontFamily: 'Ubuntu-Medium',
+          fontWeight: '200',
+          fontSize: 18,
+        },
+        headerStyle: {
+          elevation: 5
+        }
+      };
 
     state = {
         showRota: false,
@@ -97,7 +96,7 @@ class VisualizarEventoNoMapa extends Component {
         return (
             <View style={{ flex: 1, position: 'absolute' }}>
                 <TouchableOpacity onPress={() => { this.props.getLocation(); this.setState({ showRota: true }); }} >
-                    <View style={[Styles.iconButtomStyle, { backgroundColor: '#2BA3DA' }]}>
+                    <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
                         <Icon
                             type='material-community'
                             name='near-me'

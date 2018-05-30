@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, onPasswordChanged, onConfirmPasswordChanged, authUser } from '../actions';
-import { Card, CardSection, Texts, Input, Button, ButtonBack, Loading } from './commons';
-import { ScrollView, Image, View, Text } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
+import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, onPasswordChanged, onConfirmPasswordChanged, authUser } from '../actions';
+import { Card, CardSection, Texts, Input, Button, Loading } from './commons';
 import Styles from '../Styles';
-
-const logo = require('../../assets/img/logo.png');
 
 class CriarConta extends Component {
   static navigationOptions = {
@@ -22,7 +20,11 @@ class CriarConta extends Component {
     }
   };
 
-  renderCriarContaButton() {
+  showLoading() {
+    if (this.props.loading) return (<Loading />);
+  }
+
+  renderCreateUserButton() {
     const user = {
       name: this.props.name,
       registration: this.props.registration,
@@ -30,8 +32,7 @@ class CriarConta extends Component {
       email: this.props.email,
       password: this.props.password,
       error: this.props.error
-    }
-
+    };
     return (
       <Button
         text="Cadastrar"
@@ -39,10 +40,6 @@ class CriarConta extends Component {
         onPress={() => { this.props.authUser(user); }}
       />
     );
-  }
-
-  showLoading() {
-    if (this.props.loading) return (<Loading />);
   }
 
   render() {
@@ -78,7 +75,7 @@ class CriarConta extends Component {
               <Input
                 iconName={'date-range'}
                 value={this.props.birthday}
-                placeholder={"Nascimento: 00/00/0000"}
+                placeholder={'Nascimento: 00/00/0000'}
                 onChangeText={birthday => this.props.onBirthChanged(birthday)}
               />
             </CardSection>
@@ -91,7 +88,7 @@ class CriarConta extends Component {
                 iconName={'email'}
                 value={this.props.email}
                 keyboardType={'email-address'}
-                placeholder={"E-mail: aluno@email.com"}
+                placeholder={'E-mail: aluno@email.com'}
               onChangeText={email => this.props.onEmailChanged(email)}
               />
             </CardSection>
@@ -102,7 +99,7 @@ class CriarConta extends Component {
               <Input
                 secureTextEntry
                 iconName={'vpn-key'}
-                placeholder={"Senha:"}
+                placeholder={'Senha:'}
                 value={this.props.password}
                 onChangeText={
                   password =>
@@ -117,7 +114,7 @@ class CriarConta extends Component {
               <Input
                 secureTextEntry
                 iconName={'vpn-key'}
-                placeholder={"Confirmação de senha:"}
+                placeholder={'Confirmação de senha:'}
                 value={this.props.confirmPassword}
                 onChangeText={confirmPassword => this.props.onConfirmPasswordChanged(confirmPassword, this.props.password)}
               />
