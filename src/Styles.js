@@ -138,9 +138,9 @@ export default StyleSheet.create({
         flex: 1,
         zIndex: 1,
         position: 'absolute',
-        marginTop: 70,
-        paddingLeft: 20,
-        paddingRight: 20,
+        marginTop: 65,
+        paddingLeft: 18,
+        paddingRight: 18,
         elevation: 8,
         width: '100%'
     },

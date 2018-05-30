@@ -9,7 +9,6 @@ import { serachEventsToShow, searchEvento } from '../actions';
 import Styles from '../Styles';
 
 const HEIGHT = Dimensions.get('window').height;
-const HALFHEIGHT = HEIGHT * 0.13;
 const MODALSUCCESS = HEIGHT * 0.4;
 
 class Eventos extends Component {
@@ -127,7 +126,7 @@ class Eventos extends Component {
 
   renderInputPesquisaEvento() {
     return (
-      <View style={{ padding: 20, position: 'relative', flexDirection: 'row', justifyContent: 'center' }}>
+      <View style={{ paddingRight: 18, paddingLeft: 18, paddingTop: 10, position: 'relative', flexDirection: 'row', justifyContent: 'center' }}>
         <Input
           iconName={'search'}
           value={this.props.eventoNome}
@@ -205,7 +204,7 @@ class Eventos extends Component {
       return datas_eventos;
     });
     return (
-      <View style={{ margin: 18.5, marginTop: HALFHEIGHT, borderRadius: 5, borderWidth: 3, borderColor: '#FFF', elevation: 8 }}>
+      <View style={{ margin: 18.5, borderRadius: 5, borderWidth: 3, borderColor: '#FFF', elevation: 8 }}>
         <View style={{ padding: 5, backgroundColor: '#FFF' }}>
           <Calendar
             onDayPress={(day) => { this.showPoupUpEventoDia(day.dateString); }}
