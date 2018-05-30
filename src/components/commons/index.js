@@ -6,4 +6,5 @@ export * from './Spinner';
 export * from './Texts';
 export * from './HeaderImage';
 export * from './CalloutView';
+export * from './HelperCard';
 export * from './Loading';

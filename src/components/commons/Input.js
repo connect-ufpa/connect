@@ -8,8 +8,8 @@ const Input = ({ value, onChangeText, placeholder, secureTextEntry, editable, ad
   return (
       <View style={{
         flex: 1,
-        elevation: 8,
         padding: 5,
+        elevation: 2,
         borderRadius: 5,
         borderColor: '#FFF',
         flexDirection: 'row',
@@ -35,7 +35,11 @@ const Input = ({ value, onChangeText, placeholder, secureTextEntry, editable, ad
             backgroundColor: '#FFF',
           }}
         >
-          <Icon name={iconName} color="#777" size={25} />
+          <Icon 
+            name={iconName} 
+            color="#777" 
+            size={25} 
+          />
         </View>
       </View>
   );

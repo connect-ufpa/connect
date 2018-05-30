@@ -9,7 +9,7 @@ import { serachEventsToShow, searchEvento } from '../actions';
 import Styles from '../Styles';
 
 const HEIGHT = Dimensions.get('window').height;
-const MODALSUCCESS = HEIGHT * 0.4;
+const MARGIN_TOP_MODAL = HEIGHT * 0.4;
 
 class Eventos extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -62,19 +62,19 @@ class Eventos extends Component {
     datas_eventos: [],
     trabalho: 'Trabalho',
     tituloModal: ''
-  }  
-  
+  }
+
   componentWillMount() {
     this.props.serachEventsToShow();
   }
 
   renderInputPesquisaEvento() {
     return (
-      <View style={{ marginTop: 10, paddingRight: 18, paddingLeft: 18, paddingTop: 10, position: 'relative', flexDirection: 'row', justifyContent: 'center' }}>
+      <View style={{ marginTop: 10, paddingRight: 20, paddingLeft: 20, paddingTop: 10, position: 'relative', flexDirection: 'row', justifyContent: 'center' }}>
         <Input
           iconName={'search'}
           value={this.props.eventoNome}
-          placeholder={'Pesquise evento desejado:'}
+          placeholder={'Pesquise um evento desejado:'}
           onChangeText={evento => this.props.searchEvento(evento, this.props.eventos)}
         />
       </View>
@@ -117,10 +117,10 @@ class Eventos extends Component {
             style={{
               borderWidth: 2,
               borderColor: '#FFF',
-              backgroundColor: '#FFF',              
+              backgroundColor: '#FFF',
               borderBottomLeftRadius: 6,
               borderBottomRightRadius: 6,
-              
+
             }}
             renderItem={({ item }) =>
               <View style={{
@@ -238,7 +238,7 @@ class Eventos extends Component {
       return datas_eventos;
     });
     return (
-      <View style={{ margin: 18.5, borderRadius: 5, borderWidth: 3, borderColor: '#FFF', elevation: 8 }}>
+      <View style={{ margin: 20, borderRadius: 5, borderWidth: 3, borderColor: '#FFF', elevation: 2 }}>
         <View style={{ padding: 5, backgroundColor: '#FFF' }}>
           <Calendar
             onDayPress={(day) => { this.showPoupUpEventoDia(day.dateString); }}
@@ -268,7 +268,7 @@ class Eventos extends Component {
                   size={20}
                 />
               </View>
-            </TouchableOpacity>            
+            </TouchableOpacity>
           </View>
         );
       })
@@ -285,19 +285,26 @@ class Eventos extends Component {
         {this.renderInputPesquisaEvento()}
         {this.renderListEventosAchados()}
         {this.showLoading()}
+
+        {/* <View style={{ paddingLeft: 20, paddingRight: 20 }}>
+          <Text style={{ fontSize: 14, color: "#2A4065", fontFamily: 'Ubuntu-Regular'}}>
+            Descubra eventos acontecendo dentro da universidade, crie os seus próprios eventos ou filtre pela sua área de atuação.
+          </Text>
+        </View> */}
+
         {this.renderCalendar()}
         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
           {this.renderButtomSaveEvento()}
           {this.renderButtomEventosRelated()}
         </View>
         <Modal
-          animationType="slide"
           transparent
+          animationType="fade"
           visible={this.state.modal}
           onRequestClose={() => { this.setState({ modal: false }); }}
         >
           <ScrollView style={Styles.scrollViewStyle} >
-            <View style={[Styles.eventCardStyle, { marginTop: MODALSUCCESS, marginLeft: 18, marginRight: 18 }]}>
+            <View style={[Styles.eventCardStyle, { marginTop: MARGIN_TOP_MODAL, marginLeft: 40, marginRight: 40, marginBottom: 10 }]}>
               <View style={Styles.headerModalStyle}>
                 <Text style={Styles.titleModalStyle}>
                   {this.state.tituloModal}

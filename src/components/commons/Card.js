@@ -2,11 +2,11 @@ import React from 'react';
 import { View, StatusBar } from 'react-native';
 import Styles from '../../Styles';
 
-const Card = ({ children, addStyle }) => {
+const Card = ({ children, addStyle, statusBarColor }) => {
   return (
     <View style={[Styles.cardStyle, addStyle]}>
       <StatusBar
-        backgroundColor="#2A4065"
+        backgroundColor={statusBarColor}
         barStyle="light-content"
       />
       {children}

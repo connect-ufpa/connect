@@ -41,7 +41,7 @@ class Login extends Component {
     return (
       <LinearGradient colors={['#2A4065', '#2BA3DA']}>
         <ScrollView style={Styles.scrollViewStyle}>
-          <Card>
+          <Card statusBarColor={'#2A4065'}>
             <CardSection>
               <Image
                 source={logo}
@@ -58,21 +58,21 @@ class Login extends Component {
                 addStyle={{ textAlign: 'left' }}
               />
               <Texts
-                text={'Seja bem-vindo ao Connect!'}                
+                text={'Seja bem-vindo ao Connect!'}
                 style={'medium'}
-                addStyle={{ fontSize: 18 }}
+                addStyle={{ fontSize: 16, marginTop: 10 }}
               />
               <Texts
                 text={'Por favor, entre com seu e-mail e senha.'}
                 style={'medium'}
-                addStyle={{ fontSize: 18 }}
+                addStyle={{ fontSize: 16 }}
               />
             </View>
             <CardSection>
               <Input
                 iconName={'email'}
-                placeholder= {"E-mail:"}
-                value={this.props.email}                
+                placeholder={'E-mail:'}
+                value={this.props.email}
                 keyboardType={'email-address'}
                 onChangeText={email => this.props.loginEmailChange(email)}
               />
@@ -85,7 +85,7 @@ class Login extends Component {
                 secureTextEntry
                 iconName={'vpn-key'}
                 placeholder={'Senha:'}
-                value={this.props.password}                
+                value={this.props.password}
                 onChangeText={password =>
                   this.props.loginPasswordChange(password)
                 }
@@ -103,9 +103,7 @@ class Login extends Component {
             >
               <View>
                 <TouchableOpacity
-                  onPress={() =>
-                    this.props.navigation.navigate('EsqueciSenha')
-                  }
+                  onPress={() => this.props.navigation.navigate('EsqueciSenha')}
                 >
                   <Texts text="Esqueci minha senha" style="small" />
                 </TouchableOpacity>

@@ -57,8 +57,12 @@ class MeuPerfil extends Component {
         alignSelf: 'center',
       },
       drawerLabel: 'Meu perfil',
-      drawerIcon: ({ tintColor }) => (
-        <Icon name="person" color="#2a4065" size={27} />
+      drawerIcon: ({ tintColor }) => ( 
+        <Icon 
+          name="person" 
+          color="#2a4065" 
+          size={27} 
+        />
       ),
       headerLeft: (
         <TouchableOpacity style={{ flex: 1, paddingTop: 20, paddingBottom: 20, paddingRight: 20 }} onPress={() => navigate('DrawerOpen')}>
@@ -135,8 +139,6 @@ class MeuPerfil extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <StatusBar backgroundColor="#2A4065" />
-
         <ImageBackground
           style={styles.headerBackground}
           source={require('../../assets/img/background.jpg')}
