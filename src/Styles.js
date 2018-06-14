@@ -134,6 +134,15 @@ export default StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center'
     },
+    iconButtomEventStyle: {
+        height: 40,
+        width: 40,
+        margin: 15,
+        elevation: 8,
+        borderRadius: 150,
+        alignContent: 'center',
+        justifyContent: 'center'
+    },
     viewListItensFoundStyle: {
         flex: 1,
         zIndex: 1,

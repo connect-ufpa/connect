@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'react-native';
 import Styles from '../../Styles';
 
-const Texts = ({ text, style, addStyle }) => {
+const Texts = ({ text, style, color }) => {
   let textStyle;
 
   switch (style) {
@@ -24,7 +24,7 @@ const Texts = ({ text, style, addStyle }) => {
   }
 
   return (
-    <Text style={[ textStyle, addStyle ]}>
+    <Text style={[textStyle, { color }]}>
       {text}
     </Text>
   );

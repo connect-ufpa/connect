@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Modal, TouchableHighlight, Dimensions, ScrollView, TextInput, Picker, Text, TouchableOpacity } from 'react-native';
+import { View, Modal, TouchableHighlight, Dimensions, ScrollView, TextInput, Picker, Text, TouchableOpacity, DatePickerAndroid } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
@@ -28,6 +28,18 @@ class SalvarEventos extends Component {
 
   componentWillMount() {
     if (this.props.positionHelper === 0.2 || !this.props.helper) this.props.showHelper();
+  }
+
+  async openAndroidDatePicker(prop) {
+    try {
+      const { action, year, month, day } = await DatePickerAndroid.open();
+      if (action !== DatePickerAndroid.dismissedAction) {
+        const data = `${day}/${month}/${year}`;
+        this.props.eventFieldChange({ prop, value: data });
+      }
+    } catch ({ code, message }) {
+      console.warn('Cannot open date picker', message);
+    }
   }
 
   renderHelper() {
@@ -118,6 +130,9 @@ class SalvarEventos extends Component {
                 </TouchableHighlight>
               </View>
               <CardSection>
+                <Texts text='Preencha os campos do evento' style='medium' color="#2a4065" />
+              </CardSection>
+              <CardSection>
                 <Input
                   placeholder="Nome do evento:"
                   onChangeText={texto => this.props.eventFieldChange({ prop: 'nome', value: texto })}
@@ -125,16 +140,18 @@ class SalvarEventos extends Component {
                 />
               </CardSection>
               <CardSection>
-                <TextInput
-                  style={Styles.inputStyle}
-                  placeholder="Descrição do evento:"
-                  onChangeText={texto => this.props.eventFieldChange({ prop: 'descricao', value: texto })}
-                  value={this.props.descricao}
-                  underlineColorAndroid='transparent'
-                  multiline
-                  numberOfLines={4}
-                  maxLength={250}
-                />
+                <View style={{ flex: 1, elevation: 8, padding: 5, borderRadius: 5, borderColor: '#FFF', flexDirection: 'row', backgroundColor: '#FFF' }}>
+                  <TextInput
+                    style={Styles.inputStyle}
+                    placeholder="Descrição do evento:"
+                    onChangeText={texto => this.props.eventFieldChange({ prop: 'descricao', value: texto })}
+                    value={this.props.descricao}
+                    underlineColorAndroid='transparent'
+                    multiline
+                    numberOfLines={4}
+                    maxLength={250}
+                  />
+                </View>
               </CardSection>
               <CardSection>
                 <Input
@@ -144,7 +161,7 @@ class SalvarEventos extends Component {
                 />
               </CardSection>
               <CardSection>
-                <Texts text='Área Temática' style='medium' />
+                <Texts text='Área Temática' style='medium' color="#2a4065" />
               </CardSection>
               <CardSection>
                 <Picker
@@ -165,16 +182,33 @@ class SalvarEventos extends Component {
                 </Picker>
               </CardSection>
               <CardSection>
-                <Texts text='Início' style='medium' />
+                <Texts text='Data de início' style='medium' color="#2a4065" />
               </CardSection>
               <CardSection>
-                <View style={{ flex: 1, padding: 5 }}>
-                  <Input
-                    placeholder="00/00/000"
-                    onChangeText={texto => this.props.eventFieldChange({ prop: 'data_inicio', value: texto })}
-                    value={this.props.data_inicio}
-                  />
+                <View style={{ flex: 1, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
+                  <View style={{ flex: 1, paddingTop: 6, paddingBottom: 6 }}>
+                    <Input
+                      onChangeText={texto => this.props.eventFieldChange({ prop: 'data_inicio', value: texto })}
+                      placeholder="00/00/000"
+                      value={this.props.data_inicio}
+                    />
+                  </View>
+                  <TouchableOpacity onPress={() => { this.openAndroidDatePicker('data_inicio'); }}>
+                    <View style={[Styles.iconButtomEventStyle, { backgroundColor: '#2A4065' }]}>
+                      <Icon
+                        type="material-community"
+                        name="calendar-text"
+                        color="#FFF"
+                        size={22}
+                      />
+                    </View>
+                  </TouchableOpacity>
                 </View>
+              </CardSection>
+              <CardSection>
+                <Texts text='Hora de início' style='medium' color="#2a4065" />
+              </CardSection>
+              <CardSection>
                 <View style={{ flex: 1, padding: 5 }}>
                   <Input
                     placeholder="00:00"
@@ -184,16 +218,30 @@ class SalvarEventos extends Component {
                 </View>
               </CardSection>
               <CardSection>
-                <Texts text='Término' style='medium' />
+                <Texts text='Data de fim' style='medium' color="#2a4065" />
               </CardSection>
               <CardSection>
-                <View style={{ flex: 1, padding: 5 }}>
-                  <Input
-                    placeholder="00/00/000"
-                    onChangeText={texto => this.props.eventFieldChange({ prop: 'data_fim', value: texto })}
-                    value={this.props.data_fim}
-                  />
+                <View style={{ flex: 1, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
+                  <View style={{ flex: 1, paddingTop: 6, paddingBottom: 6 }}>
+                    <Input
+                      onChangeText={texto => this.props.eventFieldChange({ prop: 'data_fim', value: texto })}
+                      placeholder="00/00/000"
+                      value={this.props.data_fim}
+                    />
+                  </View>
+                  <TouchableOpacity onPress={() => { this.openAndroidDatePicker('data_fim'); }}>
+                    <View style={[Styles.iconButtomEventStyle, { backgroundColor: '#2A4065' }]}>
+                      <Icon
+                        type="material-community"
+                        name="calendar-text"
+                        color="#FFF"
+                        size={22}
+                      />
+                    </View>
+                  </TouchableOpacity>
                 </View>
+              </CardSection>
+              <CardSection>
                 <View style={{ flex: 1, padding: 5 }}>
                   <Input
                     placeholder="00:00"
@@ -212,8 +260,8 @@ class SalvarEventos extends Component {
               </CardSection>
             </View>
           </ScrollView>
-        </Modal>
-      </View>
+        </Modal >
+      </View >
     );
   }
 }

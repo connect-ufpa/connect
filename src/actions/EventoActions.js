@@ -17,6 +17,7 @@ export const closeModal = () => {
 };
 
 export const eventFieldChange = ({ prop, value }) => {
+    console.log(prop)
     if (prop === 'data_inicio') {
         const validate = validateDates(value);
         if (validate) return { type: SAVE_EVENT_FIELD_CHANGE, payload: { prop, value } };
