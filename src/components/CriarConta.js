@@ -24,7 +24,7 @@ class CriarConta extends Component {
     if (this.props.loading) return (<Loading />);
   }
 
-  renderCreateUserButton() {
+  renderCriarContaButton() {
     const user = {
       name: this.props.name,
       registration: this.props.registration,

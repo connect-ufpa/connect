@@ -73,7 +73,6 @@ export default StyleSheet.create({
         alignSelf: 'stretch',
         borderColor: '#CC2820',
         backgroundColor: '#CC2820',
-
     },
     btnTextStyle: {
         fontFamily: 'Ubuntu-Medium',
@@ -135,8 +134,8 @@ export default StyleSheet.create({
         justifyContent: 'center'
     },
     iconButtomEventStyle: {
-        height: 40,
-        width: 40,
+        height: 50,
+        width: 50,
         margin: 15,
         elevation: 8,
         borderRadius: 150,

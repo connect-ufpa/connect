@@ -11,7 +11,7 @@ import MeuPerfil from './components/MeuPerfil';
 import Eventos from './components/Eventos';
 import Ajuda from './components/Ajuda';
 import Sobre from './components/Sobre';
-import SalvarEventos from './components/SalvarEventos';
+import CriarEvento from './components/CriarEvento';
 import EditarEvento from './components/EditarEvento';
 import EditarEventoMapa from './components/EditarEventoMapa';
 import VisualizarEvento from './components/VisualizarEvento';
@@ -96,7 +96,7 @@ export const AuthorizedScreens = StackNavigator({
   MeuPerfil: { screen: MeuPerfil },
   Ajuda: { screen: Ajuda },
   Sobre: { screen: Sobre },
-  SalvarEventos: { screen: SalvarEventos },
+  CriarEvento: { screen: CriarEvento },
   EditarEvento: { screen: EditarEvento },
   EditarEventoMapa: { screen: EditarEventoMapa },
   VisualizarEvento: { screen: VisualizarEvento },

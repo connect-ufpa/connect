@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList, TextInput, Dimensions, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import MapView, { Marker, Callout } from 'react-native-maps';
-import { Icon } from 'react-native-elements';
-import MapViewDirections from 'react-native-maps-directions';
-import { connect } from 'react-redux';
-import _ from 'lodash';
-import { Spinner, CalloutView, HeaderImage, Loading } from './commons';
+import {
+  Text,
+  View,
+  FlatList,
+  TextInput,
+  Dimensions,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {
   markLocal,
-  // saveLocais,
+  saveLocais,
   createRota,
   searchLocal,
   verifyLocais,
@@ -18,10 +21,17 @@ import {
   showInfoRota,
   clearInputSearch,
   createRouteError,
-  createRouteSuccess,  
+  createRouteSuccess,
   searchLocalizacaoUsuario,
 } from '../actions';
-// import locais from '../data/locais.json';
+import { Spinner, CalloutView, HeaderImage, Loading, HelperCard } from './commons';
+import MapViewDirections from 'react-native-maps-directions';
+import MapView, { Marker, Callout } from 'react-native-maps';
+import { Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
+import _ from 'lodash';
+
+import locais from '../data/locais.json';
 import Styles from '../Styles';
 
 const { height, width } = Dimensions.get('window');
@@ -47,22 +57,18 @@ class Localizacao extends Component {
         height: 55,
       },
       drawerLabel: 'Localização',
-      drawerIcon: () => (
-        <Icon
-          name="place" 
-          color="#2a4065" 
-          size={27} 
-        />
-      ),
+      drawerIcon: () => <Icon name="place" color="#2a4065" size={27} />,
       headerLeft: (
-        <TouchableOpacity style={{ flex: 1, paddingTop: 20, paddingBottom: 20, paddingRight: 20 }} onPress={() => navigate('DrawerOpen')}>
-          <Icon
-            type="font-awesome"
-            name="bars"
-            color="#2a4065"
-            size={25}
-            
-          />
+        <TouchableOpacity
+          style={{
+            flex: 1,
+            paddingTop: 20,
+            paddingBottom: 20,
+            paddingRight: 20,
+          }}
+          onPress={() => navigate('DrawerOpen')}
+        >
+          <Icon type="font-awesome" name="bars" color="#2a4065" size={25} />
         </TouchableOpacity>
       ),
       headerRight: (
@@ -77,7 +83,7 @@ class Localizacao extends Component {
       ),
     };
   };
-  
+
   // saveLocais(locais);
 
   componentDidMount() {
@@ -114,7 +120,7 @@ class Localizacao extends Component {
               </Callout>
             </Marker>
           );
-        
+
         case 'Laboratório':
           return (
             <Marker
@@ -131,7 +137,7 @@ class Localizacao extends Component {
               </Callout>
             </Marker>
           );
-        
+
         case 'Biblioteca':
           return (
             <Marker
@@ -148,7 +154,7 @@ class Localizacao extends Component {
               </Callout>
             </Marker>
           );
-        
+
         case 'Bloco':
           return (
             <Marker
@@ -181,7 +187,7 @@ class Localizacao extends Component {
               </Callout>
             </Marker>
           );
-          
+
         case 'Administração':
           return (
             <Marker
@@ -198,9 +204,9 @@ class Localizacao extends Component {
               </Callout>
             </Marker>
           );
-        
-        case "Restaurante":
-          return(
+
+        case 'Restaurante':
+          return (
             <Marker
               key={local.nome}
               coordinate={{
@@ -215,10 +221,10 @@ class Localizacao extends Component {
               </Callout>
             </Marker>
           );
-          break
-        
-        case "Centro Acadêmico":
-          return(
+          break;
+
+        case 'Centro Acadêmico':
+          return (
             <Marker
               key={local.nome}
               coordinate={{
@@ -233,10 +239,10 @@ class Localizacao extends Component {
               </Callout>
             </Marker>
           );
-          break
-        
-        case "Desporto":
-          return(
+          break;
+
+        case 'Desporto':
+          return (
             <Marker
               key={local.nome}
               coordinate={{
@@ -251,10 +257,10 @@ class Localizacao extends Component {
               </Callout>
             </Marker>
           );
-          break
+          break;
 
-        case "Convenções":
-          return(
+        case 'Convenções':
+          return (
             <Marker
               key={local.nome}
               coordinate={{
@@ -269,10 +275,10 @@ class Localizacao extends Component {
               </Callout>
             </Marker>
           );
-          break
-        
-        case "Serviço":
-          return(
+          break;
+
+        case 'Serviço':
+          return (
             <Marker
               key={local.nome}
               coordinate={{
@@ -287,10 +293,10 @@ class Localizacao extends Component {
               </Callout>
             </Marker>
           );
-          break            
-          
-        case "Hospital":
-          return(
+          break;
+
+        case 'Hospital':
+          return (
             <Marker
               key={local.nome}
               coordinate={{
@@ -305,10 +311,10 @@ class Localizacao extends Component {
               </Callout>
             </Marker>
           );
-          break
+          break;
 
         default:
-          return(
+          return (
             <Marker
               key={local.nome}
               coordinate={{
@@ -322,7 +328,7 @@ class Localizacao extends Component {
                 <CalloutView name={local.nome} desc={local.desc} />
               </Callout>
             </Marker>
-          );                
+          );
           break;
       }
     }
@@ -330,9 +336,7 @@ class Localizacao extends Component {
 
   renderInputPesquisarLocais() {
     if (this.props.loading) {
-      return (
-        <Loading />
-      );
+      return <Loading />;
     } else {
       return (
         <View style={styles.containerPesquisar}>
@@ -363,8 +367,8 @@ class Localizacao extends Component {
               {this.props.inputSearchFocused ? (
                 <Icon name="clear" color="#777" size={25} />
               ) : (
-                <Icon name="search" color="#777" size={25} />
-              )}
+                  <Icon name="search" color="#777" size={25} />
+                )}
             </View>
           </TouchableOpacity>
         </View>
@@ -395,46 +399,22 @@ class Localizacao extends Component {
                     flex: 1,
                     flexDirection: 'row',
                     borderTopColor: '#777',
+                    backgroundColor: '#FFF',
                     borderTopWidth: 1,
+                    padding: 10,
                   }}
                 >
-                  <Text
-                    style={{
-                      flex: 5,
-                      fontFamily: 'Ubuntu-Regular',
-                      backgroundColor: 'white',
-                      color: '#777',
-                      fontSize: 12,
-                      padding: 13,
-                      height: 40,
-                    }}
-                  >
-                    {item.nome}
-                  </Text>
+                  <Text style={Styles.textFlatListStyle}>{item.nome}</Text>
                   <View
                     style={{
-                      flex: 1,
-                      padding: 10,
-                      alignItems: 'center',
+                      width: 20,
+                      height: 20,
+                      borderRadius: 50,
                       justifyContent: 'center',
-                      backgroundColor: '#FFF',
+                      backgroundColor: '#2A4065',
                     }}
                   >
-                    <View
-                      style={{
-                        width: 20,
-                        height: 20,
-                        borderRadius: 50,
-                        justifyContent: 'center',
-                        backgroundColor: '#2A4065',
-                      }}
-                    >
-                      <Icon
-                        name="keyboard-arrow-right"
-                        color="#FFF"
-                        size={20}
-                      />
-                    </View>
+                    <Icon name="keyboard-arrow-right" color="#FFF" size={20} />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -448,10 +428,10 @@ class Localizacao extends Component {
   renderMarcadoresLocais() {
     if (!this.props.loading) {
       if (_.isEmpty(this.props.localMarcado)) {
-        return this.props.locais.map((local) => {
+        return this.props.locais.map(local => {
           switch (local.tipo) {
-            case "Instituto":
-              return(
+            case 'Instituto':
+              return (
                 <Marker
                   key={local.nome}
                   coordinate={{
@@ -467,9 +447,9 @@ class Localizacao extends Component {
                 </Marker>
               );
               break;
-            
-            case "Laboratório":
-              return(
+
+            case 'Laboratório':
+              return (
                 <Marker
                   key={local.nome}
                   coordinate={{
@@ -485,9 +465,9 @@ class Localizacao extends Component {
                 </Marker>
               );
               break;
-            
-            case "Biblioteca":
-              return(
+
+            case 'Biblioteca':
+              return (
                 <Marker
                   key={local.nome}
                   coordinate={{
@@ -503,9 +483,9 @@ class Localizacao extends Component {
                 </Marker>
               );
               break;
-            
-            case "Bloco":
-              return(
+
+            case 'Bloco':
+              return (
                 <Marker
                   key={local.nome}
                   coordinate={{
@@ -521,9 +501,9 @@ class Localizacao extends Component {
                 </Marker>
               );
               break;
-            
-            case "Banheiro":
-              return(
+
+            case 'Banheiro':
+              return (
                 <Marker
                   key={local.nome}
                   coordinate={{
@@ -539,9 +519,9 @@ class Localizacao extends Component {
                 </Marker>
               );
               break;
-              
-            case "Administração":
-              return(
+
+            case 'Administração':
+              return (
                 <Marker
                   key={local.nome}
                   coordinate={{
@@ -556,10 +536,10 @@ class Localizacao extends Component {
                   </Callout>
                 </Marker>
               );
-              break
-            
-            case "Restaurante":
-              return(
+              break;
+
+            case 'Restaurante':
+              return (
                 <Marker
                   key={local.nome}
                   coordinate={{
@@ -574,10 +554,10 @@ class Localizacao extends Component {
                   </Callout>
                 </Marker>
               );
-              break
-            
-            case "Centro Acadêmico":
-              return(
+              break;
+
+            case 'Centro Acadêmico':
+              return (
                 <Marker
                   key={local.nome}
                   coordinate={{
@@ -592,10 +572,10 @@ class Localizacao extends Component {
                   </Callout>
                 </Marker>
               );
-              break
-            
-            case "Desporto":
-              return(
+              break;
+
+            case 'Desporto':
+              return (
                 <Marker
                   key={local.nome}
                   coordinate={{
@@ -610,10 +590,10 @@ class Localizacao extends Component {
                   </Callout>
                 </Marker>
               );
-              break
+              break;
 
-            case "Convenções":
-              return(
+            case 'Convenções':
+              return (
                 <Marker
                   key={local.nome}
                   coordinate={{
@@ -628,10 +608,10 @@ class Localizacao extends Component {
                   </Callout>
                 </Marker>
               );
-              break
-            
-            case "Serviço":
-              return(
+              break;
+
+            case 'Serviço':
+              return (
                 <Marker
                   key={local.nome}
                   coordinate={{
@@ -646,10 +626,10 @@ class Localizacao extends Component {
                   </Callout>
                 </Marker>
               );
-              break            
-              
-            case "Hospital":
-              return(
+              break;
+
+            case 'Hospital':
+              return (
                 <Marker
                   key={local.nome}
                   coordinate={{
@@ -664,10 +644,10 @@ class Localizacao extends Component {
                   </Callout>
                 </Marker>
               );
-              break
+              break;
 
             default:
-              return(
+              return (
                 <Marker
                   key={local.nome}
                   coordinate={{
@@ -681,7 +661,7 @@ class Localizacao extends Component {
                     <CalloutView name={local.nome} desc={local.desc} />
                   </Callout>
                 </Marker>
-              );                
+              );
               break;
           }
         });
@@ -802,42 +782,55 @@ class Localizacao extends Component {
 
   renderLoadingRota() {
     if (this.props.creatingRoute) {
-      return (
-        <View style={styles.containerLoading}>
-          <View style={{
-            height: 100,
-            width: 100,
-            backgroundColor: '#FFF',
-            borderRadius: 5,
-            elevation: 8,
-          }}>
-            <Spinner size={60} color="#2A4065" />
-          </View>
-        </View>
-      );
+      return <Loading />;
     }
   }
 
   renderRotaInfo() {
-    if(!_.isEmpty(this.props.infoRota)) {
+    if (!_.isEmpty(this.props.infoRota)) {
       const map = this.refs.Map;
-      map.animateToCoordinate(
-        {
-          latitude: this.props.localizacaoUsuario.coords.latitude,
-          longitude: this.props.localizacaoUsuario.coords.longitude,
-        }
-      );
+      map.animateToCoordinate({
+        latitude: this.props.localizacaoUsuario.coords.latitude,
+        longitude: this.props.localizacaoUsuario.coords.longitude,
+      });
 
       return (
         <View style={styles.containerInfoRota}>
-          <Text style={{ textAlign: 'center', color: '#2D2D2D', fontSize: 12, fontFamily: 'Ubuntu-Medium', borderBottomColor: '#2D2D2D', borderBottomWidth: 2, paddingBottom: 5 }}>
+          <Text
+            style={{
+              fontSize: 12,
+              paddingBottom: 5,
+              color: '#2D2D2D',
+              textAlign: 'center',
+              borderBottomWidth: 2,       
+              fontFamily: 'Ubuntu-Medium',
+              borderBottomColor: '#2D2D2D',
+              
+            }}
+          >
             Informações da rota
           </Text>
-          <Text style={{ textAlign: 'center', color: '#777', fontSize: 11, fontFamily: 'Ubuntu-Regular', marginTop: 10 }}>
-            Distância:{` ${this.props.infoRota.distance.toFixed(2)} km`} 
+          <Text
+            style={{
+              fontSize: 12,
+              marginTop: 10,
+              color: '#777',
+              textAlign: 'center',
+              fontFamily: 'Ubuntu-Regular',
+            }}
+          >
+            Distância:{` ${this.props.infoRota.distance.toFixed(2)} km`}
           </Text>
-          <Text style={{ textAlign: 'center', color: '#777', fontSize: 11, fontFamily: 'Ubuntu-Regular', marginTop: 10 }}>
-            Tempo:{` ${this.props.infoRota.duration.toFixed(2)} min`} 
+          <Text
+            style={{
+              textAlign: 'center',
+              color: '#777',
+              fontSize: 11,
+              fontFamily: 'Ubuntu-Regular',
+              marginTop: 10,
+            }}
+          >
+            Tempo:{` ${this.props.infoRota.duration.toFixed(2)} min`}
           </Text>
         </View>
       );
@@ -901,68 +894,12 @@ class Localizacao extends Component {
   renderHelper() {
     if (this.props.helper && !this.props.loading) {
       return (
-        <View
-          style={{
-            elevation: 8,
-            flex: 1,
-            alignSelf: 'center',
-            position: 'absolute',
-            bottom: 130,
-            zIndex: 1,
-            backgroundColor: '#FFF',
-            padding: 5,
-            borderRadius: 10,
-            width: width * 0.5,
-            height: height * 0.2,
-          }}
-        >
-          <View style={{ flex: 2, flexDirection: 'row', marginTop: 10 }}>
-            <Text
-              style={{
-                flex: 5,
-                fontFamily: 'Ubuntu-Medium',
-                textAlign: 'center',
-                fontSize: 14,
-                color: '#2BA3DA',
-                marginLeft: 20,
-                paddingTop: 5,
-              }}
-            >
-              Dica
-            </Text>
-            <TouchableOpacity
-              onPress={() => {
-                this.props.closeHelper();
-              }}
-            >
-              <View
-                style={{
-                  height: 30,
-                  width: 30,
-                  borderRadius: 25,
-                  marginRight: 10,
-                  backgroundColor: '#CC2820',
-                  alignContent: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Icon name="clear" color="#FFF" size={15} />
-              </View>
-            </TouchableOpacity>
-          </View>
-          <Text
-            style={{
-              flex: 4,
-              fontSize: 11,
-              padding: 5,
-              fontFamily: 'Ubuntu-Regular',
-              color: '#777',
-              textAlign: 'center',
-            }}
-          >
-            {this.props.helperMessage}
-          </Text>
-        </View>
+        <HelperCard
+          title={'Dica!'}
+          kind={'helper'}
+          onPress={this.props.closeHelper}
+          message={this.props.helperMessage}
+        />
       );
     }
   }
@@ -970,68 +907,12 @@ class Localizacao extends Component {
   renderError() {
     if (this.props.error) {
       return (
-        <View
-          style={{
-            elevation: 8,
-            flex: 1,
-            alignSelf: 'center',
-            position: 'absolute',
-            bottom: 135,
-            zIndex: 1,
-            backgroundColor: '#FFF',
-            padding: 5,
-            borderRadius: 10,
-            width: width * 0.5,
-            height: height * 0.2,
-          }}
-        >
-          <View style={{ flex: 2, flexDirection: 'row', marginTop: 10 }}>
-            <Text
-              style={{
-                flex: 5,
-                fontFamily: 'Ubuntu-Medium',
-                textAlign: 'center',
-                fontSize: 14,
-                color: '#CC2822',
-                marginLeft: 20,
-                paddingTop: 5,
-              }}
-            >
-              Erro
-            </Text>
-            <TouchableOpacity
-              onPress={() => {
-                this.props.closeError();
-              }}
-            >
-              <View
-                style={{
-                  height: 30,
-                  width: 30,
-                  borderRadius: 25,
-                  marginRight: 10,
-                  backgroundColor: '#CC2820',
-                  alignContent: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Icon name="clear" color="#FFF" size={15} />
-              </View>
-            </TouchableOpacity>
-          </View>
-          <Text
-            style={{
-              flex: 4,
-              fontSize: 11,
-              padding: 5,
-              fontFamily: 'Ubuntu-Regular',
-              color: '#777',
-              textAlign: 'center',
-            }}
-          >
-            {this.props.errorMessage}
-          </Text>
-        </View>
+        <HelperCard
+          title={'Erro!'}
+          kind={'error'}
+          onPress={this.props.closeError}
+          message={this.props.errorMessage}
+        />
       );
     }
   }
@@ -1052,7 +933,7 @@ class Localizacao extends Component {
           onStart={() => {
             this.props.loadingRoute();
           }}
-          onReady={(result) => {
+          onReady={result => {
             this.props.showInfoRota(result);
             this.props.createRouteSuccess();
           }}
@@ -1147,14 +1028,14 @@ const styles = StyleSheet.create({
     elevation: 8,
     borderRadius: 5,
     width: width * 0.35,
-    height: height * 0.20,
+    height: height * 0.2,
     borderColor: '#FFF',
     position: 'absolute',
     alignItems: 'center',
     alignContent: 'center',
     backgroundColor: '#FFF',
     justifyContent: 'center',
-  },  
+  },
   inputPesquisar: {
     flex: 5,
     color: '#2D2D2D',
@@ -1183,7 +1064,7 @@ const mapStateToProps = state => {
     localizacaoUsuario: state.localizacao.localizacaoUsuario,
     inputSearchFocused: state.localizacao.inputSearchFocused,
     localSendoPesquisado: state.localizacao.localSendoPesquisado,
-    showRoute: state.localizacao.showRoute
+    showRoute: state.localizacao.showRoute,
   };
 };
 

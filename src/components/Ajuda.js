@@ -133,14 +133,15 @@ class Ajuda extends Component {
                   <Text
                     style={{
                       paddingLeft: 10,
-                      color: '#2A4065',
+                      color: '#2D2D2D',
                       fontFamily: 'Ubuntu-Light',
                       fontSize: 12,
                       textAlign: 'left',
                     }}
                   >
                     O Connect é uma aplicação mobile desenvolvida por alunos da UFPa com o intuito de ajudar, conectar e servir a comunidade academia. 
-                    Gerando rotas aos locais presentes no campus, gerenciando e tendo informações de eventos que estejam no campus e providenciando informações que possam ser de utilidade para a comunidade.
+                    Gerando rotas aos locais presentes no campus, gerenciando e tendo informações de eventos que estão ocorrendo no campus e além de providenciar 
+                    informações que possam ser de utilidade para comunidade como um todo.
                   </Text>
                 </View>
               ) : (
@@ -203,7 +204,7 @@ class Ajuda extends Component {
                   <Text
                     style={{
                       paddingLeft: 10,
-                      color: '#2A4065',
+                      color: '#2D2D2D',
                       fontFamily: 'Ubuntu-Light',
                       fontSize: 12,
                       textAlign: 'left',
@@ -272,7 +273,7 @@ class Ajuda extends Component {
                   <Text
                     style={{
                       paddingLeft: 10,
-                      color: '#2A4065',
+                      color: '#2D2D2D',
                       fontFamily: 'Ubuntu-Light',
                       fontSize: 12,
                       textAlign: 'left',
@@ -341,7 +342,7 @@ class Ajuda extends Component {
                   <Text
                     style={{
                       paddingLeft: 10,
-                      color: '#2A4065',
+                      color: '#2D2D2D',
                       fontFamily: 'Ubuntu-Light',
                       fontSize: 12,
                       textAlign: 'left',
@@ -411,7 +412,7 @@ class Ajuda extends Component {
                   <Text
                     style={{
                       paddingLeft: 10,
-                      color: '#2A4065',
+                      color: '#2D2D2D',
                       fontFamily: 'Ubuntu-Light',
                       fontSize: 12,
                       textAlign: 'left',
@@ -481,7 +482,7 @@ class Ajuda extends Component {
                   <Text
                     style={{
                       paddingLeft: 10,
-                      color: '#2A4065',
+                      color: '#2D2D2D',
                       fontFamily: 'Ubuntu-Light',
                       fontSize: 12,
                       textAlign: 'left',
