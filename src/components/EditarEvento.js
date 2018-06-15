@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, TextInput, ScrollView, Picker } from 'react-native';
+import { View, TextInput, ScrollView, Picker, TouchableOpacity, DatePickerAndroid, TimePickerAndroid } from 'react-native';
 import { connect } from 'react-redux';
+import { Icon } from 'react-native-elements';
 import { editEvent, saveEditedEvent } from '../actions';
-import { CardSection, Input, Texts, Button, Spinner } from '../components/commons';
+import { CardSection, Input, Texts, Button, Loading } from '../components/commons';
 import Styles from '../Styles';
 
 class EditarEvento extends Component {
@@ -27,6 +28,33 @@ class EditarEvento extends Component {
             this.props.editEvent({ prop, value });
         });
     }
+
+    async openAndroidTimePicker(prop) {
+        try {
+            const { action, hour, minute } = await TimePickerAndroid.open({
+                is24Hour: true,
+            });
+            if (action !== TimePickerAndroid.dismissedAction) {
+                const hora = `${hour}:${minute}`;
+                this.props.editEvent({ prop, value: hora });
+            }
+        } catch ({ code, message }) {
+            console.warn('Cannot open time picker', message);
+        }
+    }
+
+    async openAndroidDatePicker(prop) {
+        try {
+            const { action, year, month, day } = await DatePickerAndroid.open();
+            if (action !== DatePickerAndroid.dismissedAction) {
+                const data = `${day}/${month}/${year}`;
+                this.props.editEvent({ prop, value: data });
+            }
+        } catch ({ code, message }) {
+            console.warn('Cannot open date picker', message);
+        }
+    }
+
     renderSaveEventButton() {
         const evento = {
             id: this.props.id,
@@ -39,14 +67,21 @@ class EditarEvento extends Component {
             error: this.props.error
         };
         if (this.props.loading) {
-            return (<Spinner size="large" color="#ffff" />);
+            return <Loading />;
         }
         return (
-            <Button
-                text="Salvar Edição"
-                styles={Styles.btnConfirm}
-                onPress={() => { this.props.saveEditedEvent(evento); }}
-            />
+            <View style={{ alignItems: 'center' }}>
+                <TouchableOpacity onPress={() => { this.props.saveEditedEvent(evento); }} >
+                    <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]} >
+                        <Icon
+                            type="material-community"
+                            name="check"
+                            color="#FFF"
+                            size={25}
+                        />
+                    </View>
+                </TouchableOpacity>
+            </View>
         );
     }
     render() {
@@ -58,21 +93,40 @@ class EditarEvento extends Component {
             <ScrollView >
                 <View style={[Styles.eventCardStyle, { marginTop: 5, marginBottom: 5, elevation: 5, flex: 1 }]} >
                     <CardSection>
+                        <View style={{ alignItems: 'center' }}>
+                            <TouchableOpacity onPress={() => { this.props.navigation.navigate('EditarEventoMapa', { param }); }} >
+                                <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]} >
+                                    <Icon
+                                        type="material-community"
+                                        name="map-marker"
+                                        color="#FFF"
+                                        size={25}
+                                    />
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    </CardSection>
+                    <CardSection>
+                        <Texts text='Clique nos campos para editá-los' style='medium' color="#2a4065" />
+                    </CardSection>
+                    <CardSection>
                         <Input
                             onChangeText={text => this.props.editEvent({ prop: 'nome', value: text })}
                             value={this.props.nome}
                         />
                     </CardSection>
                     <CardSection>
-                        <TextInput
-                            style={Styles.inputStyle}
-                            onChangeText={text => this.props.editEvent({ prop: 'descricao', value: text })}
-                            value={this.props.descricao}
-                            underlineColorAndroid='transparent'
-                            multiline
-                            numberOfLines={4}
-                            maxLength={250}
-                        />
+                        <View style={{ flex: 1, elevation: 8, padding: 5, borderRadius: 5, borderColor: '#FFF', flexDirection: 'row', backgroundColor: '#FFF' }}>
+                            <TextInput
+                                style={Styles.inputStyle}
+                                onChangeText={text => this.props.editEvent({ prop: 'descricao', value: text })}
+                                value={this.props.descricao}
+                                underlineColorAndroid='transparent'
+                                multiline
+                                numberOfLines={4}
+                                maxLength={250}
+                            />
+                        </View>
                     </CardSection>
                     <CardSection>
                         <Input
@@ -81,13 +135,13 @@ class EditarEvento extends Component {
                         />
                     </CardSection>
                     <CardSection>
-                        <Texts text='Área Temática' style='medium' />
+                        <Texts text='Área Temática' style='medium' color="#2a4065" />
                     </CardSection>
                     <CardSection>
                         <Picker
                             selectedValue={this.props.area_tematica}
                             style={{ height: 50, width: 250 }}
-                            onValueChange={texto => this.props.eventFieldChange({ prop: 'area_tematica', value: texto })}
+                            onValueChange={texto => this.props.editEvent({ prop: 'area_tematica', value: texto })}
                         >
                             <Picker.Item label="Comunicação" value="Comunicação" />
                             <Picker.Item label="Cultura" value="Cultura" />
@@ -101,42 +155,115 @@ class EditarEvento extends Component {
                         </Picker>
                     </CardSection>
                     <CardSection>
-                        <Texts text='Início do Evento' style='medium' />
+                        <Texts text='Data de início' style='medium' color="#2a4065" />
                     </CardSection>
                     <CardSection>
-                        <Input
-                            onChangeText={text => this.props.editEvent({ prop: 'data_inicio', value: text })}
-                            value={this.props.data_inicio}
-                        />
-                        <Input
-                            onChangeText={text => this.props.editEvent({ prop: 'hora_inicio', value: text })}
-                            value={this.props.hora_inicio}
-                        />
+                        <View style={{ flex: 1, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
+                            <View style={{ flex: 1, paddingTop: 6, paddingBottom: 6 }}>
+                                <Input
+                                    onChangeText={texto => this.props.editEvent({ prop: 'data_inicio', value: texto })}
+                                    placeholder="00/00/000"
+                                    value={this.props.data_inicio}
+                                />
+                            </View>
+                            <TouchableOpacity onPress={() => { this.openAndroidDatePicker('data_inicio'); }}>
+                                <View style={[Styles.iconButtomEventStyle, { backgroundColor: '#2A4065' }]}>
+                                    <Icon
+                                        type="material-community"
+                                        name="calendar-text"
+                                        color="#FFF"
+                                        size={22}
+                                    />
+                                </View>
+                            </TouchableOpacity>
+                        </View>
                     </CardSection>
                     <CardSection>
-                        <Texts text='Término do Evento' style='medium' />
+                        <Texts text='Hora de início' style='medium' color="#2a4065" />
                     </CardSection>
                     <CardSection>
-                        <Input
-                            onChangeText={text => this.props.editEvent({ prop: 'data_fim', value: text })}
-                            value={this.props.data_fim}
-                        />
-                        <Input
-                            onChangeText={text => this.props.editEvent({ prop: 'hora_fim', value: text })}
-                            value={this.props.hora_fim}
-                        />
+                        <View style={{ flex: 1, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
+                            <View style={{ flex: 1, paddingTop: 6, paddingBottom: 6 }}>
+                                <Input
+                                    placeholder="00:00"
+                                    onChangeText={texto =>
+                                        this.props.editEvent({
+                                            prop: 'hora_inicio',
+                                            value: texto,
+                                        })
+                                    }
+                                    value={this.props.hora_inicio}
+                                />
+                            </View>
+                            <TouchableOpacity onPress={() => { this.openAndroidTimePicker('hora_inicio'); }}>
+                                <View style={[Styles.iconButtomEventStyle, { backgroundColor: '#2A4065' }]}>
+                                    <Icon
+                                        type="material-community"
+                                        name="clock"
+                                        color="#FFF"
+                                        size={22}
+                                    />
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    </CardSection>
+                    <CardSection>
+                        <Texts text='Data de fim' style='medium' color="#2a4065" />
+                    </CardSection>
+                    <CardSection>
+                        <View style={{ flex: 1, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
+                            <View style={{ flex: 1, paddingTop: 6, paddingBottom: 6 }}>
+                                <Input
+                                    onChangeText={texto => this.props.editEvent({ prop: 'data_fim', value: texto })}
+                                    placeholder="00/00/000"
+                                    value={this.props.data_fim}
+                                />
+                            </View>
+                            <TouchableOpacity onPress={() => { this.openAndroidDatePicker('data_fim'); }}>
+                                <View style={[Styles.iconButtomEventStyle, { backgroundColor: '#2A4065' }]}>
+                                    <Icon
+                                        type="material-community"
+                                        name="calendar-text"
+                                        color="#FFF"
+                                        size={22}
+                                    />
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    </CardSection>
+                    <CardSection>
+                        <Texts text='Hora do Término' style='medium' color="#2a4065" />
+                    </CardSection>
+                    <CardSection>
+                        <View style={{ flex: 1, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
+                            <View style={{ flex: 1, paddingTop: 6, paddingBottom: 6 }}>
+                                <Input
+                                    placeholder="00:00"
+                                    onChangeText={texto =>
+                                        this.props.editEvent({
+                                            prop: 'hora_fim',
+                                            value: texto,
+                                        })
+                                    }
+                                    value={this.props.hora_fim}
+                                />
+                            </View>
+                            <TouchableOpacity onPress={() => { this.openAndroidTimePicker('hora_fim'); }}>
+                                <View style={[Styles.iconButtomEventStyle, { backgroundColor: '#2A4065' }]}>
+                                    <Icon
+                                        type="material-community"
+                                        name="clock"
+                                        color="#FFF"
+                                        size={22}
+                                    />
+                                </View>
+                            </TouchableOpacity>
+                        </View>
                     </CardSection>
                     <View style={{ alignItems: 'center' }}>
                         <Texts text={this.props.errorData} color='grey' />
                         <Texts text={this.props.errorHora} color='grey' />
                     </View>
-                    <CardSection>
-                        <Button
-                            text="Editar Local no Mapa"
-                            styles={Styles.btnConfirm}
-                            onPress={() => { this.props.navigation.navigate('EditarEventoMapa', { param }); }}
-                        />
-                    </CardSection>
                     <CardSection>
                         {this.renderSaveEventButton()}
                     </CardSection>

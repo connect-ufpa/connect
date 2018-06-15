@@ -3,14 +3,7 @@ import { View, Modal, TouchableHighlight, Dimensions, ScrollView, TextInput, Pic
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
-import {
-  showMarkerAndModal,
-  closeModal,
-  eventFieldChange,
-  saveEvent,
-  showHelper,
-  closeEventHelper,
-} from '../actions';
+import { showMarkerAndModal, closeModal, eventFieldChange, saveEvent, showHelper, closeEventHelper } from '../actions';
 import { Input, CardSection, Texts, Loading } from './commons/';
 import Styles from '../Styles';
 

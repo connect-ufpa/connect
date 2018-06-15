@@ -9,7 +9,7 @@ const Input = ({ value, onChangeText, placeholder, secureTextEntry, editable, ad
       <View style={{
         flex: 1,
         padding: 5,
-        elevation: 2,
+        elevation: 8,
         borderRadius: 5,
         borderColor: '#FFF',
         flexDirection: 'row',
