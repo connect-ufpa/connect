@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Modal, TouchableHighlight, Dimensions, ScrollView, TextInput, Picker, Text, TouchableOpacity, DatePickerAndroid } from 'react-native';
+import { View, Modal, TouchableHighlight, Dimensions, ScrollView, TextInput, Picker, Text, TouchableOpacity, DatePickerAndroid, TimePickerAndroid } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
@@ -35,6 +35,20 @@ class CriarEvento extends Component {
 
   componentWillMount() {
     if (this.props.positionHelper === 0.2 || !this.props.helper) this.props.showHelper();
+  }
+
+  async openAndroidTimePicker(prop) {
+    try {
+      const { action, hour, minute } = await TimePickerAndroid.open({
+        is24Hour: true,
+      });
+      if (action !== TimePickerAndroid.dismissedAction) {
+        const hora = `${hour}:${minute}`;
+        this.props.eventFieldChange({ prop, value: hora });
+      }
+    } catch ({ code, message }) {
+      console.warn('Cannot open time picker', message);
+    }
   }
 
   async openAndroidDatePicker(prop) {
@@ -265,17 +279,29 @@ class CriarEvento extends Component {
                 <Texts text='Hora de início' style='medium' color="#2a4065" />
               </CardSection>
               <CardSection>
-                <View style={{ flex: 1, padding: 5 }}>
-                  <Input
-                    placeholder="00:00"
-                    onChangeText={texto =>
-                      this.props.eventFieldChange({
-                        prop: 'hora_inicio',
-                        value: texto,
-                      })
-                    }
-                    value={this.props.hora_inicio}
-                  />
+                <View style={{ flex: 1, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
+                  <View style={{ flex: 1, paddingTop: 6, paddingBottom: 6 }}>
+                    <Input
+                      placeholder="00:00"
+                      onChangeText={texto =>
+                        this.props.eventFieldChange({
+                          prop: 'hora_inicio',
+                          value: texto,
+                        })
+                      }
+                      value={this.props.hora_inicio}
+                    />
+                  </View>
+                  <TouchableOpacity onPress={() => { this.openAndroidTimePicker('hora_inicio'); }}>
+                    <View style={[Styles.iconButtomEventStyle, { backgroundColor: '#2A4065' }]}>
+                      <Icon
+                        type="material-community"
+                        name="clock"
+                        color="#FFF"
+                        size={22}
+                      />
+                    </View>
+                  </TouchableOpacity>
                 </View>
               </CardSection>
               <CardSection>
@@ -303,17 +329,32 @@ class CriarEvento extends Component {
                 </View>
               </CardSection>
               <CardSection>
-                <View style={{ flex: 1, padding: 5 }}>
-                  <Input
-                    placeholder="00:00"
-                    onChangeText={texto =>
-                      this.props.eventFieldChange({
-                        prop: 'hora_fim',
-                        value: texto,
-                      })
-                    }
-                    value={this.props.hora_fim}
-                  />
+                <Texts text='Hora do Término' style='medium' color="#2a4065" />
+              </CardSection>
+              <CardSection>
+                <View style={{ flex: 1, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
+                  <View style={{ flex: 1, paddingTop: 6, paddingBottom: 6 }}>
+                    <Input
+                      placeholder="00:00"
+                      onChangeText={texto =>
+                        this.props.eventFieldChange({
+                          prop: 'hora_fim',
+                          value: texto,
+                        })
+                      }
+                      value={this.props.hora_fim}
+                    />
+                  </View>
+                  <TouchableOpacity onPress={() => { this.openAndroidTimePicker('hora_fim'); }}>
+                    <View style={[Styles.iconButtomEventStyle, { backgroundColor: '#2A4065' }]}>
+                      <Icon
+                        type="material-community"
+                        name="clock"
+                        color="#FFF"
+                        size={22}
+                      />
+                    </View>
+                  </TouchableOpacity>
                 </View>
               </CardSection>
               <View style={{ alignItems: 'center' }}>
