@@ -1050,21 +1050,21 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    infoRota: state.localizacao.infoRota,
-    helper: state.localizacao.helper,
     error: state.localizacao.error,
+    helper: state.localizacao.helper,
     locais: state.localizacao.locais,
     loading: state.localizacao.loading,
+    infoRota: state.localizacao.infoRota,
+    showRoute: state.localizacao.showRoute,
     localPesquisado: state.localizacao.local,
+    errorMessage: state.localizacao.errorMessage,
     localMarcado: state.localizacao.localMarcado,
     locaisAchados: state.localizacao.locaisAchados,
     creatingRoute: state.localizacao.creatingRoute,
-    errorMessage: state.localizacao.errorMessage,
     helperMessage: state.localizacao.helperMessage,
-    localizacaoUsuario: state.localizacao.localizacaoUsuario,
     inputSearchFocused: state.localizacao.inputSearchFocused,
+    localizacaoUsuario: state.localizacao.localizacaoUsuario,
     localSendoPesquisado: state.localizacao.localSendoPesquisado,
-    showRoute: state.localizacao.showRoute,
   };
 };
 
@@ -1072,11 +1072,11 @@ export default connect(mapStateToProps, {
   markLocal,
   createRota,
   closeError,
+  closeError,
+  closeHelper,
   closeHelper,
   searchLocal,
   verifyLocais,
-  closeHelper,
-  closeError,
   showInfoRota,
   loadingRoute,
   createRouteError,
