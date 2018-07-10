@@ -1,39 +1,38 @@
 import {
+  ROUTE_INFO,
   MARK_LOCAL,
+  LOADING_ROUTE,
   CREATING_ROUTE,
   SEARCHED_LOCAL,
   SEARCHING_LOCAL,
   RETRIEVE_LOCAIS,
   RETRIVING_LOCAIS,
-  ROUTE_INFO,
-  INPUT_SEARCH_UNFOCUSED,
-  SEARCHING_USER_LOCALIZATION,
-  SEARCHED_USER_LOCALIZATION,
-  ERROR_CREATING_ROUTE,
   CLEAR_INPUT_SEARCH,
   CLOSE_ERROR_MESSAGE,
   CLOSE_HELPER_MESSAGE,
   CREATE_ROUTE_SUCCESS,
-  LOADING_ROUTE,
+  ERROR_CREATING_ROUTE,
+  INPUT_SEARCH_UNFOCUSED,
+  SEARCHED_USER_LOCALIZATION,
+  SEARCHING_USER_LOCALIZATION,
 } from '../actions/types';
 
 const INITIAL_STATE = {
+  error: false,  
   helper: true,
   loading: true,
+  showRoute: false,
+  creatingRoute: false,
+  inputSearchFocused: false,
   locais: [],
-  infoRota: {},
+  locaisAchados: [],
+  infoRoute: {},
   localMarcado: {},
   localizacaoUsuario: {},
-  locaisAchados: [],
-  inputSearchFocused: false,
-  creatingRoute: false,
-  showRoute: false,
-  error: false,
+  errorMessage: '',
   localPesquisado: '',
   localSendoPesquisado: '',
-  errorMessage: '',
-  helperMessage:
-    'Confira todos os locais do campus na UFPa, gere rotas e facilite sua locomoção com o Connect.',
+  helperMessage: 'Confira todos os locais do campus na UFPa, gere rotas e facilite sua locomoção com o Connect.'
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -41,7 +40,7 @@ export default (state = INITIAL_STATE, action) => {
     case MARK_LOCAL:
       return {
         ...state,
-        infoRota: {},
+        infoRoute: {},
         locaisAchados: [],
         localPesquisado: '',
         localMarcado: action.payload,
@@ -64,7 +63,7 @@ export default (state = INITIAL_STATE, action) => {
     case CLEAR_INPUT_SEARCH:
       return {
         ...state,
-        infoRota: {},
+        infoRoute: {},
         localMarcado: {},
         locaisAchados: [],
         localSendoPesquisado: '',
@@ -82,7 +81,7 @@ export default (state = INITIAL_STATE, action) => {
     case SEARCHING_LOCAL:
       return {
         ...state,
-        infoRota: {},
+        infoRoute: {},
         localMarcado: {},
         locaisAchados: [],
         localPesquisado: action.payload,
@@ -96,7 +95,7 @@ export default (state = INITIAL_STATE, action) => {
     case SEARCHED_LOCAL:
       return {
         ...state,
-        infoRota: {},
+        infoRoute: {},
         localMarcado: {},
         localPesquisado: '',
         locaisAchados: action.payload,
@@ -112,7 +111,7 @@ export default (state = INITIAL_STATE, action) => {
     case INPUT_SEARCH_UNFOCUSED:
       return { ...state, inputSearchFocused: false };
     case ROUTE_INFO:
-      return { ...state, infoRota: action.payload };
+      return { ...state, infoRoute: action.payload };
     case SEARCHING_USER_LOCALIZATION:
       return { ...state };
     case SEARCHED_USER_LOCALIZATION:
