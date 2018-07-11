@@ -139,29 +139,29 @@ class CriarConta extends Component {
 const mapStateToProps = (state) => {
   return {
     name: state.createUser.name,
-    registration: state.createUser.registration,
-    birthday: state.createUser.birthday,
     email: state.createUser.email,
-    password: state.createUser.password,
-    confirmPassword: state.createUser.confirmPassword,
-    loading: state.createUser.loading,
     error: state.createUser.error,
+    loading: state.createUser.loading,
+    password: state.createUser.password,
+    birthday: state.createUser.birthday,
+    registration: state.createUser.registration,
+    confirmPassword: state.createUser.confirmPassword,
     errorMessageName: state.createUser.errorMessageName,
-    errorMessageRegistration: state.createUser.errorMessageRegistration,
-    errorMessageBirthday: state.createUser.errorMessageBirthday,
     errorMessageEmail: state.createUser.errorMessageEmail,
+    errorMessageBirthday: state.createUser.errorMessageBirthday,
     errorMessagePassword: state.createUser.errorMessagePassword,
+    errorMessageRegistration: state.createUser.errorMessageRegistration,
     errorMessageConfirmPassword: state.createUser.errorMessageConfirmPassword,
     errorMessageCreateAccountFail: state.createUser.errorMessageCreateAccountFail
   };
 };
 
 export default connect(mapStateToProps, {
+  authUser,
   onNameChanged,
-  onRegistrationChanged,
   onBirthChanged,
   onEmailChanged,
   onPasswordChanged,
+  onRegistrationChanged,
   onConfirmPasswordChanged,
-  authUser
 })(CriarConta);
