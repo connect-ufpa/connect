@@ -74,7 +74,7 @@ class EditarEventoMapa extends Component {
                     <Marker coordinate={LatLng} image={ICON} />
                 </MapView>
                 <CardSection styleSection={{ flex: 1, position: 'absolute', right: 0, left: 0, bottom: 0 }}>
-                        <TouchableOpacity onPress={() => { this.props.saveNewEventCoords({ id: this.props.i, coords }); }} >
+                        <TouchableOpacity onPress={() => { this.props.saveNewEventCoords({ id: this.props.id, coords }); }} >
                             <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
                                 <Icon
                                     type='material-community'
