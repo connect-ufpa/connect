@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, FlatList, Text, Dimensions, Modal, TouchableHighlight, ScrollView } from 'react-native';
+import { View, TouchableOpacity, FlatList, Text, Dimensions, Modal, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { Calendar } from 'react-native-calendars';
@@ -8,6 +8,7 @@ import { HeaderImage, Input, Loading } from '../components/commons';
 import { serachEventsToShow, searchEvento } from '../actions';
 import Styles from '../Styles';
 
+const { height, width } = Dimensions.get('window');
 const HEIGHT = Dimensions.get('window').height;
 const MARGIN_TOP_MODAL = HEIGHT * 0.4;
 
@@ -68,185 +69,8 @@ class Eventos extends Component {
     this.props.serachEventsToShow();
   }
 
-  renderInputPesquisaEvento() {
-    return (
-      <View style={{ marginTop: 10, paddingRight: 20, paddingLeft: 20, paddingTop: 10, position: 'relative', flexDirection: 'row', justifyContent: 'center' }}>
-        <Input
-          iconName={'search'}
-          value={this.props.eventoNome}
-          placeholder={'Pesquise um evento desejado:'}
-          onChangeText={evento => this.props.searchEvento(evento, this.props.eventos)}
-        />
-      </View>
-    );
-  }
-
-  renderEditEventIcon(evento) {
-    const usuario = firebaseAuth().currentUser;
-    if (usuario.uid === evento.usuario_id) {
-      return (
-        <TouchableOpacity onPress={() => { this.props.navigation.navigate('EditarEvento', evento); this.setState({ modal: false }); }} >
-          <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2BA3DA' }]}>
-            <Icon
-              type='font-awsome'
-              name='edit'
-              color='#FFF'
-              size={17}
-            />
-          </View>
-        </TouchableOpacity >
-      );
-    }
-  }
-
-  renderListEventosAchados() {
-    if (this.props.eventosAchados.length !== 0) {
-      return (
-        <View style={{
-          flex: 1,
-          zIndex: 3,
-          elevation: 8,
-          marginTop: 75,
-          width: '100%',
-          paddingLeft: 18,
-          paddingRight: 18,
-          position: 'absolute',
-        }}>
-          <FlatList
-            data={this.props.eventosAchados}
-            style={{
-              borderWidth: 2,
-              borderColor: '#FFF',
-              backgroundColor: '#FFF',
-              borderBottomLeftRadius: 6,
-              borderBottomRightRadius: 6,
-
-            }}
-            renderItem={({ item }) =>
-              <View style={{
-                flex: 1,
-                borderTopWidth: 1,
-                flexDirection: 'row',
-                borderTopColor: '#777',
-                backgroundColor: '#FFF',
-                padding: 10,
-              }}>
-                <Text style={Styles.textFlatListStyle}>
-                  {item.nome}
-                </Text>
-                {this.renderEditEventIcon(item)}
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('VisualizarEvento', item)} >
-                  <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2A4065' }]}>
-                    <Icon
-                      name='keyboard-arrow-right'
-                      color='#FFF'
-                      size={20}
-                    />
-                  </View>
-                </TouchableOpacity >
-              </View>}
-          />
-        </View>
-      );
-    }
-  }
-
-  renderButtomSaveEvento() {
-    return (
-      <View style={{ alignItems: 'center' }}>
-        <TouchableOpacity onPress={() => { this.props.navigation.navigate('CriarEvento'); }} >
-          <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
-            <Icon
-              type='material-community'
-              name='calendar-plus'
-              color='#FFF'
-              size={25}
-            />
-          </View>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
-  renderButtomEventosRelated() {
-    let render_button_once = 0;
-    const eventos = [];
-    return (
-      this.props.eventos.map(evento => {
-        if (this.state.trabalho === evento.area_tematica) {
-          eventos.push(evento);
-          if (render_button_once === 0) {
-            render_button_once = 1;
-            return (
-              <View key={evento.id} style={{ alignItems: 'center', marginLeft: 10 }}>
-                <TouchableOpacity onPress={() => { this.setEventosToState(eventos); }} >
-                  <View style={[Styles.iconButtomStyle, { backgroundColor: '#2BA3DA' }]}>
-                    <Icon
-                      type='material-community'
-                      name='calendar-text'
-                      color='#FFF'
-                      size={25}
-                    />
-                  </View>
-                </TouchableOpacity>
-              </View>
-            );
-          }
-        }
-        return null;
-      })
-    );
-  }
-
   setEventosToState(eventos) {
     this.setState({ datas_eventos: eventos, modal: true, tituloModal: 'Eventos na sua area' });
-  }
-
-  showPoupUpEventoDia(data) {
-    const formatData = data.split('-').reverse().join('/');
-    let datas_eventos = {};
-    let id = '';
-    this.props.eventos.map(evento => {
-      if (evento.data_inicio === formatData) {
-        id = evento.id;
-        datas_eventos = { ...datas_eventos, [evento.id]: evento };
-      }
-      return datas_eventos;
-    });
-    if (Object.prototype.hasOwnProperty.call(datas_eventos, id)) {
-      this.setState({
-        modal: true,
-        datas_eventos,
-        tituloModal: 'Eventos nesta data'
-      });
-    }
-  }
-
-  renderCalendar() {
-    const selected = true;
-    const marked = true;
-    const selectedColor = '#2A4065';
-    let markedDates = {};
-    markedDates = { ...markedDates, ...{ selected } };
-    markedDates = { ...markedDates, ...{ marked } };
-    markedDates = { ...markedDates, ...{ selectedColor } };
-    let datas_eventos = {};
-    this.props.eventos.map(evento => {
-      const evento_data = evento.data_inicio.split('/').reverse().join('-');
-      const updatedMarkedDates = { ...datas_eventos, [evento_data]: markedDates };
-      datas_eventos = { ...updatedMarkedDates };
-      return datas_eventos;
-    });
-    return (
-      <View style={{ margin: 20, borderRadius: 5, borderWidth: 3, borderColor: '#FFF', elevation: 2 }}>
-        <View style={{ padding: 5, backgroundColor: '#FFF' }}>
-          <Calendar
-            onDayPress={(day) => { this.showPoupUpEventoDia(day.dateString); }}
-            markedDates={datas_eventos}
-          />
-        </View>
-      </View>
-    );
   }
 
   infoEventoModal() {
@@ -279,19 +103,173 @@ class Eventos extends Component {
     if (this.props.loading) return (<Loading />);
   }
 
+  showPoupUpEventoDia(data) {
+    const formatData = data.split('-').reverse().join('/');
+    let datas_eventos = {};
+    let id = '';
+    this.props.eventos.map(evento => {
+      if (evento.data_inicio === formatData) {
+        id = evento.id;
+        datas_eventos = { ...datas_eventos, [evento.id]: evento };
+      }
+      return datas_eventos;
+    });
+    if (Object.prototype.hasOwnProperty.call(datas_eventos, id)) {
+      this.setState({
+        modal: true,
+        datas_eventos,
+        tituloModal: 'Eventos nesta data'
+      });
+    }
+  }
+
+  renderButtomEventosRelated() {
+    let render_button_once = 0;
+    const eventos = [];
+    return (
+      this.props.eventos.map(evento => {
+        if (this.state.trabalho === evento.area_tematica) {
+          eventos.push(evento);
+          if (render_button_once === 0) {
+            render_button_once = 1;
+            return (
+              <View key={evento.id} style={{ alignItems: 'center', marginLeft: 10 }}>
+                <TouchableOpacity onPress={() => { this.setEventosToState(eventos); }} >
+                  <View style={[Styles.iconButtomStyle, { backgroundColor: '#2BA3DA' }]}>
+                    <Icon
+                      type='material-community'
+                      name='calendar-text'
+                      color='#FFF'
+                      size={25}
+                    />
+                  </View>
+                </TouchableOpacity>
+              </View>
+            );
+          }
+        }
+        return null;
+      })
+    );
+  }
+
+  renderButtomSaveEvento() {
+    return (
+      <View style={{ alignItems: 'center' }}>
+        <TouchableOpacity onPress={() => { this.props.navigation.navigate('CriarEvento'); }} >
+          <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
+            <Icon
+              type='material-community'
+              name='calendar-plus'
+              color='#FFF'
+              size={25}
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  renderListEventosAchados() {
+    if (this.props.eventosAchados.length !== 0) {
+      return (
+        <View style={{ flex: 1, zIndex: 3, elevation: 8, marginTop: 75, width: '100%', paddingLeft: 18, paddingRight: 18, position: 'absolute' }}>
+          <FlatList
+            data={this.props.eventosAchados}
+            style={{
+              borderWidth: 2,
+              borderColor: '#FFF',
+              backgroundColor: '#FFF',
+              borderBottomLeftRadius: 6,
+              borderBottomRightRadius: 6,
+
+            }}
+            renderItem={({ item }) =>
+              <View style={{ flex: 1, borderTopWidth: 1, flexDirection: 'row', borderTopColor: '#777', backgroundColor: '#FFF', padding: 10 }}>
+                <Text style={Styles.textFlatListStyle}>
+                  {item.nome}
+                </Text>
+                {this.renderEditEventIcon(item)}
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('VisualizarEvento', item)} >
+                  <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2A4065' }]}>
+                    <Icon
+                      name='keyboard-arrow-right'
+                      color='#FFF'
+                      size={20}
+                    />
+                  </View>
+                </TouchableOpacity >
+              </View>}
+          />
+        </View>
+      );
+    }
+  }
+
+  renderEditEventIcon(evento) {
+    const usuario = firebaseAuth().currentUser;
+    if (usuario.uid === evento.usuario_id) {
+      return (
+        <TouchableOpacity onPress={() => { this.props.navigation.navigate('EditarEvento', evento); this.setState({ modal: false }); }} >
+          <View style={[Styles.iconInsideSearchBarStyle, { backgroundColor: '#2BA3DA' }]}>
+            <Icon
+              type='font-awsome'
+              name='edit'
+              color='#FFF'
+              size={17}
+            />
+          </View>
+        </TouchableOpacity >
+      );
+    }
+  }
+
+  renderCalendar() {
+    const selected = true;
+    const marked = true;
+    const selectedColor = '#2A4065';
+    let markedDates = {};
+    markedDates = { ...markedDates, ...{ selected } };
+    markedDates = { ...markedDates, ...{ marked } };
+    markedDates = { ...markedDates, ...{ selectedColor } };
+    let datas_eventos = {};
+    this.props.eventos.map(evento => {
+      const evento_data = evento.data_inicio.split('/').reverse().join('-');
+      const updatedMarkedDates = { ...datas_eventos, [evento_data]: markedDates };
+      datas_eventos = { ...updatedMarkedDates };
+      return datas_eventos;
+    });
+    return (
+      <View style={{ margin: 20, borderRadius: 5, borderWidth: 3, borderColor: '#FFF', elevation: 2 }}>
+        <View style={{ padding: 5, backgroundColor: '#FFF' }}>
+          <Calendar
+            onDayPress={(day) => { this.showPoupUpEventoDia(day.dateString); }}
+            markedDates={datas_eventos}
+          />
+        </View>
+      </View>
+    );
+  }
+
+  renderInputPesquisaEvento() {
+    return (
+      <View style={{ marginTop: 10, paddingRight: 20, paddingLeft: 20, paddingTop: 10, position: 'relative', flexDirection: 'row', justifyContent: 'center' }}>
+        <Input
+          iconName={'search'}
+          value={this.props.eventoNome}
+          placeholder={'Pesquise um evento desejado:'}
+          onChangeText={evento => this.props.searchEvento(evento, this.props.eventos)}
+        />
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={{ flex: 1, flexDirection: 'column' }}>
         {this.renderInputPesquisaEvento()}
         {this.renderListEventosAchados()}
         {this.showLoading()}
-
-        {/* <View style={{ paddingLeft: 20, paddingRight: 20 }}>
-          <Text style={{ fontSize: 14, color: "#2A4065", fontFamily: 'Ubuntu-Regular'}}>
-            Descubra eventos acontecendo dentro da universidade, crie os seus próprios eventos ou filtre pela sua área de atuação.
-          </Text>
-        </View> */}
-
         {this.renderCalendar()}
         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
           {this.renderButtomSaveEvento()}

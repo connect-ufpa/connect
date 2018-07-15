@@ -3,7 +3,7 @@ import { View, TextInput, ScrollView, Picker, TouchableOpacity, DatePickerAndroi
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
 import { editEvent, saveEditedEvent } from '../actions';
-import { CardSection, Input, Texts, Button, Loading } from '../components/commons';
+import { CardSection, Input, Texts, Loading } from '../components/commons';
 import Styles from '../Styles';
 
 class EditarEvento extends Component {
@@ -60,10 +60,13 @@ class EditarEvento extends Component {
             id: this.props.id,
             nome: this.props.nome,
             descricao: this.props.descricao,
+            area_tematica: this.props.area_tematica,
             local: this.props.local,
             coords: this.props.coords,
-            data: this.props.data,
-            hora: this.props.hora,
+            data_inicio: this.props.data_inicio,
+            hora_inicio: this.props.hora_inicio,
+            data_fim: this.props.data_fim,
+            hora_fim: this.props.hora_fim,
             error: this.props.error
         };
         if (this.props.loading) {

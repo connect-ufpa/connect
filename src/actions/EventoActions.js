@@ -1,4 +1,4 @@
-// import moment from 'moment';
+import { Alert } from 'react-native';
 import { firebaseAuth, database } from '../config/Config';
 import { validateDates, validateHours, validateEvent } from '../helpers/HandleData';
 import {
@@ -49,7 +49,7 @@ export const showHelper = () => {
 };
 
 export const closeEventHelper = () => {
-    return { type: CLOSE_HELPER_EVENT }; 
+    return { type: CLOSE_HELPER_EVENT };
 };
 
 export const saveEvent = (evento) => {
@@ -164,7 +164,7 @@ export const searchEvento = (nomeEvento, eventos) => {
             });
             searchedEventosSuccess(dispatch, eventosAchados);
         }
-    }; 
+    };
 };
 
 const searchedEventosSuccess = (dispatch, eventos) => {
@@ -172,19 +172,27 @@ const searchedEventosSuccess = (dispatch, eventos) => {
 };
 
 export const serachEventsToShow = () => {
-    // const currentDate = moment().format('DD/MM/YYYY');
     return (dispatch) => {
         dispatch({ type: CLEAR });
         database().ref('evento')
-        .on('value', snap => {
-            const eventos = snap.val();
-            const key = Object.keys(eventos);
-            key.forEach(id => {
-                const { nome, descricao, local, data_inicio, hora_inicio, coords, hora_fim, data_fim, area_tematica, usuario_id } = eventos[id];
-                dispatch({ type: EVENTS_TO_SHOW_SUCCESS, payload: { id, nome, descricao, local, data_inicio, hora_inicio, coords, hora_fim, data_fim, area_tematica, usuario_id } });
-            }); 
-                dispatch({ type: CLOSE_LOADING_EVENT_SCREEN }); 
-        });
+            .on('value', snap => {
+                const eventos = snap.val();
+                if (eventos) {
+                    const key = Object.keys(eventos);
+                    key.forEach(id => {
+                        const { nome, descricao, local, data_inicio, hora_inicio, coords, hora_fim, data_fim, area_tematica, usuario_id } = eventos[id];
+                        dispatch({ type: EVENTS_TO_SHOW_SUCCESS, payload: { id, nome, descricao, local, data_inicio, hora_inicio, coords, hora_fim, data_fim, area_tematica, usuario_id } });
+                    });
+                    dispatch({ type: CLOSE_LOADING_EVENT_SCREEN });
+                } else {
+                    dispatch({ type: CLOSE_LOADING_EVENT_SCREEN });
+                    Alert.alert(
+                        'Ainda não há eventos cadastrados!',
+                        'Clique no botão abaixo para criar seu primeiro evento', 
+                        [{ text: 'OK', onPress: () => console.log('OK Pressed') }]
+                    );
+                }
+            });
     };
 };
 
