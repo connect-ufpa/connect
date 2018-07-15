@@ -242,5 +242,14 @@ export default StyleSheet.create({
         paddingBottom: 7,
         borderTopWidth: 1,
         borderBottomColor: '#777'
+    },
+    viewInput: {
+        flex: 1,
+        padding: 5,
+        elevation: 8,
+        borderRadius: 5,
+        borderColor: '#FFF',
+        flexDirection: 'row',
+        backgroundColor: '#FFF'
     }
 });

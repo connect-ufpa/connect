@@ -8,7 +8,6 @@ import { HeaderImage, Input, Loading } from '../components/commons';
 import { serachEventsToShow, searchEvento } from '../actions';
 import Styles from '../Styles';
 
-const { height, width } = Dimensions.get('window');
 const HEIGHT = Dimensions.get('window').height;
 const MARGIN_TOP_MODAL = HEIGHT * 0.4;
 

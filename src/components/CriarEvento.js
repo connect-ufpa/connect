@@ -213,36 +213,34 @@ class CriarEvento extends Component {
                 <Texts text='Área Temática' style='medium' color="#2a4065" />
               </CardSection>
               <CardSection>
-                <Picker
-                  itemStyle={{ fontFamily: 'Ubuntu-Regular ' }}
-                  selectedValue={this.props.area_tematica}
-                  style={{ height: 50, width: 250 }}
-                  onValueChange={texto =>
-                    this.props.eventFieldChange({
-                      prop: 'area_tematica',
-                      value: texto,
-                    })
-                  }
-                >
-                  <Picker.Item label="Comunicação" value="Comunicação" />
-                  <Picker.Item label="Cultura" value="Cultura" />
-                  <Picker.Item
-                    label="Direitos Humanos e Justiça"
-                    value="Direitos Humanos e Justiça"
-                  />
-                  <Picker.Item label="Educação" value="Educação" />
-                  <Picker.Item label="Meio Ambiente" value="Meio Ambiente" />
-                  <Picker.Item
-                    label="Ciências Sociais e Aplicadas"
-                    value="Ciências Sociais e Aplicadas"
-                  />
-                  <Picker.Item label="Saúde" value="Saúde" />
-                  <Picker.Item
-                    label="Tecnologia e Produção"
-                    value="Tecnologia e Produção"
-                  />
-                  <Picker.Item label="Trabalho" value="Trabalho" />
-                </Picker>
+                <View style={Styles.viewInput}>
+                  <Picker
+                    selectedValue={this.props.area_tematica}
+                    style={{
+                      height: 58,
+                      width: '100%',
+                      flex: 5,
+                      paddingLeft: 20,
+                      paddingRight: 20
+                    }}
+                    onValueChange={texto =>
+                      this.props.eventFieldChange({
+                        prop: 'area_tematica',
+                        value: texto,
+                      })
+                    }
+                  >
+                    <Picker.Item color='gray' color='gray' label="Comunicação" value="Comunicação" />
+                    <Picker.Item color='gray' label="Cultura" value="Cultura" />
+                    <Picker.Item color='gray' label="Direitos Humanos e Justiça" value="Direitos Humanos e Justiça" />
+                    <Picker.Item color='gray' label="Educação" value="Educação" />
+                    <Picker.Item color='gray' label="Meio Ambiente" value="Meio Ambiente" />
+                    <Picker.Item color='gray' label="Ciências Sociais e Aplicadas" value="Ciências Sociais e Aplicadas" />
+                    <Picker.Item color='gray' label="Saúde" value="Saúde" />
+                    <Picker.Item color='gray' label="Tecnologia e Produção" value="Tecnologia e Produção" />
+                    <Picker.Item color='gray' label="Trabalho" value="Trabalho" />
+                  </Picker>
+                </View>
               </CardSection>
               <CardSection>
                 <Texts text='Data de início' style='medium' color="#2a4065" />
