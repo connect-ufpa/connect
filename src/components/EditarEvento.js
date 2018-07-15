@@ -35,8 +35,16 @@ class EditarEvento extends Component {
                 is24Hour: true,
             });
             if (action !== TimePickerAndroid.dismissedAction) {
-                const hora = `${hour}:${minute}`;
-                this.props.editEvent({ prop, value: hora });
+                let hora;
+                let minutos;
+                if (hour < 10) hora = `0${hour}`;
+                else hora = hour;
+        
+                if (minute < 10) minutos = `0${minute}`;
+                else minutos = minute;
+        
+                const hours = `${hora}:${minutos}`;
+                this.props.editEvent({ prop, value: hours });
             }
         } catch ({ code, message }) {
             console.warn('Cannot open time picker', message);
@@ -47,7 +55,16 @@ class EditarEvento extends Component {
         try {
             const { action, year, month, day } = await DatePickerAndroid.open();
             if (action !== DatePickerAndroid.dismissedAction) {
-                const data = `${day}/${month}/${year}`;
+                const correctMonth = month + 1;
+                let dia;
+                let mes;
+                if (day < 10) dia = `0${day}`;
+                else dia = day;
+        
+                if (month < 10) mes = `0${correctMonth}`;
+                else mes = correctMonth;
+        
+                const data = `${dia}/${mes}/${year}`;
                 this.props.editEvent({ prop, value: data });
             }
         } catch ({ code, message }) {

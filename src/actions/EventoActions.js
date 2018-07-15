@@ -88,12 +88,12 @@ export const saveEvent = (evento) => {
 };
 
 export const editEvent = ({ prop, value }) => {
-    if (prop === 'data') {
+    if (prop === 'data_inicio' || prop === 'data_fim') {
         const validate = validateDates(value);
         if (validate) return { type: EDIT_EVENT, payload: { prop, value } };
 
         return { type: EVENT_EDIT_DATA, payload: { prop, value } };
-    } else if (prop === 'hora') {
+    } else if (prop === 'hora_inicio' || prop === 'hora_fim') {
         const validate = validateHours(value);
         if (validate) return { type: EDIT_EVENT, payload: { prop, value } };
 
@@ -117,6 +117,7 @@ export const saveNewEventCoords = ({ id, coords }) => {
 export const saveEditedEvent = (evento) => {
     const validate = validateEvent(evento);
     const id = evento.id;
+    console.log(evento)
     if (validate) {
         return (dispatch) => {
             const prop = 'loading';
@@ -138,6 +139,7 @@ export const saveEditedEvent = (evento) => {
                 dispatch({ type: SAVED_EDITED_EVENT });
                 database().ref(`evento/${id}`).on('value', snap => {
                     const evento = snap.val();
+                    evento.id = id;
                     const key = Object.keys(evento);
                     key.forEach(prop => {
                         const value = evento[prop];
