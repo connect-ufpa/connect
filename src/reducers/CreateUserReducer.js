@@ -18,19 +18,19 @@ import {
 
 const INITIAL_STATE = {
     name: '',
-    registration: '',
-    birthday: '',
     email: '',
+    birthday: '',
     password: '',
+    registration: '',
     confirmPassword: '',
-    loading: false,
     errorMessageName: '',
-    errorMessageRegistration: '',
-    errorMessageBirthday: '',
     errorMessageEmail: '',
+    errorMessageBirthday: '',
     errorMessagePassword: '',
+    errorMessageRegistration: '',
     errorMessageConfirmPassword: '',
     errorMessageCreateAccountFail: '',
+    loading: false,
     error: true
 };
 
