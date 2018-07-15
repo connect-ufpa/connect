@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, TouchableOpacity, FlatList, Text, Dimensions, Modal, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
-import { Calendar } from 'react-native-calendars';
+import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { firebaseAuth } from '../config/Config';
 import { HeaderImage, Input, Loading } from '../components/commons';
 import { serachEventsToShow, searchEvento } from '../actions';
@@ -10,6 +10,15 @@ import Styles from '../Styles';
 
 const HEIGHT = Dimensions.get('window').height;
 const MARGIN_TOP_MODAL = HEIGHT * 0.4;
+
+LocaleConfig.locales['br'] = {
+  monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+  monthNamesShort: ['Jan.', 'Fev.', 'Mar.', 'Abr.', 'Mai.', 'Jun.', 'Jul.', 'Ago.', 'Set.', 'Out.', 'Nov.', 'Dec.'],
+  dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+  dayNamesShort: ['Dom.', 'Seg.', 'Ter.', 'Qua.', 'Qui.', 'Sex.', 'Sab.']
+};
+
+LocaleConfig.defaultLocale = 'br';
 
 class Eventos extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -242,6 +251,7 @@ class Eventos extends Component {
       <View style={{ margin: 20, borderRadius: 5, borderWidth: 3, borderColor: '#FFF', elevation: 2 }}>
         <View style={{ padding: 5, backgroundColor: '#FFF' }}>
           <Calendar
+            onDayLongPress={(day) => { this.showPoupUpEventoDia(day.dateString); }}
             onDayPress={(day) => { this.showPoupUpEventoDia(day.dateString); }}
             markedDates={datas_eventos}
           />
