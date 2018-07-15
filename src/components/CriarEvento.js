@@ -36,7 +36,15 @@ class CriarEvento extends Component {
         is24Hour: true,
       });
       if (action !== TimePickerAndroid.dismissedAction) {
-        const hora = `${hour}:${minute}`;
+        let hours;
+        let minutes;
+        if (hour < 10) hours = `0${hour}`;
+        else hours = hour;
+
+        if (minute < 10) minutes = `0${minute}`;
+        else minutes = minute;
+
+        const hora = `${hours}:${minutes}`;
         this.props.eventFieldChange({ prop, value: hora });
       }
     } catch ({ code, message }) {
@@ -216,19 +224,8 @@ class CriarEvento extends Component {
                 <View style={Styles.viewInput}>
                   <Picker
                     selectedValue={this.props.area_tematica}
-                    style={{
-                      height: 58,
-                      width: '100%',
-                      flex: 5,
-                      paddingLeft: 20,
-                      paddingRight: 20
-                    }}
-                    onValueChange={texto =>
-                      this.props.eventFieldChange({
-                        prop: 'area_tematica',
-                        value: texto,
-                      })
-                    }
+                    style={{ height: 58, width: '100%', flex: 5, paddingLeft: 20, paddingRight: 20 }}
+                    onValueChange={texto => this.props.eventFieldChange({ prop: 'area_tematica', value: texto, })}
                   >
                     <Picker.Item color='gray' color='gray' label="Comunicação" value="Comunicação" />
                     <Picker.Item color='gray' label="Cultura" value="Cultura" />
@@ -270,6 +267,7 @@ class CriarEvento extends Component {
                 <Texts text='Hora de início' style='medium' color="#2a4065" />
               </CardSection>
               <CardSection>
+                {console.log(this.props.hora_inicio)}
                 <View style={{ flex: 1, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
                   <View style={{ flex: 1, paddingTop: 6, paddingBottom: 6 }}>
                     <Input

@@ -188,7 +188,7 @@ export const serachEventsToShow = () => {
                     dispatch({ type: CLOSE_LOADING_EVENT_SCREEN });
                     Alert.alert(
                         'Ainda não há eventos cadastrados!',
-                        'Clique no botão abaixo para criar seu primeiro evento', 
+                        'Clique no botão abaixo para criar seu primeiro evento.', 
                         [{ text: 'OK', onPress: () => console.log('OK Pressed') }]
                     );
                 }
