@@ -124,9 +124,7 @@ class CriarEvento extends Component {
       hora_fim: this.props.hora_fim,
       error: this.props.error,
     };
-    if (this.props.loading) {
-      return <Loading />;
-    }
+  
     return (
       <View style={{ alignItems: 'center' }}>
         <TouchableOpacity
@@ -149,6 +147,9 @@ class CriarEvento extends Component {
     );
   }
 
+  renderLoading() {
+    if (this.props.loading) { return <Loading />; }
+  }
   render() {
     return (
       <View>
@@ -276,7 +277,6 @@ class CriarEvento extends Component {
                 <Texts text='Hora de início' style='medium' color="#2a4065" />
               </CardSection>
               <CardSection>
-                {console.log(this.props.hora_inicio)}
                 <View style={{ flex: 1, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
                   <View style={{ flex: 1, paddingTop: 6, paddingBottom: 6 }}>
                     <Input

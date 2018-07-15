@@ -59,6 +59,7 @@ export const MOVING = 'moving';
 export const CLOSE_LOADING_EVENT_SCREEN = 'close_loading_event_sceen';
 
 export const CLEAR = 'clear';
+export const CLOSE_EVENT_EDIT_HELPER = 'close_event_edit_helper';
 export const EDIT_EVENT = 'edit_event';
 export const EVENT_EDIT_DATA = 'event_edit_data';
 export const EVENT_EDIT_HORA = 'event_edit_hora';

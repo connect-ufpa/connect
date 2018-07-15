@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { View, TextInput, ScrollView, Picker, TouchableOpacity, DatePickerAndroid, TimePickerAndroid } from 'react-native';
+import { View, Text, Dimensions, TextInput, ScrollView, Picker, TouchableOpacity, DatePickerAndroid, TimePickerAndroid } from 'react-native';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
-import { editEvent, saveEditedEvent } from '../actions';
+import { editEvent, saveEditedEvent, closeEventEditHelper } from '../actions';
 import { CardSection, Input, Texts, Loading } from '../components/commons';
 import Styles from '../Styles';
+
+const { height, width } = Dimensions.get('window');
+const HEIGHT = Dimensions.get('window').height;
 
 class EditarEvento extends Component {
     static navigationOptions = {
@@ -104,6 +107,42 @@ class EditarEvento extends Component {
             </View>
         );
     }
+
+    renderHelper() {
+        const { positionHelper } = this.props;
+        if (this.props.helper) {
+          return (
+            <View
+              style={[
+                Styles.cardHelperStyle,
+                {
+                  marginBottom: HEIGHT * positionHelper,
+                  width: width * 0.5,
+                  height: height * 0.2,
+                },
+              ]}
+            >
+              <View style={{ flex: 2, flexDirection: 'row', margin: 5 }}>
+                <Text style={Styles.dicaTextStyle}>Dica</Text>
+                <TouchableOpacity
+                  style={{ alignSelf: 'center' }}
+                  onPress={() => {
+                    this.props.closeEventEditHelper();
+                  }}
+                >
+                  <View style={Styles.buttomCloseStyle}>
+                    <Icon name="clear" color="#FFF" size={15} />
+                  </View>
+                </TouchableOpacity>
+              </View>
+              <Text style={Styles.textCardHelperStyle}>
+                {'Evento salvo com sucesso! \n Clique na seta acima para voltar para a tela de evento'}
+              </Text>
+            </View>
+          );
+        }
+      }
+
     render() {
         const param = {
             id: this.props.id,
@@ -290,14 +329,15 @@ class EditarEvento extends Component {
                         {this.renderSaveEventButton()}
                     </CardSection>
                 </View>
+                {this.renderHelper()}
             </ScrollView>
         );
     }
 }
 const mapStateToProps = (state) => {
-    const { id, nome, descricao, local, area_tematica, data_inicio, hora_inicio, data_fim, hora_fim, coords, loading, errorData, errorHora, error } = state.eventoEdicao;
+    const { id, nome, descricao, local, area_tematica, data_inicio, hora_inicio, data_fim, hora_fim, coords, loading, errorData, errorHora, error, helper, positionHelper } = state.eventoEdicao;
 
-    return { id, nome, descricao, local, area_tematica, data_inicio, hora_inicio, data_fim, hora_fim, coords, errorData, errorHora, error, loading };
+    return { id, nome, descricao, local, area_tematica, data_inicio, hora_inicio, data_fim, hora_fim, coords, errorData, errorHora, error, loading, helper, positionHelper };
 };
 
-export default connect(mapStateToProps, { editEvent, saveEditedEvent })(EditarEvento);
+export default connect(mapStateToProps, { editEvent, saveEditedEvent, closeEventEditHelper })(EditarEvento);
