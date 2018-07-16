@@ -1,4 +1,4 @@
-import { EDIT_EVENT, EVENT_EDIT_DATA, EVENT_EDIT_HORA, SAVED_EDITED_EVENT, CLOSE_EVENT_EDIT_HELPER } from '../actions/types';
+import { EDIT_EVENT, EVENT_EDIT_DATA, EVENT_EDIT_HORA, SAVED_EDITED_EVENT, CLOSE_EVENT_EDIT_HELPER, CLOSE_EVENT_EDIT_HELPER_MAP, COORDS_SAVED } from '../actions/types';
 
 const INITIAL_STATTE = {
     id: '',
@@ -14,7 +14,9 @@ const INITIAL_STATTE = {
     loading: false,
     errorData: '',
     errorHora: '',
+    modal: false,
     helper: false,
+    helperMap: true,
     positionHelper: 0.4,
     error: true
 };
@@ -31,6 +33,10 @@ export default (state = INITIAL_STATTE, action) => {
             return { ...state, loading: false, helper: true };
         case CLOSE_EVENT_EDIT_HELPER:
             return { ...state, helper: false };
+        case CLOSE_EVENT_EDIT_HELPER_MAP:
+            return { ...state, helperMap: false };
+        case COORDS_SAVED:
+            return { ...state, helperMap: false, modal: true };
         default:
             return INITIAL_STATTE;
     }

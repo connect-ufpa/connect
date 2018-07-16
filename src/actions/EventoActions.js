@@ -5,7 +5,7 @@ import {
     MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR,
     INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, SHOW_HELPER_EVENT, CLOSE_HELPER_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EDIT_EVENT,
     EVENT_EDIT_DATA, EVENT_EDIT_HORA, SAVED_EDITED_EVENT, EVENTS_TO_SHOW_SUCCESS, SEARCHING_EVENT, SEARCHED_EVENTO,
-    CLEAR, INICIAL_POSITION, MOVING, CLOSE_LOADING_EVENT_SCREEN, CLOSE_EVENT_EDIT_HELPER
+    CLEAR, INICIAL_POSITION, MOVING, CLOSE_LOADING_EVENT_SCREEN, CLOSE_EVENT_EDIT_HELPER, CLOSE_EVENT_EDIT_HELPER_MAP, COORDS_SAVED
 } from './types';
 
 export const showMarkerAndModal = (e) => {
@@ -108,10 +108,13 @@ export const saveNewEventCoords = ({ id, coords }) => {
             lat: coords.lat,
             long: coords.long
         }).then(() => {
-            const prop = 'coords';
-            dispatch({ type: EDIT_EVENT, payload: { prop, coords } });
+            dispatch({ type: COORDS_SAVED });
         });
     };
+};
+
+export const closeEventMapHelper = () => {
+    return { type: CLOSE_EVENT_EDIT_HELPER_MAP };
 };
 
 export const saveEditedEvent = (evento) => {
