@@ -1,26 +1,9 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Modal,
-  TouchableHighlight,
-  Dimensions,
-  ScrollView,
-  TextInput,
-  Picker,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Modal, TouchableHighlight, Dimensions, ScrollView, TextInput, Picker, Text, TouchableOpacity, DatePickerAndroid, TimePickerAndroid } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { Icon } from 'react-native-elements';
-import {
-  showMarkerAndModal,
-  closeModal,
-  eventFieldChange,
-  saveEvent,
-  showHelper,
-  closeEventHelper,
-} from '../actions';
+import { showMarkerAndModal, closeModal, eventFieldChange, saveEvent, showHelper, closeEventHelper } from '../actions';
 import { Input, CardSection, Texts, Loading } from './commons/';
 import Styles from '../Styles';
 
@@ -44,8 +27,50 @@ class CriarEvento extends Component {
   };
 
   componentWillMount() {
-    if (this.props.positionHelper === 0.2 || !this.props.helper)
-      this.props.showHelper();
+    if (this.props.positionHelper === 0.2 || !this.props.helper) this.props.showHelper();
+  }
+
+  async openAndroidTimePicker(prop) {
+    try {
+      const { action, hour, minute } = await TimePickerAndroid.open({
+        is24Hour: true,
+      });
+      if (action !== TimePickerAndroid.dismissedAction) {
+        let hora;
+        let minutos;
+        if (hour < 10) hora = `0${hour}`;
+        else hora = hour;
+
+        if (minute < 10) minutos = `0${minute}`;
+        else minutos = minute;
+
+        const hours = `${hora}:${minutos}`;
+        this.props.eventFieldChange({ prop, value: hours });
+      }
+    } catch ({ code, message }) {
+      console.warn('Cannot open time picker', message);
+    }
+  }
+
+  async openAndroidDatePicker(prop) {
+    try {
+      const { action, year, month, day } = await DatePickerAndroid.open();
+      if (action !== DatePickerAndroid.dismissedAction) {
+        const correctMonth = month + 1;
+        let dia;
+        let mes;
+        if (day < 10) dia = `0${day}`;
+        else dia = day;
+
+        if (month < 10) mes = `0${correctMonth}`;
+        else mes = correctMonth;
+
+        const data = `${dia}/${mes}/${year}`;
+        this.props.eventFieldChange({ prop, value: data });
+      }
+    } catch ({ code, message }) {
+      console.warn('Cannot open date picker', message);
+    }
   }
 
   renderHelper() {
@@ -99,9 +124,7 @@ class CriarEvento extends Component {
       hora_fim: this.props.hora_fim,
       error: this.props.error,
     };
-    if (this.props.loading) {
-      return <Loading />;
-    }
+  
     return (
       <View style={{ alignItems: 'center' }}>
         <TouchableOpacity
@@ -124,6 +147,9 @@ class CriarEvento extends Component {
     );
   }
 
+  renderLoading() {
+    if (this.props.loading) { return <Loading />; }
+  }
   render() {
     return (
       <View>
@@ -167,6 +193,9 @@ class CriarEvento extends Component {
                 </TouchableHighlight>
               </View>
               <CardSection>
+                <Texts text='Preencha os campos do evento' style='medium' color="#2a4065" />
+              </CardSection>
+              <CardSection>
                 <Input
                   placeholder="Nome do evento:"
                   onChangeText={texto =>
@@ -176,21 +205,18 @@ class CriarEvento extends Component {
                 />
               </CardSection>
               <CardSection>
-                <TextInput
-                  style={Styles.inputStyle}
-                  placeholder="Descrição do evento:"
-                  onChangeText={texto =>
-                    this.props.eventFieldChange({
-                      prop: 'descricao',
-                      value: texto,
-                    })
-                  }
-                  value={this.props.descricao}
-                  underlineColorAndroid="transparent"
-                  multiline
-                  numberOfLines={4}
-                  maxLength={250}
-                />
+                <View style={{ flex: 1, elevation: 8, padding: 5, borderRadius: 5, borderColor: '#FFF', flexDirection: 'row', backgroundColor: '#FFF' }}>
+                  <TextInput
+                    style={Styles.inputStyle}
+                    placeholder="Descrição do evento:"
+                    onChangeText={texto => this.props.eventFieldChange({ prop: 'descricao', value: texto })}
+                    value={this.props.descricao}
+                    underlineColorAndroid='transparent'
+                    multiline
+                    numberOfLines={4}
+                    maxLength={250}
+                  />
+                </View>
               </CardSection>
               <CardSection>
                 <Input
@@ -202,96 +228,131 @@ class CriarEvento extends Component {
                 />
               </CardSection>
               <CardSection>
-                <Texts text="Área Temática" style="medium" />
+                <Texts text='Área Temática' style='medium' color="#2a4065" />
               </CardSection>
               <CardSection>
-                <Picker
-                  itemStyle={{ fontFamily: 'Ubuntu-Regular ' }}
-                  selectedValue={this.props.area_tematica}
-                  style={{ height: 50, width: 250 }}
-                  onValueChange={texto =>
-                    this.props.eventFieldChange({
-                      prop: 'area_tematica',
-                      value: texto,
-                    })
-                  }
-                >
-                  <Picker.Item label="Comunicação" value="Comunicação" />
-                  <Picker.Item label="Cultura" value="Cultura" />
-                  <Picker.Item
-                    label="Direitos Humanos e Justiça"
-                    value="Direitos Humanos e Justiça"
-                  />
-                  <Picker.Item label="Educação" value="Educação" />
-                  <Picker.Item label="Meio Ambiente" value="Meio Ambiente" />
-                  <Picker.Item
-                    label="Ciências Sociais e Aplicadas"
-                    value="Ciências Sociais e Aplicadas"
-                  />
-                  <Picker.Item label="Saúde" value="Saúde" />
-                  <Picker.Item
-                    label="Tecnologia e Produção"
-                    value="Tecnologia e Produção"
-                  />
-                  <Picker.Item label="Trabalho" value="Trabalho" />
-                </Picker>
-              </CardSection>
-              <CardSection>
-                <Texts text="Início" style="medium" />
-              </CardSection>
-              <CardSection>
-                <View style={{ flex: 1, padding: 5 }}>
-                  <Input
-                    placeholder="00/00/000"
-                    onChangeText={texto =>
-                      this.props.eventFieldChange({
-                        prop: 'data_inicio',
-                        value: texto,
-                      })
-                    }
-                    value={this.props.data_inicio}
-                  />
-                </View>
-                <View style={{ flex: 1, padding: 5 }}>
-                  <Input
-                    placeholder="00:00"
-                    onChangeText={texto =>
-                      this.props.eventFieldChange({
-                        prop: 'hora_inicio',
-                        value: texto,
-                      })
-                    }
-                    value={this.props.hora_inicio}
-                  />
+                <View style={Styles.viewInput}>
+                  <Picker
+                    selectedValue={this.props.area_tematica}
+                    style={{ height: 58, width: '100%', flex: 5, paddingLeft: 20, paddingRight: 20 }}
+                    onValueChange={texto => this.props.eventFieldChange({ prop: 'area_tematica', value: texto, })}
+                  >
+                    <Picker.Item color='gray' color='gray' label="Comunicação" value="Comunicação" />
+                    <Picker.Item color='gray' label="Cultura" value="Cultura" />
+                    <Picker.Item color='gray' label="Direitos Humanos e Justiça" value="Direitos Humanos e Justiça" />
+                    <Picker.Item color='gray' label="Educação" value="Educação" />
+                    <Picker.Item color='gray' label="Meio Ambiente" value="Meio Ambiente" />
+                    <Picker.Item color='gray' label="Ciências Sociais e Aplicadas" value="Ciências Sociais e Aplicadas" />
+                    <Picker.Item color='gray' label="Saúde" value="Saúde" />
+                    <Picker.Item color='gray' label="Tecnologia e Produção" value="Tecnologia e Produção" />
+                    <Picker.Item color='gray' label="Trabalho" value="Trabalho" />
+                  </Picker>
                 </View>
               </CardSection>
               <CardSection>
-                <Texts text="Término" style="medium" />
+                <Texts text='Data de início' style='medium' color="#2a4065" />
               </CardSection>
               <CardSection>
-                <View style={{ flex: 1, padding: 5 }}>
-                  <Input
-                    placeholder="00/00/000"
-                    onChangeText={texto =>
-                      this.props.eventFieldChange({
-                        prop: 'data_fim',
-                        value: texto,
-                      })
-                    }
-                    value={this.props.data_fim}
-                  />
+                <View style={{ flex: 1, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
+                  <View style={{ flex: 1, paddingTop: 6, paddingBottom: 6 }}>
+                    <Input
+                      onChangeText={texto => this.props.eventFieldChange({ prop: 'data_inicio', value: texto })}
+                      placeholder="00/00/000"
+                      value={this.props.data_inicio}
+                    />
+                  </View>
+                  <TouchableOpacity onPress={() => { this.openAndroidDatePicker('data_inicio'); }}>
+                    <View style={[Styles.iconButtomEventStyle, { backgroundColor: '#2A4065' }]}>
+                      <Icon
+                        type="material-community"
+                        name="calendar-text"
+                        color="#FFF"
+                        size={22}
+                      />
+                    </View>
+                  </TouchableOpacity>
                 </View>
-                <View style={{ flex: 1, padding: 5 }}>
-                  <Input
-                    placeholder="00:00"
-                    onChangeText={texto =>
-                      this.props.eventFieldChange({
-                        prop: 'hora_fim',
-                        value: texto,
-                      })
-                    }
-                    value={this.props.hora_fim}
-                  />
+              </CardSection>
+              <CardSection>
+                <Texts text='Hora de início' style='medium' color="#2a4065" />
+              </CardSection>
+              <CardSection>
+                <View style={{ flex: 1, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
+                  <View style={{ flex: 1, paddingTop: 6, paddingBottom: 6 }}>
+                    <Input
+                      placeholder="00:00"
+                      onChangeText={texto =>
+                        this.props.eventFieldChange({
+                          prop: 'hora_inicio',
+                          value: texto,
+                        })
+                      }
+                      value={this.props.hora_inicio}
+                    />
+                  </View>
+                  <TouchableOpacity onPress={() => { this.openAndroidTimePicker('hora_inicio'); }}>
+                    <View style={[Styles.iconButtomEventStyle, { backgroundColor: '#2A4065' }]}>
+                      <Icon
+                        type="material-community"
+                        name="clock"
+                        color="#FFF"
+                        size={22}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </CardSection>
+              <CardSection>
+                <Texts text='Data de fim' style='medium' color="#2a4065" />
+              </CardSection>
+              <CardSection>
+                <View style={{ flex: 1, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
+                  <View style={{ flex: 1, paddingTop: 6, paddingBottom: 6 }}>
+                    <Input
+                      onChangeText={texto => this.props.eventFieldChange({ prop: 'data_fim', value: texto })}
+                      placeholder="00/00/000"
+                      value={this.props.data_fim}
+                    />
+                  </View>
+                  <TouchableOpacity onPress={() => { this.openAndroidDatePicker('data_fim'); }}>
+                    <View style={[Styles.iconButtomEventStyle, { backgroundColor: '#2A4065' }]}>
+                      <Icon
+                        type="material-community"
+                        name="calendar-text"
+                        color="#FFF"
+                        size={22}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </CardSection>
+              <CardSection>
+                <Texts text='Hora do Término' style='medium' color="#2a4065" />
+              </CardSection>
+              <CardSection>
+                <View style={{ flex: 1, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
+                  <View style={{ flex: 1, paddingTop: 6, paddingBottom: 6 }}>
+                    <Input
+                      placeholder="00:00"
+                      onChangeText={texto =>
+                        this.props.eventFieldChange({
+                          prop: 'hora_fim',
+                          value: texto,
+                        })
+                      }
+                      value={this.props.hora_fim}
+                    />
+                  </View>
+                  <TouchableOpacity onPress={() => { this.openAndroidTimePicker('hora_fim'); }}>
+                    <View style={[Styles.iconButtomEventStyle, { backgroundColor: '#2A4065' }]}>
+                      <Icon
+                        type="material-community"
+                        name="clock"
+                        color="#FFF"
+                        size={22}
+                      />
+                    </View>
+                  </TouchableOpacity>
                 </View>
               </CardSection>
               <View style={{ alignItems: 'center' }}>
@@ -302,8 +363,8 @@ class CriarEvento extends Component {
               <CardSection>{this.renderSaveEventButton()}</CardSection>
             </View>
           </ScrollView>
-        </Modal>
-      </View>
+        </Modal >
+      </View >
     );
   }
 }

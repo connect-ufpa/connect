@@ -131,12 +131,12 @@ class Login extends Component {
 const mapStateToProps = state => {
   return {
     email: state.login.email,
-    errorMessageEmail: state.login.errorMessageEmail,
-    password: state.login.password,
-    loading: state.login.loading,
     error: state.login.error,
-    errorMessagePassword: state.login.errorMessagePassword,
+    loading: state.login.loading,
+    password: state.login.password,
+    errorMessageEmail: state.login.errorMessageEmail,
     errorMessageLogin: state.login.errorMessageLogin,
+    errorMessagePassword: state.login.errorMessagePassword,
   };
 };
 

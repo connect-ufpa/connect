@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, Text, Dimensions, TouchableOpacity, Modal } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import MapView, { Marker } from 'react-native-maps';
-import { editEvent, saveNewEventCoords } from '../actions';
+import { editEvent, saveNewEventCoords, closeEventMapHelper } from '../actions';
 import { CardSection } from '../components/commons';
 import Styles from '../Styles';
 
 const ICON = require('../../assets/img/pin.png');
+
+const { height, width } = Dimensions.get('window');
+const HEIGHT = Dimensions.get('window').height;
 
 let lat = -1.473987;
 let long = -48.452267;
@@ -39,6 +42,41 @@ class EditarEventoMapa extends Component {
         const prop = 'coords';
         this.props.editEvent({ prop, params });
     }
+
+    renderHelper() {
+        if (this.props.helperMap) {
+            return (
+                <View
+                    style={[
+                        Styles.cardHelperStyle,
+                        {
+                            marginBottom: HEIGHT * 0.4,
+                            width: width * 0.5,
+                            height: height * 0.2,
+                        },
+                    ]}
+                >
+                    <View style={{ flex: 2, flexDirection: 'row', margin: 5 }}>
+                        <Text style={Styles.dicaTextStyle}>Dica</Text>
+                        <TouchableOpacity
+                            style={{ alignSelf: 'center' }}
+                            onPress={() => {
+                                this.props.closeEventMapHelper();
+                            }}
+                        >
+                            <View style={Styles.buttomCloseStyle}>
+                                <Icon name="clear" color="#FFF" size={15} />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <Text style={Styles.textCardHelperStyle}>
+                        {'Clique no em um local do mapa e depois clique no botão salvar para atualizar o local do evento'}
+                    </Text>
+                </View>
+            );
+        }
+    }
+
     render() {
         if (this.props.coords) {
             lat = this.props.coords.lat;
@@ -54,6 +92,7 @@ class EditarEventoMapa extends Component {
         }
         return (
             <View>
+                {this.renderHelper()}
                 <MapView
                     style={styles.mapStyle}
                     region={{
@@ -74,18 +113,50 @@ class EditarEventoMapa extends Component {
                     <Marker coordinate={LatLng} image={ICON} />
                 </MapView>
                 <CardSection styleSection={{ flex: 1, position: 'absolute', right: 0, left: 0, bottom: 0 }}>
-                        <TouchableOpacity onPress={() => { this.props.saveNewEventCoords({ id: this.props.i, coords }); }} >
-                            <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
-                                <Icon
-                                    type='material-community'
-                                    name='check'
-                                    color='#FFF'
-                                    size={25}
-                                />
-                            </View>
-                        </TouchableOpacity>
+                    <TouchableOpacity onPress={() => { this.props.saveNewEventCoords({ id: this.props.id, coords }); }} >
+                        <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
+                            <Icon
+                                type='material-community'
+                                name='check'
+                                color='#FFF'
+                                size={25}
+                            />
+                        </View>
+                    </TouchableOpacity>
                 </CardSection>
-            </View>
+                <Modal
+                    transparent
+                    animationType="fade"
+                    visible={this.props.modal}
+                    onRequestClose={() => { this.props.navigation.navigate('Eventos'); }}
+                >
+                    <View
+                        style={[
+                            Styles.cardHelperStyle,
+                            {
+                                marginBottom: HEIGHT * 0.2,
+                                width: width * 0.5,
+                                height: height * 0.2,
+                            },
+                        ]}
+                    >
+                        <View style={{ flex: 2, flexDirection: 'row', margin: 5 }}>
+                            <Text style={Styles.dicaTextStyle}>Dica</Text>
+                            <TouchableOpacity
+                                style={{ alignSelf: 'center' }}
+                                onPress={() => { this.props.navigation.navigate('Eventos'); }}
+                            >
+                                <View style={Styles.buttomCloseStyle}>
+                                    <Icon name="clear" color="#FFF" size={15} />
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                        <Text style={Styles.textCardHelperStyle}>
+                            {'Local do evento atualizado com sucesso!'}
+                        </Text>
+                    </View>
+                </Modal>
+            </View >
         );
     }
 }
@@ -98,9 +169,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    const { id, coords } = state.eventoEdicao;
+    const { id, coords, helperMap, modal } = state.eventoEdicao;
 
-    return { id, coords };
+    return { id, coords, helperMap, modal };
 };
 
-export default connect(mapStateToProps, { editEvent, saveNewEventCoords })(EditarEventoMapa);
+export default connect(mapStateToProps, { editEvent, saveNewEventCoords, closeEventMapHelper })(EditarEventoMapa);

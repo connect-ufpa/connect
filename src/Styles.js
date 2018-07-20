@@ -1,234 +1,255 @@
 import { StyleSheet, Dimensions } from 'react-native';
+
 const { height } = Dimensions.get('window');
 
 export default StyleSheet.create({
-  logoTextStyle: {
-    fontFamily: 'Ubuntu-Medium',
-    fontSize: 28,
-    color: '#ffffff',
-  },
-  smallBlueTextStyle: {
-    fontFamily: 'Ubuntu',
-    fontSize: 12,
-    color: '#2A4065',
-  },
-  xLargeTextStyle: {
-    fontFamily: 'Ubuntu-Bold',
-    fontSize: 48,
-    color: '#ffffff',
-  },
-  largeTextStyle: {
-    fontFamily: 'Ubuntu-Regular',
-    fontSize: 28,
-    color: '#ffffff',
-  },
-  mediumTextStyle: {
-    fontFamily: 'Ubuntu-Regular',
-    fontSize: 20,
-    color: '#ffffff',
-  },
-  smallTextStyle: {
-    fontFamily: 'Ubuntu-Light',
-    fontSize: 12,
-    color: '#ffffff',
-  },
-  inputStyle: {
-    flex: 5,
-    fontSize: 14,
-    paddingLeft: 20,
-    paddingRight: 20,
-    color: '#2D2D2D',
-    fontFamily: 'Ubuntu-Regular',
-  },
-  containerStyle: {
-    padding: 10,
-    paddingLeft: 20,
-    paddingRight: 20,
-    position: 'relative',
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  cardStyle: {
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 10,
-  },
-  btnConfirm: {
-    flex: 1,
-    padding: 5,
-    elevation: 4,
-    borderWidth: 2,
-    borderRadius: 5,
-    alignSelf: 'stretch',
-    borderColor: '#2A4065',
-    backgroundColor: '#2A4065',
-  },
-  btnCancel: {
-    flex: 1,
-    elevation: 4,
-    borderWidth: 2,
-    borderRadius: 5,
-    alignSelf: 'stretch',
-    borderColor: '#CC2820',
-    backgroundColor: '#CC2820',
-  },
-  btnTextStyle: {
-    fontFamily: 'Ubuntu-Medium',
-    fontSize: 16,
-    alignSelf: 'center',
-    color: '#fff',
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
-  spinnerStyle: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  scrollViewStyle: {
-    height: '100%',
-  },
-  modalScrollViewStyle: {
-    height: '100%',
-    marginBottom: 20,
-    marginTop: 75,
-  },
-  mapStyle: {
-    height: 300,
-    width: '100%',
-  },
-  mapLocalizacaoStyle: {
-    height: height - 80,
-    width: '100%',
-  },
-  eventCardStyle: {
-    elevation: 4,
-    borderRadius: 5,
-    backgroundColor: '#FFF',
-  },
-  searchBarStyle: {
-    flex: 1,
-    padding: 20,
-    width: '100%',
-    position: 'absolute',
-  },
-  iconInsideSearchBarStyle: {
-    width: 20,
-    height: 20,
-    marginRight: 5,
-    borderRadius: 50,
-    justifyContent: 'center',
-  },
-  iconButtomStyle: {
-    height: 60,
-    width: 60,
-    margin: 15,
-    elevation: 8,
-    borderRadius: 150,
-    alignContent: 'center',
-    justifyContent: 'center',
-  },
-  viewListItensFoundStyle: {
-    flex: 1,
-    zIndex: 1,
-    elevation: 8,
-    paddingLeft: 18,
-    paddingRight: 18,
-    width: '100%',
-  },
-  flatListStyle: {
-    borderBottomLeftRadius: 6,
-    borderBottomRightRadius: 6,
-    borderWidth: 2,
-    borderColor: '#FFF',
-  },
-  backgroudTextFlatListStyle: {
-    flex: 1,
-    borderTopWidth: 1,
-    flexDirection: 'row',
-    borderTopColor: '#777',
-    backgroundColor: 'white',
-  },
-  textFlatListStyle: {
-    flex: 5,
-    fontSize: 12,
-    color: '#777',
-    paddingLeft: 10,
-    alignSelf: 'center',
-    flexDirection: 'row',
-    backgroundColor: 'white',
-    fontFamily: 'Ubuntu-Regular',
-  },
-  buttomCloseStyle: {
-    width: 20,
-    height: 20,
-    borderRadius: 50,
-    alignContent: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#CC2820',
-  },
-  cardHelperStyle: {
-    flex: 1,
-    zIndex: 1,
-    padding: 5,
-    bottom: 130,
-    elevation: 8,
-    borderRadius: 5,
-    alignSelf: 'center',
-    position: 'absolute',
-    backgroundColor: '#FFF',
-  },
-  cardHelperHeaderContainer: {
-    flex: 2,
-    flexDirection: 'row',
-    margin: 5,
-  },
-  dicaTextStyle: {
-    flex: 5,
-    fontSize: 14,
-    alignSelf: 'center',
-    fontFamily: 'Ubuntu-Medium',
-    textAlign: 'center',
-    color: '#2BA3DA',
-    marginLeft: 20,
-  },
-  textCardHelperStyle: {
-    flex: 4,
-    padding: 5,
-    fontSize: 12,
-    color: '#777',
-    textAlign: 'center',
-    fontFamily: 'Ubuntu-Regular',
-  },
-  headerModalStyle: {
-    flex: 1,
-    padding: 5,
-    flexDirection: 'row',
-  },
-  titleModalStyle: {
-    flex: 1,
-    fontSize: 14,
-    paddingTop: 5,
-    marginLeft: 50,
-    color: '#2D2D2D',
-    fontFamily: 'Ubuntu-Regular',
-  },
-  textModalStyle: {
-    flex: 1,
-    fontSize: 12,
-    color: '#777',
-    paddingLeft: 10,
-    alignSelf: 'center',
-    fontFamily: 'Ubuntu-Regular',
-  },
-  backgroundModalStyle: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    paddingBottom: 5,
-    borderTopWidth: 1,
-    borderBottomColor: '#777',
-  },
+    logoTextStyle: {
+        fontFamily: 'Ubuntu-Medium',
+        fontSize: 28,
+        color: '#ffffff'
+    },
+    smallBlueTextStyle: {
+        fontFamily: 'Ubuntu',
+        fontSize: 12,
+        color: '#2A4065'
+    },
+    xLargeTextStyle: {
+        fontFamily: 'Ubuntu-Bold',
+        fontSize: 48,
+        color: '#ffffff'
+    },
+    largeTextStyle: {
+        fontFamily: 'Ubuntu-Regular',
+        fontSize: 28,
+        color: '#ffffff'
+    },
+    mediumTextStyle: {
+        fontFamily: 'Ubuntu-Regular',
+        fontSize: 20,
+        color: '#ffffff'
+    },
+    smallTextStyle: {
+        fontFamily: 'Ubuntu-Light',
+        fontSize: 12,
+        color: '#ffffff'
+    },
+    inputStyle: {
+        flex: 5,
+        fontSize: 14,
+        paddingLeft: 20,
+        paddingRight: 20,
+        color: '#2D2D2D',
+        fontFamily: 'Ubuntu-Regular',
+    },
+    containerStyle: {
+        padding: 10,
+        paddingLeft: 20,
+        paddingRight: 20,
+        position: 'relative',
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    cardStyle: {
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 10
+    },
+    btnConfirm: {
+        flex: 1,
+        padding: 5,
+        elevation: 4,
+        borderWidth: 2,
+        borderRadius: 5,
+        alignSelf: 'stretch',
+        borderColor: '#2A4065',
+        backgroundColor: '#2A4065',
+    },
+    btnCancel: {
+        flex: 1,
+        elevation: 4,
+        borderWidth: 2,
+        borderRadius: 5,
+        alignSelf: 'stretch',
+        borderColor: '#CC2820',
+        backgroundColor: '#CC2820',
+    },
+    btnTextStyle: {
+        fontFamily: 'Ubuntu-Medium',
+        fontSize: 16,
+        alignSelf: 'center',
+        color: '#fff',
+        paddingTop: 10,
+        paddingBottom: 10
+    },
+    spinnerStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    scrollViewStyle: {
+        height: '100%',
+    },
+    modalScrollViewStyle: {
+        height: '100%',
+        marginBottom: 20,
+        marginTop: 75
+    },
+    mapStyle: {
+        height: 300,
+        width: '100%'
+    },
+    mapLocalizacaoStyle: {
+        height: height - 80,
+        width: '100%'
+    },
+    eventCardStyle: {
+        elevation: 8,
+        backgroundColor: '#ffff',
+        borderRadius: 10,
+        marginLeft: 10,
+        marginRight: 10,
+        marginBottom: 10,
+    },
+    searchBarStyle: {
+        flex: 1,
+        padding: 20,
+        width: '100%',
+        position: 'absolute'
+    },
+    iconInsideSearchBarStyle: {
+        height: 30,
+        width: 30,
+        justifyContent: 'center',
+        borderRadius: 50,
+        marginRight: 5
+    },
+    iconButtomStyle: {
+        height: 60,
+        width: 60,
+        margin: 15,
+        elevation: 8,
+        borderRadius: 150,
+        alignContent: 'center',
+        justifyContent: 'center'
+    },
+    iconButtomEventStyle: {
+        height: 50,
+        width: 50,
+        margin: 15,
+        elevation: 8,
+        borderRadius: 150,
+        alignContent: 'center',
+        justifyContent: 'center'
+    },
+    viewListItensFoundStyle: {
+        flex: 1,
+        zIndex: 1,
+        position: 'absolute',
+        marginTop: 65,
+        paddingLeft: 18,
+        paddingRight: 18,
+        elevation: 8,
+        width: '100%'
+    },
+    flatListStyle: {
+        borderBottomLeftRadius: 6,
+        borderBottomRightRadius: 6,
+        borderWidth: 2,
+        borderColor: '#FFF',
+    },
+    backgroudTextFlatListStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        borderTopColor: '#777',
+        borderTopWidth: 2,
+        backgroundColor: 'white'
+    },
+    textFlatListStyle: {
+        flex: 5,
+        fontFamily: 'Ubuntu-Regular',
+        backgroundColor: 'white',
+        color: '#777',
+        fontSize: 12,
+        padding: 13,
+        height: 40,
+    },
+    buttomCloseStyle: {
+        height: 30,
+        width: 30,
+        borderRadius: 25,
+        marginRight: 10,
+        backgroundColor: '#CC2820',
+        alignContent: 'center',
+        justifyContent: 'center',
+    },
+    cardHelperStyle: {
+        elevation: 8,
+        flex: 1,
+        alignSelf: 'center',
+        position: 'absolute',
+        bottom: 130,
+        zIndex: 1,
+        backgroundColor: '#FFF',
+        padding: 5,
+        borderRadius: 10,
+    },
+    dicaTextStyle: {
+        flex: 5,
+        fontFamily: 'Ubuntu',
+        textAlign: 'center',
+        fontSize: 14,
+        color: '#2BA3DA',
+        marginLeft: 20,
+        paddingTop: 5,
+    },
+    textCardHelperStyle: {
+        flex: 4,
+        fontSize: 11,
+        padding: 5,
+        fontFamily: 'Ubuntu',
+        color: '#777',
+        textAlign: 'center',
+    },
+    headerModalStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        borderBottomWidth: 1,
+        borderBottomColor: '#777',
+        paddingBottom: 3,
+    },
+    titleModalStyle: {
+        flex: 1,
+        color: '#777',
+        fontSize: 17,
+        paddingTop: 5,
+        marginLeft: 50,
+        fontFamily: 'Ubuntu-Regular',
+    },
+    textModalStyle: {
+        flex: 1,
+        color: '#777',
+        fontSize: 12,
+        fontFamily: 'Ubuntu-Regular',
+        alignItems: 'center',
+        paddingLeft: 5,
+    },
+    backgroundModalStyle: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        paddingBottom: 7,
+        borderTopWidth: 1,
+        borderBottomColor: '#777'
+    },
+    viewInput: {
+        flex: 1,
+        padding: 5,
+        elevation: 8,
+        borderRadius: 5,
+        borderColor: '#FFF',
+        flexDirection: 'row',
+        backgroundColor: '#FFF'
+    }
 });

@@ -12,13 +12,13 @@ import {
 import {
   markLocal,
   saveLocais,
-  createRota,
+  createRoute,
   searchLocal,
   verifyLocais,
   closeHelper,
   closeError,
   loadingRoute,
-  showInfoRota,
+  showInfoRoute,
   clearInputSearch,
   createRouteError,
   createRouteSuccess,
@@ -780,14 +780,14 @@ class Localizacao extends Component {
     );
   }
 
-  renderLoadingRota() {
+  renderLoadingRoute() {
     if (this.props.creatingRoute) {
       return <Loading />;
     }
   }
 
-  renderRotaInfo() {
-    if (!_.isEmpty(this.props.infoRota)) {
+  renderRouteInfo() {
+    if (!_.isEmpty(this.props.infoRotue)) {
       const map = this.refs.Map;
       map.animateToCoordinate({
         latitude: this.props.localizacaoUsuario.coords.latitude,
@@ -795,7 +795,7 @@ class Localizacao extends Component {
       });
 
       return (
-        <View style={styles.containerInfoRota}>
+        <View style={styles.containerinfoRotue}>
           <Text
             style={{
               fontSize: 12,
@@ -819,7 +819,7 @@ class Localizacao extends Component {
               fontFamily: 'Ubuntu-Regular',
             }}
           >
-            Distância:{` ${this.props.infoRota.distance.toFixed(2)} km`}
+            Distância:{` ${this.props.infoRotue.distance.toFixed(2)} km`}
           </Text>
           <Text
             style={{
@@ -830,7 +830,7 @@ class Localizacao extends Component {
               marginTop: 10,
             }}
           >
-            Tempo:{` ${this.props.infoRota.duration.toFixed(2)} min`}
+            Tempo:{` ${this.props.infoRotue.duration.toFixed(2)} min`}
           </Text>
         </View>
       );
@@ -847,7 +847,7 @@ class Localizacao extends Component {
             <TouchableOpacity
               onPress={() => {
                 if (!_.isEmpty(this.props.localMarcado)) {
-                  this.props.createRota(this.props.localMarcado);
+                  this.props.createRoute(this.props.localMarcado);
                 } else {
                   this.props.createRouteError();
                 }
@@ -917,7 +917,7 @@ class Localizacao extends Component {
     }
   }
 
-  renderRota() {
+  renderRoute() {
     if (!this.props.error && this.props.showRoute) {
       return (
         <MapViewDirections
@@ -934,7 +934,7 @@ class Localizacao extends Component {
             this.props.loadingRoute();
           }}
           onReady={result => {
-            this.props.showInfoRota(result);
+            this.props.showInfoRoute(result);
             this.props.createRouteSuccess();
           }}
         />
@@ -958,13 +958,13 @@ class Localizacao extends Component {
         >
           {this.renderMarcadorLocalPesquisado()}
           {this.renderMarcadoresLocais()}
-          {this.renderRota()}
+          {this.renderRoute()}
         </MapView>
         {/* {this.renderFiltroButtons()} */}
         {this.renderInputPesquisarLocais()}
         {this.renderListaLocaisAchados()}
-        {this.renderLoadingRota()}
-        {this.renderRotaInfo()}
+        {this.renderLoadingRoute()}
+        {this.renderRouteInfo()}
         {this.renderButtons()}
         {this.renderHelper()}
         {this.renderError()}
@@ -1018,7 +1018,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#FFF',
   },
-  containerInfoRota: {
+  containerInfoRoute: {
     flex: 1,
     zIndex: 2,
     padding: 5,
@@ -1050,34 +1050,34 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    infoRota: state.localizacao.infoRota,
-    helper: state.localizacao.helper,
     error: state.localizacao.error,
+    helper: state.localizacao.helper,
     locais: state.localizacao.locais,
     loading: state.localizacao.loading,
+    infoRotue: state.localizacao.infoRotue,
+    showRoute: state.localizacao.showRoute,
     localPesquisado: state.localizacao.local,
+    errorMessage: state.localizacao.errorMessage,
     localMarcado: state.localizacao.localMarcado,
     locaisAchados: state.localizacao.locaisAchados,
     creatingRoute: state.localizacao.creatingRoute,
-    errorMessage: state.localizacao.errorMessage,
     helperMessage: state.localizacao.helperMessage,
-    localizacaoUsuario: state.localizacao.localizacaoUsuario,
     inputSearchFocused: state.localizacao.inputSearchFocused,
+    localizacaoUsuario: state.localizacao.localizacaoUsuario,
     localSendoPesquisado: state.localizacao.localSendoPesquisado,
-    showRoute: state.localizacao.showRoute,
   };
 };
 
 export default connect(mapStateToProps, {
   markLocal,
-  createRota,
+  createRoute,
   closeError,
+  closeError,
+  closeHelper,
   closeHelper,
   searchLocal,
   verifyLocais,
-  closeHelper,
-  closeError,
-  showInfoRota,
+  showInfoRoute,
   loadingRoute,
   createRouteError,
   clearInputSearch,

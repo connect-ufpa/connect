@@ -1,11 +1,11 @@
-// import moment from 'moment';
+import { Alert } from 'react-native';
 import { firebaseAuth, database } from '../config/Config';
 import { validateDates, validateHours, validateEvent } from '../helpers/HandleData';
 import {
     MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR,
     INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, SHOW_HELPER_EVENT, CLOSE_HELPER_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EDIT_EVENT,
     EVENT_EDIT_DATA, EVENT_EDIT_HORA, SAVED_EDITED_EVENT, EVENTS_TO_SHOW_SUCCESS, SEARCHING_EVENT, SEARCHED_EVENTO,
-    CLEAR, INICIAL_POSITION, MOVING, CLOSE_LOADING_EVENT_SCREEN
+    CLEAR, INICIAL_POSITION, MOVING, CLOSE_LOADING_EVENT_SCREEN, CLOSE_EVENT_EDIT_HELPER, CLOSE_EVENT_EDIT_HELPER_MAP, COORDS_SAVED
 } from './types';
 
 export const showMarkerAndModal = (e) => {
@@ -49,7 +49,7 @@ export const showHelper = () => {
 };
 
 export const closeEventHelper = () => {
-    return { type: CLOSE_HELPER_EVENT }; 
+    return { type: CLOSE_HELPER_EVENT };
 };
 
 export const saveEvent = (evento) => {
@@ -88,12 +88,12 @@ export const saveEvent = (evento) => {
 };
 
 export const editEvent = ({ prop, value }) => {
-    if (prop === 'data') {
+    if (prop === 'data_inicio' || prop === 'data_fim') {
         const validate = validateDates(value);
         if (validate) return { type: EDIT_EVENT, payload: { prop, value } };
 
         return { type: EVENT_EDIT_DATA, payload: { prop, value } };
-    } else if (prop === 'hora') {
+    } else if (prop === 'hora_inicio' || prop === 'hora_fim') {
         const validate = validateHours(value);
         if (validate) return { type: EDIT_EVENT, payload: { prop, value } };
 
@@ -108,10 +108,13 @@ export const saveNewEventCoords = ({ id, coords }) => {
             lat: coords.lat,
             long: coords.long
         }).then(() => {
-            const prop = 'coords';
-            dispatch({ type: EDIT_EVENT, payload: { prop, coords } });
+            dispatch({ type: COORDS_SAVED });
         });
     };
+};
+
+export const closeEventMapHelper = () => {
+    return { type: CLOSE_EVENT_EDIT_HELPER_MAP };
 };
 
 export const saveEditedEvent = (evento) => {
@@ -138,6 +141,7 @@ export const saveEditedEvent = (evento) => {
                 dispatch({ type: SAVED_EDITED_EVENT });
                 database().ref(`evento/${id}`).on('value', snap => {
                     const evento = snap.val();
+                    evento.id = id;
                     const key = Object.keys(evento);
                     key.forEach(prop => {
                         const value = evento[prop];
@@ -147,6 +151,10 @@ export const saveEditedEvent = (evento) => {
             });
         };
     }
+};
+
+export const closeEventEditHelper = () => {
+    return { type: CLOSE_EVENT_EDIT_HELPER };
 };
 
 export const searchEvento = (nomeEvento, eventos) => {
@@ -164,7 +172,7 @@ export const searchEvento = (nomeEvento, eventos) => {
             });
             searchedEventosSuccess(dispatch, eventosAchados);
         }
-    }; 
+    };
 };
 
 const searchedEventosSuccess = (dispatch, eventos) => {
@@ -172,19 +180,27 @@ const searchedEventosSuccess = (dispatch, eventos) => {
 };
 
 export const serachEventsToShow = () => {
-    // const currentDate = moment().format('DD/MM/YYYY');
     return (dispatch) => {
         dispatch({ type: CLEAR });
         database().ref('evento')
-        .on('value', snap => {
-            const eventos = snap.val();
-            const key = Object.keys(eventos);
-            key.forEach(id => {
-                const { nome, descricao, local, data_inicio, hora_inicio, coords, hora_fim, data_fim, area_tematica, usuario_id } = eventos[id];
-                dispatch({ type: EVENTS_TO_SHOW_SUCCESS, payload: { id, nome, descricao, local, data_inicio, hora_inicio, coords, hora_fim, data_fim, area_tematica, usuario_id } });
-            }); 
-                dispatch({ type: CLOSE_LOADING_EVENT_SCREEN }); 
-        });
+            .on('value', snap => {
+                const eventos = snap.val();
+                if (eventos) {
+                    const key = Object.keys(eventos);
+                    key.forEach(id => {
+                        const { nome, descricao, local, data_inicio, hora_inicio, coords, hora_fim, data_fim, area_tematica, usuario_id } = eventos[id];
+                        dispatch({ type: EVENTS_TO_SHOW_SUCCESS, payload: { id, nome, descricao, local, data_inicio, hora_inicio, coords, hora_fim, data_fim, area_tematica, usuario_id } });
+                    });
+                    dispatch({ type: CLOSE_LOADING_EVENT_SCREEN });
+                } else {
+                    dispatch({ type: CLOSE_LOADING_EVENT_SCREEN });
+                    Alert.alert(
+                        'Ainda não há eventos cadastrados!',
+                        'Clique no botão abaixo para criar seu primeiro evento.', 
+                        [{ text: 'OK', onPress: () => console.log('OK Pressed') }]
+                    );
+                }
+            });
     };
 };
 

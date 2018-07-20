@@ -84,7 +84,7 @@ export const searchLocalizacaoUsuario = () => {
   };
 };
 
-export const showInfoRota = info => {
+export const showInfoRoute = info => {
   return dispatch => {
     dispatch({ type: ROUTE_INFO, payload: info });
   };
@@ -112,7 +112,7 @@ export const saveLocais = locais => {
   }
 };
 
-export const createRota = local => {
+export const createRoute = local => {
   if (_.isEmpty(local)) {
     return dispatch => {
       dispatch({
