@@ -973,7 +973,7 @@ class Localizacao extends Component {
         {this.renderButtons()}
         {this.renderHelper()}
         {this.renderError()}
-        {/* {this.debugState()} */}
+        {/*   */}
       </ScrollView>
     );
   }
