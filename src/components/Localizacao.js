@@ -383,10 +383,10 @@ class Localizacao extends Component {
           <FlatList
             data={this.props.locaisAchados}
             style={{
-              borderBottomLeftRadius: 6,
-              borderBottomRightRadius: 6,
               borderWidth: 2,
               borderColor: '#FFF',
+              borderBottomLeftRadius: 6,
+              borderBottomRightRadius: 6,
             }}
             renderItem={({ item }) => (
               <TouchableOpacity
@@ -397,24 +397,29 @@ class Localizacao extends Component {
                 <View
                   style={{
                     flex: 1,
+                    borderTopWidth: 1,
                     flexDirection: 'row',
                     borderTopColor: '#777',
                     backgroundColor: '#FFF',
-                    borderTopWidth: 1,
-                    padding: 10,
                   }}
                 >
                   <Text style={Styles.textFlatListStyle}>{item.nome}</Text>
                   <View
                     style={{
-                      width: 20,
-                      height: 20,
-                      borderRadius: 50,
+                      flex: 1,
+                      alignItems: 'center',
                       justifyContent: 'center',
-                      backgroundColor: '#2A4065',
-                    }}
-                  >
-                    <Icon name="keyboard-arrow-right" color="#FFF" size={20} />
+                    }}>
+                    <View
+                      style={{
+                        width: 20,
+                        height: 20,
+                        borderRadius: 50,
+                        backgroundColor: '#2A4065',
+                      }}
+                    >
+                      <Icon name="keyboard-arrow-right" color="#FFF" size={20} />
+                    </View>
                   </View>
                 </View>
               </TouchableOpacity>
@@ -787,7 +792,7 @@ class Localizacao extends Component {
   }
 
   renderRouteInfo() {
-    if (!_.isEmpty(this.props.infoRotue)) {
+    if (!_.isEmpty(this.props.infoRoute)) {
       const map = this.refs.Map;
       map.animateToCoordinate({
         latitude: this.props.localizacaoUsuario.coords.latitude,
@@ -795,17 +800,17 @@ class Localizacao extends Component {
       });
 
       return (
-        <View style={styles.containerinfoRotue}>
+        <View style={styles.containerInfoRoute}>
           <Text
             style={{
               fontSize: 12,
               paddingBottom: 5,
               color: '#2D2D2D',
               textAlign: 'center',
-              borderBottomWidth: 2,       
+              borderBottomWidth: 2,
               fontFamily: 'Ubuntu-Medium',
               borderBottomColor: '#2D2D2D',
-              
+
             }}
           >
             Informações da rota
@@ -819,7 +824,7 @@ class Localizacao extends Component {
               fontFamily: 'Ubuntu-Regular',
             }}
           >
-            Distância:{` ${this.props.infoRotue.distance.toFixed(2)} km`}
+            Distância:{` ${this.props.infoRoute.distance.toFixed(2)} km`}
           </Text>
           <Text
             style={{
@@ -830,7 +835,7 @@ class Localizacao extends Component {
               marginTop: 10,
             }}
           >
-            Tempo:{` ${this.props.infoRotue.duration.toFixed(2)} min`}
+            Tempo:{` ${this.props.infoRoute.duration.toFixed(2)} min`}
           </Text>
         </View>
       );
@@ -895,8 +900,8 @@ class Localizacao extends Component {
     if (this.props.helper && !this.props.loading) {
       return (
         <HelperCard
-          title={'Dica!'}
           kind={'helper'}
+          title={'Dica!'}
           onPress={this.props.closeHelper}
           message={this.props.helperMessage}
         />
@@ -908,8 +913,8 @@ class Localizacao extends Component {
     if (this.props.error) {
       return (
         <HelperCard
-          title={'Erro!'}
           kind={'error'}
+          title={'Erro!'}
           onPress={this.props.closeError}
           message={this.props.errorMessage}
         />
@@ -968,7 +973,7 @@ class Localizacao extends Component {
         {this.renderButtons()}
         {this.renderHelper()}
         {this.renderError()}
-        {this.debugState()}
+        {/* {this.debugState()} */}
       </ScrollView>
     );
   }
@@ -1054,7 +1059,7 @@ const mapStateToProps = state => {
     helper: state.localizacao.helper,
     locais: state.localizacao.locais,
     loading: state.localizacao.loading,
-    infoRotue: state.localizacao.infoRotue,
+    infoRoute: state.localizacao.infoRoute,
     showRoute: state.localizacao.showRoute,
     localPesquisado: state.localizacao.local,
     errorMessage: state.localizacao.errorMessage,

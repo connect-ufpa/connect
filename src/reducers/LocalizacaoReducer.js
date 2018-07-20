@@ -40,25 +40,25 @@ export default (state = INITIAL_STATE, action) => {
     case MARK_LOCAL:
       return {
         ...state,
+        helper: true,
         infoRoute: {},
         locaisAchados: [],
         localPesquisado: '',
         localMarcado: action.payload,
         localSendoPesquisado: action.payload.nome,
-        helper: true,
         helperMessage:
           'Clique no botão para gerar uma rota ao local pesquisado.',
       };
     case ERROR_CREATING_ROUTE:
       return {
         ...state,
+        error: true,
+        helper: false,
+        showRoute: false,
         routeCreated: false,
         creatingRoute: false,
-        error: true,
-        showRoute: false,
         errorMessage:
           'Por favor, pesquise um local desejado antes de tentar criar uma rota.',
-        helper: false,
       };
     case CLEAR_INPUT_SEARCH:
       return {
@@ -66,8 +66,9 @@ export default (state = INITIAL_STATE, action) => {
         infoRoute: {},
         localMarcado: {},
         locaisAchados: [],
-        localSendoPesquisado: '',
         localPesquisado: '',
+        localSendoPesquisado: '',
+        helper: false,
         showRoute: false,
         creatingRoute: false,
         inputSearchFocused: false,
@@ -80,17 +81,16 @@ export default (state = INITIAL_STATE, action) => {
       };
     case SEARCHING_LOCAL:
       return {
-        ...state,
+        ...state,        
+        error: false,
+        helper: false,
+        creatingRoute: false,
+        inputSearchFocused: true,
         infoRoute: {},
         localMarcado: {},
         locaisAchados: [],
         localPesquisado: action.payload,
         localSendoPesquisado: action.payload.nome,
-        helper: false,
-        error: false,
-        helper: false,
-        creatingRoute: false,
-        inputSearchFocused: true,
       };
     case SEARCHED_LOCAL:
       return {

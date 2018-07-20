@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
 import Styles from '../../Styles';
 
 const HEIGHT = Dimensions.get('window').height;
@@ -15,16 +15,21 @@ const HelperCard = ({ onPress, message, title, kind }) => {
           { width: WIDTH * 0.5, height: HEIGHT * 0.2 },
         ]}
       >
-        <View style={Styles.cardHelperHeaderContainer}>
+        <View
+          style={{
+            flex: 1,
+            marginTop: 5,
+            marginBottom: 10,
+            flexDirection: 'row',
+          }}
+        >
           <Text style={Styles.dicaTextStyle}>{title}</Text>
-          <TouchableOpacity
-            style={{ alignSelf: 'center' }}
-            onPress={onPress}
-          >
+          <TouchableOpacity style={{ alignSelf: 'center' }} onPress={onPress}>
             <View style={Styles.buttomCloseStyle}>
               <Icon name="clear" color="#FFF" size={15} />
             </View>
           </TouchableOpacity>
+
         </View>
         <Text style={Styles.textCardHelperStyle}>{message}</Text>
       </View>
@@ -37,12 +42,16 @@ const HelperCard = ({ onPress, message, title, kind }) => {
           { width: WIDTH * 0.5, height: HEIGHT * 0.2 },
         ]}
       >
-        <View style={Styles.cardHelperHeaderContainer}>
-          <Text style={[Styles.dicaTextStyle, { color: '#CC2820' }]}>{title}</Text>
-          <TouchableOpacity
-            style={{ alignSelf: 'center' }}
-            onPress={onPress}
-          >
+        <View
+          style={{
+            flex: 1,
+            marginTop: 5,
+            marginBottom: 10,
+            flexDirection: 'row',
+          }}
+        >
+          <Text style={Styles.errorTextStyle}>{title}</Text>
+          <TouchableOpacity style={{ alignSelf: 'center' }} onPress={onPress}>
             <View style={Styles.buttomCloseStyle}>
               <Icon name="clear" color="#FFF" size={15} />
             </View>

@@ -121,9 +121,22 @@ export const createRoute = local => {
     };
   } else {
     return dispatch => {
-      dispatch({
-        type: CREATING_ROUTE,
-      });
+      dispatch({ type: SEARCHING_USER_LOCALIZATION });  
+      navigator.geolocation.getCurrentPosition(
+        localizacao => {
+          console.log("Localizacao:", localizacao);
+          searchLocalizacaoUsuarioSuccess(dispatch, localizacao);
+          dispatch({
+            type: CREATING_ROUTE,
+          });
+        },
+        error => {
+          console.log(error);
+          dispatch({
+            type: ERROR_CREATING_ROUTE,
+          });
+        }
+      );
     };
   }
 };
