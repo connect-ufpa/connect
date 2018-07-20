@@ -1,14 +1,14 @@
 {
-  "tipo": "Instituto",
-  "tipo": "Laboratório",
-  "tipo": "Biblioteca",
   "tipo": "Bloco",
-  "tipo": "Banheiro",
-  "tipo": "Administração",
-  "tipo": "Restaurante",
-  "tipo": "Centro Acadêmico",
-  "tipo": "Desporto",
-  "tipo": "Convenções",
   "tipo": "Serviço",
-  "tipo": "Hospital"
+  "tipo": "Hospital",
+  "tipo": "Banheiro",
+  "tipo": "Desporto",
+  "tipo": "Instituto",
+  "tipo": "Biblioteca",
+  "tipo": "Convenções",
+  "tipo": "Restaurante",
+  "tipo": "Laboratório",
+  "tipo": "Administração",
+  "tipo": "Centro Acadêmico"
 }
