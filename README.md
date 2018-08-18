@@ -1,10 +1,18 @@
-# <img src="http://res.cloudinary.com/oaugusto/image/upload/v1525272222/icon.png" width="40px"> Connect
-![Version](https://img.shields.io/badge/version-1.0-green.svg) 
-[![MIT](https://img.shields.io/dub/l/vibe-d.svg)]() 
+# <img src="http://res.cloudinary.com/oaugusto/image/upload/v1525272222/connect/icon.png" width="40px"> Connect
+![Version](https://img.shields.io/badge/version-1.0-green.svg) ![MIT](https://img.shields.io/dub/l/vibe-d.svg)
 
 ## What is it?
 
 The Connect project has as main objective be a helper mobile tool for the UFPa community in general. Providing route and informations for places, showing events happening in the university and much more.
+
+## Functionality images
+
+<p float="left" align="center">
+  <img src="http://res.cloudinary.com/oaugusto/image/upload/v1534610891/connect/login.png" width="200px">
+  <img src="http://res.cloudinary.com/oaugusto/image/upload/v1534610899/connect/home.png" width="200px">
+  <img src="http://res.cloudinary.com/oaugusto/image/upload/v1534610916/connect/search-place.png" width="200px">
+  <img src="http://res.cloudinary.com/oaugusto/image/upload/v1534610911/connect/generate-route.png" width="200px">
+</p>
 
 ## How to use
 
