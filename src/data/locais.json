@@ -29,6 +29,42 @@
       "tipo": "Convenções"
     },
     {
+      "nome": "Banheiro Ver-o-pesinho",
+      "desc": "Banheiro em frente ao \"Ver-o-pesinho\".",
+      "coords": {
+        "lat": -1.474074,
+        "lng": -48.450519
+      },
+      "tipo": "Banheiro"
+    },
+    {
+      "nome": "Prédio de Pós-graduação do ITEC",
+      "desc": "Prédio de Pós-graduação do ITEC.",
+      "coords": {
+        "lat": -1.474581,
+        "lng": -48.453726
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Prédio LABTIC/GERCOM/LABES",
+      "desc": "Prédio LABTIC/GERCOM/LABES.",
+      "coords": {
+        "lat": -1.473911,
+        "lng": -48.454345
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "PPEB - Programa de Pós Graduação em Currículo e Gestão da Escola Básica",
+      "desc": "O Programa de Pós-Graduação em Currículo e Gestão da Escola Básica (PPEB) iniciou suas atividades em junho de 2015 vinculado ao Instituto de Ciências da Educação (ICED/UFPA), quando teve aprovado o seu curso de Mestrado Acadêmico pela Coordenação de Aperfeiçoamento de Pessoal de Nível Superior (CAPES) e pelo Conselho Superior de Ensino, Pesquisa e Extensão (CONSEPE) da UFPA, nos termos da Resolução Nº 4.720/2015. ",
+      "coords": {
+        "lat": -1.472078,
+        "lng": -48.449258
+      },
+      "tipo": "Laboratório"
+    },
+    {
       "nome": "Chalé de Ferro",
       "desc": "Inaugurado em 11 de Janeiro de 1992, o Chalé de ferro é de origem belga e é o mais expressivo representante no Brasil do sistema construtivo Danly e do modelo de bangalô anglo-indiano, é o único com dois pavimentos totalmente em ferro. Não se conhece com precisão as circunstâncias de sua aquisição.",
       "coords": {
@@ -234,6 +270,429 @@
         "lng": -48.453682
       },
       "tipo": "Serviço"
-    }
+    },
+    {
+      "nome": "Auditório Setorial Básico",
+      "desc": "Auditório Setorial Básico.",
+      "coords": {
+        "lat": -1.473616,
+        "lng": -48.456967
+      },
+      "tipo": "Convenções"
+    },
+    {
+      "nome": "Assessoria de Educação a Distância (AEDI)",
+      "desc": "Assessoria de Educação a Distância (AEDI).",
+      "coords": {
+        "lat": -1.475546,
+        "lng": -48.456704
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Biblioteca Central",
+      "desc": "Fundada no dia 19 de novembro de 1962, a Biblioteca Central da UFPA, que leva o nome do seu primeiro diretor Prof. Dr. Clodoaldo Beckmann, pertence à categoria de órgão suplementar subordinado à Reitoria, de acordo com o disposto no Art. 51 do Estatuto e ainda no Art. 100, Seção IV, Cap. II do Regimento Geral da UFPA. Conforme estes dispositivos, trata-se de um órgão de natureza técnica voltada para o desenvolvimento de atividades a fim de colaborar com programas de ensino, pesquisa, extensão e qualificação profissional das unidades acadêmicas. Integra e coordena tecnicamente um conjunto de 36 bibliotecas em Belém e nos campi dos interiores que juntas compõem o Sistema de Bibliotecas da UFPA, estabelecido com um modelo de funcionamento sistêmico em rede.",
+      "coords": {
+        "lat": -1.476163,
+        "lng": -48.456684
+      },
+      "tipo": "Biblioteca"
+    },
+    {
+      "nome": "Biblioteca do Instituto de Geociências",
+      "desc": "A Biblioteca do Instituto de Geociências é uma biblioteca universitária especializada em Ciências Naturais e da Terra, integrante do Sistema de Bibliotecas da Universidade Federal do Pará - SIBI. Tem por objetivo promover o acesso à informação, em apoio aos programas de ensino, pesquisa e extensão dos cursos de graduação em Geologia, Geofísica, Meteorologia e Oceanografia e pós-graduação em Geologia e Geoquímica, Geofísica e Ciências Ambientais da UFPA, assim como ao público em geral que necessite de informações na área.",
+      "coords": {
+        "lat": -1.475017,
+        "lng": -48.458055
+      },
+      "tipo": "Biblioteca"
+    },
+    {
+      "nome": "Biotério",
+      "desc": "Biotério.",
+      "coords": {
+        "lat": -1.472707,
+        "lng": -48.457691
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Centro de Tecnologia da Informação e Comunicação (CTIC)",
+      "desc": "O Centro de Tecnologia da Informação e Comunicação (CTIC), antes denominado Serviço de Estatística e Computação (SECOM), foi inaugurado no dia 3 de junho de 1972 em um prédio de 502 metros quadrados. Sua criação teve como objetivo a utilização da informática nas atividades de ensino, pesquisa, extensão e administração da Universidade Federal do Pará. Na época, suas principais funções eram: fazer a coleta e a apresentação estatística das atividades didáticas, científicas e administrativas desempenhadas pela Universidade; fazer o processamento dos dados estatísticos através da computação e realizar a computação dos dados de que necessitasse a Universidade no campo de pesquisa, ensino e administração.",
+      "coords": {
+        "lat": -1.474984,
+        "lng": -48.456154
+      },
+      "tipo": "Administração"
+    },
+    {
+      "nome": "Centro de Processos Seletivos (CEPS)",
+      "desc": "Centro de Processos Seletivos (CEPS).",
+      "coords": {
+        "lat": -1.475504,
+        "lng": -48.455840
+      },
+      "tipo": "Administração"
+    },
+    {
+      "nome": "Centro de Registro e Indicadores Acadêmicos (CIAC)",
+      "desc": "Centro de Registro e Indicadores Acadêmicos (CIAC).",
+      "coords": {
+        "lat": -1.475564,
+        "lng": -48.456240
+      },
+      "tipo": "Administração"
+    },
+    {
+      "nome": "Clínica de Psicologia",
+      "desc": "Clínica de Psicologia da UFPa.",
+      "coords": {
+        "lat": -1.472680,
+        "lng": -48.455598
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Ver-o-pesinho Básico",
+      "desc": "Ver-o-pesinho Básico.",
+      "coords": {
+        "lat": -1.475725,
+        "lng": -48.456578
+      },
+      "tipo": "Restaurante"
+    },
+    {
+      "nome": "Restaurante Universitário Básico",
+      "desc": "Restaurante Universitário Básico.",
+      "coords": {
+        "lat": -1.477771,
+        "lng": -48.458116
+      },
+      "tipo": "Restaurante"
+    },
+    {
+      "nome": "Editora da UFPa",
+      "desc": "Editora da UFPa.",
+      "coords": {
+        "lat": -1.477142,
+        "lng": -48.458270
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Espaço de Ensino Mirante do Rio",
+      "desc": "Espaço de Ensino Mirante do Rio.",
+      "coords": {
+        "lat": -1.476925,
+        "lng": -48.456491
+      },
+      "tipo": "Bloco"
+    },
+    {
+      "nome": "Fundação de Amparo a Educação e Pesquisa - FADESP",
+      "desc": "Fundação de Amparo a Educação e Pesquisa - FADESP.",
+      "coords": {
+        "lat": -1.473931,
+        "lng": -48.457944
+      },
+      "tipo": "Administração"
+    },
+    {
+      "nome": "Faculdade de Arquivologia",
+      "desc": "Faculdade de Arquivologia.",
+      "coords": {
+        "lat": -1.476233,
+        "lng": -48.456379
+      },
+      "tipo": "Instituto"
+    },
+    {
+      "nome": "Reitoria",
+      "desc": "Reitoria da UFPa.",
+      "coords": {
+        "lat": -1.475717,
+        "lng": -48.455183
+      },
+      "tipo": "Administração"
+    },
+    {
+      "nome": "Laboratório de DNA",
+      "desc": "Laboratório de DNA.",
+      "coords": {
+        "lat": -1.473353,
+        "lng": -48.456900
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Laboratório de Geologia",
+      "desc": "Laboratório de Geologia.",
+      "coords": {
+        "lat": -1.474225,
+        "lng": -48.457459
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Laboratório de Extracta",
+      "desc": "Laboratório de Extracta.",
+      "coords": {
+        "lat": -1.473345,
+        "lng": -48.458786
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Laboratório de Física Ensino",
+      "desc": "Laboratório de Física Ensino.",
+      "coords": {
+        "lat": -1.474636,
+        "lng": -48.456789
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Laboratório de Química Ensino",
+      "desc": "Laboratório de Química Ensino.",
+      "coords": {
+        "lat": -1.475739,
+        "lng": -48.457794
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Laboratório de Antropologia",
+      "desc": "Laboratório de Antropologia.",
+      "coords": {
+        "lat": -1.473891,
+        "lng": -48.456793
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Laboratório de Antropologia",
+      "desc": "Laboratório de Antropologia.",
+      "coords": {
+        "lat": -1.473891,
+        "lng": -48.456793
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Laboratório de Biologia Computacional",
+      "desc": "Laboratório de Biologia Computacional.",
+      "coords": {
+        "lat": -1.473644,
+        "lng": -48.457983
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Instituto de Geociências (IG)",
+      "desc": "Instituto de Geociências (IG).",
+      "coords": {
+        "lat": -1.474766,
+        "lng":  -48.457649
+      },
+      "tipo": "Instituto"
+    },
+    {
+      "nome": "Instituto de Ciências Biológicas (ICB)",
+      "desc": "Instituto de Ciências Biológicas (ICB).",
+      "coords": {
+        "lat": -1.473190, 
+        "lng": -48.457734
+      },
+      "tipo": "Instituto"
+    },
+    {
+      "nome": "Instituto de Ciências Exatas e Naturais (ICEN)",
+      "desc": "Instituto de Ciências Exatas e Naturais (ICEN).",
+      "coords": {
+        "lat": -1.474714, 
+        "lng": -48.456309
+      },
+      "tipo": "Instituto"
+    },
+    {
+      "nome": "Instituto de Filosofia e Ciências Humanas (IFCH)",
+      "desc": "Instituto de Filosofia e Ciências Humanas (IFCH).",
+      "coords": {
+        "lat": -1.473933, 
+        "lng": -48.456465
+      },
+      "tipo": "Instituto"
+    },
+    {
+      "nome": "Instituto de Letras e Comunicação (ILC)",
+      "desc": "Instituto de Letras e Comunicação (ILC).",
+      "coords": {
+        "lat": -1.473321,
+        "lng": -48.456544
+      },
+      "tipo": "Instituto"
+    },
+    {
+      "nome": "Mecanica",
+      "desc": "Mecanica da UFPa.",
+      "coords": {
+        "lat": -1.472580, 
+        "lng": -48.458843
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Ginásio de Esportes",
+      "desc": "Ginásio de Esportes.",
+      "coords": {
+        "lat": -1.473322, 
+        "lng": -48.455578
+      },
+      "tipo": "Desporto"
+    },
+    {
+      "nome": "Segurança",
+      "desc": "Segurança.",
+      "coords": {
+        "lat": -1.475434,  
+        "lng": -48.458575
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Segurança",
+      "desc": "Segurança.",
+      "coords": {
+        "lat": -1.475434,  
+        "lng": -48.458575
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Marcenaria",
+      "desc": "Marcenaria .",
+      "coords": {
+        "lat": -1.471972, 
+        "lng": -48.458742
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Marcenaria",
+      "desc": "Marcenaria .",
+      "coords": {
+        "lat": -1.471972, 
+        "lng": -48.458742
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Coordenadoria de Capacitação e Desenvolvimento (CAPACIT)",
+      "desc": "Coordenadoria de Capacitação e Desenvolvimento (CAPACIT).",
+      "coords": {
+        "lat": -1.472174,
+        "lng": -48.457377
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Núcleo de Ciências Agrárias e Desenvolvimento Rural (NCADR)",
+      "desc": "Núcleo de Ciências Agrárias e Desenvolvimento Rural (NCADR).",
+      "coords": {
+        "lat": -1.472358, 
+        "lng": -48.456720
+      },
+      "tipo": "Administração"
+    },
+    {
+      "nome": "Setor de recreação (Vadião)",
+      "desc": "Setor de recreação (Vadião).",
+      "coords": {
+        "lat": -1.476751, 
+        "lng": -48.454429
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Prefeitura",
+      "desc": "Prefeitura.",
+      "coords": {
+        "lat": -1.475833, 
+        "lng": -48.458833 
+      },
+      "tipo": "Administração"
+    },
+    {
+      "nome": "Ceamazon",
+      "desc": "Ceamazon.",
+      "coords": {
+        "lat": -1.466797, 
+        "lng": -48.446923  
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "GEDAE",
+      "desc": "GEDAE.",
+      "coords": {
+        "lat": -1.470523,
+        "lng": -48.445887  
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Poema",
+      "desc": "Poema.",
+      "coords": {
+        "lat": -1.472797, 
+        "lng": -48.447400  
+      },
+      "tipo": "Restaurante"
+    },
+    {
+      "nome": "Hospital Universitário Bettina Ferro de Souza",
+      "desc": "Hospital Universitário Bettina Ferro de Souza.",
+      "coords": {
+        "lat": -1.469460, 
+        "lng": -48.446853  
+      },
+      "tipo": "Hospital"
+    },
+    {
+      "nome": "Farmácia Escola",
+      "desc": "Farmácia Escola.",
+      "coords": {
+        "lat": -1.471841, 
+        "lng": -48.446908  
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Faculdade de Fisioterapia",
+      "desc": "Faculdade de Fisioterapia.",
+      "coords": {
+        "lat": -1.471245, 
+        "lng": -48.446162  
+      },
+      "tipo": "Instituto"
+    },
+    {
+      "nome": "Faculdade de Enfermagem",
+      "desc": "Faculdade de Enfermagem.",
+      "coords": {
+        "lat": -1.471013,
+        "lng": -48.446593  
+      },
+      "tipo": "Instituto"
+    },
+    {
+      "nome": "Faculdade de Farmácia",
+      "desc": "Faculdade de Farmácia.",
+      "coords": {
+        "lat": -1.471818, 
+        "lng": -48.447412 
+      },
+      "tipo": "Instituto"
+    },
   ]
 }

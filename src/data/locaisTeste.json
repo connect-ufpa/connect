@@ -2,11 +2,12 @@
   "local": 
   [
     {
-      "nome": "Atelier de Artes",
+      "nome": "",
       "coords": {
-        "lat": -1.473950,
-        "lng": -48.453760
-      }
+        "lat": "",
+        "lng": "",
+      },
+      "tipo": ""
     },
     {
       "nome": "Auditório Setorial Profissional",
