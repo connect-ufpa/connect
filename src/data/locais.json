@@ -694,5 +694,131 @@
       },
       "tipo": "Instituto"
     },
+    {
+      "nome": "Subestação ",
+      "desc": "Subestação da UFPa.",
+      "coords": {
+        "lat": -1.469719, 
+        "lng": -48.447628  
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Subestação",
+      "desc": "Subestação da UFPa.",
+      "coords": {
+        "lat": -1.469719, 
+        "lng": -48.447628  
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Laboratório de Engenharia Naval",
+      "desc": "Laboratório de Engenharia Naval.",
+      "coords": {
+        "lat": -1.470598,  
+        "lng": -48.445068  
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Laboratório de Qualidade do Leite",
+      "desc": "Laboratório de Qualidade do Leite.",
+      "coords": {
+        "lat": -1.466705, 
+        "lng": -48.446118  
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Laboratório de Biologia",
+      "desc": "Laboratório de Biologia.",
+      "coords": {
+        "lat": -1.473248, 
+        "lng": -48.457883 
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Laboratório de Odontologia",
+      "desc": "Laboratório de Odontologia.",
+      "coords": {
+        "lat": -1.471017, 
+        "lng": -48.447265
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Laboratório de Farmácia",
+      "desc": "Laboratório de Farmácia.",
+      "coords": {
+        "lat": -1.471718, 
+        "lng": -48.447251 
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Laboratório de Analises Clinicas",
+      "desc": "Laboratório de Analises Clinicas.",
+      "coords": {
+        "lat": -1.471934, 
+        "lng": -48.447830
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Espaço Inovação",
+      "desc": "Espaço Inovação.",
+      "coords": {
+        "lat": -1.464273,  
+        "lng": -48.445339
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Centro de Estudos Avançados da Biodiversidade (CEABIO)",
+      "desc": "Centro de Estudos Avançados da Biodiversidade (CEABIO).",
+      "coords": {
+        "lat": -1.466264,   
+        "lng": -48.444890
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Incubadora",
+      "desc": "Incubadora.",
+      "coords": {
+        "lat": -1.463759,  
+        "lng": -48.445382 
+      },
+      "tipo": "Serviço"
+    },
+    {
+      "nome": "Instituto Nacional de Pesquisas Espaciais (INPE)",
+      "desc": "Instituto Nacional de Pesquisas Espaciais (INPE).",
+      "coords": {
+        "lat": -1.461128, 
+        "lng": -48.441762  
+      },
+      "tipo": "Instituto"
+    },
+    {
+      "nome": "Laboratório de Alta Tensão",
+      "desc": "Laboratório de Alta Tensão.",
+      "coords": {
+        "lat": -1.460487, 
+        "lng": -48.442320   
+      },
+      "tipo": "Laboratório"
+    },
+    {
+      "nome": "Laboratório de Biologia Pesqueira",
+      "desc": "Laboratório de Biologia Pesqueira.",
+      "coords": {
+        "lat": -1.459446, 
+        "lng": -48.443428   
+      },
+      "tipo": "Laboratório"
+    }
   ]
 }
