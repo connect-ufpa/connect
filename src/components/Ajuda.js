@@ -37,6 +37,8 @@ class Ajuda extends Component {
     pergunta4: false,
     pergunta5: false,
     pergunta6: false,
+    pergunta7: false,
+    pergunta8: false,
   };
 
   render() {
@@ -58,7 +60,7 @@ class Ajuda extends Component {
           />
           <Question
             question={"Como faço para relatar erros, bugs ou feedbacks?"}
-            answer={"De ante mão agradecemos qualquer tipo de feedback construtivo e relatos. Por favor, envie um e-mail explicando o que venha ter acontecido para: connect-team@gmail.com."}
+            answer={"De ante mão agradecemos qualquer tipo de feedback e relatos construtivos. Por favor, envie um e-mail explicando o que venha ter acontecido para: tavioalves@gmail.com."}
             isOpen={this.state.pergunta2}
             onClick={() => {
               this.state.pergunta2
@@ -78,7 +80,7 @@ class Ajuda extends Component {
           />
           <Question
             question={"Quem são os membros da equipe de desenvolvimento?"}
-            answer={"A equipe de desenvolvimento é composta por três alunos de Engenharia da Computação: Ailson Freire, Hugo Bragança e Otavio Augusto. Sendo orientada e coordenada pelo Prof. Dr. Sandro Bezerra."}
+            answer={"A equipe de desenvolvimento é composta atualmente por três alunos de Engenharia da Computação: Ailson Freire responsável pelo módulo de Eventos, Hugo Bragança responsável pelo módulo de Gerenciamento de dados, e Otavio Augusto responsável pelo módulo de Localização. Sendo orientada e coordenada pelo Prof. Dr. Sandro Bezerra."}
             isOpen={this.state.pergunta4}
             onClick={() => {
               this.state.pergunta4
@@ -89,7 +91,7 @@ class Ajuda extends Component {
 
           <Question
             question={"Como posso inserir conteúdo?"}
-            answer={"Utilize as funcionalidades de criar/inserir local ou evento. O mesmo será verificado pelo administrador, sendo aceito ou não em nosso banco de dados."}
+            answer={"Atualmente, não há nenhum módulo inserido ao projeto que possua tais funcionalidades, porém novos módulos irão ser inclusos ao projeto e possuirão tais funcionalidades. Por exemplo, o usuário poderá criar/inserir local ou evento e o mesmo será verificado por um administrador, sendo aceito ou não em nosso banco de dados."}
             isOpen={this.state.pergunta5}
             onClick={() => {
               this.state.pergunta5
@@ -99,12 +101,32 @@ class Ajuda extends Component {
           />
           <Question
             question={"Qual a abrangência do aplicativo?"}
-            answer={"Infelizmente o aplicativo é um prototípo, portanto sua área de abragência atualmente fica restrita ao campus Belém da UFPa."}
+            answer={"Atualmente a área de abragência fica restrita ao campus Belém da UFPa."}
             isOpen={this.state.pergunta6}
             onClick={() => {
               this.state.pergunta6
                 ? this.setState({ pergunta6: false })
                 : this.setState({ pergunta6: true })
+            }}
+          />
+          <Question
+            question={"O connect é 'opensource'?"}
+            answer={"Sim! O código do projeto está totalmente aberto e versionado no github. Você pode achar o projeto pelo nome 'connect'. Esperamos pela sua contribuição."}
+            isOpen={this.state.pergunta7}
+            onClick={() => {
+              this.state.pergunta7
+                ? this.setState({ pergunta7: false })
+                : this.setState({ pergunta7: true })
+            }}
+          />
+          <Question
+            question={"Como posso ajudar o projeto?"}
+            answer={"Peça acesso ao repositório ou contacte um dos desenvolvedores para verificar a melhor forma de contribuir."}
+            isOpen={this.state.pergunta8}
+            onClick={() => {
+              this.state.pergunta8
+                ? this.setState({ pergunta8: false })
+                : this.setState({ pergunta8: true })
             }}
           />
         </View>
@@ -136,6 +158,7 @@ const stylesAjuda = StyleSheet.create({
   },
   containerRow: {
     flex: 1,
+    marginBottom: 20,
     flexDirection: 'row'
   },
   containerTitle: {
