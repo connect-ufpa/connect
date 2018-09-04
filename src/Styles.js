@@ -44,13 +44,6 @@ export default StyleSheet.create({
         color: '#DDD',
         fontFamily: 'Ubuntu-Light',
     },
-    headerText: {
-        padding: 20,
-        fontSize: 16,
-        color: '#2A4065',
-        textAlign: 'left',
-        fontFamily: 'Ubuntu-Medium'
-    },
     inputStyle: {
         flex: 5,
         fontSize: 14,
