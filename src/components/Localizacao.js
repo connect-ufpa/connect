@@ -24,7 +24,7 @@ import {
   createRouteSuccess,
   searchLocalizacaoUsuario,
 } from '../actions';
-import { Spinner, CalloutView, HeaderImage, Loading, HelperCard } from './commons';
+import { CalloutView, HeaderImage, Loading, HelperCard } from './commons';
 import MapViewDirections from 'react-native-maps-directions';
 import MapView, { Marker, Callout } from 'react-native-maps';
 import { Icon } from 'react-native-elements';
@@ -83,8 +83,6 @@ class Localizacao extends Component {
       ),
     };
   };
-
-  // saveLocais(locais);
 
   componentDidMount() {
     this.props.verifyLocais();
@@ -1007,9 +1005,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     zIndex: 4,
     marginBottom: 15,
+    position: 'absolute',
     flexDirection: 'row',
     justifyContent: 'center',
-    position: 'absolute',
   },
   containerPesquisar: {
     flex: 1,
@@ -1077,8 +1075,6 @@ export default connect(mapStateToProps, {
   markLocal,
   createRoute,
   closeError,
-  closeError,
-  closeHelper,
   closeHelper,
   searchLocal,
   verifyLocais,
