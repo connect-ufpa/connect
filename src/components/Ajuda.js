@@ -111,10 +111,10 @@ class Ajuda extends Component {
         <View style={containerSection}>
           <Text style={containerTitle}>Contato</Text>
           <View style={containerRow}>
-            <ContactButton 
+            <ContactButton
               iconName={"email"}
             />
-            <ContactButton 
+            <ContactButton
               iconName={"facebook"}
               iconType={"font-awesome"}
             />
@@ -141,7 +141,7 @@ const stylesAjuda = StyleSheet.create({
   containerTitle: {
     fontSize: 16,
     paddingTop: 20,
-    paddingBottom: 10,    
+    paddingBottom: 10,
     color: '#2A4065',
     textAlign: 'left',
     fontFamily: 'Ubuntu-Medium'

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon } from 'react-native-elements';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 
 const ContactButton = ({ iconName, iconType, onClick }) => {
   return (

@@ -9,4 +9,5 @@ export * from './HelperCard';
 export * from './CardSection';
 export * from './HeaderImage';
 export * from './CalloutView';
+export * from './SobreButton';
 export * from './ContactButton';
