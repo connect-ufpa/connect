@@ -1,14 +1,16 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { View, Image } from 'react-native';
  
 const SOURCE = require('../../../assets/img/icon.png');
 
 const HeaderImage = () => {
   return (
-    <Image
-      style={{ width: 35, height: 35, resizeMode: 'contain', alignSelf: 'center' }}
-      source={SOURCE}
-    />
+    <View style={{ flex: 1, alignContent: 'center' }}>
+      <Image
+        style={{ width: 35, height: 35, resizeMode: 'contain', alignSelf: 'center' }}
+        source={SOURCE}
+      />
+    </View>
   );
 };
 

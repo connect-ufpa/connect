@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import { Dimensions, Text, ScrollView, View, Alert, Image, TouchableOpacity } from 'react-native';
-import { Card, CardSection, Texts, HeaderImage } from '../components/commons';
 import { Icon } from 'react-native-elements';
+import { HeaderImage } from '../components/commons';
+import Styles from '../Styles';
+import { 
+  Text, 
+  View, 
+  Image, 
+  TouchableOpacity 
+} from 'react-native';
 
 const logo = require('../../assets/img/logo.png');
 
@@ -10,39 +16,37 @@ class Sobre extends Component {
     const { navigate } = navigation;
     return {
       headerTitle: (
-        <View style={{ flex: 1, alignContent: 'center' }}>
-          <HeaderImage />
-        </View>
+        <HeaderImage />
       ),
-      headerStyle: {
-        paddingLeft: 15,
-        paddingRight: 15,
-        height: 55,
-      },
-      headerTitleStyle: {
-        alignSelf: 'center',
-      },
+      headerStyle: Styles.navHeader,
       drawerLabel: 'Sobre',
-      drawerIcon: ({ tintColor }) => (
-        <Icon type="font-awesome" name="heart" color="#2a4065" size={24} />
+      drawerIcon: () => (
+        <Icon  
+          size={24} 
+          name="heart" 
+          color="#2a4065" 
+          type="font-awesome"
+        />
       ),
       headerLeft: (
-        <TouchableOpacity style={{ flex: 1, paddingTop: 20, paddingBottom: 20, paddingRight: 20 }} onPress={() => navigate('DrawerOpen')}>
+        <TouchableOpacity 
+          style={Styles.navIconCard} 
+          onPress={() => navigate('DrawerOpen')}
+        >
           <Icon
             type="font-awesome"
             name="bars"
             color="#2a4065"
             size={25}
-            
+
           />
         </TouchableOpacity>
       ),
       headerRight: (
         <Icon
           name="settings"
-          color="#2a4065"
+          color="#777"
           size={25}
-          onPress={() => navigate('DrawerOpen')}
         />
       ),
     };

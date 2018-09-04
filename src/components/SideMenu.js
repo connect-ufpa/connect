@@ -35,32 +35,32 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     top: 0,
-    bottom: 0,
     left: 0,
     right: 0,
-    width: width * 0.8,
-    height: height,
+    bottom: 0,
     elevation: 8,
-    backgroundColor: 'white',
+    height: height,
+    width: width * 0.8,
+    backgroundColor: 'white'
   },
   logoutText: {
-    fontFamily: 'Ubuntu-Regular',
     fontSize: 14,
-    color: '#CC2820'
+    color: '#CC2820',
+    fontFamily: 'Ubuntu-Regular'
   },
   items: {
     width: width,
-    paddingVertical: 20,
-    paddingLeft: 5
+    paddingLeft: 5,
+    paddingVertical: 20
   },
   inactiveTintColor: {
-    fontFamily: 'Ubuntu-Regular',
     fontSize: 14,
-    color: '#94999E'
+    color: '#94999E',
+    fontFamily: 'Ubuntu-Regular'
   },
   activeTintColor: {
-    fontFamily: 'Ubuntu-Bold',
     fontSize: 16,
-    color: '#2a4065'
+    color: '#2a4065',
+    fontFamily: 'Ubuntu-Bold'
   }
 });

@@ -3,6 +3,17 @@ import { StyleSheet, Dimensions } from 'react-native';
 const { height } = Dimensions.get('window');
 
 export default StyleSheet.create({
+    navHeader: {
+        height: 55,
+        paddingLeft: 15,
+        paddingRight: 15,
+    },
+    navIconCard: {
+        flex: 1,
+        paddingTop: 20,
+        paddingRight: 20,
+        paddingBottom: 20,
+    },
     logoTextStyle: {
         fontSize: 28,
         color: '#FFF',
@@ -32,6 +43,13 @@ export default StyleSheet.create({
         fontSize: 12,
         color: '#DDD',
         fontFamily: 'Ubuntu-Light',
+    },
+    headerText: {
+        padding: 20,
+        fontSize: 16,
+        color: '#2A4065',
+        textAlign: 'left',
+        fontFamily: 'Ubuntu-Medium'
     },
     inputStyle: {
         flex: 5,
@@ -182,6 +200,17 @@ export default StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center',
         backgroundColor: '#CC2820',
+    },
+    cardFrequentQuestion: {
+        elevation: 2,
+        marginTop: 7.5,
+        paddingLeft: 5,
+        paddingRight: 5,
+        borderRadius: 5,
+        paddingTop: 12.5,
+        paddingBottom: 12.5,
+        width: '100%',
+        backgroundColor: 'white',
     },
     cardHelperStyle: {
         flex: 1,

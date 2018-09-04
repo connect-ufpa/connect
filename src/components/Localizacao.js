@@ -47,39 +47,36 @@ class Localizacao extends Component {
     const { navigate } = navigation;
     return {
       headerTitle: (
-        <View style={{ flex: 1, alignContent: 'center' }}>
-          <HeaderImage />
-        </View>
+        <HeaderImage />
       ),
-      headerStyle: {
-        paddingLeft: 15,
-        paddingRight: 15,
-        height: 55,
-      },
+      headerStyle: Styles.navHeader,
       drawerLabel: 'Localização',
-      drawerIcon: () => <Icon name="place" color="#2a4065" size={27} />,
+      drawerIcon: () => (
+        <Icon
+          size={27}
+          name="place"
+          color="#2a4065"
+        />
+      ),
       headerLeft: (
         <TouchableOpacity
-          style={{
-            flex: 1,
-            paddingTop: 20,
-            paddingBottom: 20,
-            paddingRight: 20,
-          }}
+          style={Styles.navIconCard}
           onPress={() => navigate('DrawerOpen')}
         >
-          <Icon type="font-awesome" name="bars" color="#2a4065" size={25} />
+          <Icon  
+            size={25} 
+            name="bars"
+            color="#2a4065" 
+            type="font-awesome" 
+          />
         </TouchableOpacity>
       ),
       headerRight: (
-        <View>
-          <Icon
-            name="settings"
-            color="#2a4065"
-            size={25}
-            onPress={() => navigate('DrawerOpen')}
-          />
-        </View>
+        <Icon
+          name="settings"
+          color="#777"
+          size={25}
+        />
       ),
     };
   };
@@ -337,10 +334,10 @@ class Localizacao extends Component {
       return <Loading />;
     } else {
       return (
-        <View style={styles.containerPesquisar}>
+        <View style={stylesLocalizacao.containerPesquisar}>
           <TextInput
             autoCorrect={false}
-            style={styles.inputPesquisar}
+            style={stylesLocalizacao.inputPesquisar}
             underlineColorAndroid={'transparent'}
             value={this.props.localSendoPesquisado}
             placeholder={'Pesquise um local desejado:'}
@@ -377,7 +374,7 @@ class Localizacao extends Component {
   renderListaLocaisAchados() {
     if (this.props.locaisAchados.length !== 0) {
       return (
-        <View style={styles.containerLista}>
+        <View style={stylesLocalizacao.containerLista}>
           <FlatList
             data={this.props.locaisAchados}
             style={{
@@ -798,7 +795,7 @@ class Localizacao extends Component {
       });
 
       return (
-        <View style={styles.containerInfoRoute}>
+        <View style={stylesLocalizacao.containerInfoRoute}>
           <Text
             style={{
               fontSize: 12,
@@ -843,7 +840,7 @@ class Localizacao extends Component {
   renderButtons() {
     if (!this.props.loading) {
       return (
-        <View style={styles.containerButtons}>
+        <View style={stylesLocalizacao.containerButtons}>
           <View
             style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}
           >
@@ -977,7 +974,7 @@ class Localizacao extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const stylesLocalizacao = StyleSheet.create({
   containerLoading: {
     top: 0,
     left: 0,
