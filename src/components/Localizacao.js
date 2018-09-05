@@ -42,6 +42,19 @@ const initialRegion = {
   longitudeDelta: 0.004,
 };
 
+const blocoPin = require('../../assets/img/pin/Bloco.png');
+const servicoPin = require('../../assets/img/pin/Serviço.png');
+const banheiroPin = require('../../assets/img/pin/Banheiro.png');
+const desportoPin = require('../../assets/img/pin/Desporto.png');
+const hospitalPin = require('../../assets/img/pin/Hospital.png');
+const institutoPin = require('../../assets/img/pin/Instituto.png');
+const convencoesPin = require('../../assets/img/pin/Convençoes.png');
+const bibliotecaPin = require('../../assets/img/pin/Biblioteca.png');
+const laboratorioPin = require('../../assets/img/pin/Laboratório.png');
+const restaurantePin = require('../../assets/img/pin/Restaurante.png');
+const administracaoPin = require('../../assets/img/pin/Administraçao.png');
+const centroAcademicoPin = require('../../assets/img/pin/Centro Acadêmico.png');
+
 class Localizacao extends Component {
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
@@ -103,18 +116,19 @@ class Localizacao extends Component {
           return (
             <Marker
               key={local.nome}
+              title={local.nome}
+              image={institutoPin}
               coordinate={{
                 latitude: local.coords.lat,
                 longitude: local.coords.lng,
               }}
-              title={local.nome}
-              image={require('../../assets/img/pin/Instituto.png')}
             >
-              <Callout tooltip>
+              <Callout tooltip={true}>
                 <CalloutView name={local.nome} desc={local.desc} />
               </Callout>
             </Marker>
           );
+          break;
 
         case 'Laboratório':
           return (
@@ -125,13 +139,14 @@ class Localizacao extends Component {
                 longitude: local.coords.lng,
               }}
               title={local.nome}
-              image={require('../../assets/img/pin/Laboratório.png')}
+              image={laboratorioPin}
             >
               <Callout tooltip={true}>
                 <CalloutView name={local.nome} desc={local.desc} />
               </Callout>
             </Marker>
           );
+          break;
 
         case 'Biblioteca':
           return (
@@ -142,13 +157,14 @@ class Localizacao extends Component {
                 longitude: local.coords.lng,
               }}
               title={local.nome}
-              image={require('../../assets/img/pin/Biblioteca.png')}
+              image={bibliotecaPin}
             >
-              <Callout tooltip>
+              <Callout tooltip={true}>
                 <CalloutView name={local.nome} desc={local.desc} />
               </Callout>
             </Marker>
           );
+          break;
 
         case 'Bloco':
           return (
@@ -159,13 +175,15 @@ class Localizacao extends Component {
                 longitude: local.coords.lng,
               }}
               title={local.nome}
-              image={require('../../assets/img/pin/Bloco.png')}
+              image={blocoPin}
             >
-              <Callout tooltip>
+              <Callout tooltip={true}>
                 <CalloutView name={local.nome} desc={local.desc} />
               </Callout>
             </Marker>
           );
+          break;
+
         case 'Banheiro':
           return (
             <Marker
@@ -175,13 +193,14 @@ class Localizacao extends Component {
                 longitude: local.coords.lng,
               }}
               title={local.nome}
-              image={require('../../assets/img/pin/Banheiro.png')}
+              image={banheiroPin}
             >
-              <Callout tooltip>
+              <Callout tooltip={true}>
                 <CalloutView name={local.nome} desc={local.desc} />
               </Callout>
             </Marker>
           );
+          break;
 
         case 'Administração':
           return (
@@ -192,13 +211,14 @@ class Localizacao extends Component {
                 longitude: local.coords.lng,
               }}
               title={local.nome}
-              image={require('../../assets/img/pin/Administração.png')}
+              image={administracaoPin}
             >
               <Callout tooltip={true}>
                 <CalloutView name={local.nome} desc={local.desc} />
               </Callout>
             </Marker>
           );
+          break;
 
         case 'Restaurante':
           return (
@@ -209,7 +229,7 @@ class Localizacao extends Component {
                 longitude: local.coords.lng,
               }}
               title={local.nome}
-              image={require('../../assets/img/pin/Restaurante.png')}
+              image={restaurantePin}
             >
               <Callout tooltip={true}>
                 <CalloutView name={local.nome} desc={local.desc} />
@@ -227,7 +247,7 @@ class Localizacao extends Component {
                 longitude: local.coords.lng,
               }}
               title={local.nome}
-              image={require('../../assets/img/pin/Centro Acadêmico.png')}
+              image={centroAcademicoPin}
             >
               <Callout tooltip={true}>
                 <CalloutView name={local.nome} desc={local.desc} />
@@ -245,7 +265,7 @@ class Localizacao extends Component {
                 longitude: local.coords.lng,
               }}
               title={local.nome}
-              image={require('../../assets/img/pin/Desporto.png')}
+              image={desportoPin}
             >
               <Callout tooltip={true}>
                 <CalloutView name={local.nome} desc={local.desc} />
@@ -263,7 +283,7 @@ class Localizacao extends Component {
                 longitude: local.coords.lng,
               }}
               title={local.nome}
-              image={require('../../assets/img/pin/Convenções.png')}
+              image={convencoesPin}
             >
               <Callout tooltip={true}>
                 <CalloutView name={local.nome} desc={local.desc} />
@@ -281,7 +301,7 @@ class Localizacao extends Component {
                 longitude: local.coords.lng,
               }}
               title={local.nome}
-              image={require('../../assets/img/pin/Serviço.png')}
+              image={servicoPin}
             >
               <Callout tooltip={true}>
                 <CalloutView name={local.nome} desc={local.desc} />
@@ -299,7 +319,7 @@ class Localizacao extends Component {
                 longitude: local.coords.lng,
               }}
               title={local.nome}
-              image={require('../../assets/img/pin/Hospital.png')}
+              image={hospitalPin}
             >
               <Callout tooltip={true}>
                 <CalloutView name={local.nome} desc={local.desc} />
@@ -434,12 +454,12 @@ class Localizacao extends Component {
               return (
                 <Marker
                   key={local.nome}
+                  title={local.nome}
+                  image={institutoPin}
                   coordinate={{
                     latitude: local.coords.lat,
                     longitude: local.coords.lng,
                   }}
-                  title={local.nome}
-                  image={require('../../assets/img/pin/Instituto.png')}
                 >
                   <Callout tooltip={true}>
                     <CalloutView name={local.nome} desc={local.desc} />
@@ -457,7 +477,7 @@ class Localizacao extends Component {
                     longitude: local.coords.lng,
                   }}
                   title={local.nome}
-                  image={require('../../assets/img/pin/Laboratório.png')}
+                  image={laboratorioPin}
                 >
                   <Callout tooltip={true}>
                     <CalloutView name={local.nome} desc={local.desc} />
@@ -475,7 +495,7 @@ class Localizacao extends Component {
                     longitude: local.coords.lng,
                   }}
                   title={local.nome}
-                  image={require('../../assets/img/pin/Biblioteca.png')}
+                  image={bibliotecaPin}
                 >
                   <Callout tooltip={true}>
                     <CalloutView name={local.nome} desc={local.desc} />
@@ -493,7 +513,7 @@ class Localizacao extends Component {
                     longitude: local.coords.lng,
                   }}
                   title={local.nome}
-                  image={require('../../assets/img/pin/Bloco.png')}
+                  image={blocoPin}
                 >
                   <Callout tooltip={true}>
                     <CalloutView name={local.nome} desc={local.desc} />
@@ -511,7 +531,7 @@ class Localizacao extends Component {
                     longitude: local.coords.lng,
                   }}
                   title={local.nome}
-                  image={require('../../assets/img/pin/Banheiro.png')}
+                  image={banheiroPin}
                 >
                   <Callout tooltip={true}>
                     <CalloutView name={local.nome} desc={local.desc} />
@@ -529,7 +549,7 @@ class Localizacao extends Component {
                     longitude: local.coords.lng,
                   }}
                   title={local.nome}
-                  image={require('../../assets/img/pin/Administração.png')}
+                  image={administracaoPin}
                 >
                   <Callout tooltip={true}>
                     <CalloutView name={local.nome} desc={local.desc} />
@@ -547,7 +567,7 @@ class Localizacao extends Component {
                     longitude: local.coords.lng,
                   }}
                   title={local.nome}
-                  image={require('../../assets/img/pin/Restaurante.png')}
+                  image={restaurantePin}
                 >
                   <Callout tooltip={true}>
                     <CalloutView name={local.nome} desc={local.desc} />
@@ -565,7 +585,7 @@ class Localizacao extends Component {
                     longitude: local.coords.lng,
                   }}
                   title={local.nome}
-                  image={require('../../assets/img/pin/Centro Acadêmico.png')}
+                  image={centroAcademicoPin}
                 >
                   <Callout tooltip={true}>
                     <CalloutView name={local.nome} desc={local.desc} />
@@ -583,7 +603,7 @@ class Localizacao extends Component {
                     longitude: local.coords.lng,
                   }}
                   title={local.nome}
-                  image={require('../../assets/img/pin/Desporto.png')}
+                  image={desportoPin}
                 >
                   <Callout tooltip={true}>
                     <CalloutView name={local.nome} desc={local.desc} />
@@ -601,7 +621,7 @@ class Localizacao extends Component {
                     longitude: local.coords.lng,
                   }}
                   title={local.nome}
-                  image={require('../../assets/img/pin/Convenções.png')}
+                  image={convencoesPin}
                 >
                   <Callout tooltip={true}>
                     <CalloutView name={local.nome} desc={local.desc} />
@@ -619,7 +639,7 @@ class Localizacao extends Component {
                     longitude: local.coords.lng,
                   }}
                   title={local.nome}
-                  image={require('../../assets/img/pin/Serviço.png')}
+                  image={servicoPin}
                 >
                   <Callout tooltip={true}>
                     <CalloutView name={local.nome} desc={local.desc} />
@@ -637,7 +657,7 @@ class Localizacao extends Component {
                     longitude: local.coords.lng,
                   }}
                   title={local.nome}
-                  image={require('../../assets/img/pin/Hospital.png')}
+                  image={hospitalPin}
                 >
                   <Callout tooltip={true}>
                     <CalloutView name={local.nome} desc={local.desc} />
