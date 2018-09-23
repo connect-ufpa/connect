@@ -82,33 +82,41 @@ class VisualizarEventos extends Component {
                         <Texts text='Início do Evento' style='medium' />
                     </CardSection>
                     <CardSection>
-                        <Input
-                            value={evento.data_inicio}
-                        />
-                        <Input
-                            value={evento.hora_inicio}
-                        />
+                        <View style={{ flex: 1, paddingRight: 2 }}>
+                            <Input
+                                value={evento.data_inicio}
+                            />
+                        </View>
+                        <View style={{ flex: 1, paddingLeft: 2 }}>
+                            <Input
+                                value={evento.hora_inicio}
+                            />
+                        </View>
                     </CardSection>
                     <CardSection>
                         <Texts text='Término do Evento' style='medium' />
                     </CardSection>
                     <CardSection>
-                        <Input
-                            value={evento.data_fim}
-                        />
-                        <Input
-                            value={evento.hora_fim}
-                        />
+                        <View style={{ flex: 1, paddingRight: 2 }}>
+                            <Input
+                                value={evento.data_fim}
+                            />
+                        </View>
+                        <View style={{ flex: 1, paddingLeft: 2 }}>
+                            <Input
+                                value={evento.hora_fim}
+                            />
+                        </View>
                     </CardSection>
                     <CardSection>
                         <View style={{ flexDirection: 'column' }}>
                             <TouchableOpacity onPress={() => { this.props.navigation.navigate('VisualizarEventoMapa', coords); }} >
                                 <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
                                     <Icon
-                                          type='font-awesome'
-                                         name='map'
-                                         color='#FFF'
-                                         size={25}
+                                        type='font-awesome'
+                                        name='map'
+                                        color='#FFF'
+                                        size={25}
                                     />
                                 </View>
                             </TouchableOpacity>
