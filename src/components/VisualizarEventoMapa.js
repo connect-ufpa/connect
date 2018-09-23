@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import MapView, { Marker } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { Icon } from 'react-native-elements';
-import { Texts } from '../components/commons';
-import { getLocation } from '../actions';
+import { Texts, Loading } from '../components/commons';
+import { getLocation, creatingRoute } from '../actions';
 import Styles from '../Styles';
 
 const { height, width } = Dimensions.get('window');
@@ -16,20 +16,20 @@ class VisualizarEventoNoMapa extends Component {
         title: 'Local do evento',
         headerTintColor: '#2A4065',
         headerTitleStyle: {
-          fontFamily: 'Ubuntu-Medium',
-          fontWeight: '200',
-          fontSize: 18,
+            fontFamily: 'Ubuntu-Medium',
+            fontWeight: '200',
+            fontSize: 18,
         },
         headerStyle: {
-          elevation: 5
+            elevation: 5
         }
-      };
+    };
 
     state = {
         showRota: false,
         infoRota: ''
     };
-    
+
     showInfoRota() {
         if (this.state.infoRota) {
             return (
@@ -60,11 +60,34 @@ class VisualizarEventoNoMapa extends Component {
                         Distância:{` ${this.state.infoRota.distance.toFixed(2)} km`}
                     </Text>
                     <Text style={{ textAlign: 'center', color: '#777', fontSize: 11, fontFamily: 'Ubuntu', marginTop: 10 }}>
-                        Tempo:{` ${this.state.infoRota.duration.toFixed(2)} min`}
+                        Tempo de ônibus:{` ${this.state.infoRota.duration.toFixed(2)} min`}
                     </Text>
                 </View>
             );
         }
+    }
+
+    showLoading() {
+        if (this.state.showRota) return (<Loading />);
+    }
+
+    mapSetCenter() {
+        const { params } = this.props.navigation.state;
+        const lat = params.lat;
+        const long = params.long;
+
+        const origin = {
+            latitude: this.props.latitude,
+            longitude: this.props.longitude
+        };
+        const destiny = {
+            latitude: lat,
+            longitude: long
+        };
+
+        this.mapRef.fitToCoordinates([origin, destiny],
+            { edgePadding: { top: 200, right: 50, bottom: 300, left: 50 }, animated: true }
+        );
     }
 
     renderRota = () => {
@@ -83,10 +106,10 @@ class VisualizarEventoNoMapa extends Component {
                         longitude: long,
                     }}
                     strokeWidth={6}
-                    mode={'walking'}
+                    mode={'bus'}
                     strokeColor={'#2BA3DA'}
                     apikey={'AIzaSyDs39LTHBTeq5xQoR6HJDkFtoLuWARdhCY'}
-                    onReady={result => { this.setState({ infoRota: result }); }}
+                    onReady={result => { this.setState({ infoRota: result, showRota: false }); this.mapSetCenter(); }}
                 />
             );
         }
@@ -123,6 +146,7 @@ class VisualizarEventoNoMapa extends Component {
         return (
             <View>
                 <MapView
+                    ref={(ref) => { this.mapRef = ref; }}
                     style={styles.mapStyle}
                     region={{
                         latitude: lat,
@@ -138,6 +162,7 @@ class VisualizarEventoNoMapa extends Component {
                     {this.renderButtomRoute()}
                     {this.showInfoRota()}
                 </View>
+                {this.showLoading()}
             </View>
         );
     }
@@ -151,10 +176,11 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    return { 
+    return {
         latitude: state.evento.user_latitude,
-        longitude: state.evento.user_longitude
-     };
+        longitude: state.evento.user_longitude,
+        loading: state.evento.loadingRoute
+    };
 };
 
-export default connect(mapStateToProps, { getLocation })(VisualizarEventoNoMapa);
+export default connect(mapStateToProps, { getLocation, creatingRoute })(VisualizarEventoNoMapa);

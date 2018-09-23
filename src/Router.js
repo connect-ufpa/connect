@@ -45,7 +45,7 @@ export const SobreScreen = StackNavigator({
 
 export const SideMenu = DrawerNavigator({
   Localizacao: { screen: LocalizacaoScreen },
-  // Eventos: { screen: EventosScreen },
+  Eventos: { screen: EventosScreen },
   // Perfil: { screen: PerfilScreen },
   Ajuda: { screen: AjudaScreen },
   Sobre: { screen: SobreScreen },
@@ -94,9 +94,9 @@ export const AuthorizedScreens = StackNavigator({
   },
   Ajuda: { screen: Ajuda },
   Sobre: { screen: Sobre },
-  // CriarEvento: { screen: CriarEvento },
-  // EditarEvento: { screen: EditarEvento },
-  // EditarEventoMapa: { screen: EditarEventoMapa },
-  // VisualizarEvento: { screen: VisualizarEvento },
-  // VisualizarEventoMapa: { screen: VisualizarEventoMapa }
+  CriarEvento: { screen: CriarEvento },
+  EditarEvento: { screen: EditarEvento },
+  EditarEventoMapa: { screen: EditarEventoMapa },
+  VisualizarEvento: { screen: VisualizarEvento },
+  VisualizarEventoMapa: { screen: VisualizarEventoMapa }
 });

@@ -22,49 +22,43 @@ LocaleConfig.defaultLocale = 'br';
 
 class Eventos extends Component {
   static navigationOptions = ({ navigation }) => {
-    const { navigate } = navigation;
-    return {
-      headerTitle: <View style={{ flex: 1, alignContent: 'center' }}><HeaderImage /></View>,
-      headerStyle: {
-        paddingLeft: 15,
-        paddingRight: 15,
-        height: 55
-      },
-      headerTitleStyle: {
-        alignSelf: 'center',
-      },
-      drawerLabel: 'Eventos',
-      drawerIcon: () => (
-        <Icon
-          type='font-awesome'
-          name='calendar'
-          color='#2a4065'
-          size={25}
-        />
-      ),
-      headerLeft: (
-        <TouchableOpacity style={{ flex: 1, paddingTop: 20, paddingBottom: 20, paddingRight: 20 }} onPress={() => navigate('DrawerOpen')}>
+      const { navigate } = navigation;
+      return {
+        headerTitle: (
+          <HeaderImage />
+        ),
+        headerStyle: Styles.navHeader,
+        drawerLabel: 'Eventos',
+        drawerIcon: () => (
           <Icon
             type="font-awesome"
-            name="bars"
-            color="#2a4065"
             size={25}
-
+            name="calendar"
+            color="#2a4065"
           />
-        </TouchableOpacity>
-      ),
-      headerRight: (
-        <View>
+        ),
+        headerLeft: (
+          <TouchableOpacity
+            style={Styles.navIconCard}
+            onPress={() => navigate('DrawerOpen')}
+          >
+            <Icon  
+              size={25} 
+              name="bars"
+              color="#2a4065" 
+              type="font-awesome" 
+            />
+          </TouchableOpacity>
+        ),
+        headerRight: (
           <Icon
             name="settings"
-            color="#2a4065"
+            color="#777"
             size={25}
-            onPress={() => navigate('DrawerOpen')}
           />
-        </View>
-      ),
+        ),
+      };
     };
-  }
 
   state = {
     modal: false,
