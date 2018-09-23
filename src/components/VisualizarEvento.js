@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { ScrollView, View, TextInput } from 'react-native';
-import { CardSection, Input, Button, Texts } from '../components/commons';
+import { ScrollView, View, TextInput, TouchableOpacity } from 'react-native';
+import { Icon } from 'react-native-elements';
+import { CardSection, Input, Texts } from '../components/commons';
 import Styles from '../Styles';
 
 class VisualizarEventos extends Component {
@@ -8,14 +9,14 @@ class VisualizarEventos extends Component {
         title: 'Detalhe evento',
         headerTintColor: '#2A4065',
         headerTitleStyle: {
-          fontFamily: 'Ubuntu-Medium',
-          fontWeight: '200',
-          fontSize: 18,
+            fontFamily: 'Ubuntu-Medium',
+            fontWeight: '200',
+            fontSize: 18,
         },
         headerStyle: {
-          elevation: 5
+            elevation: 5
         }
-      };
+    };
 
     componentWillMount() {
         const { params } = this.props.navigation.state;
@@ -29,19 +30,40 @@ class VisualizarEventos extends Component {
             <ScrollView >
                 <View style={[Styles.eventCardStyle, { marginTop: 5, marginBottom: 5, elevation: 5, flex: 1 }]} >
                     <CardSection>
+                        <Texts text='Nome do Evento' style='medium' color='#777' />
+                    </CardSection>
+                    <CardSection>
                         <Input
                             value={evento.nome}
                         />
                     </CardSection>
                     <CardSection>
-                        <TextInput
-                            style={Styles.inputStyle}
-                            value={evento.descricao}
-                            underlineColorAndroid='transparent'
-                            multiline
-                            numberOfLines={4}
-                            maxLength={250}
-                        />
+                        <Texts text='Descrição' style='medium' color='#777' />
+                    </CardSection>
+                    <CardSection>
+                        <View
+                            style={{
+                                flex: 1,
+                                padding: 5,
+                                elevation: 8,
+                                borderRadius: 5,
+                                borderColor: '#FFF',
+                                flexDirection: 'row',
+                                backgroundColor: '#FFF',
+                            }}
+                        >
+                            <TextInput
+                                style={Styles.inputStyle}
+                                value={evento.descricao}
+                                underlineColorAndroid='transparent'
+                                multiline
+                                numberOfLines={4}
+                                maxLength={250}
+                            />
+                        </View>
+                    </CardSection>
+                    <CardSection>
+                        <Texts text='Local' style='medium' color='#777' />
                     </CardSection>
                     <CardSection>
                         <Input
@@ -79,11 +101,21 @@ class VisualizarEventos extends Component {
                         />
                     </CardSection>
                     <CardSection>
-                        <Button
-                            text="Ver Local no Mapa"
-                            styles={Styles.btnConfirm}
-                            onPress={() => { this.props.navigation.navigate('VisualizarEventoMapa', coords); }}
-                        />
+                        <View style={{ flexDirection: 'column' }}>
+                            <TouchableOpacity onPress={() => { this.props.navigation.navigate('VisualizarEventoMapa', coords); }} >
+                                <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
+                                    <Icon
+                                          type='font-awesome'
+                                         name='map'
+                                         color='#FFF'
+                                         size={25}
+                                    />
+                                </View>
+                            </TouchableOpacity>
+                            <View style={{ marginLeft: 10 }} >
+                                <Texts text="Ver no mapa" />
+                            </View>
+                        </View>
                     </CardSection>
                 </View>
             </ScrollView>
