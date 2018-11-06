@@ -37,11 +37,6 @@ class EditarEventoMapa extends Component {
         }
     };
 
-    componentWillMount() {
-        const { params } = this.props.navigation.state;
-        const prop = 'coords';
-        this.props.editEvent({ prop, params });
-    }
 
     renderHelper() {
         if (this.props.helperMap) {
@@ -78,7 +73,8 @@ class EditarEventoMapa extends Component {
     }
 
     render() {
-        if (this.props.coords) {
+        console.log(this.props.coords)
+        if (this.props.coords !== undefined) {
             lat = this.props.coords.lat;
             long = this.props.coords.long;
             coords = {

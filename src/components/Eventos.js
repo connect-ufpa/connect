@@ -317,4 +317,5 @@ const mapStateToProps = (state) => {
     eventosAchados: state.evento.eventosAchados,
   };
 };
+
 export default connect(mapStateToProps, { serachEventsToShow, searchEvento })(Eventos);

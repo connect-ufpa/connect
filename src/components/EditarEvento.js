@@ -144,10 +144,6 @@ class EditarEvento extends Component {
       }
 
     render() {
-        const param = {
-            id: this.props.id,
-            coords: this.props.coords
-        };
         return (
             <ScrollView >
                 <View style={[Styles.eventCardStyle, { marginTop: 5, marginBottom: 5, elevation: 5, flex: 1 }]} >

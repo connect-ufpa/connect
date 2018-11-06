@@ -2,7 +2,7 @@ import { Alert } from 'react-native';
 import { firebaseAuth, database } from '../config/Config';
 import { validateDates, validateHours, validateEvent } from '../helpers/HandleData';
 import {
-    MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR,
+    MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR, EVENT,
     INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, SHOW_HELPER_EVENT, CLOSE_HELPER_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EDIT_EVENT,
     EVENT_EDIT_DATA, EVENT_EDIT_HORA, SAVED_EDITED_EVENT, EVENTS_TO_SHOW_SUCCESS, SEARCHING_EVENT, SEARCHED_EVENTO,
     CLEAR, INICIAL_POSITION, MOVING, CLOSE_LOADING_EVENT_SCREEN
@@ -48,6 +48,10 @@ export const showHelper = () => {
     return { type: SHOW_HELPER_EVENT };
 };
 
+export const getEvent = (event) => {
+    return { type: EVENT, payload: event };
+};
+
 export const closeEventHelper = () => {
     return { type: CLOSE_HELPER_EVENT };
 };
@@ -87,7 +91,7 @@ export const saveEvent = (evento) => {
     };
 };
 
-export const editEvent = ({ prop, value }) => {
+export const editEvent = ({ prop, evento, value }) => {
     if (prop === 'data') {
         const validate = validateDates(value);
         if (validate) return { type: EDIT_EVENT, payload: { prop, value } };
@@ -99,7 +103,8 @@ export const editEvent = ({ prop, value }) => {
 
         return { type: EVENT_EDIT_HORA, payload: { prop, value } };
     }
-    return { type: EDIT_EVENT, payload: { prop, value } };
+    evento[`${prop}`] = value;
+    return { type: EDIT_EVENT, payload: evento };
 };
 
 export const saveNewEventCoords = ({ id, coords }) => {

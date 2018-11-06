@@ -1,8 +1,9 @@
 import {
-    MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR,
+    MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR, EVENT,
     INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, SHOW_HELPER_EVENT, CLOSE_HELPER_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EVENTS_TO_SHOW_SUCCESS,
     SEARCHING_EVENT, SEARCHED_EVENTO, CLEAR, INICIAL_POSITION, MOVING, CLOSE_LOADING_EVENT_SCREEN
 } from '../actions/types';
+import { compose } from 'redux';
 
 const INITIAL_STATE = {
     region: {
@@ -12,6 +13,7 @@ const INITIAL_STATE = {
         longitudeDelta: 0.0025
     },
     marker: [],
+    event: '',
     modal: false,
     nome: '',
     descricao: '',
@@ -78,6 +80,8 @@ export default (state = INITIAL_STATE, action) => {
                 loading: false,
                 error: false
             };
+        case EVENT:
+            return { ...state, event: action.payload };
         case SAVE_EVENT_FIELD_CHANGE:
             return { ...state, [action.payload.prop]: action.payload.value, errorData: '', errorHora: '', createFail: '', error: false };
         case INVALID_START_EVENT_DATE:
