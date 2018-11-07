@@ -5,7 +5,7 @@ import {
     MARKER, CLOSE_MODAL, SAVE_EVENT_FIELD_CHANGE, INVALID_START_EVENT_DATE, INVALID_START_EVENT_HOUR, EVENT,
     INVALID_END_EVENT_DATE, INVALID_END_EVENT_HOUR, LOADING_EVENT, SHOW_HELPER_EVENT, CLOSE_HELPER_EVENT, CREATE_EVENT_SUCCESS, CREATE_EVENT_FAIL, EDIT_EVENT,
     EVENT_EDIT_DATA, EVENT_EDIT_HORA, SAVED_EDITED_EVENT, EVENTS_TO_SHOW_SUCCESS, SEARCHING_EVENT, SEARCHED_EVENTO,
-    CLEAR, INICIAL_POSITION, MOVING, CLOSE_LOADING_EVENT_SCREEN
+    CLEAR, INICIAL_POSITION, MOVING, CLOSE_LOADING_EVENT_SCREEN, COORDS_SAVED, CLOSE_EVENT_EDIT_HELPER_MAP
 } from './types';
 
 export const showMarkerAndModal = (e) => {
@@ -91,7 +91,7 @@ export const saveEvent = (evento) => {
     };
 };
 
-export const editEvent = ({ prop, evento, value }) => {
+export const editEvent = ({ prop, value }) => {
     if (prop === 'data') {
         const validate = validateDates(value);
         if (validate) return { type: EDIT_EVENT, payload: { prop, value } };
@@ -103,8 +103,7 @@ export const editEvent = ({ prop, evento, value }) => {
 
         return { type: EVENT_EDIT_HORA, payload: { prop, value } };
     }
-    evento[`${prop}`] = value;
-    return { type: EDIT_EVENT, payload: evento };
+    return { type: EDIT_EVENT, payload: { prop, value } };
 };
 
 export const saveNewEventCoords = ({ id, coords }) => {
@@ -113,12 +112,15 @@ export const saveNewEventCoords = ({ id, coords }) => {
             lat: coords.lat,
             long: coords.long
         }).then(() => {
-            const prop = 'coords';
-            dispatch({ type: EDIT_EVENT, payload: { prop, coords } });
+            console.log('coords na action', coords)
+            dispatch({ type: COORDS_SAVED });
         });
     };
 };
 
+export const closeEventMapHelper = () => {
+    return { type: CLOSE_EVENT_EDIT_HELPER_MAP }
+}
 export const saveEditedEvent = (evento) => {
     const validate = validateEvent(evento);
     const id = evento.id;

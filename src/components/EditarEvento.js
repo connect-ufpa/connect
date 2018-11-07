@@ -149,7 +149,7 @@ class EditarEvento extends Component {
                 <View style={[Styles.eventCardStyle, { marginTop: 5, marginBottom: 5, elevation: 5, flex: 1 }]} >
                     <CardSection>
                         <View style={{ alignItems: 'center' }}>
-                            <TouchableOpacity onPress={() => { this.props.navigation.navigate('EditarEventoMapa', { param }); }} >
+                            <TouchableOpacity onPress={() => { this.props.navigation.navigate('EditarEventoMapa'); }} >
                                 <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]} >
                                     <Icon
                                         type="material-community"

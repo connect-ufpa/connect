@@ -45,7 +45,7 @@ class EditarEventoMapa extends Component {
                     style={[
                         Styles.cardHelperStyle,
                         {
-                            marginBottom: HEIGHT * 0.4,
+                            marginBottom: HEIGHT * this.props.positionHelper,
                             width: width * 0.5,
                             height: height * 0.2,
                         },
@@ -65,7 +65,7 @@ class EditarEventoMapa extends Component {
                         </TouchableOpacity>
                     </View>
                     <Text style={Styles.textCardHelperStyle}>
-                        {'Clique no em um local do mapa e depois clique no botão salvar para atualizar o local do evento'}
+                        {`${this.props.messageHelper}`}
                     </Text>
                 </View>
             );
@@ -73,7 +73,7 @@ class EditarEventoMapa extends Component {
     }
 
     render() {
-        console.log(this.props.coords)
+        console.log('coords na view', this.props.coords)
         if (this.props.coords !== undefined) {
             lat = this.props.coords.lat;
             long = this.props.coords.long;
@@ -120,38 +120,6 @@ class EditarEventoMapa extends Component {
                         </View>
                     </TouchableOpacity>
                 </CardSection>
-                <Modal
-                    transparent
-                    animationType="fade"
-                    visible={this.props.modal}
-                    onRequestClose={() => { this.props.navigation.navigate('Eventos'); }}
-                >
-                    <View
-                        style={[
-                            Styles.cardHelperStyle,
-                            {
-                                marginBottom: HEIGHT * 0.2,
-                                width: width * 0.5,
-                                height: height * 0.2,
-                            },
-                        ]}
-                    >
-                        <View style={{ flex: 2, flexDirection: 'row', margin: 5 }}>
-                            <Text style={Styles.dicaTextStyle}>Dica</Text>
-                            <TouchableOpacity
-                                style={{ alignSelf: 'center' }}
-                                onPress={() => { this.props.navigation.navigate('Eventos'); }}
-                            >
-                                <View style={Styles.buttomCloseStyle}>
-                                    <Icon name="clear" color="#FFF" size={15} />
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-                        <Text style={Styles.textCardHelperStyle}>
-                            {'Local do evento atualizado com sucesso!'}
-                        </Text>
-                    </View>
-                </Modal>
             </View >
         );
     }
@@ -165,9 +133,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-    const { id, coords, helperMap, modal } = state.eventoEdicao;
+    const { id, coords, helperMap, messageHelper, positionHelper } = state.eventoEdicao;
 
-    return { id, coords, helperMap, modal };
+    return { id, coords, helperMap, messageHelper, positionHelper };
 };
 
 export default connect(mapStateToProps, { editEvent, saveNewEventCoords, closeEventMapHelper })(EditarEventoMapa);

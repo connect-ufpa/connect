@@ -14,10 +14,10 @@ const INITIAL_STATTE = {
     loading: false,
     errorData: '',
     errorHora: '',
-    modal: false,
     helper: false,
     helperMap: true,
     positionHelper: 0.4,
+    messageHelper: 'Clique no em um local do mapa e depois clique no botão salvar para atualizar o local do evento',
     error: true
 };
 
@@ -36,8 +36,8 @@ export default (state = INITIAL_STATTE, action) => {
         case CLOSE_EVENT_EDIT_HELPER_MAP:
             return { ...state, helperMap: false };
         case COORDS_SAVED:
-            return { ...state, helperMap: false, modal: true };
+            return { ...state, helperMap: true, messageHelper: 'Local do evento atualizado com sucesso!', positionHelper: 0.2 };
         default:
-            return INITIAL_STATTE;
+            return state;
     }
 };
