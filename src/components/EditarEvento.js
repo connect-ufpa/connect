@@ -42,10 +42,10 @@ class EditarEvento extends Component {
                 let minutos;
                 if (hour < 10) hora = `0${hour}`;
                 else hora = hour;
-        
+
                 if (minute < 10) minutos = `0${minute}`;
                 else minutos = minute;
-        
+
                 const hours = `${hora}:${minutos}`;
                 this.props.editEvent({ prop, value: hours });
             }
@@ -63,10 +63,10 @@ class EditarEvento extends Component {
                 let mes;
                 if (day < 10) dia = `0${day}`;
                 else dia = day;
-        
+
                 if (month < 10) mes = `0${correctMonth}`;
                 else mes = correctMonth;
-        
+
                 const data = `${dia}/${mes}/${year}`;
                 this.props.editEvent({ prop, value: data });
             }
@@ -110,38 +110,41 @@ class EditarEvento extends Component {
 
     renderHelper() {
         const { positionHelper } = this.props;
+        // console.log(this.props.helper)
         if (this.props.helper) {
-          return (
-            <View
-              style={[
-                Styles.cardHelperStyle,
-                {
-                  marginBottom: HEIGHT * positionHelper,
-                  width: width * 0.5,
-                  height: height * 0.2,
-                },
-              ]}
-            >
-              <View style={{ flex: 2, flexDirection: 'row', margin: 5 }}>
-                <Text style={Styles.dicaTextStyle}>Dica</Text>
-                <TouchableOpacity
-                  style={{ alignSelf: 'center' }}
-                  onPress={() => {
-                    this.props.closeEventEditHelper();
-                  }}
+            return (
+                <View
+                    style={[
+                        Styles.cardHelperStyle,
+                        {
+                            marginBottom: HEIGHT * positionHelper,
+                            width: width * 0.5,
+                            height: height * 0.2,
+                        }, {
+                            elevation: 10
+                        }
+                    ]}
                 >
-                  <View style={Styles.buttomCloseStyle}>
-                    <Icon name="clear" color="#FFF" size={15} />
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <Text style={Styles.textCardHelperStyle}>
-                {'Evento salvo com sucesso! \n Clique na seta acima para voltar para a tela de evento'}
-              </Text>
-            </View>
-          );
+                    <View style={{ flex: 2, flexDirection: 'row', margin: 5 }}>
+                        <Text style={Styles.dicaTextStyle}>Dica</Text>
+                        <TouchableOpacity
+                            style={{ alignSelf: 'center' }}
+                            onPress={() => {
+                                this.props.closeEventEditHelper();
+                            }}
+                        >
+                            <View style={Styles.buttomCloseStyle}>
+                                <Icon name="clear" color="#FFF" size={15} />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <Text style={Styles.textCardHelperStyle}>
+                        {'Evento salvo com sucesso! \n Clique na seta acima para voltar para a tela de evento'}
+                    </Text>
+                </View>
+            );
         }
-      }
+    }
 
     render() {
         return (

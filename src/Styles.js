@@ -207,7 +207,7 @@ export default StyleSheet.create({
     },
     cardHelperStyle: {
         flex: 1,
-        zIndex: 1,
+        zIndex: 10,
         padding: 5,
         bottom: 130,
         elevation: 4,
