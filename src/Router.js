@@ -7,7 +7,7 @@ import CriarConta from './components/CriarConta';
 import EsqueciSenha from './components/EsqueciSenha';
 import Localizacao from './components/Localizacao';
 import MenuLateral from './components/SideMenu';
-import MeuPerfil from './components/MeuPerfil';
+import Perfil from './components/Perfil';
 import Eventos from './components/Eventos';
 import Ajuda from './components/Ajuda';
 import Sobre from './components/Sobre';
@@ -28,7 +28,7 @@ export const LocalizacaoScreen = StackNavigator({
 });
 
 export const PerfilScreen = StackNavigator({
-  MeuPerfil: { screen: MeuPerfil },
+  Perfil: { screen: Perfil },
 });
 
 export const EventosScreen = StackNavigator({
@@ -45,8 +45,8 @@ export const SobreScreen = StackNavigator({
 
 export const SideMenu = DrawerNavigator({
   Localizacao: { screen: LocalizacaoScreen },
+  Perfil: { screen: PerfilScreen },
   Eventos: { screen: EventosScreen },
-  // Perfil: { screen: PerfilScreen },
   Ajuda: { screen: AjudaScreen },
   Sobre: { screen: SobreScreen },
   Sair: {
