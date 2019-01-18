@@ -68,7 +68,7 @@ export const SideMenu = DrawerNavigator({
     }
   },
 }, {
-    initialRouteName: 'Localizacao',
+    initialRouteName: 'Perfil',
     contentComponent: props => <MenuLateral {...props} />,
     drawerBackgroundColor: 'transparent',
     contentOptions: {
