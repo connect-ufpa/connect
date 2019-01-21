@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { HeaderImage } from './commons';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { HeaderImage, CardSection } from './commons';
 import { Icon } from 'react-native-elements';
 import Styles from '../Styles';
 
@@ -47,32 +47,51 @@ class Perfil extends Component {
     };
     render() {
         return(
-            <View style={{ flex: 1, backgroundColor: '#000'}}>
+            <View>
                 <View
                     style={{ 
-                        flex: 1,
-                        width: null,
-                        backgroundColor: '#039BE5',
+                        height: 800,
+                        backgroundColor: '#f4f4f4',
                      }}
                 >
-                </View>
-                <View
-                    style={{ 
-                        flex: 7,
-                        width: null,
-                        backgroundColor: '#E0E0E0',
-                     }}
-                >
-                <View 
-                    style={{ 
-                        backgroundColor: "#fff",
-                        height: 60,
-                        width: 300,
-                        padding: 15
-                    }}
-                >
-
-                </View>
+                    <View 
+                        style={{ 
+                            backgroundColor: "#fff",
+                            height: 350,
+                            width: 340,
+                            marginLeft: 10,
+                            marginRight: 10,
+                            marginTop: 10,
+                            borderRadius: 5,
+                            elevation: 4,
+                            alignItems: "center",
+                        }}
+                    >
+                        <View
+                            style={{
+                                width: 150,
+                                height: 150,
+                                borderRadius: 100,
+                                alignItems: "center",
+                                justifyContent: "center",
+                                marginTop: 15
+                            }}
+                        >
+                            <Image
+                                source={require('../../assets/img/user_male.png')}
+                                style={{ 
+                                    borderColor: '#f4f4f4',
+                                    borderWidth: 4,
+                                    width: 140,
+                                    height: 140,
+                                    borderRadius: 100
+                                }}
+                            />
+                            {/* <CardSection>
+                                <Text>{this.props.namePerfil}</Text>
+                            </CardSection> */}
+                        </View>
+                    </View>
                 </View>
             </View>
         );
