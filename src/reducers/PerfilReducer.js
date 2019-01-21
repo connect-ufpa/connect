@@ -15,13 +15,14 @@ const INITIAL_STATE = {
     namePerfil: '',
     registrationPerfil: '',
     birthdayPerfil: '',
-    idadePerfil: '24'
+    idadePerfil: '',
+    areaTematica: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case VALID_PERFIL:
-            return { ...state };
+            return { ...state, namePerfil: action.payload.nome, areaTematica: action.payload.area_tematica};
         case VALID_NAME:
             return { ...state, namePerfil: action.payload, errorMessageName: '', error: false };
         case INVALID_NAME:

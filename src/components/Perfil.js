@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
-import { HeaderImage, CardSection } from './commons';
+import { View, Text, TouchableOpacity, Image, Modal, ScrollView, Texts, TouchableHighlight } from 'react-native';
+import { HeaderImage, Card, CardSection, Input } from './commons';
 import { Icon } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { 
+    onNameChanged,
+    onRegistrationChanged,
+    onBirthChanged,
+    dataPerfil,
+    saveDataUser,
+ } from '../actions/';
 import Styles from '../Styles';
 
 class Perfil extends Component {
@@ -45,6 +53,20 @@ class Perfil extends Component {
               ),
         };
     };
+
+
+    componentWillMount() {
+        this.props.dataPerfil();
+    }
+
+    state = {
+        modalVisible: false,
+      };
+      
+    setModalVisible(visible) {
+        this.setState({ modalVisible: visible });
+    }
+
     render() {
         return(
             <View>
@@ -67,35 +89,157 @@ class Perfil extends Component {
                             alignItems: "center",
                         }}
                     >
-                        <View
+
+                        <Image
+                            source={require('../../assets/img/user_male.png')}
                             style={{
-                                width: 150,
-                                height: 150,
-                                borderRadius: 100,
-                                alignItems: "center",
-                                justifyContent: "center",
-                                marginTop: 15
+                                marginTop: 15, 
+                                borderColor: '#2A4065',
+                                borderWidth: 4,
+                                width: 120,
+                                height: 120,
+                                borderRadius: 100
                             }}
-                        >
-                            <Image
-                                source={require('../../assets/img/user_male.png')}
-                                style={{ 
-                                    borderColor: '#f4f4f4',
-                                    borderWidth: 4,
-                                    width: 140,
-                                    height: 140,
-                                    borderRadius: 100
-                                }}
-                            />
-                            {/* <CardSection>
-                                <Text>{this.props.namePerfil}</Text>
-                            </CardSection> */}
+                        />
+                        <View style={{ alignItems: "center" }}>
+                            <Text style={{ fontSize: 18,
+                                    color: '#2A4065',
+                                    textAlign: 'center',
+                                    fontFamily: 'Ubuntu-Medium',
+                                    marginTop: 10,
+                                    marginBottom: 10 }}>
+                                {this.props.namePerfil}
+                            </Text>
+                            <Text style={{ fontSize: 16,
+                                    color: '#2A4065',
+                                    textAlign: 'center',
+                                    fontFamily: 'Ubuntu-Medium',
+                                    marginBottom: 10  }}>
+                                    {this.props.areaTematica}
+                            </Text>
+                            <TouchableOpacity 
+                                onPress={() => {
+                                    console.log("cheguei aqui!!!");
+                                    this.setModalVisible(true)}}>
+                                <View
+                                    style={{
+                                    height: 60,
+                                    width: 60,
+                                    margin: 15,
+                                    elevation: 8,
+                                    borderRadius: 150,
+                                    alignContent: 'center',
+                                    justifyContent: 'center',
+                                    backgroundColor: '#2A4065',
+                                    }}
+                                    >
+                                    <Icon 
+                                    type="font-awesome"
+                                    name="edit" 
+                                    color="#FFF" 
+                                    size={25} />
+                                </View>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
+
+
+                <Modal
+                    style={{
+                        flex: 1,
+                        borderWidth: 6,
+                        borderRadius: 4,}}
+                    animationType="fade"
+                    presentationStyle="pageSheet"
+                    transparent={false}
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => {
+
+                        this.setModalVisible(!this.state.modalVisible)
+                    }}
+                    supportedOrientations={false}
+                >
+                <ScrollView style={Styles.scrollViewStyle}>
+                    <Card addStyle={{ paddingBottom: 40 }}>
+                    <Text style={{fontSize: 20,
+                        fontFamily: 'Ubuntu',
+                        marginBottom: 10,
+                        color: '#000',
+                        backgroundColor: '#fff',
+                        paddingRight: 120,
+                        paddingLeft: 120,
+                        paddingBottom: 15,
+                        paddingTop: 15,
+                        marginTop: -22,}}
+                        >Editar Perfil</Text>
+                    <CardSection>
+                        <Input
+                        placeholder="Nome:"
+                        onChangeText={namePerfil =>
+                            this.props.onNameChanged(namePerfil)
+                        }
+                        value={this.props.namePerfil}
+                        />
+                    </CardSection>
+                    {/* <View>
+                        <Texts text={this.props.errorMessageName} />
+                    </View> */}
+                    <CardSection>
+                        <Input
+                        placeholder="Matrícula:"
+                        onChangeText={registrationPerfil =>
+                            this.props.onRegistrationChanged(registrationPerfil)
+                        }
+                        value={this.props.registrationPerfil}
+                        />
+                    </CardSection>
+                    {/* <View>
+                        <Texts text={this.props.errorMessageRegistration} />
+                    </View> */}
+                    <CardSection>
+                        <Input
+                        placeholder="Nascimento: 00/00/0000"
+                        onChangeText={birthdayPerfil =>
+                            this.props.onBirthChanged(birthdayPerfil)
+                        }
+                        value={this.props.birthdayPerfil}
+                        />
+                    </CardSection>
+                    {/* <View>
+                        <Texts text={this.props.errorMessageBirthday} />
+                    </View> */}
+                    {/* <CardSection>{this.renderSaveDataUserButton()}</CardSection> */}
+
+                    <TouchableHighlight
+                        onPress={() => {
+                        this.setModalVisible(!this.state.modalVisible);
+                        }}
+                    >
+                        <Text style={{ fontSize: 30 }}>Hide Modal</Text>
+                    </TouchableHighlight>
+                    </Card>
+                </ScrollView>
+                </Modal>
             </View>
         );
     }
 }
 
-export default Perfil;
+const mapStateToProps = state => {
+    return {
+        namePerfil: state.perfil.namePerfil,
+        registrationPerfil: state.perfil.registrationPerfil,
+        birthdayPerfil: state.perfil.birthdayPerfil,
+        idadePerfil: state.perfil.idadePerfil,
+        areaTematica: state.perfil.areaTematica,
+    };
+};
+
+export default connect(mapStateToProps, { 
+    dataPerfil,
+    onNameChanged,
+    onRegistrationChanged,
+    onBirthChanged,
+    saveDataUser,
+ })(Perfil);
