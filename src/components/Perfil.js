@@ -162,24 +162,23 @@ class Perfil extends Component {
                 >
                 <ScrollView style={Styles.scrollViewStyle}>
                     <Card addStyle={{ paddingBottom: 40 }}>
-                    <Text style={{fontSize: 20,
-                        fontFamily: 'Ubuntu',
+                    <Text style={{fontSize: 18,
+                        fontFamily: 'Ubuntu-Medium',
                         marginBottom: 10,
-                        color: '#000',
+                        color: '#2A4065',
                         backgroundColor: '#fff',
-                        paddingRight: 120,
-                        paddingLeft: 120,
+                        alignItems: 'center',
+                        fontWeight: '200',
                         paddingBottom: 15,
                         paddingTop: 15,
-                        marginTop: -22,}}
+                        marginTop: -12,}}
                         >Editar Perfil</Text>
                     <CardSection>
                         <Input
-                        placeholder="Nome:"
-                        onChangeText={namePerfil =>
-                            this.props.onNameChanged(namePerfil)
-                        }
-                        value={this.props.namePerfil}
+                            iconName={'person'}
+                            placeholder="Nome:"
+                            onChangeText={namePerfil => this.props.onNameChanged(namePerfil)}
+                            value={this.props.namePerfil}
                         />
                     </CardSection>
                     {/* <View>
@@ -187,11 +186,11 @@ class Perfil extends Component {
                     </View> */}
                     <CardSection>
                         <Input
-                        placeholder="Matrícula:"
-                        onChangeText={registrationPerfil =>
-                            this.props.onRegistrationChanged(registrationPerfil)
-                        }
-                        value={this.props.registrationPerfil}
+                            iconName={'school'}
+                            keyboardType={'numeric'}
+                            placeholder="Matrícula:"
+                            value={this.props.registrationPerfil}
+                            onChangeText={registrationPerfil => this.props.onRegistrationChanged(registrationPerfil)}
                         />
                     </CardSection>
                     {/* <View>
@@ -199,11 +198,10 @@ class Perfil extends Component {
                     </View> */}
                     <CardSection>
                         <Input
-                        placeholder="Nascimento: 00/00/0000"
-                        onChangeText={birthdayPerfil =>
-                            this.props.onBirthChanged(birthdayPerfil)
-                        }
-                        value={this.props.birthdayPerfil}
+                            iconName={'date-range'}
+                            value={this.props.birthday}
+                            placeholder={'Nascimento: 00/00/0000'}
+                            onChangeText={birthdayPerfil => this.props.onBirthChanged(birthdayPerfil)}
                         />
                     </CardSection>
                     {/* <View>
