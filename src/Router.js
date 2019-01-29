@@ -8,6 +8,7 @@ import EsqueciSenha from './components/EsqueciSenha';
 import Localizacao from './components/Localizacao';
 import MenuLateral from './components/SideMenu';
 import Perfil from './components/Perfil';
+import EditarPerfil from './components/EditarPerfil';
 import Eventos from './components/Eventos';
 import Ajuda from './components/Ajuda';
 import Sobre from './components/Sobre';
@@ -94,6 +95,7 @@ export const AuthorizedScreens = StackNavigator({
   },
   Ajuda: { screen: Ajuda },
   Sobre: { screen: Sobre },
+  EditarPerfil: { screen: EditarPerfil },
   CriarEvento: { screen: CriarEvento },
   EditarEvento: { screen: EditarEvento },
   EditarEventoMapa: { screen: EditarEventoMapa },

@@ -67,6 +67,24 @@ class Perfil extends Component {
         this.setState({ modalVisible: visible });
     }
 
+
+    renderButtomEditPerfil() {
+        return (
+          <View style={{ alignItems: 'center' }}>
+            <TouchableOpacity onPress={() => { this.props.navigation.navigate('EditarPerfil'); }} >
+              <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
+                <Icon
+                  type='material-community'
+                  name='edit'
+                  color='#FFF'
+                  size={25}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
+        );
+      }
+
     render() {
         return(
             <View>
@@ -89,7 +107,6 @@ class Perfil extends Component {
                             alignItems: "center",
                         }}
                     >
-
                         <Image
                             source={require('../../assets/img/user_male.png')}
                             style={{
@@ -117,35 +134,15 @@ class Perfil extends Component {
                                     marginBottom: 10  }}>
                                     {this.props.areaTematica}
                             </Text>
-                            <TouchableOpacity 
-                                onPress={() => {
-                                    console.log("cheguei aqui!!!");
-                                    this.setModalVisible(true)}}>
-                                <View
-                                    style={{
-                                    height: 60,
-                                    width: 60,
-                                    margin: 15,
-                                    elevation: 8,
-                                    borderRadius: 150,
-                                    alignContent: 'center',
-                                    justifyContent: 'center',
-                                    backgroundColor: '#2A4065',
-                                    }}
-                                    >
-                                    <Icon 
-                                    type="font-awesome"
-                                    name="edit" 
-                                    color="#FFF" 
-                                    size={25} />
-                                </View>
-                            </TouchableOpacity>
+                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
+                                {this.renderButtomEditPerfil()}
+                            </View>
                         </View>
                     </View>
                 </View>
 
 
-                <Modal
+                {/* <Modal
                     style={{
                         flex: 1,
                         borderWidth: 6,
@@ -181,9 +178,9 @@ class Perfil extends Component {
                             value={this.props.namePerfil}
                         />
                     </CardSection>
-                    {/* <View>
-                        <Texts text={this.props.errorMessageName} />
-                    </View> */}
+                    <View>
+                         <Texts text={this.props.errorMessageNamePerfil} />
+                     </View>
                     <CardSection>
                         <Input
                             iconName={'school'}
@@ -193,21 +190,21 @@ class Perfil extends Component {
                             onChangeText={registrationPerfil => this.props.onRegistrationChanged(registrationPerfil)}
                         />
                     </CardSection>
-                    {/* <View>
+                    <View>
                         <Texts text={this.props.errorMessageRegistration} />
-                    </View> */}
+                    </View>
                     <CardSection>
                         <Input
                             iconName={'date-range'}
-                            value={this.props.birthday}
+                            value={this.props.birthdayPerfil}
                             placeholder={'Nascimento: 00/00/0000'}
                             onChangeText={birthdayPerfil => this.props.onBirthChanged(birthdayPerfil)}
                         />
                     </CardSection>
-                    {/* <View>
+                    <View>
                         <Texts text={this.props.errorMessageBirthday} />
-                    </View> */}
-                    {/* <CardSection>{this.renderSaveDataUserButton()}</CardSection> */}
+                    </View>
+                     <CardSection>{this.renderSaveDataUserButton()}</CardSection>
 
                     <TouchableHighlight
                         onPress={() => {
@@ -218,7 +215,7 @@ class Perfil extends Component {
                     </TouchableHighlight>
                     </Card>
                 </ScrollView>
-                </Modal>
+                </Modal> */}
             </View>
         );
     }
@@ -231,6 +228,10 @@ const mapStateToProps = state => {
         birthdayPerfil: state.perfil.birthdayPerfil,
         idadePerfil: state.perfil.idadePerfil,
         areaTematica: state.perfil.areaTematica,
+        errorMessageNamePerfil: state.perfil.errorMessageNamePerfil,
+        errorMessageEmail: state.perfil.errorMessageEmail,
+        errorMessageBirthday: state.perfil.errorMessageBirthday,
+        errorMessageRegistration: state.perfil.errorMessageRegistration,
     };
 };
 
