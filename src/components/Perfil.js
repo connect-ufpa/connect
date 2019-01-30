@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image, Modal, ScrollView, Texts, TouchableHighlight } from 'react-native';
-import { HeaderImage, Card, CardSection, Input } from './commons';
+import { HeaderImage, Card, CardSection, Input, Loading } from './commons';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { 
