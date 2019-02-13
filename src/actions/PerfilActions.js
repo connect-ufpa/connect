@@ -1,13 +1,10 @@
 import { firebaseAuth, database } from '../config/Config';
 import { validateLetters, validateNumbers, validateDates, validateEmails, validatePasswords, validateUser, matchPasswords } from '../helpers/HandleData';
 import {
-  VALID_NAME,
-  INVALID_NAME,
-  VALID_REGISTRATION,
-  INVALID_REGISTRATION,
-  VALID_BIRTHDAY,
-  INVALID_BIRTHDAY,
-  VALID_PERFIL
+  VALID_PERFIL,
+  UPDATING_DATA_USER,
+  UPDATE_DATA_USER_SUCESS,
+  UPDATE_DATA_USER_ERROR
 } from './types';
 
 
@@ -21,27 +18,24 @@ export const dataPerfil = () => {
   }
 }
 
-
-export const saveDataUser = (user) => {
+export const editPerfil = (user) => {
   const validUser = validateUser(user);
-  console.log(user, validUser);
-  if (validUser) {
+  if(validUser) {
     return (dispatch) => {
+      dispatch({ type: UPDATING_DATA_USER });
       const usuario = firebaseAuth().currentUser;
-      database().ref(`usuario/${usuario.uid}`).set({
-        nome: user.namePerfil,
-        matricula: user.registrationPerfil,
-        nascimento: user.birthdayPerfil,
+      database().ref(`usuario/${usuario.uid}`).update({
+        nome: user.nome,
+        matricula: user.matricula,
+        nascimento: user.nascimento,
       }).then(() => {
-        alert('Dados Salvos com sucesso');
-        this.props.navigation.navigate('MeuPerfil');
-        //dispatch({ type: UPDATE_DATA_USER_SUCESS });
-
+        dispatch({ type: UPDATE_DATA_USER_SUCESS });
+        alert('Dados atualizados com sucesso!');
+        this.props.navigation.navigate('Perfil')
       })
-        .catch(() => {
-          dispatch({ type: UPDATE_DATA_USER_ERROR });
-
-        });
+      .catch(() => {
+        dispatch({ type: UPDATE_DATA_USER_ERROR });
+      });
     }
   }
-};
+}

@@ -74,5 +74,6 @@ export const SEARCHED_EVENTO = 'searched_evento';
 
 
 export const VALID_PERFIL = 'valid_perfil';
+export const UPDATING_DATA_USER = 'updating_data_user';
 export const UPDATE_DATA_USER_SUCESS = 'update_date_user_sucess';
 export const UPDATE_DATA_USER_ERROR = 'update_data_user_error';

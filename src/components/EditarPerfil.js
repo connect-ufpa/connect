@@ -8,7 +8,7 @@ import {
   onRegistrationChanged,
   onBirthChanged,
   dataPerfil,
-  saveDataUser,
+  editPerfil,
 } from '../actions/';
 import Styles from '../Styles';
 
@@ -26,34 +26,31 @@ class EditarPerfil extends Component {
     },
   };
 
+  componentWillMount() {
+    this.props.dataPerfil();
+  }
+
   showLoading() {
     if (this.props.loading) return (<Loading />);
   }
-
-  renderSavePerfilButton() {
-    const userUpdate = {
-      // nomeEditPerfil: this.props.nome,
-      // matriculaEditPeril: this.props.descricao,
-      // DataNascimentoEditPerfil: this.props.local,
-      // area_tematicaEditPerfil: this.props.area_tematica,
-      // coords: {
-      //   lat: this.props.region.latitude,
-      //   long: this.props.region.longitude,
-      // },
-      // data_inicio: this.props.data_inicio,
-      // hora_inicio: this.props.hora_inicio,
-      // data_fim: this.props.data_fim,
-      // hora_fim: this.props.hora_fim,
-      // error: this.props.error,
-    };
   
+
+  renderEditPerfilButton() {
+    const user = {
+      nome: this.props.nome,
+      matricula: this.props.matricula,
+      nascimento: this.props.nascimento,
+      area_tematica: this.props.area_tematica,
+    };
+    if (this.props.loading) {
+      return <Loading />;
+    }
     return (
       <View style={{ alignItems: 'center' }}>
         <TouchableOpacity
-          onPress={() => false}
-          // onPress={() => {
-          //   this.props.saveEvent(evento);
-          // }}
+          onPress={() => {
+            this.props.editPerfil(user);
+          }}
         >
           <View
             style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}
@@ -86,8 +83,8 @@ class EditarPerfil extends Component {
             <Input
                 iconName={'person'}
                 placeholder="Nome:"
-                onChangeText={namePerfil => this.props.onNameChanged(namePerfil)}
-                value={this.props.namePerfil}
+                onChangeText={nome => this.props.onNameChanged(nome)}
+                value={this.props.nome}
             />
           </CardSection>
           <View>
@@ -98,19 +95,27 @@ class EditarPerfil extends Component {
                 iconName={'school'}
                 keyboardType={'numeric'}
                 placeholder="Matrícula:"
-                value={this.props.registrationPerfil}
-                onChangeText={registrationPerfil => this.props.onRegistrationChanged(registrationPerfil)}
+                value={this.props.matricula}
+                onChangeText={matricula => this.props.onRegistrationChanged(matricula)}
             />
           </CardSection>
           <CardSection>
             <Input
                 iconName={'date-range'}
-                value={this.props.birthdayPerfil}
+                value={this.props.nascimento}
                 placeholder={'Nascimento: 00/00/0000'}
-                onChangeText={birthdayPerfil => this.props.onBirthChanged(birthdayPerfil)}
+                onChangeText={nascimento => this.props.onBirthChanged(nascimento)}
             />
           </CardSection>
-          <CardSection>{this.renderSavePerfilButton()}</CardSection>
+          <CardSection>
+            <Input
+                iconName={'date-range'}
+                value={this.props.area_tematica}
+                placeholder={'Área Temática: Comunicação'}
+                onChangeText={area_tematica => this.props.onNameChanged(area_tematica)}
+            />
+          </CardSection>
+          <CardSection>{this.renderEditPerfilButton()}</CardSection>
         </ScrollView>
       </View >
     );
@@ -119,15 +124,14 @@ class EditarPerfil extends Component {
 
 const mapStateToProps = state => {
   return {
-    namePerfil: state.perfil.namePerfil,
-    registrationPerfil: state.perfil.registrationPerfil,
-    birthdayPerfil: state.perfil.birthdayPerfil,
-    idadePerfil: state.perfil.idadePerfil,
-    areaTematica: state.perfil.areaTematica,
-    errorMessageNamePerfil: state.perfil.errorMessageNamePerfil,
-    errorMessageEmail: state.perfil.errorMessageEmail,
-    errorMessageBirthday: state.perfil.errorMessageBirthday,
-    errorMessageRegistration: state.perfil.errorMessageRegistration,
+    nome: state.perfilEdicao.nome,
+    matricula: state.perfilEdicao.matricula,
+    nascimento: state.perfilEdicao.nascimento,
+    area_tematica: state.perfilEdicao.area_tematica,
+    errorMessageName: state.perfilEdicao.errorMessageName,
+    errorMessageEmail: state.perfilEdicao.errorMessageEmail,
+    errorMessageBirthday: state.perfilEdicao.errorMessageBirthday,
+    errorMessageRegistration: state.perfilEdicao.errorMessageRegistration,
 };
 }
 
@@ -136,6 +140,6 @@ export default connect(mapStateToProps, {
   onNameChanged,
   onRegistrationChanged,
   onBirthChanged,
-  saveDataUser,
+  editPerfil,
 })(EditarPerfil);
 
