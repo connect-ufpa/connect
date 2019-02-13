@@ -74,7 +74,6 @@ class Perfil extends Component {
             <TouchableOpacity onPress={() => { this.props.navigation.navigate('EditarPerfil'); }} >
               <View style={[Styles.iconButtomStyle, { backgroundColor: '#2A4065' }]}>
                 <Icon
-                  type='material-community'
                   name='edit'
                   color='#FFF'
                   size={25}

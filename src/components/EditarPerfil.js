@@ -31,21 +31,21 @@ class EditarPerfil extends Component {
   }
 
   renderSavePerfilButton() {
-    // const userUpdate = {
-    //   nomeEditPerfil: this.props.nome,
-    //   descricao: this.props.descricao,
-    //   local: this.props.local,
-    //   area_tematica: this.props.area_tematica,
-    //   coords: {
-    //     lat: this.props.region.latitude,
-    //     long: this.props.region.longitude,
-    //   },
-    //   data_inicio: this.props.data_inicio,
-    //   hora_inicio: this.props.hora_inicio,
-    //   data_fim: this.props.data_fim,
-    //   hora_fim: this.props.hora_fim,
-    //   error: this.props.error,
-    // };
+    const userUpdate = {
+      // nomeEditPerfil: this.props.nome,
+      // matriculaEditPeril: this.props.descricao,
+      // DataNascimentoEditPerfil: this.props.local,
+      // area_tematicaEditPerfil: this.props.area_tematica,
+      // coords: {
+      //   lat: this.props.region.latitude,
+      //   long: this.props.region.longitude,
+      // },
+      // data_inicio: this.props.data_inicio,
+      // hora_inicio: this.props.hora_inicio,
+      // data_fim: this.props.data_fim,
+      // hora_fim: this.props.hora_fim,
+      // error: this.props.error,
+    };
   
     return (
       <View style={{ alignItems: 'center' }}>

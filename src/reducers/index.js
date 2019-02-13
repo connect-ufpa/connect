@@ -6,6 +6,7 @@ import LocalizacaoReducer from './LocalizacaoReducer';
 import EventoReducer from './EventoReducer';
 import EventEditReducer from './EventEditReducer';
 import PerfilReducer from './PerfilReducer' ;
+import EditPerfilReducer from './EditPerfilReducer';
 
 export default combineReducers({
    createUser: CreateUserReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
    localizacao: LocalizacaoReducer,
    evento: EventoReducer,
    eventoEdicao: EventEditReducer,
-   perfil: PerfilReducer
+   perfil: PerfilReducer,
+   perfilEdicao: EditPerfilReducer,
 });
