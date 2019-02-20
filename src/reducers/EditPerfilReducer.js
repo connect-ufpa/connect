@@ -5,7 +5,7 @@ import {
     INVALID_REGISTRATION,
     VALID_BIRTHDAY,
     INVALID_BIRTHDAY,
-    VALID_PERFIL,
+    RETURN_DATA_PERFIL_SUCCESS,
     UPDATE_DATA_USER_SUCESS,
     UPDATE_DATA_USER_ERROR,
     UPDATING_DATA_USER,
@@ -27,11 +27,12 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case VALID_PERFIL:
+        case RETURN_DATA_PERFIL_SUCCESS:
             return { ...state, nome: action.payload.nome, 
                 area_tematica: action.payload.area_tematica, 
                 matricula: action.payload.matricula, 
-                nascimento: action.payload.nascimento};
+                nascimento: action.payload.nascimento, 
+                loading: false};
         case VALID_NAME:
             return { ...state, nome: action.payload, errorMessageName: '', error: false };
         case INVALID_NAME:

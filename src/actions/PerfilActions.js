@@ -1,7 +1,8 @@
 import { firebaseAuth, database } from '../config/Config';
 import { validateLetters, validateNumbers, validateDates, validateEmails, validatePasswords, validateUser, matchPasswords } from '../helpers/HandleData';
 import {
-  VALID_PERFIL,
+  CHECKING_DATA_PERFIL,
+  RETURN_DATA_PERFIL_SUCCESS,
   UPDATING_DATA_USER,
   UPDATE_DATA_USER_SUCESS,
   UPDATE_DATA_USER_ERROR
@@ -10,10 +11,12 @@ import {
 
 export const dataPerfil = () => {
   return dispatch => {
+    dispatch({ type: CHECKING_DATA_PERFIL })
+
     const usuario = firebaseAuth().currentUser;
     database().ref(`usuario/${usuario.uid}`)
       .on("value", snapshot => {
-        dispatch({ type: VALID_PERFIL, payload: snapshot.val() })
+        dispatch({ type: RETURN_DATA_PERFIL_SUCCESS, payload: snapshot.val() })
       })
   }
 }

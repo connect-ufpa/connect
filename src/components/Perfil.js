@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Image, Modal, ScrollView, Texts, TouchableHighlight } from 'react-native';
+import { View, Text, TouchableOpacity, Image, TouchableHighlight } from 'react-native';
 import { HeaderImage, Card, CardSection, Input, Loading } from './commons';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -59,14 +59,9 @@ class Perfil extends Component {
         this.props.dataPerfil();
     }
 
-    state = {
-        modalVisible: false,
-      };
-      
-    setModalVisible(visible) {
-        this.setState({ modalVisible: visible });
+    showLoading() {
+        if (this.props.loading) return <Loading />;
     }
-
 
     renderButtomEditPerfil() {
         return (
@@ -133,88 +128,13 @@ class Perfil extends Component {
                                     marginBottom: 10  }}>
                                     {this.props.areaTematica}
                             </Text>
-                            <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
-                                {this.renderButtomEditPerfil()}
-                            </View>
+                        </View>
+                        {this.showLoading()}
+                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
+                            {this.renderButtomEditPerfil()}
                         </View>
                     </View>
                 </View>
-
-
-                {/* <Modal
-                    style={{
-                        flex: 1,
-                        borderWidth: 6,
-                        borderRadius: 4,}}
-                    animationType="fade"
-                    presentationStyle="pageSheet"
-                    transparent={false}
-                    visible={this.state.modalVisible}
-                    onRequestClose={() => {
-
-                        this.setModalVisible(!this.state.modalVisible)
-                    }}
-                    supportedOrientations={false}
-                >
-                <ScrollView style={Styles.scrollViewStyle}>
-                    <Card addStyle={{ paddingBottom: 40 }}>
-                    <Text style={{fontSize: 18,
-                        fontFamily: 'Ubuntu-Medium',
-                        marginBottom: 10,
-                        color: '#2A4065',
-                        backgroundColor: '#fff',
-                        alignItems: 'center',
-                        fontWeight: '200',
-                        paddingBottom: 15,
-                        paddingTop: 15,
-                        marginTop: -12,}}
-                        >Editar Perfil</Text>
-                    <CardSection>
-                        <Input
-                            iconName={'person'}
-                            placeholder="Nome:"
-                            onChangeText={namePerfil => this.props.onNameChanged(namePerfil)}
-                            value={this.props.namePerfil}
-                        />
-                    </CardSection>
-                    <View>
-                         <Texts text={this.props.errorMessageNamePerfil} />
-                     </View>
-                    <CardSection>
-                        <Input
-                            iconName={'school'}
-                            keyboardType={'numeric'}
-                            placeholder="Matrícula:"
-                            value={this.props.registrationPerfil}
-                            onChangeText={registrationPerfil => this.props.onRegistrationChanged(registrationPerfil)}
-                        />
-                    </CardSection>
-                    <View>
-                        <Texts text={this.props.errorMessageRegistration} />
-                    </View>
-                    <CardSection>
-                        <Input
-                            iconName={'date-range'}
-                            value={this.props.birthdayPerfil}
-                            placeholder={'Nascimento: 00/00/0000'}
-                            onChangeText={birthdayPerfil => this.props.onBirthChanged(birthdayPerfil)}
-                        />
-                    </CardSection>
-                    <View>
-                        <Texts text={this.props.errorMessageBirthday} />
-                    </View>
-                     <CardSection>{this.renderSaveDataUserButton()}</CardSection>
-
-                    <TouchableHighlight
-                        onPress={() => {
-                        this.setModalVisible(!this.state.modalVisible);
-                        }}
-                    >
-                        <Text style={{ fontSize: 30 }}>Hide Modal</Text>
-                    </TouchableHighlight>
-                    </Card>
-                </ScrollView>
-                </Modal> */}
             </View>
         );
     }
@@ -227,10 +147,7 @@ const mapStateToProps = state => {
         birthdayPerfil: state.perfil.birthdayPerfil,
         idadePerfil: state.perfil.idadePerfil,
         areaTematica: state.perfil.areaTematica,
-        errorMessageNamePerfil: state.perfil.errorMessageNamePerfil,
-        errorMessageEmail: state.perfil.errorMessageEmail,
-        errorMessageBirthday: state.perfil.errorMessageBirthday,
-        errorMessageRegistration: state.perfil.errorMessageRegistration,
+        loading: state.perfil.loading,
     };
 };
 
