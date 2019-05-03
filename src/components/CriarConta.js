@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, Picker } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
-import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, onPasswordChanged, onConfirmPasswordChanged, authUser } from '../actions';
+import { onNameChanged, onRegistrationChanged, onBirthChanged, onEmailChanged, onAreaChanged, onPasswordChanged, onConfirmPasswordChanged, authUser } from '../actions';
 import { Card, CardSection, Texts, Input, Button, Loading } from './commons';
 import Styles from '../Styles';
 
@@ -30,6 +30,7 @@ class CriarConta extends Component {
       registration: this.props.registration,
       birthday: this.props.birthday,
       email: this.props.email,
+      area_tematica: this.props.area_tematica,
       password: this.props.password,
       error: this.props.error
     };
@@ -96,6 +97,33 @@ class CriarConta extends Component {
               <Texts text={this.props.errorMessageEmail} />
             </View>
             <CardSection>
+                <View style={Styles.viewInput}>
+                  <Picker
+                    selectedValue={this.props.area_tematica}
+                    style={{ height: 38, 
+                    width: '100%', flex: 5, 
+                    paddingLeft: 20, 
+                    paddingRight: 20, 
+                    flex: 5,
+                    fontSize: 14,
+                    color: '#2D2D2D',
+                    fontFamily: 'Ubuntu-Regular', }}
+                    onValueChange={area => this.props.onAreaChanged(area)}
+                  >
+                    <Picker.Item color='gray' label="Visitante" value="Visitante" />
+                    <Picker.Item color='gray' label="Comunicação" value="Comunicação" />
+                    <Picker.Item color='gray' label="Cultura" value="Cultura" />
+                    <Picker.Item color='gray' label="Direitos Humanos e Justiça" value="Direitos Humanos e Justiça" />
+                    <Picker.Item color='gray' label="Educação" value="Educação" />
+                    <Picker.Item color='gray' label="Meio Ambiente" value="Meio Ambiente" />
+                    <Picker.Item color='gray' label="Ciências Sociais e Aplicadas" value="Ciências Sociais e Aplicadas" />
+                    <Picker.Item color='gray' label="Saúde" value="Saúde" />
+                    <Picker.Item color='gray' label="Tecnologia e Produção" value="Tecnologia e Produção" />
+                    <Picker.Item color='gray' label="Trabalho" value="Trabalho" />
+                  </Picker>
+                </View>
+              </CardSection>
+            <CardSection>
               <Input
                 secureTextEntry
                 iconName={'vpn-key'}
@@ -144,6 +172,7 @@ const mapStateToProps = (state) => {
     loading: state.createUser.loading,
     password: state.createUser.password,
     birthday: state.createUser.birthday,
+    area_tematica: state.createUser.area_tematica,
     registration: state.createUser.registration,
     confirmPassword: state.createUser.confirmPassword,
     errorMessageName: state.createUser.errorMessageName,

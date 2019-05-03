@@ -9,6 +9,7 @@ import {
     INVALID_EMAIL,
     VALID_PASSWORD,
     INVALID_PASSWORD,
+    VALID_AREA,
     MATCH_PASSWORD,
     MISMATCH_PASSWORD,
     CREATING_ACCOUNT,
@@ -20,12 +21,14 @@ const INITIAL_STATE = {
     name: '',
     email: '',
     birthday: '',
+    area_tematica: '',
     password: '',
     registration: '',
     confirmPassword: '',
     errorMessageName: '',
     errorMessageEmail: '',
     errorMessageBirthday: '',
+    errorAreaTematica: '',
     errorMessagePassword: '',
     errorMessageRegistration: '',
     errorMessageConfirmPassword: '',
@@ -52,6 +55,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, email: action.payload, errorMessageEmail: '', error: false };
         case INVALID_EMAIL:
             return { ...state, email: action.payload, errorMessageEmail: 'Digite um e-mail válido!', error: true };
+        case VALID_AREA:
+            return { ...state, area_tematica: action.payload, errorAreaTematica: '', error: false}
         case VALID_PASSWORD:
             return { ...state, password: action.payload, errorMessagePassword: '', error: false };
         case INVALID_PASSWORD:

@@ -34,7 +34,7 @@ export const editPerfil = (user) => {
       }).then(() => {
         dispatch({ type: UPDATE_DATA_USER_SUCESS });
         alert('Dados atualizados com sucesso!');
-        this.props.navigation.navigate('Perfil')
+        this.props.navigation.navigate('Perfil');
       })
       .catch(() => {
         dispatch({ type: UPDATE_DATA_USER_ERROR });

@@ -9,6 +9,7 @@ import {
     INVALID_BIRTHDAY,
     VALID_EMAIL,
     INVALID_EMAIL,
+    VALID_AREA,
     VALID_PASSWORD,
     INVALID_PASSWORD,
     MATCH_PASSWORD,
@@ -46,6 +47,11 @@ export const onEmailChanged = (email) => {
     return { type: INVALID_EMAIL, payload: email };
 };
 
+export const onAreaChanged = (area) => {
+    return { type: VALID_AREA, payload: area }
+};
+
+
 export const onPasswordChanged = (password) => {
     const validatePassword = validatePasswords(password);
     if (validatePassword) return { type: VALID_PASSWORD, payload: password }
@@ -79,7 +85,8 @@ const saveUser = (dispatch, user, usuario) => {
         nome: user.name,
         matricula: user.registration,
         nascimento: user.birthday,
-        email: user.email
+        email: user.email,
+        area_tematica: user.area_tematica
     }).then(() => {
         dispatch({ type: CREATE_ACCOUNT_SUCCESS });
     })
