@@ -85,6 +85,8 @@ class Perfil extends Component {
                 <View
                     style={{ 
                         height: 800,
+                        flexDirection: 'row', 
+                        justifyContent: 'center' ,
                         backgroundColor: '#f4f4f4',
                      }}
                 >
@@ -92,10 +94,10 @@ class Perfil extends Component {
                         style={{ 
                             backgroundColor: "#fff",
                             height: 350,
-                            width: 340,
+                            width: '90%',
                             marginLeft: 10,
                             marginRight: 10,
-                            marginTop: 10,
+                            marginTop: 20,
                             borderRadius: 5,
                             elevation: 4,
                             alignItems: "center",

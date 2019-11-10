@@ -39,6 +39,9 @@ import { StackNavigator } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
 import Styles from '../Styles';
 
+const HEIGHT = Dimensions.get('window').height;
+const MARGIN_TOP_MODAL = HEIGHT * 0.4;
+
 class MeuPerfil extends Component {
   static navigationOptions = ({ navigation }) => {
     const { navigate } = navigation;
